@@ -35,4 +35,7 @@
 *.sln
 *.suo
 
+# Clion trash
+*.xml
+
 build
