@@ -14,3 +14,11 @@ cd build # If youŕe not there already
 make
 ./fanfaresimulator
 ```
+
+## Make clean
+```
+rm -rf build/
+mkdir build/
+cd build/
+cmake ../
+```
