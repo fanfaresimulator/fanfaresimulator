@@ -8,6 +8,7 @@
 Dependencies:
 * [CMake](https://cmake.org/)
 * [Asio](http://think-async.com/Asio/)
+* [Qt](https://openclassrooms.com/courses/programmez-avec-le-langage-c/introduction-a-qt)
 
 ```
 cd build # If youŕe not there already
