@@ -9,7 +9,7 @@ find_package(Boost 1.54.0 REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp network/server.cpp)
+set(SOURCE_FILES main.cpp network/server.cpp gui/testwindow.cpp gui/testwindow.h)
 
 find_package(Qt5Widgets)
 add_executable(fanfaresimulator ${SOURCE_FILES})
