@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.2)
 
 # Boost: asio library
-find_package(Boost 1.40.0 REQUIRED)
+find_package(Boost 1.54.0 REQUIRED)
 
 # Project's name
 project(fanfaresimulator)
