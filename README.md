@@ -6,10 +6,11 @@
 ## Setup
 
 Dependencies:
-* [Meson](http://mesonbuild.com)
+* [CMake](https://cmake.org/)
+* [Asio](http://think-async.com/Asio/)
 
 ```
-meson build
-ninja -C build
-build/fanfaresimulator
+cd build # If youŕe not there already
+make
+./fanfaresimulator
 ```
