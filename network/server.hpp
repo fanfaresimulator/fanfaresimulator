@@ -9,7 +9,6 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <asio.hpp>
 
-
 using asio::ip::tcp;
 
 std::string make_daytime_string();
