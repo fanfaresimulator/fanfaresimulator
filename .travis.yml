@@ -9,6 +9,13 @@ compiler:
   - gcc
   - clang
 
+addons:
+  apt:
+    sources:
+      - boost-latest
+    packages:
+      - libboost-all-dev
+
 script:
   - mkdir build
   - cd build
