@@ -11,10 +11,8 @@ compiler:
 
 addons:
   apt:
-    sources:
-      - boost-latest
     packages:
-      - libboost-all-dev
+      - qtbase5-dev
 
 script:
   - mkdir build
