@@ -8,7 +8,10 @@
 Dependencies:
 * [CMake](https://cmake.org/)
 * [Asio](http://think-async.com/Asio/)
-* [Qt](https://openclassrooms.com/courses/programmez-avec-le-langage-c/introduction-a-qt)
+* Qt
+  * Linux : apt install qtcreator
+  * Windows :
+  * Mac : 
 
 ```
 cd build # If youŕe not there already
