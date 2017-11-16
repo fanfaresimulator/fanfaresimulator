@@ -7,11 +7,10 @@
 
 Dependencies:
 * [CMake](https://cmake.org/)
-* [Asio](http://think-async.com/Asio/)
 * Qt
-  * Linux : apt install qtcreator
-  * Windows :
-  * Mac : 
+  * Linux : `apt install qtbase5-dev`
+  * Windows : ``
+  * Mac :
 
 ```
 cd build # If youŕe not there already
