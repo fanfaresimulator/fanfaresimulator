@@ -7,10 +7,10 @@
 
 Dependencies:
 * [CMake](https://cmake.org/)
-* Qt
-  * Linux : `apt install qtbase5-dev`
-  * Windows : ``
-  * Mac :
+* [Qt](https://www.qt.io/)
+  * Linux: on Debian-based systems, `apt install qtbase5-dev`
+  * Windows: http://doc.qt.io/qt-5/gettingstarted.html
+  * Mac: `brew install qt`
 
 ```
 cd build # If youŕe not there already
