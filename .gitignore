@@ -38,6 +38,7 @@
 # Clion trash
 *.xml
 .idea/
+cmake-build-debug/
 
 build*
 .vs/
