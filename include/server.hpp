@@ -33,6 +33,12 @@ private:
 
 public:
 
+    Server();
+
+    Server(ServerSocket serverSocket);
+
+    ~Server();
+
     void broadcastStart() const ;
 
     void updateInstrumentMap(Instrument i) ;
@@ -44,9 +50,6 @@ public:
     void sendPartition(string username) ;
 
     std::map< Instrument , bool > getInstrumentMap() const ;
-
-
-
 
 
 
