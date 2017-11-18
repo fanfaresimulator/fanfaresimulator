@@ -9,7 +9,7 @@ Dependencies:
 * [CMake](https://cmake.org/)
 * [Qt](https://www.qt.io/)
   * Linux: on Debian-based systems, `apt install qtbase5-dev`
-  * Windows: http://doc.qt.io/qt-5/gettingstarted.html
+  * Windows: https://www.qt.io/download-qt-for-application-development then "Get your open source package"
   * Mac: `brew install qt`
 
 ```
