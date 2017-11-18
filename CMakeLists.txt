@@ -11,7 +11,7 @@ list(INSERT CMAKE_MODULE_PATH 0
 find_package(Qt5Widgets)
 find_package(Portaudio 19 REQUIRED)
 
-set(SOURCE_FILES main.cpp network/server.cpp gui/testwindow.cpp gui/testwindow.h include/server.hpp include/instrument.hpp)
+set(SOURCE_FILES main.cpp network/server.cpp gui/testwindow.cpp)
 
 add_executable(fanfaresimulator ${SOURCE_FILES})
 
