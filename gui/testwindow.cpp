@@ -1,4 +1,4 @@
-#include "testwindow.h"
+#include "testwindow.hpp"
 
 TestWindow::TestWindow() : QWidget()
 {
