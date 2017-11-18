@@ -1,14 +1,18 @@
-# Specify the minimum version for CMake
 cmake_minimum_required(VERSION 3.2)
 
-# Project's name
 project(fanfaresimulator)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp network/server.cpp gui/testwindow.cpp gui/testwindow.h include/server.hpp include/instrument.hpp)
+list(INSERT CMAKE_MODULE_PATH 0
+	${CMAKE_CURRENT_SOURCE_DIR}/CMake
+)
 
 find_package(Qt5Widgets)
+find_package(Portaudio 19 REQUIRED)
+
+set(SOURCE_FILES main.cpp network/server.cpp gui/testwindow.cpp gui/testwindow.h include/server.hpp include/instrument.hpp)
+
 add_executable(fanfaresimulator ${SOURCE_FILES})
 
 target_link_libraries(fanfaresimulator Qt5::Widgets)

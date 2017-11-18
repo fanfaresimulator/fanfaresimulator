@@ -13,6 +13,7 @@ addons:
   apt:
     packages:
       - qtbase5-dev
+      - libportaudio-dev
 
 script:
   - mkdir build
