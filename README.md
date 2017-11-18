@@ -16,16 +16,17 @@ Dependencies:
   * Windows: ???
   * Mac: `brew install portaudio`
 
-```
-cd build # If youŕe not there already
+```shell
+cd build # If you're not there already
 make
 ./fanfaresimulator
 ```
 
 ## Make clean
-```
-rm -rf build/
-mkdir build/
-cd build/
-cmake ../
+
+```shell
+rm -rf build
+mkdir build
+cd build
+cmake ..
 ```
