@@ -12,7 +12,7 @@ Dependencies:
   * Windows: https://www.qt.io/download-qt-for-application-development then "Get your open source package"
   * Mac: `brew install qt`
 * [Portaudio](http://www.portaudio.com/)
-  * Linux: on Debian-based systems, `apt install libportaudio-dev`
+  * Linux: on Debian-based systems, `apt install portaudio19-dev`
   * Windows: ???
   * Mac: `brew install portaudio`
 
