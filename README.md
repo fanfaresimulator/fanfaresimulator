@@ -53,7 +53,10 @@ cmake ..
   * In "Select Components", check "Qt > Qt 5.9.2 > msvc2015 64-bit"
   * Install
   * Add `C:\Qt\5.9.2\msvc2015_64\bin` to your `PATH`
-* Download Portaudio (coming soon)
+* Download prebuilt Portaudio
+  * Download https://github.com/fanfaresimulator/fanfaresimulator/files/1485774/vendor.zip
+  * Move it in the project directory
+  * Right click > Extract All
 * Install CMake
   * Go to https://cmake.org/download/ then "Latest Release > Binary Distributions > Windows win64-x64 Installer"
   * Launch setup, install
