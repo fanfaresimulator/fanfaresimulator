@@ -68,7 +68,7 @@ cmake ..
     * Configure
     * Select "Visual Studio 14 2015 Win64"
     * Generate
-    * Open `fanfaresimulator.sln` with Visual Studio
+    * Open project (or open `fanfaresimulator.sln` with Visual Studio)
     * Build
   * From the CLI:
     ```shell
