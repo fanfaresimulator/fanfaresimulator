@@ -1,0 +1,8 @@
+//
+// Created by antoine on 19/11/17.
+//
+
+#ifndef FANFARESIMULATOR_GAME_WINDOW_H
+#define FANFARESIMULATOR_GAME_WINDOW_H
+
+#endif //FANFARESIMULATOR_GAME_WINDOW_H

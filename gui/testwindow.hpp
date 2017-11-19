@@ -1,5 +1,5 @@
-#ifndef DEF_MAINWINDOW
-#define DEF_MAINWINDOW
+#ifndef DEF_TESTWINDOW
+#define DEF_TESTWINDOW
 
 #include <QApplication>
 #include <QWidget>
