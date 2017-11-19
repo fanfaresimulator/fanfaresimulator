@@ -13,7 +13,6 @@
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 #
 
-
 if (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
   # in cache already
   set(PORTAUDIO_FOUND TRUE)
@@ -42,22 +41,15 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
     find_path(PORTAUDIO_INCLUDE_DIR
       NAMES
         portaudio.h
-      PATHS
-        /usr/include
-        /usr/local/include
-        /opt/local/include
-        /sw/include
+      HINTS
+        ./vendor/include
     )
 
     find_library(PORTAUDIO_LIBRARY
       NAMES
-        portaudio
-      PATHS
-        /usr/lib
-        /usr/local/lib
-        /opt/local/lib
-        /sw/lib
-        ${PORTAUDIO_LIBRARY_DIR}
+        portaudio_static_x64 portaudio
+      HINTS
+        ./vendor/lib
     )
 
     set(PORTAUDIO_INCLUDE_DIRS
@@ -72,7 +64,7 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
     )
 
     set(PORTAUDIO_VERSION
-      18
+      19
     )
 
     if (PORTAUDIO_INCLUDE_DIRS AND PORTAUDIO_LIBRARIES)
@@ -89,7 +81,6 @@ else (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
       endif (Portaudio_FIND_REQUIRED)
     endif (PORTAUDIO_FOUND)
   endif (PORTAUDIO2_FOUND)
-
 
   # show the PORTAUDIO_INCLUDE_DIRS and PORTAUDIO_LIBRARIES variables only in the advanced view
   mark_as_advanced(PORTAUDIO_INCLUDE_DIRS PORTAUDIO_LIBRARIES)
