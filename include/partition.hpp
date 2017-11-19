@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <notes.hpp>
+#include <instrument.hpp>
 
 class Partition {
 private:
@@ -10,4 +11,6 @@ private:
 
 public:
 	std::initializer_list <Note> getNotes();
+
+	Partition getPartition(Instrument instrument);
 };
