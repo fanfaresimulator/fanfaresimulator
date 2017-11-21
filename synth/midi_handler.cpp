@@ -4,8 +4,8 @@ using namespace std;
 
 void midi_handler() {
   cout << "Hello world from midi_handler" << endl;
-  //  MidiFile midifile;
-  //  midifile.read("Movie_Themes_-_1492_Conquest_of_Paradise.midi");
+  MidiFile midifile;
+  midifile.read("Movie_Themes_-_1492_Conquest_of_Paradise.midi");
   //
   // int tracks = midifile.getTrackCount();
   // cout << "TPQ: " << midifile.getTicksPerQuarterNote() << endl;

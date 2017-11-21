@@ -26,6 +26,12 @@ set(SOURCE_FILES
 	# gui/testwindow.cpp
 	synth/synthesizer.cpp
 	synth/midi_handler.cpp
+	synth/libmidifile/Binasc.cpp
+	synth/libmidifile/MidiEvent.cpp
+	synth/libmidifile/MidiEventList.cpp
+	synth/libmidifile/MidiFile.cpp
+	synth/libmidifile/MidiMessage.cpp
+	synth/libmidifile/Options.cpp
 	)
 
 add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})

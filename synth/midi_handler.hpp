@@ -1,5 +1,5 @@
-#include "midifile/include/MidiFile.h"
-#include "midifile/include/Options.h"
+#include "libmidifile/MidiFile.h"
+#include "libmidifile/Options.h"
 #include <iostream>
 #include <iomanip>
 
