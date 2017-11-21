@@ -35,6 +35,9 @@
 *.sln
 *.suo
 
+# Visual Studio Code trash
+.vscode/
+
 # Clion trash
 *.xml
 .idea/

@@ -1,21 +1,20 @@
-/* Created and edited by Thomas Bellotti on 19/11/2017 */
+//
+// Created by Thomas Bellotti on 19/11/2017
+//
 
-#ifndef UI_H
-#define UI_H
-
-#endif // UI_H
+#ifndef UI_HPP
+#define UI_HPP
 
 #include <iostream>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "keyboard.hpp"
 
+
 typedef std::basic_string<char> string;
 
-class UI	{
-
+class UI {
 private:
-
 	Partition partition;
 	Keyboard keyboard;
 
@@ -30,14 +29,15 @@ public:
 
 	Instrument getInstrument();
 
-	void updateInstrumentMap(Instrument);
+	void updateInstrumentMap(Instrument instrument);
 
-	void notePressed(Note);
+	void notePressed(Note note);
 
 	void startPartition();
 
 	void startStream();
 
 	string getUsername();
-
 };
+
+#endif // UI_HPP

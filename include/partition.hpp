@@ -2,8 +2,12 @@
 
 #include <iostream>
 
-#include <notes.hpp>
-#include <instrument.hpp>
+#include "note.hpp"
+#include "instrument.hpp"
+
+// Waiting for implementation
+class Obj {};
+
 
 class Partition {
 private:
@@ -11,6 +15,10 @@ private:
 
 public:
 	std::initializer_list <Note> getNotes();
+
+	Partition();
+
+	~Partition();
 
 	Partition getPartition(Instrument instrument);
 };

@@ -5,11 +5,14 @@
 #include "instrument.hpp"
 #include <iostream>
 #include <map>
+<<<<<<< HEAD
 #include <queue>
 #include <string>
 #include <QtNetwork>
 #include <QObject>
 #include <vector>
+#include "instrument.hpp"
+#include "synthesizer.hpp"
 
 typedef enum {
   HELLO,
@@ -21,13 +24,12 @@ typedef enum {
   PARTITION
 } protocol_sig;
 
+
 // Waiting for implementation
 class Obj {};
 
-typedef Obj Socket;
 typedef Obj Synthesizer;
 typedef Obj Note;
-
 //
 
 class Server : public QObject {
@@ -50,9 +52,7 @@ public:
   void updateInstrumentMap(Instrument i);
   void sendPartition(std::string username);
   std::map<Instrument, bool> getInstrumentMap() const;
-
   std::vector<QTcpSocket> getClients();
-
 };
 
 #endif // FANFARESIMULATOR_SERVER_HPP
