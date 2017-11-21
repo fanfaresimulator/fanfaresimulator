@@ -13,7 +13,7 @@
 typedef std::basic_string<char> string;
 
 // Waiting for implementation
-class Obj{};
+class Obj_1{};
 
 typedef Obj Socket;
 typedef Obj Keyboard;

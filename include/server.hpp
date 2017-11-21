@@ -9,6 +9,7 @@
 #include <queue>
 #include <map>
 #include "instrument.hpp"
+#include "synthesizer.hpp"
 
 typedef std::basic_string<char> string;
 
@@ -17,7 +18,6 @@ class Obj{};
 
 typedef Obj ServerSocket;
 typedef Obj Socket;
-typedef Obj Synthesizer;
 
 //
 
