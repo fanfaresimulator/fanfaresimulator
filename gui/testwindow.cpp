@@ -16,7 +16,12 @@ TestWindow::TestWindow() : QWidget()
 
     line = new MusicLine(this);
 
-    line->show();
+   line->show();
+
+    note1 = new Note(this);
+    note1->show();
+
+
 
 }
 

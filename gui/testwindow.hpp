@@ -5,8 +5,10 @@
 #include <QWidget>
 #include <QSlider>
 #include <QProgressBar>
+#include <QPainter>
 
 #include "music_line.hpp"
+#include "note.hpp"
 
 class TestWindow : public QWidget
 {
@@ -20,6 +22,7 @@ private:
     QSlider *m_slider;
     QProgressBar *m_bar;
     MusicLine *line;
+    Note *note1;
 };
 
 #endif
