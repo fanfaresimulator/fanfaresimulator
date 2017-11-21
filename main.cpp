@@ -1,6 +1,16 @@
 #include <iostream>
 
-int main() {
-	std::cout << "JE SUIS DANS LA BRANCHE MIDI" << std::endl;
-	return 0;
+#include "synth/synthesizer.hpp"
+
+int main(int argc, char *argv[])
+{
+	QApplication app(argc, argv);
+
+	TestWindow window;
+
+	window.show();
+	
+	testSynth();
+	
+	return app.exec();
 }

@@ -3,5 +3,28 @@ project(fanfaresimulator)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
-add_executable(code ${SOURCE_FILES})
+list(INSERT CMAKE_MODULE_PATH 0
+	${CMAKE_CURRENT_SOURCE_DIR}/CMake
+)
+
+find_package(Qt5Widgets REQUIRED)
+find_package(Portaudio 19 REQUIRED)
+
+include_directories(${PORTAUDIO_INCLUDE_DIRS})
+
+set(HEADER_FILES
+	include/client.hpp
+	include/server.hpp
+	include/instrument.hpp
+	include/partition.hpp
+	include/ui.hpp)
+
+set(SOURCE_FILES
+	main.cpp
+	network/server.cpp
+	gui/testwindow.cpp
+	synth/synthesizer.cpp)
+
+add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})
+target_link_libraries(fanfaresimulator Qt5::Widgets fluidsynth)
+
