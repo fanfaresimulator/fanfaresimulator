@@ -6,9 +6,9 @@
 #include "instrument.hpp"
 #include "synthesizer.hpp"
 #include <iostream>
+#include <string>
 #include <map>
 #include <queue>
-#include <string>
 #include <QtNetwork>
 #include <QObject>
 #include <vector>

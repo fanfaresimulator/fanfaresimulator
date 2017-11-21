@@ -6,12 +6,11 @@
 #define UI_HPP
 
 #include <iostream>
+#include <string>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
-
-typedef std::basic_string<char> string;
 
 class UI {
 private:
