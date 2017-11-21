@@ -17,7 +17,7 @@ set(SOURCE_FILES
 	main.cpp
 	network/server.cpp
 	gui/testwindow.cpp
-		gui/music_line.cpp gui/music_line.hpp)
+    gui/music_line.cpp)
 
 add_executable(fanfaresimulator ${SOURCE_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets)

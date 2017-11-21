@@ -16,6 +16,7 @@ TestWindow::TestWindow() : QWidget()
 
     line = new MusicLine(this);
 
+    line->setGeometry(0, 200, 1000, 1000);
     line->show();
 
 }
