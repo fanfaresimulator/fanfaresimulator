@@ -13,9 +13,6 @@ class TestWindow : public QWidget
 public:
     TestWindow();
 
-protected:
-    void paintEvent(QPaintEvent *event);
-
 private:
     QSlider *m_slider;
     QProgressBar *m_bar;

@@ -19,11 +19,3 @@ TestWindow::TestWindow() : QWidget()
     line->show();
 
 }
-
-
-void TestWindow::paintEvent(QPaintEvent *event)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(Qt::black, 12, Qt::SolidLine, Qt::RoundCap));
-// painter.drawEllipse(500, 500, 40, 40);
-}
