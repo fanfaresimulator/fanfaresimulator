@@ -13,12 +13,13 @@
 class Note : public QWidget {
 
 public:
-    int color;
-    int line;
-    int position;
-    int distance;//identifiant
+    int line_id;
+    float duration;
+    bool is_long;
+    float time_to_play;
+    int radius_note=10;
 
-    Note(QWidget * parent );
+    Note(QWidget * parent, int id, float time_begin, float time_end);
 
 protected:
     void paintEvent(QPaintEvent *event);
