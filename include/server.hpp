@@ -7,6 +7,8 @@
 #include <map>
 #include <queue>
 #include <string>
+#include <QtNetwork>
+#include <QObject>
 
 typedef enum {
   HELLO,
@@ -21,16 +23,15 @@ typedef enum {
 // Waiting for implementation
 class Obj {};
 
-typedef Obj ServerSocket;
 typedef Obj Socket;
 typedef Obj Synthesizer;
 typedef Obj Note;
 
 //
 
-class Server {
+class Server : public QObject {
 private:
-  ServerSocket serverSocket;
+  QTcpServer *server;
   std::queue<Note> incomingNotes;
   Synthesizer synthesizer;
 
@@ -38,24 +39,17 @@ private:
   std::map<std::string, Instrument> usrToInstrument; // key : username, value : Instrument
   std::map<Instrument, bool> instrumentMap; // key : Instrument, value : available
 
+  void newConnection();
+
 public:
-  Server();
-
-  Server(ServerSocket serverSocket);
-
-  ~Server();
-
+  explicit Server(QObject *parent = Q_NULLPTR);
   void broadcastStart() const;
-
   void updateInstrumentMap(Instrument i);
-
   bool addClient(std::string username);
-
   bool addClient(std::string username, Instrument i);
-
   void sendPartition(std::string username);
-
   std::map<Instrument, bool> getInstrumentMap() const;
+
 };
 
 #endif // FANFARESIMULATOR_SERVER_HPP
