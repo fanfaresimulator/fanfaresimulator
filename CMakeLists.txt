@@ -9,12 +9,21 @@ list(INSERT CMAKE_MODULE_PATH 0
 )
 
 find_package(Qt5Widgets REQUIRED)
-find_package(Portaudio 19 REQUIRED)
 
-include_directories(${PORTAUDIO_INCLUDE_DIRS})
-
-set(HEADER_FILES
+set(CLIENT_HEADER_FILES
 	include/client.hpp
+	include/instrument.hpp
+	include/keyboard.hpp
+	include/note.hpp
+	include/partition.hpp
+	include/synthesizer.hpp
+	include/ui.hpp)
+
+set(CLIENT_SOURCE_FILES
+	main.cpp
+	gui/testwindow.cpp)
+
+set(SERVER_HEADER_FILES
 	include/instrument.hpp
 	include/keyboard.hpp
 	include/note.hpp
@@ -23,13 +32,13 @@ set(HEADER_FILES
 	include/synthesizer.hpp
 	include/ui.hpp)
 
-set(SOURCE_FILES
-	main.cpp
+set(SERVER_SOURCE_FILES
+	server.cpp
 	network/server.cpp
 	gui/testwindow.cpp)
 
-add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets)
 
-add_executable(synth_test synth/synth.cpp)
-target_link_libraries(synth_test ${PORTAUDIO_LIBRARIES})
+add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
+target_link_libraries(fanfaresimulator-server Qt5::Widgets)
