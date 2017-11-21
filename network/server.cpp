@@ -18,6 +18,13 @@ void Server::newConnection() {
   QTcpSocket *clientConnection = server->nextPendingConnection();
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
+  clients.push_back(clientConnection);
   clientConnection->write("Hello you !\n");
   clientConnection->disconnectFromHost();
+}
+
+void Server::broadcast(std::string msg) {
+  for (int i = 0; i < clients.size(); i++) {
+    (clients[i])->write(msg.c_str());
+  }
 }
