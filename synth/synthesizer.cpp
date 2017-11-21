@@ -17,18 +17,18 @@ void testSynth () {
     settings = new_fluid_settings();
     /* Set the synthesizer settings, if necessary */
     synth = new_fluid_synth(settings);
-    fluid_settings_setstr(settings, "audio.driver", "jack"); // à changer
+    fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
     
     
     adriver = new_fluid_audio_driver(settings, synth);
     
     
-    fluid_synth_sfload(synth, "sf.sf2", 1);
+    fluid_synth_sfload(synth, "/home/pablo/Desktop/fanfaresimulator/synth/sf.sf2", 1);
     
     int key;
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 10002; i++) {
 		/* Generate a random key */
-		key = 60;
+		key = 60+i;
 		/* Play a note */
 		fluid_synth_noteon(synth, 0, key, 80);
 		/* Sleep for 1 second */
