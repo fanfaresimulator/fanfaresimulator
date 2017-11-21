@@ -1,14 +1,5 @@
 os: Visual Studio 2015
 
-environment:
-  matrix:
-    - arch: x86
-      compiler: msvc2015
-      backend: ninja
-    - arch: x64
-      compiler: msvc2015
-      backend: ninja
-
 platform:
   - x64
 
@@ -24,9 +15,7 @@ install:
   - cmd: if %compiler%==msvc2015 ( call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %arch% )
 
 build_script:
-  - cmd: echo Building on %arch% with %compiler%
-  - cmd: 'PATH=%cd%;%MESON_PYTHON_PATH%;%PATH%; && python %MESON_PYTHON_PATH%\Scripts\meson.py --backend=ninja builddir'
-  - cmd: PATH=%cd%;%MESON_PYTHON_PATH%;%PATH%; && ninja -C builddir
-
-test_script:
-  - cmd: PATH=%cd%;%MESON_PYTHON_PATH%;%PATH%; && ninja -C builddir test
+  - cmd: mkdir build
+  - cmd: cd build
+  - cmd: cmake ..
+  - cmd: msbuild fanfaresimulator.sln
