@@ -8,7 +8,14 @@
 #include <iostream>
 #include "instrument.hpp"
 #include "partition.hpp"
-#include "keyboard.hpp"
+//#include "keyboard.hpp" waiting for implementation
+
+// Waiting for implementation
+class Obj{};
+
+typedef Obj Keyboard;
+
+//
 
 typedef std::basic_string<char> string;
 
@@ -30,9 +37,9 @@ public:
 
 	Instrument getInstrument();
 
-	void updateInstrumentMap(Instrument);
+	void updateInstrumentMap(Instrument instrument);
 
-	void notePressed(Note);
+	void notePressed(Note note);
 
 	void startPartition();
 
