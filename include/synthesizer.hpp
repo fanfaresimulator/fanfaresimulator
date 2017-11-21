@@ -5,12 +5,8 @@
 #include "note.hpp"
 #include "partition.hpp"
 
-// Waiting for implementation
-class Obj {};
-
-
 class Synthesizer {
-private : 
+private :
 	Partition mainPartition;
 
 public:

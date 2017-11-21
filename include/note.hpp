@@ -2,8 +2,8 @@
 // Created by Luis Gustavo on 21/11/2017
 //
 
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
+#ifndef NOTE_HPP
+#define NOTE_HPP
 
 class Note {
 private:
@@ -17,4 +17,4 @@ public:
     ~Note();
 };
 
-#endif // KEYBOARD_HPP
+#endif // NOTE_HPP

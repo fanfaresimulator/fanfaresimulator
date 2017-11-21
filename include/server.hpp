@@ -2,17 +2,16 @@
 #ifndef FANFARESIMULATOR_SERVER_HPP
 #define FANFARESIMULATOR_SERVER_HPP
 
+#include "note.hpp"
 #include "instrument.hpp"
+#include "synthesizer.hpp"
 #include <iostream>
 #include <map>
-<<<<<<< HEAD
 #include <queue>
 #include <string>
 #include <QtNetwork>
 #include <QObject>
 #include <vector>
-#include "instrument.hpp"
-#include "synthesizer.hpp"
 
 typedef enum {
   HELLO,
@@ -24,21 +23,13 @@ typedef enum {
   PARTITION
 } protocol_sig;
 
-
-// Waiting for implementation
-class Obj {};
-
-typedef Obj Synthesizer;
-typedef Obj Note;
-//
-
 class Server : public QObject {
 private:
   QTcpServer *server;
   std::vector<QTcpSocket*> clients;
 
-  std::queue<Note> incomingNotes;
-  Synthesizer synthesizer;
+  // std::queue<Note> incomingNotes;
+  // Synthesizer synthesizer;
 
   std::map<std::string, Instrument> usrToInstrument; // key : username, value : Instrument
   std::map<Instrument, bool> instrumentMap; // key : Instrument, value : available
