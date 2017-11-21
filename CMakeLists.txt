@@ -16,7 +16,7 @@ include_directories(${PORTAUDIO_INCLUDE_DIRS})
 set(SOURCE_FILES
 	main.cpp
 	network/server.cpp
-	gui/testwindow.cpp
+		gui/game_window.cpp
 		gui/music_line.cpp gui/music_line.hpp
 		gui/note.cpp gui/note.hpp)
 
