@@ -8,14 +8,13 @@
 Dependencies:
 * [CMake](https://cmake.org/)
 * [Qt](https://www.qt.io/)
-* [Portaudio](http://www.portaudio.com/)
 
 ### Linux
 
 On Debian-based systems:
 
 ```shell
-sudo apt install qtbase5-dev portaudio19-dev
+sudo apt install qtbase5-dev
 ```
 
 In the project directory:
@@ -29,7 +28,7 @@ cmake ..
 ### macOS
 
 ```shell
-brew install qt portaudio
+brew install qt
 ```
 
 In the project directory:
@@ -53,10 +52,6 @@ cmake ..
   * In "Select Components", check "Qt > Qt 5.9.2 > msvc2015 64-bit"
   * Install
   * Add `C:\Qt\5.9.2\msvc2015_64\bin` to your `PATH`
-* Download prebuilt Portaudio
-  * Download https://github.com/fanfaresimulator/fanfaresimulator/files/1485774/vendor.zip
-  * Move it in the project directory
-  * Right click > Extract All
 * Install CMake
   * Go to https://cmake.org/download/ then "Latest Release > Binary Distributions > Windows win64-x64 Installer"
   * Launch setup, install
