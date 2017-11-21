@@ -13,6 +13,7 @@ find_package(Qt5Network REQUIRED)
 
 set(CLIENT_HEADER_FILES
 	include/client.hpp
+	include/network_client.hpp
 	include/instrument.hpp
 	include/keyboard.hpp
 	include/note.hpp
@@ -22,6 +23,7 @@ set(CLIENT_HEADER_FILES
 
 set(CLIENT_SOURCE_FILES
 	main.cpp
+	network/network_client.cpp
 	gui/testwindow.cpp)
 
 set(SERVER_HEADER_FILES
@@ -30,12 +32,13 @@ set(SERVER_HEADER_FILES
 	include/note.hpp
 	include/partition.hpp
 	include/server.hpp
+	include/network_server.hpp
 	include/synthesizer.hpp
 	include/ui.hpp)
 
 set(SERVER_SOURCE_FILES
 	server.cpp
-	network/server.cpp
+	network/network_server.cpp
 	gui/testwindow.cpp)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})

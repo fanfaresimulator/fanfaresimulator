@@ -1,9 +1,9 @@
-//
-// Created by Ragel on 21/11/2017.
-//
-
 #ifndef FANFARESIMULATOR_CLIENT_HPP
 #define FANFARESIMULATOR_CLIENT_HPP
+
+/***********************/
+/*    ENGINE CLIENT    */
+/***********************/
 
 #include <iostream>
 #include <string>
@@ -12,18 +12,10 @@
 #include "keyboard.hpp"
 #include "note.hpp"
 
-// Waiting for implementation
-class Obj_1{};
-
-typedef Obj Socket;
-
-
-//
-
-class client {
+class Client {
 
 private :
-    Socket socket;              // !!! use the class Socket => Remark : waiting for the implementation
+    NetworkClient net;              // !!! use the class Socket => Remark : waiting for the implementation
     string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition
@@ -32,8 +24,6 @@ private :
 public:
 
     client();
-
-    // Other constructer can be created
 
     ~client();
 
@@ -50,7 +40,6 @@ public:
     void loadPartition(Partition partition);
 
     Instrument setInstrument();
-
 
 };
 
