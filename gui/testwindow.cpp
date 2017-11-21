@@ -15,10 +15,11 @@ TestWindow::TestWindow() : QWidget()
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_bar, SLOT(setValue(int))) ;
 
     line = new MusicLine(this);
-
+    line->setGeometry(0,200,1000,1000);
    line->show();
 
     note1 = new Note(this);
+    line->setGeometry(0,200,1000,1000);
     note1->show();
 
 
