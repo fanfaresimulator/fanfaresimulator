@@ -13,11 +13,18 @@ find_package(Portaudio 19 REQUIRED)
 
 include_directories(${PORTAUDIO_INCLUDE_DIRS})
 
+set(HEADER_FILES
+	include/client.hpp
+	include/server.hpp
+	include/instrument.hpp
+	include/server.hpp
+	include/synthesizer.hpp
+	include/ui.hpp)
+
 set(SOURCE_FILES
 	main.cpp
 	network/server.cpp
-	gui/testwindow.cpp
-	include/client.hpp)
+	gui/testwindow.cpp)
 
 add_executable(fanfaresimulator ${SOURCE_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets)
