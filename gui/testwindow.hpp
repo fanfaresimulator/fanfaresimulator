@@ -6,6 +6,8 @@
 #include <QSlider>
 #include <QProgressBar>
 
+#include "music_line.hpp"
+
 class TestWindow : public QWidget
 {
 public:
@@ -17,6 +19,7 @@ protected:
 private:
     QSlider *m_slider;
     QProgressBar *m_bar;
+    MusicLine *line;
 };
 
 #endif

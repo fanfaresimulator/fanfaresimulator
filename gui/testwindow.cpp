@@ -13,6 +13,11 @@ TestWindow::TestWindow() : QWidget()
     m_bar->setOrientation(Qt::Horizontal);
 
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_bar, SLOT(setValue(int))) ;
+
+    line = new MusicLine(this);
+
+    line->show();
+
 }
 
 
@@ -20,5 +25,5 @@ void TestWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.setPen(QPen(Qt::black, 12, Qt::SolidLine, Qt::RoundCap));
-    painter.drawEllipse(500, 500, 40, 40);
+// painter.drawEllipse(500, 500, 40, 40);
 }
