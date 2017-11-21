@@ -15,9 +15,11 @@ include_directories(${PORTAUDIO_INCLUDE_DIRS})
 
 set(HEADER_FILES
 	include/client.hpp
-	include/server.hpp
 	include/instrument.hpp
+	include/keyboard.hpp
+	include/note.hpp
 	include/partition.hpp
+	include/server.hpp
 	include/synthesizer.hpp
 	include/ui.hpp)
 
