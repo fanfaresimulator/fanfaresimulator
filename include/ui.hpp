@@ -10,12 +10,6 @@
 #include "partition.hpp"
 #include "keyboard.hpp"
 
-// Waiting for implementation
-class Obj{};
-
-typedef Obj Keyboard;
-
-//
 
 typedef std::basic_string<char> string;
 
