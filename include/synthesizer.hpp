@@ -21,7 +21,7 @@ public:
 
 	~Synthesizer();
 
-	Partition getPartition(Instrument instrument);
+	Partition getPartition(Instrument);
 
-	void playNote(Note note);
+	void playNote(Note);
 };

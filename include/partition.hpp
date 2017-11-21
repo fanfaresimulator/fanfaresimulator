@@ -12,5 +12,9 @@ private:
 public:
 	std::initializer_list <Note> getNotes();
 
-	Partition getPartition(Instrument instrument);
+	Partition();
+
+	~Partition();
+
+	Partition getPartition(Instrument );
 };
