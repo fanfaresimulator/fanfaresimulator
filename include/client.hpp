@@ -8,7 +8,8 @@
 #include <iostream>
 #include "instrument.hpp"
 #include "partition.hpp"
-// #include "keyboard.hpp"  !! Waiting for Keyboard
+#include "keyboard.hpp"
+#include "note.hpp"
 
 typedef std::basic_string<char> string;
 
@@ -16,8 +17,7 @@ typedef std::basic_string<char> string;
 class Obj_1{};
 
 typedef Obj Socket;
-typedef Obj Keyboard;
-typedef Obj Note;
+
 
 //
 
