@@ -6,8 +6,6 @@
 
 Note::Note(QWidget * parent ) : QWidget (){
     this->setParent(parent);
-    setFixedSize(1000, 1000);
-
 }
 
 void Note::paintEvent(QPaintEvent * event)

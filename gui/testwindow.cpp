@@ -16,20 +16,12 @@ TestWindow::TestWindow() : QWidget()
 
     line = new MusicLine(this);
     line->setGeometry(0,200,1000,1000);
-   line->show();
+    line->show();
 
     note1 = new Note(this);
-    line->setGeometry(0,200,1000,1000);
+    note1->setGeometry(0,200,1000,1000);
     note1->show();
 
 
 
-}
-
-
-void TestWindow::paintEvent(QPaintEvent *event)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(Qt::black, 12, Qt::SolidLine, Qt::RoundCap));
-// painter.drawEllipse(500, 500, 40, 40);
 }

@@ -9,5 +9,5 @@ void MusicLine::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.setPen(QPen(Qt::black, 12, Qt::SolidLine, Qt::RoundCap));
-    painter.drawLine(100, 100, 900, 100);
+    painter.drawLine(0, 0, 1000, 0);
 }
