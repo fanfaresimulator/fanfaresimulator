@@ -17,7 +17,7 @@ set(HEADER_FILES
 	include/client.hpp
 	include/server.hpp
 	include/instrument.hpp
-	include/server.hpp
+	include/partition.hpp
 	include/synthesizer.hpp
 	include/ui.hpp)
 

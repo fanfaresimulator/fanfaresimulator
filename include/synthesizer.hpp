@@ -17,11 +17,11 @@ private :
 public:
 	Synthesizer();
 
-	Synthesizer(MainPartition);
+	Synthesizer(Partition mainPartition);
 
 	~Synthesizer();
 
-	Partition getPartition(Instrument);
+	Partition getPartition(Instrument instrument);
 
-	void playNote(Note);
+	void playNote(Note note);
 };

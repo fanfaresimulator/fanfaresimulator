@@ -2,8 +2,13 @@
 
 #include <iostream>
 
-#include <notes.hpp>
-#include <instrument.hpp>
+//#include "note.hpp" waiting for implementation
+#include "instrument.hpp"
+
+// Waiting for implementation
+class Obj {};
+
+typedef Obj Note;
 
 class Partition {
 private:
@@ -16,5 +21,5 @@ public:
 
 	~Partition();
 
-	Partition getPartition(Instrument );
+	Partition getPartition(Instrument instrument);
 };
