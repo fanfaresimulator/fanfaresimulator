@@ -26,7 +26,7 @@ set(SOURCE_FILES
 	network/server.cpp
 	gui/testwindow.cpp)
 
-add_executable(fanfaresimulator ${SOURCE_FILES})
+add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets)
 
 add_executable(synth_test synth/synth.cpp)
