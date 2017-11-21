@@ -4,13 +4,14 @@
 
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
+	// QApplication app(argc, argv);
 
-	TestWindow window;
+	// TestWindow window;
 
-	window.show();
+	// window.show();
 	
 	testSynth();
 	
-	return app.exec();
+	// return app.exec();
+	return 0;
 }
