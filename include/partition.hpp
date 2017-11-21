@@ -2,13 +2,12 @@
 
 #include <iostream>
 
-//#include "note.hpp" waiting for implementation
+#include "note.hpp"
 #include "instrument.hpp"
 
 // Waiting for implementation
 class Obj {};
 
-typedef Obj Note;
 
 class Partition {
 private:
