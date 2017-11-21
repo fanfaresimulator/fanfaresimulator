@@ -25,6 +25,7 @@ set(SOURCE_FILES
 	# network/server.cpp
 	# gui/testwindow.cpp
 	synth/synthesizer.cpp
+	synth/midi_handler.cpp
 	)
 
 add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})
