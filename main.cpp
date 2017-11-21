@@ -1,6 +1,6 @@
 //#include <QApplication>
 #include <QtWidgets/QApplication>
-#include "gui/testwindow.hpp"
+#include "gui/game_window.hpp"
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QGraphicsView>
 
@@ -8,7 +8,9 @@ int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
 
-	TestWindow window;
+	GameWindow window;
+
+	window.set_size(1500, 1000);
 
 	window.show();
 
