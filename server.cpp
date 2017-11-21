@@ -1,4 +1,9 @@
+#include "include/network_server.hpp"
+#include <QApplication>
+
+
 int main(int argc, char *argv[]) {
-	// TODO
-	return 0;
+	QApplication app(argc, argv);
+	NetworkServer serv;
+	return app.exec();
 }
