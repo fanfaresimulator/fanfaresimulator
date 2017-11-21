@@ -1,3 +1,7 @@
+//
+// Created by Ragel on 21/11/2017.
+//
+
 #ifndef FANFARESIMULATOR_CLIENT_HPP
 #define FANFARESIMULATOR_CLIENT_HPP
 
@@ -8,30 +12,46 @@
 #include "keyboard.hpp"
 #include "note.hpp"
 
+// Waiting for implementation
+class Obj_1{};
+
+typedef Obj Socket;
+
+
+//
+
 class client {
 
-private:
-  Socket socket;              // !!! use the class Socket => Remark : waiting for the implementation
-  string username;            // use nothing ?
-  Instrument instrument;      // use the class Instrument
-  Partition partition;
-  Keyboard keyboard;          // !!! Waiting for the class Keyboard
+private :
+    Socket socket;              // !!! use the class Socket => Remark : waiting for the implementation
+    string username;            // use nothing ?
+    Instrument instrument;      // use the class Instrument
+    Partition partition;        // Use the class Partition
+    Keyboard keyboard;          // !!! Waiting for the class Keyboard
 
 public:
 
-  client();
+    client();
 
-  // Other constructer can be created
+    // Other constructer can be created
 
-  ~client();
+    ~client();
 
-  void sendNote(Note note);
-  void sendReady();
-  void sendHello(string username);
-  void sendInstrumentChoice(string username, Instrument instrument);
-  void getPartition(Partition partition);
+    void sendNote(Note note);
 
-  Instrument setInstrument();
+    void sendReady();
+
+    void sendAddClient(string username);
+
+    void sendAddInstrumentToClient(string username, Instrument instrument);
+
+    void requestPartition(Partition partition);
+
+    void loadPartition(Partition partition);
+
+    Instrument setInstrument();
+
+
 };
 
 

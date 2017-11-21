@@ -1,7 +1,5 @@
 #include "../include/server.hpp"
 
-#define PORT_NO 15051
-
 Server::Server(QObject *parent) :
 QObject(parent) {
   server = new QTcpServer(this);
