@@ -1,5 +1,4 @@
-#ifndef FANFARESIMULATOR_CLIENT_HPP
-#define FANFARESIMULATOR_CLIENT_HPP
+#pragma once
 
 /***********************/
 /*    ENGINE CLIENT    */
@@ -42,6 +41,3 @@ public:
     Instrument setInstrument();
 
 };
-
-
-#endif //FANFARESIMULATOR_CLIENT_HPP

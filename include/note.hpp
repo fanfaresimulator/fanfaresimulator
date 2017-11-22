@@ -1,9 +1,8 @@
+#pragma once
+
 //
 // Created by Luis Gustavo on 21/11/2017
 //
-
-#ifndef NOTE_HPP
-#define NOTE_HPP
 
 class Note {
 private:
@@ -16,5 +15,3 @@ public:
 
     ~Note();
 };
-
-#endif // NOTE_HPP

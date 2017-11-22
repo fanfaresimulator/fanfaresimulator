@@ -1,5 +1,4 @@
-#ifndef FANFARESIMULATOR_SERVER_HPP
-#define FANFARESIMULATOR_SERVER_HPP
+#pragma once
 
 /***********************/
 /*    ENGINE SERVER    */
@@ -45,8 +44,3 @@ public:
     std::map< Instrument , bool > getInstrumentMap() const ;
 
 };
-
-
-
-
-#endif //FANFARESIMULATOR_SERVER_HPP
