@@ -1,9 +1,8 @@
+#pragma once
+
 //
 // Created by Thomas Bellotti on 19/11/2017
 //
-
-#ifndef UI_HPP
-#define UI_HPP
 
 #include <iostream>
 #include <string>
@@ -38,5 +37,3 @@ public:
 
 	string getUsername();
 };
-
-#endif // UI_HPP

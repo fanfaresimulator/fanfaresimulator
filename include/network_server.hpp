@@ -1,5 +1,4 @@
-#ifndef FANFARESIMULATOR_NETWORKSERVER_HPP
-#define FANFARESIMULATOR_NETWORKSERVER_HPP
+#pragma once
 
 #include "note.hpp"
 #include "instrument.hpp"
@@ -47,5 +46,3 @@ public:
   std::map<Instrument, bool> getInstrumentMap() const;
   std::vector<QTcpSocket> getClients();
 };
-
-#endif // FANFARESIMULATOR_NETWORKSERVER_HPP

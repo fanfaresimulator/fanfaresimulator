@@ -1,5 +1,4 @@
-#ifndef FANFARESIMULATOR_CLIENT_HPP
-#define FANFARESIMULATOR_CLIENT_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -28,6 +27,3 @@ public:
 
   Instrument setInstrument();
 };
-
-
-#endif //FANFARESIMULATOR_CLIENT_HPP

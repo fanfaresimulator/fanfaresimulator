@@ -1,5 +1,4 @@
-#ifndef DEF_MAINWINDOW
-#define DEF_MAINWINDOW
+#pragma once
 
 #include <QApplication>
 #include <QWidget>
@@ -15,5 +14,3 @@ private:
     QSlider *m_slider;
     QProgressBar *m_bar;
 };
-
-#endif
