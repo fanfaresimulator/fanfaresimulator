@@ -14,6 +14,7 @@ find_package(Qt5Network REQUIRED)
 set(CLIENT_HEADER_FILES
 	include/client.hpp
 	include/network_client.hpp
+	include/network_utils.hpp
 	include/instrument.hpp
 	include/keyboard.hpp
 	include/note.hpp
@@ -33,6 +34,7 @@ set(SERVER_HEADER_FILES
 	include/partition.hpp
 	include/server.hpp
 	include/network_server.hpp
+	include/network_utils.hpp
 	include/synthesizer.hpp
 	include/ui.hpp)
 

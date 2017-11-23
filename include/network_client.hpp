@@ -4,6 +4,7 @@
 #include <string>
 #include <QTcpSocket>
 
+#include "network_utils.hpp"
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "keyboard.hpp"
@@ -15,15 +16,17 @@ private:
   QTcpSocket socket;
   std::string username;
 
+  void sendMessage(std::string msg);
+
 public:
   NetworkClient(std::string username);
-  ~NetworkClient();
 
-  void sendNote(Note note);
-  void sendReady();
   void sendHello(std::string username);
-  void sendInstrumentChoice(std::string username, Instrument instrument);
-  void getPartition();
+  void sendInstrumentChoice(Instrument instrument);
+  void sendReady();
+  void sendNote(Note note);
 
-  Instrument setInstrument();
+signals:
+  /* Emit a signal that sends the partition */
+  void partitionArrived(Partition partition);
 };

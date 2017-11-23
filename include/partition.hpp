@@ -16,9 +16,10 @@ private:
 public:
 	std::initializer_list <Note> getNotes();
 
-	Partition();
-
-	~Partition();
+	// TODO: implement these
+	// Partition();
+	//
+	// ~Partition();
 
 	Partition getPartition(Instrument instrument);
 };

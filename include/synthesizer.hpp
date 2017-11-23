@@ -6,15 +6,16 @@
 #include "partition.hpp"
 
 class Synthesizer {
-private :
+private:
 	Partition mainPartition;
 
 public:
-	Synthesizer();
-
-	Synthesizer(Partition mainPartition);
-
-	~Synthesizer();
+	// TODO: implement these
+	// Synthesizer();
+	//
+	// Synthesizer(Partition mainPartition);
+	//
+	// ~Synthesizer();
 
 	Partition getPartition(Instrument instrument);
 

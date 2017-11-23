@@ -1,8 +1,5 @@
 #pragma once
 
-#include "note.hpp"
-#include "instrument.hpp"
-#include "synthesizer.hpp"
 #include <iostream>
 #include <string>
 #include <map>
@@ -11,29 +8,15 @@
 #include <QObject>
 #include <vector>
 
-#define PORT_NO 15051
-
-typedef enum {
-  HELLO,
-  NOTE,
-  CHOICE_LOBBY,
-  CHOICE_INSTRUMENT,
-  READY,
-  LOBBIES,
-  INSTRUMENTS,
-  PARTITION
-} protocol_sig;
+#include "network_utils.hpp"
+#include "note.hpp"
+#include "instrument.hpp"
+#include "synthesizer.hpp"
 
 class NetworkServer : public QObject {
 private:
   QTcpServer *server;
   std::vector<QTcpSocket*> clients;
-
-  // std::queue<Note> incomingNotes;
-  // Synthesizer synthesizer;
-
-  std::map<std::string, Instrument> usrToInstrument; // key : username, value : Instrument
-  std::map<Instrument, bool> instrumentMap; // key : Instrument, value : available
 
   void newConnection();
   void broadcast(std::string msg);
@@ -41,8 +24,12 @@ private:
 public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);
   void broadcastStart() const;
-  void updateInstrumentMap(Instrument i);
   void sendPartition(std::string username);
-  std::map<Instrument, bool> getInstrumentMap() const;
-  std::vector<QTcpSocket> getClients();
+  void sendInstruments(std::string username);
+
+signals:
+  void helloRecv(std::string username);
+  void instrumentChoiceRecv(std::string username, Instrument instrument);
+  void noteRecv(std::string username, Note note);
+
 };
