@@ -11,7 +11,6 @@
 #include "network_utils.hpp"
 #include "note.hpp"
 #include "instrument.hpp"
-#include "synthesizer.hpp"
 
 class NetworkServer : public QObject {
 private:

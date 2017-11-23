@@ -11,15 +11,22 @@ list(INSERT CMAKE_MODULE_PATH 0
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 
+set(COMMON_HEADER_FILES
+	include/instrument.hpp
+	include/note.hpp
+	include/partition.hpp)
+
+set(COMMON_SOURCE_FILES
+	include/instrument.cpp
+	include/note.cpp
+	include/partition.cpp)
+
 set(CLIENT_HEADER_FILES
+	${COMMON_HEADER_FILES}
 	include/client.hpp
 	include/network_client.hpp
 	include/network_utils.hpp
-	include/instrument.hpp
 	include/keyboard.hpp
-	include/note.hpp
-	include/partition.hpp
-	include/synthesizer.hpp
 	include/ui.hpp)
 
 set(CLIENT_SOURCE_FILES
@@ -28,10 +35,7 @@ set(CLIENT_SOURCE_FILES
 	gui/testwindow.cpp)
 
 set(SERVER_HEADER_FILES
-	include/instrument.hpp
-	include/keyboard.hpp
-	include/note.hpp
-	include/partition.hpp
+	${COMMON_HEADER_FILES}
 	include/server.hpp
 	include/network_server.hpp
 	include/network_utils.hpp

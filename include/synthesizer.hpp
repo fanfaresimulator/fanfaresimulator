@@ -10,12 +10,11 @@ private:
 	Partition mainPartition;
 
 public:
-	// TODO: implement these
-	// Synthesizer();
-	//
-	// Synthesizer(Partition mainPartition);
-	//
-	// ~Synthesizer();
+	Synthesizer();
+
+	Synthesizer(Partition mainPartition);
+
+	~Synthesizer();
 
 	Partition getPartition(Instrument instrument);
 
