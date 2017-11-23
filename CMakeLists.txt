@@ -17,9 +17,8 @@ set(COMMON_HEADER_FILES
 	include/partition.hpp)
 
 set(COMMON_SOURCE_FILES
-	include/instrument.cpp
-	include/note.cpp
-	include/partition.cpp)
+	common/note.cpp
+	common/partition.cpp)
 
 set(CLIENT_HEADER_FILES
 	${COMMON_HEADER_FILES}
@@ -30,6 +29,7 @@ set(CLIENT_HEADER_FILES
 	include/ui.hpp)
 
 set(CLIENT_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
 	main.cpp
 	network/network_client.cpp
 	gui/testwindow.cpp)
@@ -43,6 +43,7 @@ set(SERVER_HEADER_FILES
 	include/ui.hpp)
 
 set(SERVER_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
 	server.cpp
 	network/network_server.cpp
 	gui/testwindow.cpp)
