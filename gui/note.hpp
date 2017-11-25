@@ -22,7 +22,7 @@ public:
     Note(QWidget * parent, int id, float time_begin, float time_end);
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event, int position);
 
 };
 
