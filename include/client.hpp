@@ -10,29 +10,30 @@
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
+#include "network_client.hpp"
 
 class Client {
 
 private :
     NetworkClient net;              // !!! use the class Socket => Remark : waiting for the implementation
-    string username;            // use nothing ?
+    std::string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition
     Keyboard keyboard;          // !!! Waiting for the class Keyboard
 
 public:
 
-    client();
+    Client();
 
-    ~client();
+    ~Client();
 
     void sendNote(Note note);
 
     void sendReady();
 
-    void sendAddClient(string username);
+    void sendAddClient(std::string username);
 
-    void sendAddInstrumentToClient(string username, Instrument instrument);
+    void sendAddInstrumentToClient(std::string username, Instrument instrument);
 
     void requestPartition(Partition partition);
 

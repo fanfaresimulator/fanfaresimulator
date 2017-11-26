@@ -14,6 +14,7 @@
 #include "synthesizer.hpp"
 
 
+
 class Server {
 private:
     NetworkServer serveur;
