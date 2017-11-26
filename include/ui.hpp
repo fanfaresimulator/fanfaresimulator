@@ -35,5 +35,5 @@ public:
 
 	void startStream();
 
-	string getUsername();
+	std::string getUsername();
 };
