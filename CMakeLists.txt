@@ -32,6 +32,7 @@ set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	main.cpp
 	network/network_client.cpp
+	gui/keyboard.cpp
 	gui/testwindow.cpp)
 
 set(SERVER_HEADER_FILES
