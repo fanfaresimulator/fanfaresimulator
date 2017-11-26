@@ -17,9 +17,9 @@
 
 class Server {
 private:
-    NetworkServer serveur;
-    std::queue incomingNotes;
-    Synthesizer synthesizer;
+    NetworkServer* server;
+    Synthesizer* synthesizer;
+    std::queue<Note>* incomingNotes;
 
     std::map< std::string, std::pair< NetworkServer, bool > > clients;  // key : username, vale : (socket, isReady)
     std::map< std::string, Instrument > usrToInstrument;         // key : username, value : Instrument
@@ -27,9 +27,7 @@ private:
 
 public:
 
-    Server();
-
-    Server(NetworkServer serverSocket);
+    Server(NetworkServer& server, Synthesizer& synthesizer);
 
     ~Server();
 
@@ -39,7 +37,7 @@ public:
 
     bool addClient(std::string username) ;
 
-    bool addClient(std::string username, Instrument i) ;
+    bool addInstrument(std::string username, Instrument i) ;
 
     void sendPartition(std::string username) ;
 

@@ -15,15 +15,16 @@
 class Client {
 
 private :
-    NetworkClient net;              // !!! use the class Socket => Remark : waiting for the implementation
+    NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
+    Keyboard* keyboard;          // !!! Waiting for the class Keyboard
     std::string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition
-    Keyboard keyboard;          // !!! Waiting for the class Keyboard
+
 
 public:
 
-    Client();
+    Client(NetworkClient& network, Keyboard& keyboard);
 
     ~Client();
 
@@ -39,6 +40,6 @@ public:
 
     void loadPartition(Partition partition);
 
-    Instrument setInstrument();
+    void setInstrument(Instrument instrument);
 
 };
