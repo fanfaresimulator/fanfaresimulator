@@ -4,6 +4,10 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QGraphicsView>
 #include <qinputdialog>
+#include <iostream>
+
+
+typedef std::basic_string<char> string;
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +20,8 @@ int main(int argc, char *argv[])
 	bool dialogResult;
 	QInputDialog *renameDialog = new QInputDialog();
 	renameDialog->setTextValue("Test"); // has no effect
-	QString result = renameDialog->getText(0, "Rename Label", "New name:", QLineEdit::Normal,
+	QString result = renameDialog->getText(0, "Rename Label", "username:", QLineEdit::Normal,
 		"", &dialogResult);
-
 
 
 
