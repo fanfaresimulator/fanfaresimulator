@@ -10,7 +10,8 @@
 #include <map>
 #include "instrument.hpp"
 #include "note.hpp"
-#include "note.hpp"
+#include "network_server.hpp"
+#include "synthesizer.hpp"
 
 
 class Server {
@@ -27,7 +28,7 @@ public:
 
     Server();
 
-    Server(ServerSocket serverSocket);
+    Server(NetworkServer serverSocket);
 
     ~Server();
 
