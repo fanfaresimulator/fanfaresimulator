@@ -15,14 +15,14 @@ NetworkClient::NetworkClient(std::string username) {
 void NetworkClient::sendHello() {
   QJsonObject obj;
   obj["type"] = SIG_HELLO;
-  obj["data"] = QJsonValue(username.c_str());
+  obj["data"] = QString::fromStdString(username);
   this->sendJsonObject(obj);
 }
 
 void NetworkClient::sendInstrumentChoice(Instrument instrument) {
   QJsonObject obj;
   obj["type"] = SIG_CHOICE_INSTRUMENT;
-  obj["data"] = "NOT YET IMPLEMENTED";
+  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   this->sendJsonObject(obj);
 }
 
@@ -35,6 +35,6 @@ void NetworkClient::sendReady(){
 void NetworkClient::sendNote(Note note) {
   QJsonObject obj;
   obj["type"] = SIG_NOTE;
-  obj["data"] = "NOT YET IMPLEMENTED";
+  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   this->sendJsonObject(obj);
 }

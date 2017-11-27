@@ -21,7 +21,7 @@ void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
     }
   }
   // error
-  printf("Not such client found: %s\n", username);
+  printf("Not such client found: %s\n", username.c_str());
 }
 
 void NetworkServer::broadcast(QJsonObject obj) {
