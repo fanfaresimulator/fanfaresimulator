@@ -25,7 +25,7 @@ void testSynth() {
 
 	adriver = new_fluid_audio_driver(settings, synth);
 
-	fluid_synth_sfload(synth, "../sf.sf2", 1);
+	fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
 
 	int key;
 	for (int i = 0; i < 10002; i++) {

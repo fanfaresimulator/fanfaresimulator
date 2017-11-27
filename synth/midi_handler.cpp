@@ -36,7 +36,7 @@ const char *GMinstrument[128] = {
 void midi_handler() {
   cout << "Hello world from midi_handler" << endl;
   MidiFile midifile;
-  midifile.read("../synth/Movie_Themes_-_Willie_Wonka.mid");
+  midifile.read("../resources/Movie_Themes_-_Willie_Wonka.mid");
   double tempo = 120.0;
   int tracks = midifile.getTrackCount();
   int TPQ = midifile.getTicksPerQuarterNote();
