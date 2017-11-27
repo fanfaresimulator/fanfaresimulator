@@ -55,13 +55,13 @@ void NetworkServer::broadcastStart() {
 void NetworkServer::sendPartition(std::string username) {
   QJsonObject obj;
   obj["type"] = SIG_PARTITION;
-  obj["data"] = "NOT YET IMPLEMENTED";
+  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   sendJsonObject(username, obj);
 }
 
 void NetworkServer::sendInstruments(std::string username) {
   QJsonObject obj;
   obj["type"] = SIG_INSTRUMENTS;
-  obj["data"] = "NOT YET IMPLEMENTED";
+  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   sendJsonObject(username, obj);
 }
