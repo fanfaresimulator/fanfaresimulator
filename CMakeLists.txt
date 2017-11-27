@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.2)
+
 project(fanfaresimulator)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -8,32 +9,80 @@ list(INSERT CMAKE_MODULE_PATH 0
 )
 
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Fluidsynth REQUIRED)
 
 include_directories(${FLUIDSYNTH_INCLUDE_DIRS})
 
-set(HEADER_FILES
-	# include/client.hpp
-	# include/server.hpp
-	# include/instrument.hpp
-	# include/partition.hpp
-	# include/ui.hpp
-	)
+set(MIDIFILE_HEADER_FILES
+	synth/libmidifile/Binasc.h
+	synth/libmidifile/MidiEvent.h
+	synth/libmidifile/MidiEventList.h
+	synth/libmidifile/MidiFile.h
+	synth/libmidifile/MidiMessage.h
+	synth/libmidifile/Options.h
+)
 
-set(SOURCE_FILES
-	main.cpp
-	# network/server.cpp
-	# gui/testwindow.cpp
-	synth/synthesizer.cpp
-	synth/midi_handler.cpp
+set(MIDIFILE_SOURCE_FILES
 	synth/libmidifile/Binasc.cpp
 	synth/libmidifile/MidiEvent.cpp
 	synth/libmidifile/MidiEventList.cpp
 	synth/libmidifile/MidiFile.cpp
 	synth/libmidifile/MidiMessage.cpp
 	synth/libmidifile/Options.cpp
-	)
+)
 
-add_executable(fanfaresimulator ${SOURCE_FILES} ${HEADER_FILES})
-target_link_libraries(fanfaresimulator Qt5::Widgets ${FLUIDSYNTH_LIBRARIES})
+set(COMMON_HEADER_FILES
+	include/instrument.hpp
+	include/note.hpp
+	include/partition.hpp
+)
 
+set(COMMON_SOURCE_FILES
+	common/note.cpp
+	common/partition.cpp
+)
+
+set(CLIENT_HEADER_FILES
+	${COMMON_HEADER_FILES}
+	include/client.hpp
+	include/network_client.hpp
+	include/network_utils.hpp
+	include/keyboard.hpp
+	include/ui.hpp
+)
+
+set(CLIENT_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
+	main.cpp
+	network/network_client.cpp
+	gui/keyboard.cpp
+	gui/testwindow.cpp
+	engine/client.cpp
+)
+
+set(SERVER_HEADER_FILES
+	${COMMON_HEADER_FILES}
+	${MIDIFILE_HEADER_FILES}
+	include/server.hpp
+	include/network_server.hpp
+	include/network_utils.hpp
+	include/synthesizer.hpp
+	include/ui.hpp
+)
+
+set(SERVER_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
+	${MIDIFILE_SOURCE_FILES}
+	network/network_server.cpp
+	synth/synthesizer.cpp
+	synth/midi_handler.cpp
+	engine/server.cpp
+	server.cpp
+)
+
+add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
+target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
+
+add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
+target_link_libraries(fanfaresimulator-server Qt5::Widgets Qt5::Network ${FLUIDSYNTH_LIBRARIES})

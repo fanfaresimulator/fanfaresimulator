@@ -1,48 +1,46 @@
+#include <stdio.h>
+#include <fluidsynth.h>
+#include <fluidsynth/settings.h>
+
+#ifdef __unix__
+#include <unistd.h>
+#elif defined(_WIN32) || defined(WIN32)
+#include <windows.h>
+#endif
+
 #include "synthesizer.hpp"
 
-#include <stdio.h>
-#include <unistd.h>
+void testSynth() {
+	printf("Hello world from the synth !\n");
 
-#include "fluidsynth.h"
-#include "fluidsynth/settings.h"
+	fluid_settings_t* settings;
+	fluid_synth_t* synth;
+	fluid_audio_driver_t* adriver;
+	settings = new_fluid_settings();
+	/* Set the synthesizer settings, if necessary */
+	synth = new_fluid_synth(settings);
+	//fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
+	adriver = new_fluid_audio_driver(settings, synth);
+	fluid_synth_sfload(synth, "../sf.sf2", 1);
 
-void testSynth () {
-	
-	printf("Hello world from the synth !");
-	
-	
-    fluid_settings_t* settings;
-    fluid_synth_t* synth;
-    fluid_audio_driver_t* adriver;
-    settings = new_fluid_settings();
-    /* Set the synthesizer settings, if necessary */
-    synth = new_fluid_synth(settings);
-    fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
-    
-    
-    adriver = new_fluid_audio_driver(settings, synth);
-    
-    
-    fluid_synth_sfload(synth, "../sf.sf2", 1);
-    
-    int key;
+	int key;
 	for (int i = 0; i < 10002; i++) {
 		/* Generate a random key */
 		key = 60+i;
 		/* Play a note */
 		fluid_synth_noteon(synth, 0, key, 80);
 		/* Sleep for 1 second */
+#ifdef __unix__
 		sleep(1);
+#elif defined(_WIN32) || defined(WIN32)
+		Sleep(1000);
+#endif
 		/* Stop the note */
 		fluid_synth_noteoff(synth, 0, key);
 	}
-    
-    /* Do useful things here */
-    delete_fluid_audio_driver(adriver);
-    delete_fluid_synth(synth);
-    delete_fluid_settings(settings);
-	
-	
-	return;
-	
+
+	/* Do useful things here */
+	delete_fluid_audio_driver(adriver);
+	delete_fluid_synth(synth);
+	delete_fluid_settings(settings);
 }
