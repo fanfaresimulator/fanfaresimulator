@@ -1,18 +1,13 @@
-#include <iostream>
-
-#include "synth/synthesizer.hpp"
-#include "synth/midi_handler.hpp"
+#include <QApplication>
+#include "gui/testwindow.hpp"
 
 int main(int argc, char *argv[])
 {
-	// QApplication app(argc, argv);
+	QApplication app(argc, argv);
 
-	// TestWindow window;
+	TestWindow window;
 
-	// window.show();
-	midi_handler();
-	testSynth();
+	window.show();
 
-	// return app.exec();
-	return 0;
+	return app.exec();
 }

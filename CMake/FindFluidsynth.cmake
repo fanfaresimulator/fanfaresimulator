@@ -22,6 +22,23 @@ else (FLUIDSYNTH_LIBRARIES AND FLUIDSYNTH_INCLUDE_DIRS)
    pkg_check_modules(FLUIDSYNTH fluidsynth)
   endif (NOT WIN32)
 
+  if (NOT FLUIDSYNTH_FOUND)
+    find_path(FLUIDSYNTH_INCLUDE_DIR
+      NAMES fluidsynth.h
+      HINTS ./vendor/include
+    )
+
+    find_library(FLUIDSYNTH_LIBRARY
+      NAMES fluidsynth_debug fluidsynth
+      HINTS ./vendor/lib
+    )
+
+    set(FLUIDSYNTH_INCLUDE_DIRS ${FLUIDSYNTH_INCLUDE_DIR})
+    set(FLUIDSYNTH_LIBRARIES ${FLUIDSYNTH_LIBRARY})
+    set(FLUIDSYNTH_LIBRARY_DIRS ${FLUIDSYNTH_LIBRARY_DIR})
+
+  endif (NOT FLUIDSYNTH_FOUND)
+
   # show the FLUIDSYNTH_INCLUDE_DIRS and FLUIDSYNTH_LIBRARIES variables only in the advanced view
   mark_as_advanced(FLUIDSYNTH_INCLUDE_DIRS FLUIDSYNTH_LIBRARIES)
 

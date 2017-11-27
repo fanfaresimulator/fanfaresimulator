@@ -1,8 +1,5 @@
-#ifndef SYNTH_H
-#define SYNTH_H
+#pragma once
 
 #include <fluidsynth.h>
 
 void testSynth();
-
-#endif

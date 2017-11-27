@@ -35,4 +35,14 @@
 *.sln
 *.suo
 
-build
+# Visual Studio Code trash
+.vscode/
+
+# Clion trash
+*.xml
+.idea/
+cmake-build-debug/
+
+build*
+.vs/
+vendor
