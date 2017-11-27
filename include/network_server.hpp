@@ -2,10 +2,14 @@
 
 #include <iostream>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <queue>
 #include <QtNetwork>
 #include <QObject>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QByteArray>
 #include <vector>
 
 #include "network_utils.hpp"
@@ -15,14 +19,16 @@
 class NetworkServer : public QObject {
 private:
   QTcpServer *server;
-  std::vector<QTcpSocket*> clients;
+  std::unordered_map<std::string, QTcpSocket*> clients; // HashMap<username, socket>
+  // std::vector<QTcpSocket*> clients; // TODO use a HashMap<Username,Socket>
 
   void newConnection();
-  void broadcast(std::string msg);
+  void sendJsonObject(std::string username, QJsonObject obj);
+  void broadcast(QJsonObject obj);
 
 public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);
-  void broadcastStart() const;
+  void broadcastStart();
   void sendPartition(std::string username);
   void sendInstruments(std::string username);
 
