@@ -4,9 +4,9 @@ platform:
   - x64
 
 before_build:
-  - ps: (new-object net.webclient).DownloadFile('https://github.com/fanfaresimulator/fanfaresimulator/files/1505797/vendor.zip', 'vendor.zip')
+  - ps: (new-object net.webclient).DownloadFile('https://github.com/fanfaresimulator/fanfaresimulator/files/1505797/vendor.zip', 'C:\vendor.zip')
   - cmd: mkdir vendor
-  - cmd: 7z x vendor.zip -ovendor
+  - cmd: 7z x C:\vendor.zip -ovendor
 
 build_script:
   - cmd: mkdir build
