@@ -8,13 +8,14 @@
 Dependencies:
 * [CMake](https://cmake.org/)
 * [Qt](https://www.qt.io/)
+* [FluidSynth](http://www.fluidsynth.org/)
 
 ### Linux
 
 On Debian-based systems:
 
 ```shell
-sudo apt install qtbase5-dev
+sudo apt install qtbase5-dev libfluidsynth-dev
 ```
 
 In the project directory:
@@ -28,7 +29,7 @@ cmake ..
 ### macOS
 
 ```shell
-brew install qt
+brew install qt fluidsynth
 ```
 
 In the project directory:
