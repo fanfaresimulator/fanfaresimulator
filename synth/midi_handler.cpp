@@ -1,3 +1,9 @@
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <midifile/MidiFile.h>
+#include <midifile/Options.h>
+
 #include "midi_handler.hpp"
 
 using namespace std;

@@ -12,25 +12,9 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Fluidsynth REQUIRED)
 
-include_directories(${FLUIDSYNTH_INCLUDE_DIRS})
+include_directories(include)
 
-set(MIDIFILE_HEADER_FILES
-	synth/libmidifile/Binasc.h
-	synth/libmidifile/MidiEvent.h
-	synth/libmidifile/MidiEventList.h
-	synth/libmidifile/MidiFile.h
-	synth/libmidifile/MidiMessage.h
-	synth/libmidifile/Options.h
-)
-
-set(MIDIFILE_SOURCE_FILES
-	synth/libmidifile/Binasc.cpp
-	synth/libmidifile/MidiEvent.cpp
-	synth/libmidifile/MidiEventList.cpp
-	synth/libmidifile/MidiFile.cpp
-	synth/libmidifile/MidiMessage.cpp
-	synth/libmidifile/Options.cpp
-)
+add_subdirectory(midifile)
 
 set(COMMON_HEADER_FILES
 	include/instrument.hpp
@@ -63,7 +47,6 @@ set(CLIENT_SOURCE_FILES
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
-	${MIDIFILE_HEADER_FILES}
 	include/server.hpp
 	include/network_server.hpp
 	include/network_utils.hpp
@@ -73,7 +56,6 @@ set(SERVER_HEADER_FILES
 
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
-	${MIDIFILE_SOURCE_FILES}
 	network/network_server.cpp
 	synth/synthesizer.cpp
 	synth/midi_handler.cpp
@@ -85,4 +67,5 @@ add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
 
 add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
-target_link_libraries(fanfaresimulator-server Qt5::Widgets Qt5::Network ${FLUIDSYNTH_LIBRARIES})
+target_include_directories(fanfaresimulator-server PRIVATE ${FLUIDSYNTH_INCLUDE_DIRS})
+target_link_libraries(fanfaresimulator-server Qt5::Widgets Qt5::Network midifile ${FLUIDSYNTH_LIBRARIES})

@@ -19,8 +19,12 @@ void testSynth() {
 	settings = new_fluid_settings();
 	/* Set the synthesizer settings, if necessary */
 	synth = new_fluid_synth(settings);
-	//fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
+#ifdef __linux__
+	fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
+#endif
+
 	adriver = new_fluid_audio_driver(settings, synth);
+
 	fluid_synth_sfload(synth, "../sf.sf2", 1);
 
 	int key;
