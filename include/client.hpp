@@ -11,6 +11,8 @@
 #include "keyboard.hpp"
 #include "note.hpp"
 #include "network_client.hpp"
+#include "noteglobale.hpp"
+#include "partitionglobale.hpp"
 
 class Client : public QObject
 {
@@ -22,6 +24,7 @@ private :
     std::string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition
+	PartitionGlobale partitionglobale; //Use the class NoteGlobale
 
 
 public:
@@ -43,9 +46,5 @@ public:
     void loadPartition(Partition partition);
 
     void setInstrument(Instrument instrument);
-
-public slots:
-
-    void loadOriginalPartition(Partition partition);
 
 };
