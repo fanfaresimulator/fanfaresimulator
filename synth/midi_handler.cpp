@@ -102,47 +102,14 @@ void midi_handler() {
   // if (tracks > 1) {
   //     cout << "TRACKS: " << tracks << endl;
   // }
-  // cout << endl;
-
   for (int track=0; track < tracks; track++) {
-      // if (tracks > 1) {
-      //     cout << "\nTrack " << track << " has " << midifile.getEventCount(track) << " events" << endl;
-      //  }
-      int instru;
-
+       int instru;
        for (int event=0; event < midifile.getEventCount(track); event++) {
-
-
             if(!(midifile.getEvent(track, event).isNoteOn() || midifile.getEvent(track, event).isNoteOff())){
-
-              // if(midifile.getEvent(track, event).isAftertouch()){
-              //   cout << "Aftertouch :";
-              // }
-              // if(midifile.getEvent(track, event).isController()){
-              //   cout << "Controller :";
-              // }
-              // if(midifile.getEvent(track, event).isMeta()){
-              //   cout << "Meta :";
-              // }
-              //
-              // if(midifile.getEvent(track, event).isPitchbend()){
-              //   cout << "Pitchbend :";
-              // }
-              // if(midifile.getEvent(track, event).isPressure()){
-              //   cout << "Pressure :";
-              // }
-              // if(midifile.getEvent(track, event).isTempo()){
-              //   cout << " Tempo :";
-              // }
               if(midifile.getEvent(track, event).isTimbre()){
                 instru = (int)midifile.getEvent(track, event)[1];
                 //cout << "Timbre : " << GMinstrument[(int)midifile.getEvent(track, event)[1]] << " " << (int)midifile.getEvent(track, event)[1] << endl;
               }
-
-              // for (int i=0; i<midifile.getEvent(track, event).size(); i++) {
-              //             cout << " " << (int)midifile.getEvent(track, event)[i];
-              //   }
-              //cout << endl;
             }
 
             else{
@@ -155,14 +122,9 @@ void midi_handler() {
 
               for (int i=1; i<midifile.getEvent(track, event).size(); i++) {  // On commence à 1 car le premier element signifie note on ou noteoff déjà pris en compte
                           note << " " << (int)midifile.getEvent(track, event)[i];
-                }
+              }
               cout << note.str() << endl;
             }
-
-            //cout << midifile.getEvent(track, event).getCommandByte() << " ";
-            //cout << midifile.getEvent(track, event).getCommandNibble() << " ";
-          }
-
+      }
    }
-
 }
