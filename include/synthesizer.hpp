@@ -1,11 +1,16 @@
 #pragma once
 
 #include <iostream>
+#include <QObject>
 #include "instrument.hpp"
 #include "note.hpp"
 #include "partition.hpp"
 
-class Synthesizer {
+class Synthesizer  : public QObject
+{
+
+Q_OBJECT
+
 private:
 	Partition mainPartition;
 
@@ -16,7 +21,8 @@ public:
 
 	~Synthesizer();
 
-	Partition getPartition(Instrument instrument);
-
 	void playNote(Note note);
+
+public slots:
+	Partition getPartition(Instrument instrument);
 };
