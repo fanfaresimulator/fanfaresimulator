@@ -9,6 +9,8 @@
 
 #include "music_line.hpp"
 #include "note.hpp"
+
+class MusicLine;
 using namespace std;
 class GameWindow : public QWidget
 {
@@ -31,13 +33,15 @@ public:
 
     void create_lines();
 
+    void read_notes(char * list);
+
 private:
     int height;
     int width;
     bool is_ready;
     int time_start;
     int number_of_lines;
-    MusicLine** lines;
+    vector<MusicLine*> lines;
     vector<Note*> note;
 };
 

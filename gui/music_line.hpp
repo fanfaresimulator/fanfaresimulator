@@ -7,21 +7,27 @@
 
 #include <iostream>
 #include <QWidget>
-
+#include "game_window.hpp"
 typedef std::string string;
-
+class GameWindow;
 
 class MusicLine : public QWidget{
 
 public:
+
+    MusicLine(GameWindow * parent );
+
+    void setId(int id);
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
+private:
     int id;
     string color;
     int key;
 
-    MusicLine(QWidget * parent );
-
-protected:
-    void paintEvent(QPaintEvent *event);
+    GameWindow* parent;
 
 };
 
