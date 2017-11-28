@@ -6,9 +6,6 @@ Server::Server(NetworkServer& server, Synthesizer& synthesizer) {
     this->incomingNotes = new std::queue<Note>();
 }
 
-Server::~Server() {
-
-}
 
 bool Server::addClient(std::string username) {
     return false;
