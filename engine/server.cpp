@@ -20,8 +20,7 @@ bool Server::addClient(std::string username) {
     if (username == ""){
         throw std::invalid_argument("Username null");
     }
-    // A verifier
-    //clients.try_emplace(username,false);
+    clients.emplace(username,false);
     return true;
 }
 
@@ -35,8 +34,7 @@ bool Server::addInstrument(std::string username, Instrument i) {
         throw std::invalid_argument("Username not found in clients");
     }
     // found => insert in usrToInstrument
-    // A verifier
-    //usrToInstrument.try_emplace(username,i);
+    usrToInstrument.emplace(username,i);
     return true;
 }
 

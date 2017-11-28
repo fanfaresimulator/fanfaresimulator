@@ -43,6 +43,37 @@ std::list <double> Partition::frameDivision()	{
 	return frames;
 }
 
+std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTime)	{
+
+
+	std::list <Note> finalPartition;
+
+	// This is the set of notes for which we are not sure that they have an ON/OFF
+	// in the current frame.
+	std::list <Note> noteSet;
+
+	for (iterator=listOfNotes.begin(); iterator != listOfNotes.end(); iterator++)	{
+		if (iterator.getTime()>finalTime)	{
+			break;
+		}
+
+		if (iterator.getTime()>=startTime)	{
+			if (iterator.getSignal())	{
+				noteSet.push_front(iterator);
+				finalPartition.push_back(iterator);
+			}
+			else	{
+				// TO BE COMPLETED
+			}
+
+		}
+	}
+
+
+}
+
+
+
 
 
 
