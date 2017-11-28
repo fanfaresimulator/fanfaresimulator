@@ -9,6 +9,9 @@
 class Partition {
 private:
 	std::list <Note> listOfNotes;
+	
+	const double minFrameLength = 0.5; // Minimum frame duration
+	const double maxFrameLength = 3.0; // Maximum frame duration
 
 public:
 	Partition();
