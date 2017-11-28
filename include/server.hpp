@@ -45,6 +45,6 @@ public:
 public slots:
     bool addClient(std::string username);
     bool addInstrument(std::string username, Instrument i);
-    void addNote(std::string username, Note note);
+    void playNote(std::string username, Note note);
 
 };

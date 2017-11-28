@@ -16,4 +16,6 @@ public:
 
     Note(double timestamp, bool signal, Instrument instrument, int key, int velocity, int track);
 
+    double getTime ();
+
 };

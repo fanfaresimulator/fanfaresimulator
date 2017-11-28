@@ -14,8 +14,10 @@
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
 
-class Client {
+class Client : public QObject
+{
 
+    Q_OBJECT
 private :
     NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
     Keyboard* keyboard;          // !!! Waiting for the class Keyboard
@@ -44,7 +46,5 @@ public:
     void loadPartition(Partition partition);
 
     void setInstrument(Instrument instrument);
-
-	PartitionGlobale setPartitionGlobale();
 
 };
