@@ -6,7 +6,6 @@
 #include <note.hpp>
 #include "midi_handler.hpp"
 
-
 using namespace std;
 
 #define TICK 1            /* time units are MIDI file ticks (absolute)     */
@@ -14,6 +13,41 @@ using namespace std;
 #define SEC  3            /* time units are seconds (absolute)             */
 #define MSEC 4            /* time units are millisecodns (absolute)        */
 
+int getTimetype(std::string s){
+
+  Options opts;
+  opts.define("t|ticks|tick=b",                    "display time in ticks");
+  opts.define("s|sec|second|seconds=b",            "display time in seconds");
+  opts.define("m|msec|millisecond|milliseconds=b", "display time in msec");
+  opts.define("b|beat|beats=b",                    "display time in beats");
+
+  char* argvalues[1];
+
+  argvalues[0] = new char[s.length()+1];
+  for (int i = 0; i < s.length(); i++){
+    argvalues[0][i] = s[i];
+  }
+  argvalues[0][s.length()] = '\0';
+  opts.process(1, argvalues);
+
+  int tickQ = opts.getBoolean("ticks");
+  int secQ  = opts.getBoolean("seconds");
+  int msecQ = opts.getBoolean("milliseconds");
+  int beatQ = opts.getBoolean("beats");
+
+  if (tickQ) {
+     return TICK;
+  } else if (beatQ) {
+     return BEAT;
+  } else if (secQ) {
+     return SEC;
+  } else if (msecQ) {
+     return MSEC;
+  } else {
+     return BEAT;
+  }
+  return SEC;
+}
 
 double getTime(int ticks, MidiFile& midifile, int timetype) {
    int tpq = midifile.getTicksPerQuarterNote();
@@ -55,46 +89,14 @@ const char *GMinstrument[128] = {
    "applause",  "ringwhsl"
 };
 
-
-
 void midi_handler() {
-  //cout << "Hello world from midi_handler" << endl;
-  MidiFile midifile;
-  midifile.read("../resources/Movie_Themes_-_Willie_Wonka.mid");
 
-  Options opts;
-  opts.define("t|ticks|tick=b",                    "display time in ticks");
-  opts.define("s|sec|second|seconds=b",            "display time in seconds");
-  opts.define("m|msec|millisecond|milliseconds=b", "display time in msec");
-  opts.define("b|beat|beats=b",                    "display time in beats");
-
-  char* argvalues[1];
   std::string s = "../resources/Movie_Themes_-_Willie_Wonka.mid";
-  argvalues[0] = new char[s.length()+1];
-  for (int i = 0; i < s.length(); i++){
-  argvalues[0][i] = s[i];
-  }
-  argvalues[0][s.length()] = '\0';
-  opts.process(1, argvalues);
 
-  int tickQ = opts.getBoolean("ticks");
-  int secQ  = opts.getBoolean("seconds");
-  int msecQ = opts.getBoolean("milliseconds");
-  int beatQ = opts.getBoolean("beats");
+  MidiFile midifile;
+  midifile.read(s);
 
-  int timetype = SEC;
-
-  if (tickQ) {
-     timetype = TICK;
-  } else if (beatQ) {
-     timetype = BEAT;
-  } else if (secQ) {
-     timetype = SEC;
-  } else if (msecQ) {
-     timetype = MSEC;
-  } else {
-     timetype = BEAT;
-  }
+  int timetype = getTimetype(s);
 
   int tracks = midifile.getTrackCount();
   //int TPQ = midifile.getTicksPerQuarterNote();
