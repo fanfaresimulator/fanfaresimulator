@@ -9,22 +9,26 @@
 #include <iostream>
 #include <QWidget>
 #include <QPainter>
+#include "game_window.hpp"
+
+class GameWindow;
 
 class Note : public QWidget {
 
 public:
     float visible_duration=0.3;
+    GameWindow* parent;
     int line_id;
     float duration;
-    bool is_long;
     float time_to_play;
     int radius_note=10;
     int position;
+    float x;
 
-    Note(QWidget * parent, int id, float time_begin, float time_end);
+    Note(GameWindow * parent, int id, float time_begin, float time_end);
 
     bool is_visible(float spent_time);
-    void actualize_position(float spent_time);
+    void actualize_position(int spent_time);
 
 protected:
     void paintEvent(QPaintEvent *event);

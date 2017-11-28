@@ -11,6 +11,7 @@
 #include "note.hpp"
 
 class MusicLine;
+class Note;
 using namespace std;
 class GameWindow : public QWidget
 {
@@ -39,6 +40,8 @@ public:
     void create_lines();
 
     void read_notes(vector<string> list);
+    void actualize_notes(int spent_time);
+
 
 private:
     int height;
