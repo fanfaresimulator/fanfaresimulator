@@ -10,10 +10,9 @@ int main(int argc, char *argv[])
 
 	GameWindow window;
 
+
 	window.set_size(1500, 1000);
-
 	window.show();
-
 
 
 	return app.exec();

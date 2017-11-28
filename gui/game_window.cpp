@@ -52,3 +52,21 @@ bool GameWindow::get_is_ready() {
 int GameWindow::get_time_start() {
     return time_start;
 }
+
+void GameWindow::read_notes(char * list){
+    float time1;
+    float time2;
+    for(int i=0;i<list.size()/3;i++){
+        if((char)list(3*i+2)=='U'){
+            time1=(float)list(3*i);
+            int id=(int)list(3*i+1)
+                     for(int j=i;j<list.size()/3;j++){
+                if((int)list(3*i+1)==id && (char)list(3*j+2)=='D') {
+                    time2 = (float) list(3 * j);
+                    break;
+                }
+                     }
+            this->note.push_back(new Note(this,id,time1,time2));
+            }
+        }
+}

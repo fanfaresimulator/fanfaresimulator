@@ -9,6 +9,8 @@
 #include <iostream>
 #include <QWidget>
 #include <QPainter>
+#include <ctime>
+
 
 class Note : public QWidget {
 
@@ -20,6 +22,7 @@ public:
     int radius_note=10;
 
     Note(QWidget * parent, int id, float time_begin, float time_end);
+    Note(QWidget * parent);
 
 protected:
     void paintEvent(QPaintEvent *event, int position);
