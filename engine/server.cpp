@@ -1,4 +1,7 @@
 #include "../include/server.hpp"
+#include <map>
+#include <iostream>
+
 
 Server::Server(NetworkServer& server, Synthesizer& synthesizer) {
     this->server = &server;
@@ -15,7 +18,7 @@ bool Server::addClient(std::string username) {
     if (username == null){
         throw std::invalid_argument("Username null");
     }
-    client.try_emplace(username,false);
+    clients.try_emplace(username,false);
     return true;
 }
 
