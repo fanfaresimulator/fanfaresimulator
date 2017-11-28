@@ -13,6 +13,10 @@ private:
 	int track;
 
 public:
+	NoteGlobale();
 
+	NoteGlobale(std::initializer_list <Note> listOfNotes, double timestamp, bool signal);
+
+	~NoteGlobale();
 	
 };
