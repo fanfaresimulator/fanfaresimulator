@@ -27,7 +27,7 @@ void testSynth() {
 
 	fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
 	fluid_settings_setnum(settings, "synth.gain", 2);
-	fluid_synth_program_change(synth, 0, 40); // 40 = violon dans la bank0. On reste dans la bank 0.
+	fluid_synth_program_change(synth, 0, 16); // 40 = violon dans la bank0. On reste dans la bank 0. 16 = tonewheel organ ooooh yeah -> Cory Henry/Jimmy Smith inside
 
 	int key;
 	for (int i = 0; i < 10002; i++) {
@@ -35,7 +35,7 @@ void testSynth() {
 		key = 60+i;
 		/* Play a note */
 		fluid_synth_noteon(synth, 0, key, 80);
-		fluid_synth_noteon(synth, 0, key + 4, 80);
+		fluid_synth_noteon(synth, 0, key + 4, 80); // une petite tierce
 		/* Sleep for 1 second */
 #ifdef __unix__
 		sleep(1);
