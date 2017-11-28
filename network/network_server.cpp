@@ -5,12 +5,13 @@ void NetworkServer::newConnection() {
   QTcpSocket *clientConnection = server->nextPendingConnection();
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
-  std::string username = NULL;
+  std::string username = "";
   ServerConnection client(username, clientConnection);
   clients.insert(&client);
+  std::cout << "new client" << std::endl;
 
   clientConnection->write("Hello you !\n");
-  // clientConnection->disconnectFromHost();
+  clientConnection->disconnectFromHost();
 }
 
 void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {

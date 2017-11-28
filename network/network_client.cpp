@@ -17,9 +17,10 @@ void NetworkClient::readyRead() {
 NetworkClient::NetworkClient(std::string username, QObject *parent) :
 QObject(parent) {
   socket = new QTcpSocket(this);
-  socket->connectToHost(QHostAddress("localhost"), 15051);
+  socket->connectToHost(QHostAddress("127.0.0.1"), 15051);
   // connect(socket, &QIODevice::readyRead, this, &NetworkClient::read);
   this->username = username;
+  std::cout << "new client: " << username << std::endl;
 }
 
 void NetworkClient::sendHello() {
