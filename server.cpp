@@ -18,6 +18,15 @@ int main(int argc, char *argv[]) {
 //
 //	QObject::connect(&networkServer, &NetworkServer::noteRecv,
 //					 &serverEngine, &Server::playNote);
+//
+//	QObject::connect(&serverEngine, &Server::playNote,
+//					 &synthesizer, &Synthesizer::playNote);
+//
+//	QObject::connect(&serverEngine, &Server::requestPartiton,
+//					 &synthesizer, &Synthesizer::getPartition);
+//
+//	QObject::connect(&synthesizer, &Synthesizer::sendPartition,
+//					 &serverEngine, &Server::sendPartition);
 
 	return app.exec();
 }

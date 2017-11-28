@@ -34,7 +34,7 @@ public:
 
     void broadcastStart() const ;
     void updateInstrumentMap(Instrument i) ;
-    void sendPartition(std::string username) ;
+
     std::map< Instrument , bool > getInstrumentMap() const;
 
 
@@ -42,5 +42,11 @@ public slots:
     bool addClient(std::string username);
     bool addInstrument(std::string username, Instrument i);
     void playNote(std::string username, Note note);
+    void sendPartition(std::string username, Partition partition);
+
+signals:
+    void playNote(Note note);
+    void requestPartiton(std::string username, Partition partition);
+
 
 };
