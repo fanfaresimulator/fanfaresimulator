@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <note>
 #include "instrument.hpp"
 
 class NoteGlobale {

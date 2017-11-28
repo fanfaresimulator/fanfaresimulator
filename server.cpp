@@ -7,17 +7,17 @@
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 	NetworkServer networkServer;
-	Synthesizer synthesizer;
-	Server serverEngine(networkServer, synthesizer);
-
-	QObject::connect(&networkServer, &NetworkServer::helloRecv,
-					 &serverEngine, &Server::addClient);
-
-	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
-					 &serverEngine, &Server::addInstrument);
-
-	QObject::connect(&networkServer, &NetworkServer::noteRecv,
-					 &serverEngine, &Server::playNote);
+//	Synthesizer synthesizer;
+//	Server serverEngine(networkServer, synthesizer);
+//
+//	QObject::connect(&networkServer, &NetworkServer::helloRecv,
+//					 &serverEngine, &Server::addClient);
+//
+//	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
+//					 &serverEngine, &Server::addInstrument);
+//
+//	QObject::connect(&networkServer, &NetworkServer::noteRecv,
+//					 &serverEngine, &Server::playNote);
 
 	return app.exec();
 }
