@@ -5,15 +5,20 @@
 
 
 
-Partition::Partition (std::initializer_list <Note> newListOfNotes)	{
+Partition::Partition (std::list <Note> newListOfNotes)	{
 
 	listOfNotes = newListOfNotes; // ask more about this structure
 }
 
 
-std::initializer_list <Note> Partition::getNotes()	{
+std::list <Note> Partition::getNotes()	{
 
 	return listOfNotes;
+}
+
+double Partition::getLength() {
+
+	Note lastNote = listOfNotes.back();
 }
 
 
