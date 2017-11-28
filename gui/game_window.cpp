@@ -79,20 +79,25 @@ void GameWindow::create_lines(){
     }
 }
 
-void GameWindow::read_notes(char * list){
+void GameWindow::read_notes(vector<char> list){
     float time1;
     float time2;
-    for(int i=0;i<list.size()/3;i++){
-        if((char)list(3*i+2)=='U'){
-            time1=(float)list(3*i);
-            int id=(int)list(3*i+1)
-            for(int j=i;j<list.size()/3;j++){
-                if((int)list(3*i+1)==id && (char)list(3*j+2)=='D') {
-                    time2 = (float) list(3 * j);
-                    break;
-                }
+    int id;
+    while(!list.empty()) {
+        time1 = (float) list[0];
+        id = (int) list[1];
+        for (int i = 1; i < list.size() / 3; i++) {
+            if ((int) list[3 * i + 1] == id && (char) list[3 * i + 2] == 'D') {
+                time2 = (float) list[3 * i];
+                list.erase(list.begin()+3*i);
+                list.erase(list.begin()+3*i);
+                list.erase(list.begin()+3*i);
             }
-            this->note.push_back(new Note(this,id,time1,time2));
+            break;
         }
+        this->note.push_back(new Note(this, id, time1, time2));
+        list.erase(list.begin());
+        list.erase(list.begin());
+        list.erase(list.begin());
     }
 }
