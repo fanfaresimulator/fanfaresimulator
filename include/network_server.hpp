@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include <unordered_set>
 #include <functional>
 #include <QtNetwork>

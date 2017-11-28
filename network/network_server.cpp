@@ -5,11 +5,11 @@ void NetworkServer::newConnection() {
   QTcpSocket *clientConnection = server->nextPendingConnection();
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
-  std::string username;
+  std::string username = NULL;
   ServerConnection client(username, clientConnection);
   clients.insert(&client);
 
-  // clientConnection->write("Hello you !\n");
+  clientConnection->write("Hello you !\n");
   // clientConnection->disconnectFromHost();
 }
 
@@ -43,7 +43,7 @@ QObject(parent) {
   if(server->listen(QHostAddress::Any, PORT_NO) == 0) {
     exit(EXIT_FAILURE);
   }
-  // NetworkServer Online ! on port : PORT_NO
+  std::cout << "NetworkServer Online ! on port: " << PORT_NO << std::endl;
 }
 
 void NetworkServer::broadcastStart() {

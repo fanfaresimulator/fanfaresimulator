@@ -12,3 +12,7 @@ void ServerConnection::readyRead() {
   std::cout << username << " is reading :" << std::endl;
   std::cout << msg.toStdString() << std::endl << "end\n";
 }
+
+void ServerConnection::setUsername(std::string username) {
+  this->username = username;
+}

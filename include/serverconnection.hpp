@@ -10,6 +10,7 @@ private:
   std::string username;
 
   void readyRead();
+  void setUsername(std::string username);
 
 public:
   ServerConnection(std::string username, QTcpSocket *socket);
