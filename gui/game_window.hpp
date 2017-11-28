@@ -1,6 +1,6 @@
 #ifndef DEF_TESTWINDOW
 #define DEF_TESTWINDOW
-
+#include <vector>
 #include <QApplication>
 #include <QWidget>
 #include <QSlider>
@@ -9,7 +9,7 @@
 
 #include "music_line.hpp"
 #include "note.hpp"
-
+using namespace std;
 class GameWindow : public QWidget
 {
 public:
@@ -38,7 +38,7 @@ private:
     int time_start;
     int number_of_lines;
     MusicLine** lines;
-    Note** note;
+    vector<Note*> note;
 };
 
 #endif
