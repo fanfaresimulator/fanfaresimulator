@@ -4,6 +4,7 @@
 GameWindow::GameWindow() : QWidget()
 {
     set_size(1000, 1000);
+    set_number_of_lines(4);
 
     /*
     setFixedSize(get_height(), get_width());
@@ -30,11 +31,16 @@ GameWindow::GameWindow() : QWidget()
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
+    create_lines();
 }
 void GameWindow::set_size(int width, int height) {
     this->height = height;
     this->width = width;
     setFixedSize(width, height);
+}
+
+void GameWindow::set_number_of_lines(int number) {
+    this->number_of_lines = number;
 }
 
 int GameWindow::get_width() {
@@ -45,10 +51,27 @@ int GameWindow::get_height() {
     return height;
 }
 
+int GameWindow::get_number_of_lines() {
+    return number_of_lines;
+}
+
 bool GameWindow::get_is_ready() {
     return is_ready;
 }
 
 int GameWindow::get_time_start() {
     return time_start;
+}
+
+void GameWindow::create_lines(){
+    int number = get_number_of_lines();
+    int x = this->width/(number+1);
+    MusicLine* test = new MusicLine(this);
+    test->setGeometry(0,200,1000,1000);
+    test->show();
+    for (int i = 0; i < number; i++){
+        lines[i] = new MusicLine(this);
+        lines[i]->setGeometry((i+1)*x,0,(i+1)*x,get_height());
+        lines[i]->show();
+    }
 }

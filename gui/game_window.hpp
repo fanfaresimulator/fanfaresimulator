@@ -18,21 +18,27 @@ public:
 
     void set_size(int width, int height);
 
+    void set_number_of_lines(int number);
+
 
     int get_height();
     int get_width();
+    int get_number_of_lines();
 
     bool get_is_ready();
 
     int get_time_start();
+
+    void create_lines();
 
 private:
     int height;
     int width;
     bool is_ready;
     int time_start;
-    MusicLine* lines[];
-    Note* note[];
+    int number_of_lines;
+    MusicLine** lines;
+    Note** note;
 };
 
 #endif
