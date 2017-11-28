@@ -1,22 +1,23 @@
 #pragma once
 
 #include <iostream>
+#include <list>
 
 #include "noteglobale.hpp"
 #include "instrument.hpp"
 
 class PartitionGlobale {
 private:
-	std::initializer_list <NoteGlobale> listOfNotes;
+	std::list <NoteGlobale> listOfNotes;
 
 public:
 	PartitionGlobale();
 
-	PartitionGlobale(std::initializer_list <NoteGlobale> listOfNotes);
+	PartitionGlobale(std::list <NoteGlobale> listOfNotes);
 
 	~PartitionGlobale();
 
-	std::initializer_list <NoteGlobale> getNotes();
+	std::list <NoteGlobale> getNotes();
 
 
 	Partition getPartition(Instrument instrument);
