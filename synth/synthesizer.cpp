@@ -52,3 +52,52 @@ void testSynth() {
 	delete_fluid_synth(synth);
 	delete_fluid_settings(settings);
 }
+
+
+
+/*#include <stdio.h>
+#ifdef __unix__
+#include <unistd.h>
+#elif defined(_WIN32) || defined(WIN32)
+#include <windows.h>
+#endif
+#include "synthesizer.hpp"
+#include <note.hpp>
+
+
+Synthesizer::Synthesizer(Partition P) {
+    this -> mainPartition = P;
+
+    printf("Created the Synth !\n");
+
+    settings = new_fluid_settings();
+    synth = new_fluid_synth(settings);
+    adriver = new_fluid_audio_driver(settings, synth);
+    *//* Set the synthesizer settings, if necessary *//*
+#ifdef __linux__
+    fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
+#endif
+
+    fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
+    fluid_settings_setnum(settings, "synth.gain", 2);
+}
+
+
+Synthesizer::~Synthesizer(){
+    delete_fluid_audio_driver(adriver);
+    delete_fluid_settings(settings);
+    delete_fluid_synth(synth);
+};
+
+void Synthesizer::playNote(Note note) {
+    fluid_synth_noteon(synth, 0, 0, 80);
+};
+
+void Synthesizer::stopNote(Note note){
+    fluid_synth_noteoff(synth, 0, 0);
+};
+
+
+void testSynth() {
+
+};*/
