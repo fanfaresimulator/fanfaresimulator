@@ -6,9 +6,6 @@ Client::Client(NetworkClient& network, Keyboard& keyboard) {
 
 }
 
-Client::~Client() {
-
-}
 
 void Client::sendNote(Note note) {
 
