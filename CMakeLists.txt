@@ -40,6 +40,7 @@ set(SERVER_HEADER_FILES
 	include/server.hpp
 	include/network_server.hpp
 	include/network_utils.hpp
+	include/serverconnection.hpp
 	include/synthesizer.hpp
 	include/ui.hpp)
 
@@ -47,6 +48,7 @@ set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	server.cpp
 	network/network_server.cpp
+	network/serverconnection.cpp
 	gui/testwindow.cpp engine/server.cpp)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})

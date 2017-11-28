@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
+#include <unordered_set>
+#include <functional>
 #include <QtNetwork>
 #include <QObject>
 #include <QJsonObject>
@@ -12,11 +13,12 @@
 #include "network_utils.hpp"
 #include "note.hpp"
 #include "instrument.hpp"
+#include "serverconnection.hpp"
 
 class NetworkServer : public QObject {
 private:
   QTcpServer *server;
-  std::unordered_map<std::string, QTcpSocket*> clients; // HashMap<username, socket>
+  std::unordered_set<ServerConnection*> clients;
 
   void newConnection();
   void sendJsonObject(std::string username, QJsonObject obj);

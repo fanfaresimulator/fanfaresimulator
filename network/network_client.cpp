@@ -4,11 +4,21 @@
 void NetworkClient::sendJsonObject(QJsonObject o) {
   QJsonDocument doc = QJsonDocument(o);
   QByteArray msg = doc.toJson();
-  socket.write(msg);
+  socket->write(msg);
+}
+
+void NetworkClient::readyRead() {
+  std::cout << "Client " << username << " is reading :" << std::endl;
+  QByteArray msg = socket->readAll();
+  std::cout <<  msg.toStdString() << std::endl << "end \n";
 }
 
 /* PUBLIC */
-NetworkClient::NetworkClient(std::string username) {
+NetworkClient::NetworkClient(std::string username, QObject *parent) :
+QObject(parent) {
+  socket = new QTcpSocket(this);
+  socket->connectToHost(QHostAddress("localhost"), 15051);
+  // connect(socket, &QIODevice::readyRead, this, &NetworkClient::read);
   this->username = username;
 }
 

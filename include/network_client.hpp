@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <QTcpSocket>
+#include <QHostAddress>
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
@@ -14,17 +15,17 @@
 #include "keyboard.hpp"
 #include "note.hpp"
 
-class NetworkClient {
+class NetworkClient : public QObject {
 
 private:
-  QTcpSocket socket;
+  QTcpSocket *socket;
   std::string username;
 
   void sendJsonObject(QJsonObject o);
+  void readyRead();
 
 public:
-  NetworkClient(std::string username);
-
+  explicit NetworkClient(std::string username, QObject *parent = Q_NULLPTR);
   void sendHello();
   void sendInstrumentChoice(Instrument instrument);
   void sendReady();
