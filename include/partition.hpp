@@ -20,4 +20,7 @@ public:
 	Partition getPartition(Instrument instrument);
 
 	double getLength (); // Partition length
+
+	std::initializer_list <double> frameDivision (double endTime) // Divide time in frames.
+
 };
