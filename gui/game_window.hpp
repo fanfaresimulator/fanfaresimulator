@@ -22,6 +22,7 @@ public:
 
     void set_number_of_lines(int number);
 
+    void read_notes(vector<char> list);
 
     double get_height();
     double get_width();
