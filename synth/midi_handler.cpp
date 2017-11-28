@@ -115,7 +115,13 @@ void midi_handler() {
             }
 
             else{
-              //Note n;
+              Note n = Note(getTime(midifile.getEvent(track, event).tick, midifile, timetype),
+                            (int)midifile.getEvent(track, event).isNoteOn(),
+                           instru,
+                             (int)midifile.getEvent(track, event)[0],
+                           (int)midifile.getEvent(track, event)[1],
+                            track);
+
               ostringstream note;
               //note << midifile.getEvent(track, event).tick * 60.0 / (tempo*TPQ) << ";" << instru << ";" << track;
               note << getTime(midifile.getEvent(track, event).tick, midifile, timetype)<< " " << instru << " " << track;
