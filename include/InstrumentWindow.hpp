@@ -5,21 +5,23 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <QWidget>
+#include <QRadioButton>
 using namespace std;
 
 #ifndef FANFARESIMULATOR_INSTRUMENT_HPP
 #define FANFARESIMULATOR_INSTRUMENT_HPP
 
-class InstrumentWindow {
+class InstrumentWindow : public QWidget {
 
 public:
+	InstrumentWindow();
+
 	const std::vector<std::string> instruList = {"violon", "guitare", "violoncelle", "piano"};
+	QRadioButton *i1;
 
-
-	std::string chooseInstrument();
+	void chooseInstrument();
 	void printInstrumentChosen();
-
-
 };
 
 

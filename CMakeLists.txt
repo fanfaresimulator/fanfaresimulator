@@ -12,23 +12,22 @@ find_package(Qt5Widgets REQUIRED)
 
 set(CLIENT_HEADER_FILES
 	include/client.hpp
-	include/instrument.hpp
 	include/keyboard.hpp
 	include/note.hpp
 	include/partition.hpp
 	include/synthesizer.hpp
+	include/InstrumentWindow.hpp
 	include/ui.hpp
 	gui/testwindow.hpp
 	gui/utilisateur.hpp)
-	
 
 set(CLIENT_SOURCE_FILES
 	main.cpp
 	gui/testwindow.cpp
+	gui/InstrumentWindow.cpp
 	gui/utilisateur.cpp)
 
 set(SERVER_HEADER_FILES
-	include/instrument.hpp
 	include/keyboard.hpp
 	include/note.hpp
 	include/partition.hpp

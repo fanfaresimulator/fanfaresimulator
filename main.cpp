@@ -8,6 +8,7 @@
 #include <QInputDialog>
 #include <QString>
 #include "gui/Utilisateur.hpp"
+#include "include/InstrumentWindow.hpp"
 
 int main(int argc, char* argv[]) {
 	
@@ -22,6 +23,9 @@ int main(int argc, char* argv[]) {
 
 	current.printWelcomeMessage();
 	current.printInstrumentMessage();
-	return app.exec();
+
+	InstrumentWindow win;
 	
+	return app.exec();	
 }
+
