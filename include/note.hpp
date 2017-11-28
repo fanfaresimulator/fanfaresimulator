@@ -8,8 +8,8 @@ private:
     double timestamp;
     bool signal;                // on/off
     Instrument instrument;      // channel
-    int key;                    // note between 0 and 127
-    int velocity;               // value between 0 and 127
+    int key;                    // note 0 to 127
+    int velocity;               // value 0 to 127
 
 public:
 
