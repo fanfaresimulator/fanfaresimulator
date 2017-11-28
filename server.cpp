@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 	NetworkServer networkServer;
 //	Synthesizer synthesizer;
-//	Server serverEngine(networkServer, synthesizer);
+	Server serverEngine(networkServer);
 //
 //	QObject::connect(&networkServer, &NetworkServer::helloRecv,
 //					 &serverEngine, &Server::addClient);
@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
 //
 //	QObject::connect(&synthesizer, &Synthesizer::sendPartition,
 //					 &serverEngine, &Server::sendPartition);
+
 
 	return app.exec();
 }

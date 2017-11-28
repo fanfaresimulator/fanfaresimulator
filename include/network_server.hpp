@@ -14,6 +14,7 @@
 #include "instrument.hpp"
 
 class NetworkServer : public QObject {
+
 private:
   QTcpServer *server;
   std::unordered_map<std::string, QTcpSocket*> clients; // HashMap<username, socket>

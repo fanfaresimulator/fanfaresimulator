@@ -21,32 +21,31 @@ class Server  : public QObject {
 
 private:
     NetworkServer* server;
-    Synthesizer* synthesizer;
 
-    std::queue<Note> incomingNotes;
     std::map< std::string, bool > clients;  // key : username, value isReady
     std::map< std::string, Instrument > usrToInstrument;         // key : username, value : Instrument
     std::map< Instrument , bool > instrumentMap;          // key : Instrument, value : available
 
+    void broadcastStart();
+    void updateInstrumentMap(Instrument i);
+
 public:
 
-    Server(NetworkServer& server, Synthesizer& synthesizer);
-
-    void broadcastStart() const ;
-    void updateInstrumentMap(Instrument i) ;
-
-    std::map< Instrument , bool > getInstrumentMap() const;
-
+    Server(NetworkServer& server);
 
 public slots:
-    bool addClient(std::string username);
-    bool addInstrument(std::string username, Instrument i);
+    void instrumentMapInit(std::list<Instrument>);
+    void addClient(std::string username);
+    void addInstrument(std::string username, Instrument i);
     void playNote(std::string username, Note note);
     void sendPartition(std::string username, Partition partition);
+    void sendInstrumentMap(std::map< Instrument , bool > imap);
+
 
 signals:
     void playNote(Note note);
-    void requestPartiton(std::string username, Partition partition);
-
+    void requestPartiton(std::string username, Instrument i);
+    void requestInstrumentList();
+    void sendInstruments(std::map<Instrument, bool>);
 
 };
