@@ -10,7 +10,6 @@ private:
 	double timestamp;
 	bool signal;
 	Instrument instrument;
-	int track;
 
 public:
 	NoteGlobale();
