@@ -17,11 +17,15 @@ set(CLIENT_HEADER_FILES
 	include/note.hpp
 	include/partition.hpp
 	include/synthesizer.hpp
-	include/ui.hpp)
+	include/ui.hpp
+	gui/testwindow.hpp
+	gui/utilisateur.hpp)
+	
 
 set(CLIENT_SOURCE_FILES
 	main.cpp
-	gui/testwindow.cpp)
+	gui/testwindow.cpp
+	gui/utilisateur.cpp)
 
 set(SERVER_HEADER_FILES
 	include/instrument.hpp
@@ -34,8 +38,7 @@ set(SERVER_HEADER_FILES
 
 set(SERVER_SOURCE_FILES
 	server.cpp
-	network/server.cpp
-	gui/testwindow.cpp)
+	network/server.cpp)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets)
