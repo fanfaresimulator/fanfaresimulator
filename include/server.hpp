@@ -32,8 +32,6 @@ public:
 
     Server(NetworkServer& server, Synthesizer& synthesizer);
 
-    ~Server();
-
     void broadcastStart() const ;
     void updateInstrumentMap(Instrument i) ;
     void sendPartition(std::string username) ;
