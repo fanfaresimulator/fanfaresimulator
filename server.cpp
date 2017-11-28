@@ -2,6 +2,7 @@
 #include "include/synthesizer.hpp"
 #include "include/server.hpp"
 #include "synth/midi_handler.hpp"
+#include "synth/synthesizer.hpp"
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
