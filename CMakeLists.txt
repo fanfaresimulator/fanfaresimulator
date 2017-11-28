@@ -14,7 +14,9 @@ find_package(Qt5Network REQUIRED)
 set(COMMON_HEADER_FILES
 	include/instrument.hpp
 	include/note.hpp
-	include/partition.hpp)
+	include/partition.hpp
+	include/noteglobale.hpp
+	include/partitionglobale.hpp)
 
 set(COMMON_SOURCE_FILES
 	common/note.cpp
