@@ -17,9 +17,7 @@
 
 
 
-class Server  : public QObject
-{
-    Q_OBJECT
+class Server  : public QObject {
 
 private:
     NetworkServer* server;

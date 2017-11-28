@@ -1,6 +1,4 @@
 #include "../include/server.hpp"
-#include <map>
-#include <iostream>
 
 
 Server::Server(NetworkServer& server, Synthesizer& synthesizer) {
