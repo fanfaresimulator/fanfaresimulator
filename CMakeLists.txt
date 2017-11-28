@@ -51,7 +51,8 @@ set(SERVER_SOURCE_FILES
 	server.cpp
 	network/network_server.cpp
 	gui/testwindow.cpp
-	engine/server.cpp)
+	engine/server.cpp
+	engine/partition.cpp)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
