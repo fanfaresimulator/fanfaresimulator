@@ -6,10 +6,10 @@ MusicLine::MusicLine(GameWindow * parent, int id ) : QWidget (){
     this->setParent(parent);
     this->parent = parent;
     this-> id = id;
-    std::cout << "constructeur " << id << std::endl;
+    this->x = parent->get_width() * (id + 1) /(parent->get_number_of_lines() + 1);
+    std::cout << "constructeur " << x  << std::endl;
 
-    double x = parent->get_width()/(parent->get_number_of_lines() + 1);
-    this->setGeometry((id+1)*x, 0, (id+1)*x, parent->get_height());
+
 }
 
 void MusicLine::setId(int number){
@@ -20,9 +20,11 @@ void MusicLine::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::RoundCap));
-    float x = parent->get_width()  /((parent->get_number_of_lines() + 1.0)*10);
-
     std::cout << "id " << id << std::endl;
-    painter.drawLine((id + 1) * x, 0, (id + 1) * x , parent->get_height());
+    painter.drawLine(x, 0, x , parent->get_height());
 
+}
+
+double MusicLine::get_x() {
+    return this->x;
 }

@@ -19,6 +19,8 @@ public:
 
     void setId(int id);
 
+    double get_x();
+
 protected:
     void paintEvent(QPaintEvent *event);
 
@@ -26,6 +28,8 @@ private:
     int id;
     string color;
     int key;
+
+    double x;
 
     GameWindow* parent;
 
