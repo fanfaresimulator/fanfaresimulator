@@ -151,12 +151,8 @@ void midi_handler() {
               //note << midifile.getEvent(track, event).tick * 60.0 / (tempo*TPQ) << ";" << instru << ";" << track;
               note << getTime(midifile.getEvent(track, event).tick, midifile, timetype)<< " " << instru << " " << track;
 
-              if(midifile.getEvent(track, event).isNoteOn()){
-                note << " 1";
-              }
-              if(midifile.getEvent(track, event).isNoteOff()){
-                note << " 0";
-              }
+              note << " " << (int)midifile.getEvent(track, event).isNoteOn();
+
               for (int i=1; i<midifile.getEvent(track, event).size(); i++) {  // On commence à 1 car le premier element signifie note on ou noteoff déjà pris en compte
                           note << " " << (int)midifile.getEvent(track, event)[i];
                 }
