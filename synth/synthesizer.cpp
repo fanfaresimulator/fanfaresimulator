@@ -27,7 +27,7 @@ void testSynth() {
 
 	fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
 	fluid_settings_setnum(settings, "synth.gain", 2);
-	fluid_synth_program_change(synth, 0, 40); // 40 = violon
+	fluid_synth_program_change(synth, 0, 40); // 40 = violon dans la bank0. On reste dans la bank 0.
 
 	int key;
 	for (int i = 0; i < 10002; i++) {
@@ -35,6 +35,7 @@ void testSynth() {
 		key = 60+i;
 		/* Play a note */
 		fluid_synth_noteon(synth, 0, key, 80);
+		fluid_synth_noteon(synth, 0, key + 4, 80);
 		/* Sleep for 1 second */
 #ifdef __unix__
 		sleep(1);
@@ -43,6 +44,7 @@ void testSynth() {
 #endif
 		/* Stop the note */
 		fluid_synth_noteoff(synth, 0, key);
+		fluid_synth_noteoff(synth, 0, key + 4);
 	}
 
 	/* Do useful things here */
