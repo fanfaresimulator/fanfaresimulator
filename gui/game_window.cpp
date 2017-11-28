@@ -14,6 +14,14 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
     create_lines();
 }
 
+GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
+    set_size(width, height);
+    set_number_of_lines(4);
+    create_lines();
+    read_notes(list);
+    std::cout << this->note.size() << std::endl;
+}
+
 void GameWindow::set_size(int width, int height) {
     this->height = height;
     this->width = width;
@@ -51,16 +59,16 @@ void GameWindow::create_lines(){
     }
 }
 
-void GameWindow::read_notes(vector<char> list){
+void GameWindow::read_notes(vector<string> list) {
     float time1;
     float time2;
     int id;
     while(!list.empty()) {
-        time1 = (float) list[0];
-        id = (int) list[1];
+        time1 = std::stod(list[0]);
+        id = (int) std::stod(list[1]);
         for (int i = 1; i < list.size() / 3; i++) {
-            if ((int) list[3 * i + 1] == id && (char) list[3 * i + 2] == 'D') {
-                time2 = (float) list[3 * i];
+            if ((int) std::stod(list[3 * i + 1]) == id && list[3 * i + 2].compare("D") == 0) {
+                time2 = std::stod(list[3 * i]);
                 list.erase(list.begin()+3*i);
                 list.erase(list.begin()+3*i);
                 list.erase(list.begin()+3*i);

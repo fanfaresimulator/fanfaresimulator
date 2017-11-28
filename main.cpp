@@ -1,32 +1,25 @@
-//#include <QApplication>
 #include <QtWidgets/QApplication>
 #include "gui/game_window.hpp"
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QGraphicsView>
 
-int main(int argc, char *argv[])
-{
-	QApplication app(argc, argv);
+typedef basic_string<char> string;
 
 
-	GameWindow window(1000, 1000);
-
-
-	window.show();
-
-
-	return app.exec();
-}
-
-/*int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+    vector<string> list;
+    list.push_back("1000");
+    list.push_back("0");
+    list.push_back("U");
+    list.push_back("5000");
+    list.push_back("0");
+    list.push_back("D");
+    list.push_back("2000");
+    list.push_back("1");
+    list.push_back("U");
+    list.push_back("5000");
+    list.push_back("1");
+    list.push_back("D");
     QApplication app(argc, argv);
-
-    MyScene scene;
-    scene.setSceneRect(-150, -150, 300, 300);
-
-    QGraphicsView view(&scene);
-    view.setWindowTitle("Ma première scène");
-    view.show();
+    GameWindow window(1000, 1000, list);
+    window.show();
     return app.exec();
-}*/
+}

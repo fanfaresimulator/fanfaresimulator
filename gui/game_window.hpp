@@ -19,6 +19,9 @@ public:
 
     GameWindow(int width, int height);
 
+    GameWindow(int width, int height, vector<string>);
+
+
     void set_size(int width, int height);
 
     void set_number_of_lines(int number);
@@ -35,7 +38,7 @@ public:
 
     void create_lines();
 
-    void read_notes(vector<char> list);
+    void read_notes(vector<string> list);
 
 private:
     int height;
