@@ -27,7 +27,7 @@ void testSynth() {
 
 	fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
 	fluid_settings_setnum(settings, "synth.gain", 2);
-	fluid_synth_program_change(synth, 0, 40);
+	fluid_synth_program_change(synth, 0, 81); // 40 = violon
 
 	int key;
 	for (int i = 0; i < 10002; i++) {
