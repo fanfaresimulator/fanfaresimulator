@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
 
 	current.addName(premier);
 
-	current.printUtilisateur();
-	//current.removeName();
+	current.printWelcomeMessage();
+	current.printInstrumentMessage();
 	return app.exec();
 	
 }
