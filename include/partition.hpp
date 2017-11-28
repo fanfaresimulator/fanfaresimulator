@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <list>
+#include <cstdlib>
 
 #include "note.hpp"
 #include "instrument.hpp"
