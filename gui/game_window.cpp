@@ -68,7 +68,6 @@ int GameWindow::get_time_start() {
 
 void GameWindow::create_lines(){
     int number = get_number_of_lines();
-    double x = width/(number + 1);
     for (int i = 0; i < number; i++){
         lines.push_back(new MusicLine(this, i));
         std::cout << "compteur " << i << std::endl;
