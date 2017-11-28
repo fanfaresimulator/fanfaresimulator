@@ -12,8 +12,10 @@
 #include "note.hpp"
 #include "network_client.hpp"
 
-class Client {
+class Client : public QObject
+{
 
+    Q_OBJECT
 private :
     NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
     Keyboard* keyboard;          // !!! Waiting for the class Keyboard
@@ -41,5 +43,9 @@ public:
     void loadPartition(Partition partition);
 
     void setInstrument(Instrument instrument);
+
+public slots:
+
+    void loadOriginalPartition(Partition partition);
 
 };
