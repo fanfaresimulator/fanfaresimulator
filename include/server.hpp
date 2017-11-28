@@ -26,7 +26,7 @@ private:
     Synthesizer* synthesizer;
 
     std::queue<Note> incomingNotes;
-    std::map< std::string, bool > clients;  // key : username, vale : (socket, isReady)
+    std::map< std::string, bool > clients;  // key : username, value isReady
     std::map< std::string, Instrument > usrToInstrument;         // key : username, value : Instrument
     std::map< Instrument , bool > instrumentMap;          // key : Instrument, value : available
 
