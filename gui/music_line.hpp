@@ -1,7 +1,3 @@
-//
-// Created by antoine on 21/11/17.
-//
-
 #ifndef FANFARESIMULATOR_MUSIC_LINE_H
 #define FANFARESIMULATOR_MUSIC_LINE_H
 
@@ -19,17 +15,17 @@ public:
 
     void setId(int id);
 
-    double get_x();
+    int get_x();
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) final;
 
 private:
     int id;
     string color;
     int key;
 
-    double x;
+    int x;
 
     GameWindow* parent;
 

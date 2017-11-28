@@ -16,16 +16,17 @@ class GameWindow : public QWidget
 {
 public:
     GameWindow();
-    GameWindow(double width, double height);
 
-    void set_size(double width, double height);
+    GameWindow(int width, int height);
+
+    void set_size(int width, int height);
 
     void set_number_of_lines(int number);
 
-    void read_notes(vector<char> list);
 
-    double get_height();
-    double get_width();
+    int get_height();
+
+    int get_width();
     int get_number_of_lines();
 
     bool get_is_ready();
@@ -34,11 +35,11 @@ public:
 
     void create_lines();
 
-    void read_notes(char * list);
+    void read_notes(vector<char> list);
 
 private:
-    double height;
-    double width;
+    int height;
+    int width;
     bool is_ready;
     int time_start;
     int number_of_lines;
