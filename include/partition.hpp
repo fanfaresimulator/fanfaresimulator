@@ -12,6 +12,8 @@ private:
 public:
 	Partition();
 
+	Partition (std::initializer_list <Note> listOfNotes);
+
 	~Partition();
 
 	std::initializer_list <Note> getNotes();
