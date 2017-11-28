@@ -39,13 +39,12 @@ public slots:
     void addInstrument(std::string username, Instrument i);
     void playNote(std::string username, Note note);
     void sendPartition(std::string username, Partition partition);
-    void sendInstrumentMap(std::map< Instrument , bool > imap);
+    void sendInstrumentMap(std::string username);
 
 
 signals:
     void playNote(Note note);
-    void requestPartiton(std::string username, Instrument i);
+    void requestPartition(std::string username, Instrument i);
     void requestInstrumentList();
-    void sendInstruments(std::map<Instrument, bool>);
 
 };

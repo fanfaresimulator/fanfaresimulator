@@ -51,7 +51,7 @@ void Server::addInstrument(string username, Instrument i) {
     pair< string, Instrument > p = pair<string, Instrument >(username, i);
     usrToInstrument.insert(p);
 
-//    emit requestPartiton(username, i);
+//    emit requestPartition(username, i);
 }
 
 void Server::playNote(std::string username, Note note){
@@ -64,8 +64,9 @@ void Server::sendPartition(std::string username, Partition partition){
 //    server->sendPartition(username, partition)
 }
 
-void Server::sendInstrumentMap(std::map<Instrument, bool> imap) {
-//    emit sendInstruments(imap);
+void Server::sendInstrumentMap(std::string username) {
+    // change signature of server network + add signal to server network request instruments
+//    server->sendInstruments(username, instrumentMap);
 }
 
 /* regular methods */
