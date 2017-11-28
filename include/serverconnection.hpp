@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <QtNetwork>
+#include <QByteArray>
 
 class ServerConnection : public QObject {
 private:
@@ -14,5 +15,7 @@ private:
 
 public:
   ServerConnection(std::string username, QTcpSocket *socket);
+  void write(QByteArray msg);
+  std::string getUsername();
 
 };

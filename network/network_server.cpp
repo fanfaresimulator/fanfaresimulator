@@ -6,8 +6,8 @@ void NetworkServer::newConnection() {
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
   std::string username = "";
-  ServerConnection client(username, clientConnection);
-  clients.insert(&client);
+  ServerConnection *client = new ServerConnection(username, clientConnection);
+  clients.push_back(client);
   std::cout << "new client" << std::endl;
 
   clientConnection->write("Hello you !\n");
@@ -15,11 +15,11 @@ void NetworkServer::newConnection() {
 }
 
 void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
-  // auto search = clients.find();
+  // auto search = clients.find("");
   // if (search != clients.end()) {
   //   QJsonDocument doc = QJsonDocument(obj);
   //   QByteArray msg = doc.toJson();
-  //   // search->write(msg);
+  //   search->write(msg);
   // } else {
   //   printf("Not such client found: %s\n", username.c_str());
   // }
@@ -29,8 +29,8 @@ void NetworkServer::broadcast(QJsonObject obj) {
   QJsonDocument doc = QJsonDocument(obj);
   QByteArray msg = doc.toJson();
   // for each element e of the Set clients
-  for (const auto& e : clients) {
-    // e->write(msg);
+  for (size_t i = 0; i < clients.size(); i++) {
+    clients[i]->write(msg);
   }
 }
 
@@ -53,14 +53,14 @@ void NetworkServer::broadcastStart() {
   broadcast(obj);
 }
 
-void NetworkServer::sendPartition(std::string username) {
+void NetworkServer::sendPartition(std::string username, Partition partition) {
   QJsonObject obj;
   obj["type"] = SIG_PARTITION;
   obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   sendJsonObject(username, obj);
 }
 
-void NetworkServer::sendInstruments(std::string username) {
+void NetworkServer::sendInstruments(std::string username, std::list<Instrument> instuments) {
   QJsonObject obj;
   obj["type"] = SIG_INSTRUMENTS;
   obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
