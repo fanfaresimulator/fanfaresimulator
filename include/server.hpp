@@ -8,6 +8,8 @@
 #include <string>
 #include <queue>
 #include <map>
+#include <QObject>
+
 #include "instrument.hpp"
 #include "note.hpp"
 #include "network_server.hpp"
@@ -15,7 +17,10 @@
 
 
 
-class Server {
+class Server  : public QObject
+{
+    Q_OBJECT
+
 private:
     NetworkServer* server;
     Synthesizer* synthesizer;
@@ -32,15 +37,13 @@ public:
     ~Server();
 
     void broadcastStart() const ;
-
     void updateInstrumentMap(Instrument i) ;
-
-    bool addClient(std::string username) ;
-
-    bool addInstrument(std::string username, Instrument i) ;
-
     void sendPartition(std::string username) ;
 
-    std::map< Instrument , bool > getInstrumentMap() const ;
+
+public slots:
+    bool addClient(std::string username);
+    bool addInstrument(std::string username, Instrument i);
+    void addNote(std::string username, Note note);
 
 };
