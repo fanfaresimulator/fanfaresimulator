@@ -14,8 +14,7 @@
 #include "keyboard.hpp"
 #include "note.hpp"
 
-class NetworkClient {
-
+class NetworkClient : public QObject {
 private:
   QTcpSocket socket;
   std::string username;

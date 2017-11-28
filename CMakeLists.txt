@@ -35,7 +35,8 @@ set(CLIENT_SOURCE_FILES
 	main.cpp
 	network/network_client.cpp
 	gui/keyboard.cpp
-	gui/testwindow.cpp engine/client.cpp)
+	gui/testwindow.cpp
+	engine/client.cpp)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
@@ -49,7 +50,8 @@ set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	server.cpp
 	network/network_server.cpp
-	gui/testwindow.cpp engine/server.cpp)
+	gui/testwindow.cpp
+	engine/server.cpp)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)

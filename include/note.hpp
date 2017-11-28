@@ -18,4 +18,6 @@ public:
 
     double getTime ();
 
+    bool isEqual(Note note2); // Compare timestamp and key.
+
 };

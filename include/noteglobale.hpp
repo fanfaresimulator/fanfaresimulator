@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <note>
 #include "instrument.hpp"
 
 class NoteGlobale {
@@ -10,7 +11,6 @@ private:
 	double timestamp;
 	bool signal;
 	Instrument instrument;
-	int track;
 
 public:
 	NoteGlobale();
