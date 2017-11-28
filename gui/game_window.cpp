@@ -22,12 +22,12 @@ GameWindow::GameWindow() : QWidget()
     */
 }
 
-GameWindow::GameWindow(int width, int height) : QWidget() {
+GameWindow::GameWindow(double width, double height) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
     create_lines();
 }
-void GameWindow::set_size(int width, int height) {
+void GameWindow::set_size(double width, double height) {
     this->height = height;
     this->width = width;
     setFixedSize(width, height);
@@ -37,11 +37,11 @@ void GameWindow::set_number_of_lines(int number) {
     this->number_of_lines = number;
 }
 
-int GameWindow::get_width() {
+double GameWindow::get_width() {
     return this->width;
 }
 
-int GameWindow::get_height() {
+double GameWindow::get_height() {
     return height;
 }
 
@@ -59,11 +59,10 @@ int GameWindow::get_time_start() {
 
 void GameWindow::create_lines(){
     int number = get_number_of_lines();
+    double x = width/(number + 1);
     for (int i = 0; i < number; i++){
-        lines.push_back(new MusicLine(this));
-        std::cout << i << std::endl;
-        lines[i]->setId(i);
-        lines[i]->show();
+        lines.push_back(new MusicLine(this, i));
+        std::cout << "compteur " << i << std::endl;
     }
 }
 

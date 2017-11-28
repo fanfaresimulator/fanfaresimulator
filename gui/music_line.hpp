@@ -15,7 +15,7 @@ class MusicLine : public QWidget{
 
 public:
 
-    MusicLine(GameWindow * parent );
+    MusicLine(GameWindow * parent, int id );
 
     void setId(int id);
 
