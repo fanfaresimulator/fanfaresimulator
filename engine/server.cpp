@@ -3,7 +3,11 @@
 Server::Server(NetworkServer& server, Synthesizer& synthesizer) {
     this->server = &server;
     this->synthesizer = &synthesizer;
-    this->incomingNotes = new std::queue<Note>();
+
+    this->incomingNotes = std::queue<Note>();
+    this->clients = std::map< std::string, bool >();
+    this->usrToInstrument = std::map< std::string, Instrument >();
+    this->instrumentMap = std::map< Instrument , bool >();
 }
 
 
