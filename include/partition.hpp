@@ -18,4 +18,6 @@ public:
 
 
 	Partition getPartition(Instrument instrument);
+
+	double getLength (); // Partition length
 };
