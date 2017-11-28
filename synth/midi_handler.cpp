@@ -3,8 +3,9 @@
 #include <iomanip>
 #include <midifile/MidiFile.h>
 #include <midifile/Options.h>
-
+#include <note.hpp>
 #include "midi_handler.hpp"
+
 
 using namespace std;
 
@@ -145,30 +146,27 @@ void midi_handler() {
             }
 
             else{
+              Note n;
               ostringstream note;
               //note << midifile.getEvent(track, event).tick * 60.0 / (tempo*TPQ) << ";" << instru << ";" << track;
-              note << getTime(midifile.getEvent(track, event).tick, midifile, timetype)<< ";" << instru << ";" << track;
+              note << getTime(midifile.getEvent(track, event).tick, midifile, timetype)<< " " << instru << " " << track;
 
               if(midifile.getEvent(track, event).isNoteOn()){
-                note << ";1";
+                note << " 1";
               }
               if(midifile.getEvent(track, event).isNoteOff()){
-                note << ";0";
+                note << " 0";
               }
               for (int i=1; i<midifile.getEvent(track, event).size(); i++) {  // On commence à 1 car le premier element signifie note on ou noteoff déjà pris en compte
-                          note << ";" << (int)midifile.getEvent(track, event)[i];
+                          note << " " << (int)midifile.getEvent(track, event)[i];
                 }
               cout << note.str() << endl;
             }
-
-
 
             //cout << midifile.getEvent(track, event).getCommandByte() << " ";
             //cout << midifile.getEvent(track, event).getCommandNibble() << " ";
           }
 
    }
-   cout << "Fin midi_handler" << endl;
-   cout << endl;
 
 }
