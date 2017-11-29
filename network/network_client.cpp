@@ -16,7 +16,7 @@ void NetworkClient::readyRead() {
   // parse JSON
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
-  if(jerror.errorString() != QJsonParseError::ParseError::NoError) {
+  if(jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
     //return;
   }
