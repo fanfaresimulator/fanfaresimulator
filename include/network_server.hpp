@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <initializer_list> // waiting for interface of Patition to change
 #include <QtNetwork>
 #include <QObject>
 #include <QJsonObject>
@@ -12,10 +13,10 @@
 #include <QByteArray>
 
 #include "network_utils.hpp"
-#include "note.hpp"
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "serverconnection.hpp"
+#include "note.hpp"
 
 class NetworkServer : public QObject {
   Q_OBJECT
