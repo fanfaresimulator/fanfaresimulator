@@ -23,6 +23,7 @@ private:
   std::string username;
 
   void sendJsonObject(QJsonObject o);
+  void handleJsonDoc(QJsonDocument doc);
   void readyRead();
 
 public:
@@ -34,6 +35,7 @@ public:
 
 signals:
   /* Emit a signal that sends the partition */
-  void partitionArrived(Partition partition);
-  void instrumentsArrived(std::list<Instrument>);
+  void partitionRecv(Partition partition);
+  void instrumentsRecv(std::list<Instrument>);
+  void startRecv();
 };

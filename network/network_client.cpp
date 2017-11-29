@@ -1,4 +1,5 @@
 #include "../include/network_client.hpp"
+#include "../include/network_utils.hpp"
 
 /* PRIVATE */
 void NetworkClient::sendJsonObject(QJsonObject o) {
@@ -6,6 +7,33 @@ void NetworkClient::sendJsonObject(QJsonObject o) {
   QByteArray msg = doc.toJson();
   std::cout << "sending: " << QString(msg).toStdString() << std::endl;
   socket->write(msg);
+}
+
+void NetworkClient::handleJsonDoc(QJsonDocument doc) {
+  QJsonObject obj = doc.object();
+  int type = obj["type"].toInt();
+
+  switch (type) {
+    case SIG_START: {
+      emit startRecv();
+      break;
+    }
+    case SIG_LOBBIES: {
+      break;
+    }
+
+    case SIG_INSTRUMENTS: {
+      break;
+    }
+
+    case SIG_PARTITION: {
+      break;
+    }
+
+    default:
+      std::cout << "Unsupported type: " << type << std::endl;
+      break;
+  }
 }
 
 void NetworkClient::readyRead() {
@@ -18,10 +46,9 @@ void NetworkClient::readyRead() {
   QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
   if(jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
-    //return;
+    return;
   }
-
-  sendHello();
+  handleJsonDoc(doc);
 }
 
 /* PUBLIC */

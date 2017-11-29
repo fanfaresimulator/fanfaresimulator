@@ -10,7 +10,7 @@ void NetworkServer::newConnection() {
   clients.push_back(client);
   std::cout << "new client" << std::endl;
 
-  clientConnection->write("Hello you !\n");
+  // clientConnection->write("Hello you !\n");
   // clientConnection->disconnectFromHost();
 }
 
