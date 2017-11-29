@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
+#include <iostream>
+#include <vector>
+#include <list>
 #include <QtNetwork>
 #include <QObject>
 #include <QJsonObject>
@@ -12,11 +14,14 @@
 #include "network_utils.hpp"
 #include "note.hpp"
 #include "instrument.hpp"
+#include "partition.hpp"
+#include "serverconnection.hpp"
 
 class NetworkServer : public QObject {
+  Q_OBJECT
 private:
   QTcpServer *server;
-  std::unordered_map<std::string, QTcpSocket*> clients; // HashMap<username, socket>
+  std::vector<ServerConnection*> clients; //<username, name+socket>
 
   void newConnection();
   void sendJsonObject(std::string username, QJsonObject obj);
@@ -25,12 +30,13 @@ private:
 public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);
   void broadcastStart();
-  void sendPartition(std::string username);
-  void sendInstruments(std::string username);
+  void sendPartition(std::string username, Partition partition);
+  void sendInstruments(std::string username, std::list<Instrument> instruments);
 
 signals:
   void helloRecv(std::string username);
   void instrumentChoiceRecv(std::string username, Instrument instrument);
+  void readyReceived(std::string username);
   void noteRecv(std::string username, Note note);
 
 };

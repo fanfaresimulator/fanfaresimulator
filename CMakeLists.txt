@@ -8,6 +8,8 @@ list(INSERT CMAKE_MODULE_PATH 0
 	${CMAKE_CURRENT_SOURCE_DIR}/CMake
 )
 
+set(CMAKE_AUTOMOC ON)
+
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Fluidsynth REQUIRED)
@@ -50,6 +52,7 @@ set(SERVER_HEADER_FILES
 	include/server.hpp
 	include/network_server.hpp
 	include/network_utils.hpp
+	include/serverconnection.hpp
 	include/synthesizer.hpp
 	include/ui.hpp
 )
@@ -57,11 +60,14 @@ set(SERVER_HEADER_FILES
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	network/network_server.cpp
+  network/serverconnection.cpp
 	synth/synthesizer.cpp
 	synth/midi_handler.cpp
 	server.cpp
 	gui/testwindow.cpp
-	engine/server.cpp)
+	engine/server.cpp
+ )
+
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
