@@ -18,6 +18,7 @@
 #include "serverconnection.hpp"
 
 class NetworkServer : public QObject {
+  Q_OBJECT
 private:
   QTcpServer *server;
   std::vector<ServerConnection*> clients; //<username, name+socket>
@@ -35,6 +36,7 @@ public:
 signals:
   void helloRecv(std::string username);
   void instrumentChoiceRecv(std::string username, Instrument instrument);
+  void readyReceived(std::string username);
   void noteRecv(std::string username, Note note);
 
 };

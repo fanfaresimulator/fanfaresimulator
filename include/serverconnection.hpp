@@ -5,17 +5,20 @@
 #include <QtNetwork>
 #include <QByteArray>
 
+class NetworkServer;
+
 class ServerConnection : public QObject {
 private:
+  NetworkServer *server;
   QTcpSocket *socket;
   std::string username;
 
-  void readyRead();
   void setUsername(std::string username);
+  void handleJsonDoc(QJsonDocument doc);
+  void readyRead();
 
 public:
-  ServerConnection(std::string username, QTcpSocket *socket);
+  ServerConnection(std::string username, QTcpSocket *socket, NetworkServer *server);
   void write(QByteArray msg);
   std::string getUsername();
-
 };

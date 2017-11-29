@@ -8,6 +8,8 @@ list(INSERT CMAKE_MODULE_PATH 0
 	${CMAKE_CURRENT_SOURCE_DIR}/CMake
 )
 
+set(CMAKE_AUTOMOC ON)
+
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 

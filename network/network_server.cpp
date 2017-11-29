@@ -6,23 +6,24 @@ void NetworkServer::newConnection() {
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
   std::string username = "";
-  ServerConnection *client = new ServerConnection(username, clientConnection);
+  ServerConnection *client = new ServerConnection(username, clientConnection, this);
   clients.push_back(client);
   std::cout << "new client" << std::endl;
 
   clientConnection->write("Hello you !\n");
-  clientConnection->disconnectFromHost();
+  // clientConnection->disconnectFromHost();
 }
 
 void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
-  // auto search = clients.find("");
-  // if (search != clients.end()) {
-  //   QJsonDocument doc = QJsonDocument(obj);
-  //   QByteArray msg = doc.toJson();
-  //   search->write(msg);
-  // } else {
-  //   printf("Not such client found: %s\n", username.c_str());
-  // }
+  for (size_t i = 0; i < clients.size(); i++) {
+    if (clients[i]->getUsername() == username) {
+      QJsonDocument doc = QJsonDocument(obj);
+      QByteArray msg = doc.toJson();
+      clients[i]->write(msg);
+      return;
+    }
+  }
+  printf("Not such client found: %s\n", username.c_str());
 }
 
 void NetworkServer::broadcast(QJsonObject obj) {
