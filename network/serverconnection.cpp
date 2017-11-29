@@ -52,7 +52,7 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
 void ServerConnection::readyRead() {
   std::cout << "Reading from " << username << std::endl << "##beg##\n";
   QByteArray msg = socket->readAll();
-  std::cout <<  msg.toStdString() << std::endl << "##end##\n";
+  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
 
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);

@@ -4,14 +4,14 @@
 void NetworkClient::sendJsonObject(QJsonObject o) {
   QJsonDocument doc = QJsonDocument(o);
   QByteArray msg = doc.toJson();
-  std::cout << "sending: " << msg.toStdString() << std::endl;
+  std::cout << "sending: " << QString(msg).toStdString() << std::endl;
   socket->write(msg);
 }
 
 void NetworkClient::readyRead() {
   std::cout << "Client " << username << " is reading :" << std::endl << "##beg##\n";
   QByteArray msg = socket->readAll();
-  std::cout <<  msg.toStdString() << std::endl << "##end##\n";
+  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
 
   // parse JSON
   QJsonParseError jerror;
