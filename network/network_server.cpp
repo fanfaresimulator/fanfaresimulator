@@ -5,31 +5,33 @@ void NetworkServer::newConnection() {
   QTcpSocket *clientConnection = server->nextPendingConnection();
   connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 
-  std::string username;
-  clients[username] = clientConnection;
+  std::string username = "";
+  ServerConnection *client = new ServerConnection(username, clientConnection, this);
+  clients.push_back(client);
+  std::cout << "new client" << std::endl;
+
   clientConnection->write("Hello you !\n");
-  clientConnection->disconnectFromHost();
+  // clientConnection->disconnectFromHost();
 }
 
 void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
   for (size_t i = 0; i < clients.size(); i++) {
-    auto search = clients.find(username);
-    if (search != clients.end()) {
+    if (clients[i]->getUsername() == username) {
       QJsonDocument doc = QJsonDocument(obj);
       QByteArray msg = doc.toJson();
-      search->second->write(msg);
+      clients[i]->write(msg);
+      return;
     }
   }
-  // error
   printf("Not such client found: %s\n", username.c_str());
 }
 
 void NetworkServer::broadcast(QJsonObject obj) {
   QJsonDocument doc = QJsonDocument(obj);
   QByteArray msg = doc.toJson();
-  // for each element e of the HashMap clients
-  for (const auto& e : clients) {
-    e.second->write(msg);
+  // for each element e of the Set clients
+  for (size_t i = 0; i < clients.size(); i++) {
+    clients[i]->write(msg);
   }
 }
 
@@ -43,7 +45,7 @@ QObject(parent) {
   if(server->listen(QHostAddress::Any, PORT_NO) == 0) {
     exit(EXIT_FAILURE);
   }
-  // NetworkServer Online ! on port : PORT_NO
+  std::cout << "NetworkServer Online ! on port: " << PORT_NO << std::endl;
 }
 
 void NetworkServer::broadcastStart() {
@@ -52,14 +54,14 @@ void NetworkServer::broadcastStart() {
   broadcast(obj);
 }
 
-void NetworkServer::sendPartition(std::string username) {
+void NetworkServer::sendPartition(std::string username, Partition partition) {
   QJsonObject obj;
   obj["type"] = SIG_PARTITION;
   obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
   sendJsonObject(username, obj);
 }
 
-void NetworkServer::sendInstruments(std::string username) {
+void NetworkServer::sendInstruments(std::string username, std::list<Instrument> instuments) {
   QJsonObject obj;
   obj["type"] = SIG_INSTRUMENTS;
   obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");

@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <string>
+#include <list>
 #include <QTcpSocket>
+#include <QHostAddress>
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
@@ -15,15 +17,16 @@
 #include "note.hpp"
 
 class NetworkClient : public QObject {
+  Q_OBJECT
 private:
-  QTcpSocket socket;
+  QTcpSocket *socket;
   std::string username;
 
   void sendJsonObject(QJsonObject o);
+  void readyRead();
 
 public:
-  NetworkClient(std::string username);
-
+  explicit NetworkClient(std::string username, QObject *parent = Q_NULLPTR);
   void sendHello();
   void sendInstrumentChoice(Instrument instrument);
   void sendReady();
@@ -32,4 +35,5 @@ public:
 signals:
   /* Emit a signal that sends the partition */
   void partitionArrived(Partition partition);
+  void instrumentsArrived(std::list<Instrument>);
 };
