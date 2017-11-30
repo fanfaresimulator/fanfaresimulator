@@ -61,7 +61,10 @@ Synthesizer::~Synthesizer() {}
 
 void Synthesizer::playNote(Note note) {}
 
-Partition Synthesizer::getPartition(Instrument instrument) {}
+Partition Synthesizer::getPartition(Instrument instrument) {
+	Partition p;
+	return p;
+}
 
 /*#include <stdio.h>
 #ifdef __unix__
