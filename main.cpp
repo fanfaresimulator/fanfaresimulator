@@ -26,7 +26,6 @@ int main(int argc, char *argv[]) {
     int spent_time=0;
     while(spent_time<7000){
         spent_time=(float)(clock()-time_start)*1000/CLOCKS_PER_SEC;
-        //cout<<spent_time<<endl;
         window.actualize_notes(spent_time);
         //cout<<window.getPositionNote(0)<<endl;
         window.update();
