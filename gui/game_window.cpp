@@ -34,7 +34,7 @@ GameWindow::GameWindow() : QWidget()
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
-    //create_lines();
+    create_lines();
     note.push_back(new Note(this,0,0,10));
     note[0]->position=60;
     note.push_back(new Note(this,1,0,5));
