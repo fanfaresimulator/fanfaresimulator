@@ -19,14 +19,25 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       break;
     }
     case SIG_LOBBIES: {
+      std::cout << "NOT YET IMPLEMENTED" << std::endl;
       break;
     }
 
     case SIG_INSTRUMENTS: {
+      if (!obj["data"].isArray()) {
+        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
+        return;
+      }
+      QJsonArray instruments = obj["data"].toArray();
       break;
     }
 
     case SIG_PARTITION: {
+      if (!obj["data"].isArray()) {
+        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
+        return;
+      }
+      QJsonArray notes = obj["data"].toArray();
       break;
     }
 

@@ -8,6 +8,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
+#include <QJsonArray>
 #include <QByteArray>
 
 #include "network_utils.hpp"
