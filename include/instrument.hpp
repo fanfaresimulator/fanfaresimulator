@@ -1,6 +1,9 @@
 #pragma once
 
 typedef int Instrument;
-// enum Instrument{
-//
-// };
+
+static const int INSTRUMENT_NUMBER = 128;
+
+//enum Instrument {
+//        // instruments here !
+//};

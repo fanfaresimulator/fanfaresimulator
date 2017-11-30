@@ -38,5 +38,4 @@ signals:
   void instrumentChoiceRecv(std::string username, Instrument instrument);
   void readyReceived(std::string username);
   void noteRecv(std::string username, Note note);
-
 };
