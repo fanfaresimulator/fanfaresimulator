@@ -6,11 +6,10 @@
 #include "note.hpp"
 #include "partition.hpp"
 
-class Synthesizer  : public QObject
-{
+void testSynth();
 
-Q_OBJECT
-
+class Synthesizer  : public QObject {
+	Q_OBJECT
 private:
 	Partition mainPartition;
 

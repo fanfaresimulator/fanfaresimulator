@@ -2,15 +2,15 @@
 #include "include/synthesizer.hpp"
 #include "include/server.hpp"
 #include "synth/midi_handler.hpp"
-#include "synth/synthesizer.hpp"
+#include "include/synthesizer.hpp"
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
-midi_handler();
-testSynth();
+	midi_handler();
+	testSynth();
 
-NetworkServer networkServer;
+	NetworkServer networkServer;
 
 //	Synthesizer synthesizer;
 //	Server serverEngine(networkServer, synthesizer);

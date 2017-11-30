@@ -8,7 +8,7 @@
 #include <windows.h>
 #endif
 
-#include "synthesizer.hpp"
+#include "../include/synthesizer.hpp"
 
 void testSynth() {
 	printf("Hello world from the synth !\n");
@@ -53,7 +53,15 @@ void testSynth() {
 	delete_fluid_settings(settings);
 }
 
+Synthesizer::Synthesizer() {}
 
+Synthesizer::Synthesizer(Partition mainPartition) {}
+
+Synthesizer::~Synthesizer() {}
+
+void Synthesizer::playNote(Note note) {}
+
+Partition Synthesizer::getPartition(Instrument instrument) {}
 
 /*#include <stdio.h>
 #ifdef __unix__
