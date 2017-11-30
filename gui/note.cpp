@@ -31,10 +31,13 @@ bool Note::is_visible(float spent_time){
 }
 
 void Note::actualize_position(int spent_time){
-    if(!is_visible(spent_time)){
+    if(spent_time>duration+time_to_play&&spent_time<time_to_play-visible_duration){
         this->position=-1;
     }
     else {
-        this->position = (time_to_play - spent_time) * 100;
+        this->position = (time_to_play - spent_time);
     }
+     /*if(spent_time>=2000){
+         this->position=100;
+     }*/
 }

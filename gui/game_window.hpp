@@ -41,6 +41,8 @@ public:
 
     void read_notes(vector<string> list);
     void actualize_notes(int spent_time);
+    int getPositionNote(int index);
+    int getDurationNote(int index);
 
 
 private:

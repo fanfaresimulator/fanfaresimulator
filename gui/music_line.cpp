@@ -24,3 +24,4 @@ void MusicLine::paintEvent(QPaintEvent *event)
 int MusicLine::get_x() {
     return this->x;
 }
+

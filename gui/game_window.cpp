@@ -34,7 +34,7 @@ GameWindow::GameWindow() : QWidget()
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
-    create_lines();
+    //create_lines();
     note.push_back(new Note(this,0,0,10));
     note[0]->position=60;
     note.push_back(new Note(this,1,0,5));
@@ -50,6 +50,9 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_number_of_lines(4);
     create_lines();
     read_notes(list);
+    /*for(Note* n:note){
+        n->position=100;
+    }*/
     std::cout << this->note.size() << std::endl;
 }
 
@@ -116,4 +119,14 @@ void GameWindow::read_notes(vector<string> list) {
         list.erase(list.begin());
         list.erase(list.begin());
     }
+}
+
+int GameWindow::getPositionNote(int index){
+    int p = this->note[index]->position;
+    return p;
+}
+
+int GameWindow::getDurationNote(int index){
+    int p = this->note[index]->duration;
+    return p;
 }
