@@ -1,5 +1,6 @@
 #pragma once
 
-enum Instrument{
-    // instruments here !
-};
+typedef int Instrument;
+// enum Instrument{
+//
+// };
