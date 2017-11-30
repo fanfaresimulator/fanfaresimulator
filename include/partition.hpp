@@ -7,14 +7,12 @@
 #include "note.hpp"
 #include "instrument.hpp"
 
+#define  MIN_FRAME_LENGTH 0.5; // Minimum frame duration
+#define  MAX_FRAME_LENGTH 0.5; // Maximum frame duration
+
 class Partition {
 private:
 	std::list <Note> listOfNotes;
-	
-	const double minFrameLength = 0.5; // Minimum frame duration
-	const double maxFrameLength = 3.0; // Maximum frame duration
-
-
 
 public:
 	Partition();
@@ -40,4 +38,3 @@ public:
 	std::list <Note> buildPartitionInFrame(double startTime, double endTime);
 
 };
-
