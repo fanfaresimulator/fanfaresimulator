@@ -45,7 +45,7 @@ set(CLIENT_SOURCE_FILES
 	network/network_client.cpp
 	gui/keyboard.cpp
 	gui/testwindow.cpp
-	engine/client.cpp)
+	engine/client.cpp include/sound_player.h)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
@@ -66,7 +66,7 @@ set(SERVER_SOURCE_FILES
 	server.cpp
 	gui/testwindow.cpp
 	engine/server.cpp
- )
+        synth/sound_player.cpp)
 
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})

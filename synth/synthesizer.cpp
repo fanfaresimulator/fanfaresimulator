@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <fluidsynth.h>
-#include <fluidsynth/settings.h>
 
 #ifdef __unix__
 #include <unistd.h>
