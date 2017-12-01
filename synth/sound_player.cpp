@@ -36,11 +36,38 @@ void Sound_player::playNote(Note* note){
         fluid_synth_noteon(synth, note->getInstrument(), note->getKey (), note->getVelocity ());
     }
     else {
-        fluid_synth_noteoff(synth,note->getInstrument(),note->getVelocity ());
+        fluid_synth_noteoff(synth, note->getInstrument(),note->getVelocity ());
     }
     printf("played !\n");
 }
 
-void Sound_player::testSynth() {
+void Sound_player::testPlayer() {
+
+    Note* noteon_1  = new Note(1.0,1,0,30,50,0);
+    Note* noteoff_1 = new Note(1.0,0,0,30,50,0);
+
+    Note* noteon_2  = new Note(1.0,1,0,90,50,0);
+    Note* noteoff_2 = new Note(1.0,0,0,90,50,0);
+
+    for (int i = 0; i < 100; i++) {
+
+        playNote(noteon_1);
+        /* Sleep for 1 second */
+#ifdef __unix__
+        sleep(1);
+#elif defined(_WIN32) || defined(WIN32)
+        Sleep(1000);
+#endif
+        playNote(noteoff_1);
+
+        playNote(noteon_2);
+        /* Sleep for 1 second */
+#ifdef __unix__
+        sleep(1);
+#elif defined(_WIN32) || defined(WIN32)
+        Sleep(1000);
+#endif
+        playNote(noteoff_2);
+    }
 
 }

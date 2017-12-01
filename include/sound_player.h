@@ -21,7 +21,7 @@ public:
 
     void playNote(Note* note);
 
-    void testSynth();
+    void testPlayer();
 };
 
 

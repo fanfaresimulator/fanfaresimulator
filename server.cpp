@@ -18,32 +18,8 @@ int main(int argc, char *argv[]) {
 	NetworkServer networkServer;
 
     Sound_player* S = new Sound_player();
-    Note* noteon_1  = new Note(1.0,1,0,30,50,0);
-    Note* noteoff_1 = new Note(1.0,0,0,30,50,0);
-
-    Note* noteon_2  = new Note(1.0,1,0,90,50,0);
-    Note* noteoff_2 = new Note(1.0,0,0,90,50,0);
-
-    for (int i = 0; i < 100; i++) {
-
-        S->playNote(noteon_1);
-        /* Sleep for 1 second */
-#ifdef __unix__
-        sleep(1);
-#elif defined(_WIN32) || defined(WIN32)
-        Sleep(1000);
-#endif
-        S->playNote(noteoff_1);
-
-        S->playNote(noteon_2);
-        /* Sleep for 1 second */
-#ifdef __unix__
-        sleep(1);
-#elif defined(_WIN32) || defined(WIN32)
-        Sleep(1000);
-#endif
-        S->playNote(noteoff_2);
-    }
+    
+    S->testPlayer();
 
 //	Synthesizer synthesizer;
 //	Server serverEngine(networkServer, synthesizer);
@@ -56,6 +32,6 @@ int main(int argc, char *argv[]) {
 //
 //	QObject::connect(&networkServer, &NetworkServer::noteRecv,
 //					 &serverEngine, &Server::playNote);
-
+    delete(S);
 	return app.exec();
 }
