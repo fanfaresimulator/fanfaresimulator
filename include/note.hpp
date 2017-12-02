@@ -10,15 +10,25 @@ private:
     Instrument instrument;      // channel
     int key;                    // note 0 to 127
     int velocity;               // value 0 to 127
-	int track;					// value 0 to #track
+    int track;					// value 0 to #track
 
 public:
     Note(double timestamp, bool signal, Instrument instrument, int key, int velocity, int track);
 
     double getTime ();
 
-	bool getSignal();
+    bool getSignal();
+
+    Instrument getInstrument();
+
+    int getKey();
+
+    int getVelocity();
+
+    int getTrack();
 
     bool isEqual(Note note2); // Compare timestamp and key.
+
+    bool operator== (Note note2); // We surcharge the equality
 
 };
