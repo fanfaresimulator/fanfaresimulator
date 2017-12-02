@@ -52,23 +52,37 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 	// in the current frame.
 	std::list <Note> noteSet;
 
-	for (iterator=listOfNotes.begin(); iterator != listOfNotes.end(); iterator++)	{
-		if (iterator.getTime()>finalTime)	{
+	for (iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
+		if (iterAct.getTime()>endTime)	{
 			break;
 		}
 
-		if (iterator.getTime()>=startTime)	{
-			if (iterator.getSignal())	{
-				noteSet.push_front(iterator);
-				finalPartition.push_back(iterator);
+		if (iterAct.getTime()>=startTime)	{
+			if (iterAct.getSignal())	{
+				noteSet.push_front(iterAct);
+				finalPartition.push_back(iterAct);
 			}
 			else	{
-				// TO BE COMPLETED
+				std::list<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), iterAct);
+				if (findIter == noteSet.end())	{
+					// pushes the ON of the current note.
+					finalPartition.push_front(Note(startTime, true, iterAct.getInstrument() , iterAct.getKey() , iterAct.getVelocity(), iterAct.getTrack()));
+					finalPartition.push_back(iterAct);
+				}
+				else	{
+					erase(findIter);
+					finalPartition.push_back(iterAct);
+				}
 			}
 
 		}
 	}
 
+	for (iterRest=noteSet.begin(); iterRest!=noteSet.end(); iterRest++)	{
+		finalPartition.push_back(Note(endTime, false, iterRest.getInstrument(),iterRest.getKey(), iterRest.getVelocity(), iterRest.getTrack()));
+	}
+
+	return finalPartition;
 
 }
 
