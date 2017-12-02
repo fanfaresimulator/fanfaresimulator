@@ -9,7 +9,10 @@ Note::Note(double timestamp, bool signal, Instrument instrument, int key, int ve
  this->track = track;
     };
 
-
+    
+// Cette egalite a ete redefinie pour utiliser une fonction de recherche
+// dans une liste.
+    
 bool Note::operator== (Note note2)	{
 	return (key==note2.key);
 }
