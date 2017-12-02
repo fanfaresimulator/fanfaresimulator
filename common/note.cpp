@@ -27,7 +27,7 @@ int Note::getVelocity()	{
 	return velocity;
 }
 
-int Note:getTrack()	{
+int Note::getTrack()	{
 	return track;
 }
 
