@@ -8,7 +8,7 @@
 #include "instrument.hpp"
 
 #define  MIN_FRAME_LENGTH 0.5; // Minimum frame duration
-#define  MAX_FRAME_LENGTH 0.5; // Maximum frame duration
+#define  MAX_FRAME_LENGTH 3.0; // Maximum frame duration
 
 class Partition {
 private:
