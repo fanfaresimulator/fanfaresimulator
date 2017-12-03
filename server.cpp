@@ -19,7 +19,9 @@ int main(int argc, char *argv[]) {
 
     Sound_player* S = new Sound_player();
 
-    S->testPlayer();
+    //S->testPlayer();
+
+	testSynth();
 
 //	Synthesizer synthesizer;
 //	Server serverEngine(networkServer, synthesizer);

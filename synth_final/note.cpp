@@ -25,6 +25,14 @@ int Note::getKey (){
  return key;
 };
 
+Instrument Note::getInstrument (){
+ return pupitre.getInstrument() ;
+};
+
+int Note::getTrack(){
+ return pupitre.getTrack();
+};
+
 int Note::getVelocity (){
  return velocity;
 };

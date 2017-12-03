@@ -32,8 +32,14 @@ Sound_player::~Sound_player() {
 }
 
 void Sound_player::initPupitres(Partition partition){
-
-    getInstrument().getNumber();
+    Pupitre pupitre = partition.getPupitre();
+    int instrument, track ;
+    for(int i=0; i<Pupitre.size(); i++){
+        track = pupitre[i].getTrack();
+        instrument = pupitre[i].getInstrument().getNumber();
+        //Chaque track joue dans un channel égal à son track et en utilisant le Soundfont correspondant à son instrument;
+        fluid_synth_program_change(synth, track , instrument);
+        }
 };
 
 void Sound_player::playNote(Note* note){

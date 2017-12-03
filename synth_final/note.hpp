@@ -20,6 +20,10 @@ public:
 
     Pupitre getPupitre();
 
+    Instrument getInstrument();
+
+    int getTrack();
+
     int getKey ();
 
     int getVelocity ();
