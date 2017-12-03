@@ -31,6 +31,11 @@ Sound_player::~Sound_player() {
     delete_fluid_synth(synth);
 }
 
+void Sound_player::initPupitres(Partition partition){
+
+    getInstrument().getNumber();
+};
+
 void Sound_player::playNote(Note* note){
     if(note->getSignal()){
         fluid_synth_noteon(synth, note->getInstrument(), note->getKey (), note->getVelocity ());

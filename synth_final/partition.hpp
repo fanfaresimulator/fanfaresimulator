@@ -18,7 +18,7 @@ private:
 public:
 
   Partition();
-  
+
 	Partition(std::vector<Note> listOfNotes);
 
   Partition(std::string midiFileName);

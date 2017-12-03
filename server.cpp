@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	NetworkServer networkServer;
 
     Sound_player* S = new Sound_player();
-    
+
     S->testPlayer();
 
 //	Synthesizer synthesizer;
