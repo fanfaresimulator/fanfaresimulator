@@ -18,7 +18,7 @@ private:
 public:
 
   Partition();
-  
+
 	Partition(std::vector<Note> listOfNotes);
 
   Partition(std::string midiFileName);
@@ -27,7 +27,7 @@ public:
 
 	std::vector<Note> getNotes();
 
-  std::vector<Partition> getPartition();
+  std::vector<Pupitre> getPupitre();
 
 	Partition getPartition(Pupitre pupitre); // What is that function? What does it should do?
 
