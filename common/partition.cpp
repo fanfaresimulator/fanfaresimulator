@@ -53,12 +53,12 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 	std::list <Note> noteSet;
 
 	for (std::list<Note>::iterator iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
-		if ((*iterAct).getTime()>endTime)	{
+		if (iterAct->getTime()>endTime)	{
 			break;
 		}
 
-		if ((*iterAct).getTime()>=startTime)	{
-			if ((*iterAct).getSignal())	{
+		if (iterAct->getTime()>=startTime)	{
+			if (iterAct->getSignal())	{
 				noteSet.push_front(*iterAct);
 				finalPartition.push_back(*iterAct);
 			}
@@ -66,7 +66,7 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 				std::list<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
 				if (findIter == noteSet.end())	{
 					// pushes the ON of the current note.
-					finalPartition.push_front(Note(startTime, true, (*iterAct).getInstrument() ,(*iterAct).getKey() , (*iterAct).getVelocity(), (*iterAct).getTrack()));
+					finalPartition.push_front(Note(startTime, true, iterAct->getInstrument() ,iterAct->getKey() , iterAct->getVelocity(), iterAct->getTrack()));
 					finalPartition.push_back((*iterAct));
 				}
 				else	{
@@ -79,7 +79,7 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 	}
 
 	for (std::list<Note>::iterator iterRest=noteSet.begin(); iterRest!=noteSet.end(); iterRest++)	{
-		finalPartition.push_back(Note(endTime, false, (*iterRest).getInstrument(),(*iterRest).getKey(), (*iterRest).getVelocity(), (*iterRest).getTrack()));
+		finalPartition.push_back(Note(endTime, false, iterRest->getInstrument(),iterRest->getKey(), iterRest->getVelocity(), iterRest->getTrack()));
 	}
 
 	return finalPartition;
