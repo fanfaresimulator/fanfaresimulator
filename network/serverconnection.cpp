@@ -1,6 +1,5 @@
-#include "../include/serverconnection.hpp"
-#include "../include/network_server.hpp"
-#include "../include/network_utils.hpp"
+#include "../include/network/server.hpp"
+#include "../include/network/serverconnection.hpp"
 
 /* PRIVATE */
 void ServerConnection::handleJsonDoc(QJsonDocument doc) {

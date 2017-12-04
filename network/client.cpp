@@ -1,5 +1,4 @@
-#include "../include/network_client.hpp"
-#include "../include/network_utils.hpp"
+#include "../include/network/client.hpp"
 
 /* PRIVATE */
 void NetworkClient::sendJsonObject(QJsonObject o) {

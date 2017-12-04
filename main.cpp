@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "gui/testwindow.hpp"
-#include "include/network_client.hpp"
+#include "include/network/client.hpp"
 
 int main(int argc, char *argv[])
 {
