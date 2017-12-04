@@ -34,3 +34,11 @@ int Note::getTrack()	{
 	return track;
 }
 
+double Note::getTime()	{
+	return timestamp;
+}
+
+
+bool Note::getSignal()	{
+	return signal;
+}
