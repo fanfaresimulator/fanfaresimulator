@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <map>
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QJsonObject>
@@ -30,13 +30,13 @@ private:
 public:
   explicit NetworkClient(std::string username, QObject *parent = Q_NULLPTR);
   void sendHello();
-  void sendInstrumentChoice(Instrument instrument);
+  void sendPupitreChoice(Pupitre pupitre);
   void sendReady();
   void sendNote(Note note);
 
 signals:
   /* Emit a signal that sends the partition */
   void partitionRecv(Partition partition);
-  void instrumentsRecv(std::list<Instrument>);
+  void pupitresRecv(std::map<Pupitre, bool>);
   void startRecv();
 };

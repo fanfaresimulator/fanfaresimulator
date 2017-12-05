@@ -35,6 +35,7 @@ set(COMMON_SOURCE_FILES
 	synth/pupitre.cpp
 	synth/instrument.cpp
 	synth/midi_handler.cpp
+	network/network.cpp
 )
 
 set(CLIENT_HEADER_FILES
