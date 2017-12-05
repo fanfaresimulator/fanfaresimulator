@@ -19,7 +19,7 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
 
     vector<Pupitre> plist = partition.getPupitre();
     for(Pupitre p : plist){
-        pair< Pupitre, bool > pair = pair< Pupitre, bool >(p, false);
+        pair< Pupitre, bool > pair(p, false);
         this->pupitreMap.insert(pair);
     }
 }
@@ -41,7 +41,7 @@ void Server::updatePupitreMap(Pupitre p) {
 }
 
 bool Server::everyoneReady() {
-    for(pair clientPaire : clients){
+    for(pair<std::string, bool> clientPaire : clients){
         if(!clientPaire.second) return false;
     }
     return true;
@@ -67,7 +67,7 @@ void Server::addPupitre(string username, Pupitre p) {
         throw std::invalid_argument("Username not found in clients");
     }
     // found => insert in usrToPupitre
-    pair< string, Pupitre > pair = pair<string, Pupitre >(username, p);
+    pair< string, Pupitre > pair(username, p);
     usrToPupitre.insert(pair);
 
     // update pupitreMap

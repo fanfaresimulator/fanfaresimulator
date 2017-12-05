@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
 
 //	Synthesizer synthesizer;
-	Server serverEngine(networkServer);
+//	Server serverEngine(networkServer);
 
     /* CONNECTS network server & server engine */
 
