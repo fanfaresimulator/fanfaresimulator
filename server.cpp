@@ -1,7 +1,7 @@
 #include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
 #include "include/server.hpp"
-#include "include/sound_player.h"
+#include "include/sound_player.hpp"
 #include "include/midi_handler.hpp"
 
 #include <QApplication>
