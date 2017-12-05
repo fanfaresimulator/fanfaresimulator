@@ -17,7 +17,7 @@ public:
 
     int get_x();
 
-    void setIsPushed(bool state);
+    void set_is_pushed(bool state);
 
 protected:
     void paintEvent(QPaintEvent *event) final;

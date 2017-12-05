@@ -32,7 +32,7 @@ int MusicLine::get_x() {
     return this->x;
 }
 
-void MusicLine::setIsPushed(bool state) {
+void MusicLine::set_is_pushed(bool state) {
     this->isPushed = state;
 }
 
