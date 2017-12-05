@@ -2,20 +2,20 @@
 
 #include <string>
 #include <note>
-#include "instrument.hpp"
+#include "pupitre.hpp"
 
 class NoteGlobale {
 private:
-	std::initializer_list <Note> listOfNotes;
-	int key;			// from 0 to 3
+	std::list <Note> listOfNotes;
+	int key;			// from 1 to 4
 	double timestamp;
 	bool signal;
-	Instrument instrument;
+	Pupitre pupitre;
 
 public:
 	NoteGlobale();
 
-	NoteGlobale(std::initializer_list <Note> listOfNotes, double timestamp, bool signal);
+	NoteGlobale(std::list <Note> listOfNotes, int key, double timestamp, bool signal, Pupitre pupitrenew);
 
 	~NoteGlobale();
 	

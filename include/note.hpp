@@ -12,7 +12,9 @@ private:
     int velocity;               // value 0 to 127
 
 public:
-    Note(double timestamp, bool signal, Pupitre pupitre, int key, int velocity);
+    Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
+
+	~Note();
 
     bool getSignal ();
 
@@ -20,14 +22,11 @@ public:
 
     Pupitre getPupitre();
 
-    Instrument getInstrument();
-
-    int getTrack();
-
     int getKey ();
 
     int getVelocity ();
 
-    bool isEqual(Note note2); // Compare timestamp and key.
+	//bool isEqual(Note note2); // Compare timestamp and key.
 
+	bool operator== (Note note2); // We surcharge the equality
 };
