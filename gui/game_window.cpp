@@ -17,6 +17,7 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
+    this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
     /*for(Note* n:note){
@@ -61,7 +62,8 @@ void GameWindow::create_lines(){
         lines.push_back(new MusicLine(this, i));
     }
 }
-void GameWindow::actualize_notes(int spent_time){
+
+void GameWindow::actualize_notes(float spent_time) {
     for(Note* n:this->note){
         n->actualize_position(spent_time);
     }

@@ -21,12 +21,11 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     GameWindow window(1000, 1000, list);
     window.show();
-    int time_start=clock();
-    int spent_time=0;
-    while(spent_time<7000){
-        spent_time=(float)(clock()-time_start)*1000/CLOCKS_PER_SEC;
+    float time_start = clock();
+    float spent_time = 0;
+    while (true) {
+        spent_time = (clock() - time_start) * 1000 / CLOCKS_PER_SEC;
         window.actualize_notes(spent_time);
-        //cout<<window.getPositionNote(0)<<endl;
         window.update();
         QCoreApplication::processEvents();
     }

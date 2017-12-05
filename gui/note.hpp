@@ -22,13 +22,14 @@ public:
     float duration;
     float time_to_play;
     int radius_note=10;
-    int position;
+    float position;
     float x;
 
     Note(GameWindow * parent, int id, float time_begin, float time_end);
 
     bool is_visible(float spent_time);
-    void actualize_position(int spent_time);
+
+    void actualize_position(float spent_time);
 
 protected:
     void paintEvent(QPaintEvent *event);
