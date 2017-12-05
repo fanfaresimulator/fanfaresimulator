@@ -59,7 +59,6 @@ set(CLIENT_SOURCE_FILES
 	gui/PupitreWindow.cpp
 	gui/UsernameWindow.cpp
 	engine/client.cpp
-	include/sound_player.h
 )
 
 set(SERVER_HEADER_FILES

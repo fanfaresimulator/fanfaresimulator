@@ -23,7 +23,7 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
     }
 
     case SIG_PUPITRES: {
-      QJsonArray instruments = arrayFromJson(obj["data"]);
+      QJsonArray pupitres = arrayFromJson(obj["data"]);
       break;
     }
 
@@ -75,10 +75,10 @@ void NetworkClient::sendHello() {
   this->sendJsonObject(obj);
 }
 
-void NetworkClient::sendInstrumentChoice(Instrument instrument) {
+void NetworkClient::sendPupitreChoice(Pupitre pupitre) {
   QJsonObject obj;
   obj["type"] = SIG_CHOICE_INSTRUMENT;
-  obj["data"] = instrumentToJson(instrument);
+  obj["data"] = pupitreToJson(pupitre);
   this->sendJsonObject(obj);
 }
 

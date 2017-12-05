@@ -30,7 +30,7 @@ private:
 public:
   explicit NetworkClient(std::string username, QObject *parent = Q_NULLPTR);
   void sendHello();
-  void sendInstrumentChoice(Instrument instrument);
+  void sendPupitreChoice(Pupitre pupitre);
   void sendReady();
   void sendNote(Note note);
 
