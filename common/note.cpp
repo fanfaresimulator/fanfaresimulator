@@ -1,31 +1,38 @@
 #include "../include/note.hpp"
 
-Note::Note(double timestamp, bool signal, int instrument, int key, int velocity, int track){
- this->timestamp = timestamp;
- this->signal = signal;
- this->instrument = instrument;
- this->key = key;
- this->velocity = velocity;
- this->track = track;
-    };
+Note::~Note() {
+	delete pupitre;
+}
 
-bool Note::getSignal (){
+Note::Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity){
+	this->timestamp = timestamp;
+	this->signal = signal;
+	this->pupitre = pupitredeux;
+	this->key = key;
+	this->velocity = velocity;
+};
+
+bool Note::getSignal(){
  return signal;
 };
 
 
-double Note::getTime (){
+double Note::getTime(){
  return timestamp;
 };
 
-Instrument Note::getInstrument (){
- return instrument ;
+Instrument Note::getPupitre(){
+ return pupitre ;
 };
 
-int Note::getKey (){
+int Note::getKey(){
  return key;
 };
 
 int Note::getVelocity (){
  return velocity;
 };
+
+bool Note::operator== (Note note2) {
+	return (key == note2.key);
+}
