@@ -57,27 +57,17 @@ void NetworkServer::broadcastStart() {
 void NetworkServer::sendPartition(std::string username, Partition partition) {
   QJsonObject obj;
   obj["type"] = SIG_PARTITION;
-  QJsonArray noteList;
-  // std::list<Note> l = partition.getNotes(); // waiting for interface
-  // std::initializer_list<Note> l = partition.getNotes();
-  std::list<Note> l;
-  for (Note & n : l) {
-    QJsonObject note;
-    note["timestamp"] = QString::fromStdString("NEED GETTER");
-    note["signal"] = QString::fromStdString("NEED GETTER");
-    note["instrument"] = QString::fromStdString("NEED GETTER");
-    note["velocity"] = 0;
-    note["key"] = 0;
-    note["track"] = 0;
-    noteList.append(note);
-  }
-  obj["data"] = noteList;
+  obj["data"] = partitionToJson(partition);
   sendJsonObject(username, obj);
 }
 
-void NetworkServer::sendInstruments(std::string username, std::list<Instrument> instuments) {
+void NetworkServer::sendInstruments(std::string username, std::list<Instrument> instruments) {
   QJsonObject obj;
   obj["type"] = SIG_INSTRUMENTS;
-  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
+  QJsonArray JsonInstrs;
+  for (Instrument & i : instruments) {
+    JsonInstrs.append(instrumentToJson(i));
+  }
+  obj["data"] = JsonInstrs;
   sendJsonObject(username, obj);
 }

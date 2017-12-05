@@ -1,5 +1,13 @@
 #pragma once
 
+#include <QJsonObject>
+#include <QJsonArray>
+
+#include "../pupitre.hpp"
+#include "../instrument.hpp"
+#include "../partition.hpp"
+#include "../note.hpp"
+
 #define PORT_NO 15051
 #define DISCOVER_MSG "fanfaresimulator"
 
@@ -14,3 +22,19 @@ typedef enum {
   SIG_INSTRUMENTS,
   SIG_PARTITION
 } Protocol_sig;
+
+QJsonObject instrumentToJson(Instrument instrument);
+
+Instrument instrumentFromJson(QJsonObject o);
+
+QJsonObject partitionToJson(Partition partition);
+
+Partition partitionFromJson(QJsonObject o);
+
+QJsonObject noteToJson(Note note);
+
+Note noteFromJson(QJsonObject o);
+
+QJsonObject pupitreToJson(Pupitre pupitre);
+
+Pupitre pupitreFromJson(QJsonObject o);
