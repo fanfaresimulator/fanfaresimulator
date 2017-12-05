@@ -13,8 +13,6 @@ class InstrumentWindow : public QWidget {
 public:
 	InstrumentWindow();
 
-	int nbInstru = 4;
-
 	std::vector<std::string> instruList = {"violon", "guitare", "violoncelle", "piano"};
 	//liste vide de radio button a ajouter dans le cpp
 	std::vector<QRadioButton*> buttons = {};

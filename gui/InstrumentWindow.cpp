@@ -17,7 +17,7 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 
 	QVBoxLayout *vBox = new QVBoxLayout;
 
-	for (int i = 0; i < nbInstru; i++) {
+	for (int i = 0; i < instruList.size(); i++) {
 		std::string nameInstru = instruList[i];
 		QRadioButton *b = new QRadioButton(QString(nameInstru.c_str()));
 		buttons.push_back(b);
