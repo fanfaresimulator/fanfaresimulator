@@ -11,5 +11,5 @@ public:
 
     ~Keyboard();
 
-    Note getNextNote();
+//    Note getNextNote();
 };
