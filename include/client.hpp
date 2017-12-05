@@ -32,7 +32,7 @@ public:
     //Client(NetworkClient& network, Keyboard& keyboard);
 	Client(NetworkClient& network, std::string username);
 
-    vector<string> pupitreVecAvlb(std::map<Pupitre, bool>);
+    vector<string> pupitreMapToNameVec(std::map<Pupitre, bool>);
 
     void sendAddClient(std::string username);
 

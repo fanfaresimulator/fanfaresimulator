@@ -7,7 +7,7 @@ Client::Client(NetworkClient &network, std::string username) {
 
 }
 
-vector<string> Client::pupitreVecAvlb(std::map<Pupitre, bool> pmap) {
+vector<string> Client::pupitreMapToNameVec(std::map<Pupitre, bool> pmap) {
     vector<string> pupitreVec = vector<string>();
     for(pair<Pupitre, bool> p : pmap){
         if(!p.second) continue;
