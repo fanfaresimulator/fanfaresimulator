@@ -1,5 +1,54 @@
 #include "../include/network/network.hpp"
 
+static int intFromJson(QJsonValue val) {
+  if (val.isUndefined() || val.isNull()) {
+    throw val.type();
+  } else {
+    return val.toInt();
+  }
+}
+
+static bool boolFromJson(QJsonValue val) {
+  if (val.isUndefined() || val.isNull()) {
+    throw val.type();
+  } else {
+    return val.toBool();
+  }
+}
+
+static double doubleFromJson(QJsonValue val) {
+  if (!val.isDouble()) {
+    throw val.type();
+  } else {
+    return val.toDouble();
+  }
+}
+
+
+static std::string stringFromJson(QJsonValue val) {
+  if (!val.isString()) {
+    throw val.type();
+  } else {
+    return val.toString().toStdString();
+  }
+}
+
+static QJsonArray arrayFromJson(QJsonValue val) {
+  if (!val.isDouble()) {
+    throw val.type();
+  } else {
+    return val.toArray();
+  }
+}
+
+static QJsonObject objectFromJson(QJsonValue val) {
+  if (!val.isObject()) {
+    throw val.type();
+  } else {
+    return val.toObject();
+  }
+}
+
 QJsonObject instrumentToJson(Instrument instrument) {
   QJsonObject JsonInstr;
   JsonInstr["id"] = instrument.getNumber();
@@ -38,33 +87,18 @@ QJsonObject noteToJson(Note note) {
   JsonNote["timestamp"] = note.getTime();
   JsonNote["signal"] = note.getSignal();
   JsonNote["pupitre"] = QString::fromStdString("TODO pupitre to JSON");
-  JsonNote["velocity"] = note.getVelocity();
   JsonNote["key"] = note.getKey();
+  JsonNote["velocity"] = note.getVelocity();
   JsonNote["track"] = note.getTrack();
   return JsonNote;
 }
 
 Note noteFromJson(QJsonObject obj) {
-  double timestamp;
-  if (!obj["timestamp"].isDouble()) {
-    std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-    timestamp = -1.0;
-  } else {
-    timestamp = obj["timestamp"].toDouble();
-  }
-
-  bool signal;
-  if (!obj["signal"].isBool()) {
-    std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-    signal = -1;
-  } else {
-    signal = obj["signal"].toBool();
-  }
-
-  Pupitre pupitre;
-
-  int key;
-  int velocity;
+  double timestamp = doubleFromJson(obj["timestamp"]);
+  bool signal = boolFromJson(obj["signal"]);
+  Pupitre pupitre = pupitreFromJson(obj["pupitre"].toObject());
+  int key = intFromJson("key");
+  int velocity = intFromJson(obj["velocity"]);
   Note note(timestamp, signal, pupitre, key, velocity);
   return note;
 }
