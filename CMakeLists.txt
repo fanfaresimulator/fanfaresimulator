@@ -74,7 +74,6 @@ set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	server.cpp
 	engine/server.cpp
-	gui/testwindow.cpp
 	network/server.cpp
 	network/advertizer.cpp
 	network/serverconnection.cpp
