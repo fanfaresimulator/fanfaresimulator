@@ -9,47 +9,47 @@ using namespace std;
 // EMITS will be uncommented after the implementation of dependencies will be done
 
 Server::Server(NetworkServer& server) {
-//     this->server = &server;
-//
-//     this->clients = std::map< string, bool >();
-//     this->usrToInstrument = map< std::string, Instrument >();
-// //    emit requestInstrumentList();
+    this->server = &server;
+
+    this->clients = std::map< string, bool >();
+    this->usrToInstrument = map< std::string, Instrument >();
+//    emit requestInstrumentList();
 
 }
 
 // SLOTS
 
 void Server::instrumentMapInit(std::list<Instrument> ilist) {
-    // this->instrumentMap = map< Instrument, bool>();
-    // for (Instrument i: ilist){
-    //     pair<Instrument, bool> p = pair<Instrument, bool>(i, false);
-    //     this->instrumentMap.insert(p);
-    // }
+//    this->instrumentMap = map< Instrument, bool>();
+//    for (Instrument i: ilist){
+//        pair<Instrument, bool> p = pair<Instrument, bool>(i, false);
+//        this->instrumentMap.insert(p);
+//    }
 }
 
 void Server::addClient(string username) {
-    // if (username.empty()){
-    //     throw std::invalid_argument("Username null");
-    // }
-    // pair< string, bool > p = pair<string, bool>(username, false);
-    // clients.insert(p);
+//    if (username.empty()){
+//        throw std::invalid_argument("Username null");
+//    }
+//    pair< string, bool > p = pair<string, bool>(username, false);
+//    clients.insert(p);
 }
 
 void Server::addInstrument(string username, Instrument i) {
-    // if (username.empty()){
-    //     throw std::invalid_argument("Username null");
-    // }
-    // if (i < 0 || i >= INSTRUMENT_NUMBER) {
-    //     throw std::invalid_argument("wrong instrument");
-    // }
-    // // check if username exist in clients
-    // if ( clients.find(username) == clients.end() ) {
-    //     // not found
-    //     throw std::invalid_argument("Username not found in clients");
-    // }
-    // // found => insert in usrToInstrument
-    // pair< string, Instrument > p = pair<string, Instrument >(username, i);
-    // usrToInstrument.insert(p);
+//    if (username.empty()){
+//        throw std::invalid_argument("Username null");
+//    }
+//    if (i < 0 || i >= INSTRUMENT_NUMBER) {
+//        throw std::invalid_argument("wrong instrument");
+//    }
+//    // check if username exist in clients
+//    if ( clients.find(username) == clients.end() ) {
+//        // not found
+//        throw std::invalid_argument("Username not found in clients");
+//    }
+//    // found => insert in usrToInstrument
+//    pair< string, Instrument > p = pair<string, Instrument >(username, i);
+//    usrToInstrument.insert(p);
 
 //    emit requestPartition(username, i);
 }
