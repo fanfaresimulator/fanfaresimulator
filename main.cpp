@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QTime>
 #include "include/network/client.hpp"
 #include "include/InstrumentWindow.hpp"
 #include "gui/game_window.hpp"
@@ -8,6 +9,9 @@ typedef basic_string<char> string;
 
 int main(int argc, char *argv[]) {
     vector<string> list;
+    QTime t0 = QTime::currentTime();
+    cout << t0.msec() << endl;
+    t0.start();
     list.push_back("1000");
     list.push_back("0");
     list.push_back("U");
@@ -23,10 +27,12 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     GameWindow window(1000, 1000, list);
     window.show();
-    float time_start = clock();
-    float spent_time = 0;
+    cout << t0.elapsed() << endl;
     while (true) {
-        spent_time = (clock() - time_start) * 1000 / CLOCKS_PER_SEC;
+        int spent_time = t0.elapsed();
+        /*if (abs(spent_time-1000) < 2){
+            cout<<"main  " <<spent_time<<endl;
+        }*/
         window.actualize_notes(spent_time);
         window.update();
         QCoreApplication::processEvents();
