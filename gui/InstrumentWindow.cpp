@@ -42,18 +42,16 @@ void InstrumentWindow::chooseInstrument() {
 }
 
 
-QRadioButton* InstrumentWindow::printInstrumentChosen() {
-	//chosen est le QRadioButton qui a été selectionné
-	QRadioButton * chosen = NULL;
-	for (std::vector<QRadioButton*>::iterator it = buttons.begin(); it != buttons.end(); ++it) {
-		if ((*it)->isChecked()) {
-			chosen = *it;
+void InstrumentWindow::printInstrumentChosen() {
+	
+	for (int i = 0; i < buttons.size(); i++) {
+		if (buttons[i]->isChecked()) {
+			std::cout << i << std::endl;
+			emit instrumentChosen(i);
+			break;
 		}
 	}
 	this->hide();
-	std::cout << chosen << std::endl;
-	return chosen;
-	
 }
 
 

@@ -24,7 +24,9 @@ public:
 	std::vector<QRadioButton*> buttons = {};
 	
 	void chooseInstrument();
-	QRadioButton* printInstrumentChosen();
+	void printInstrumentChosen();
+signals:
+	void instrumentChosen(int i);
 };
 
 
