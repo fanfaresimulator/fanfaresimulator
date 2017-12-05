@@ -45,12 +45,24 @@ QJsonObject noteToJson(Note note) {
 }
 
 Note noteFromJson(QJsonObject obj) {
-  // if (obj["timestamp"].) {
-  //
-  // }
   double timestamp;
+  if (!obj["timestamp"].isDouble()) {
+    std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
+    timestamp = -1.0;
+  } else {
+    timestamp = obj["timestamp"].toDouble();
+  }
+
   bool signal;
+  if (!obj["signal"].isBool()) {
+    std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
+    signal = -1;
+  } else {
+    signal = obj["signal"].toBool();
+  }
+
   Pupitre pupitre;
+
   int key;
   int velocity;
   Note note(timestamp, signal, pupitre, key, velocity);

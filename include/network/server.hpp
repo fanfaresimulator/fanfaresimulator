@@ -3,8 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <list>
-#include <initializer_list> // waiting for interface of Patition to change
+#include <map>
 #include <QtNetwork>
 #include <QObject>
 #include <QJsonObject>
@@ -33,7 +32,7 @@ public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);
   void broadcastStart();
   void sendPartition(std::string username, Partition partition);
-  void sendPupitres(std::string username, std::list<Pupitre> pupitres);
+  void sendPupitres(std::string username, std::map<Pupitre, bool> pupitres);
 
 signals:
   void helloRecv(std::string username);
