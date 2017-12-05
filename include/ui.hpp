@@ -1,17 +1,15 @@
+#pragma once
+
 //
 // Created by Thomas Bellotti on 19/11/2017
 //
 
-#ifndef UI_HPP
-#define UI_HPP
-
 #include <iostream>
+#include <string>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
-
-typedef std::basic_string<char> string;
 
 class UI {
 private:
@@ -37,7 +35,5 @@ public:
 
 	void startStream();
 
-	string getUsername();
+	std::string getUsername();
 };
-
-#endif // UI_HPP

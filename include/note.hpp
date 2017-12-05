@@ -1,20 +1,33 @@
-//
-// Created by Luis Gustavo on 21/11/2017
-//
+#pragma once
 
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
+#include <string>
+#include "pupitre.hpp"
 
 class Note {
 private:
-    // static map<...>;
-    // ... musicalNote;
-    // ... STATE;
+    double timestamp;
+    bool signal;                // on/off
+    Pupitre pupitre;
+    int key;                    // note 0 to 127
+    int velocity;               // value 0 to 127
 
 public:
-    Note();
+    Note(double timestamp, bool signal, Pupitre pupitre, int key, int velocity);
 
-    ~Note();
+    bool getSignal ();
+
+    double getTime ();
+
+    Pupitre getPupitre();
+
+    Instrument getInstrument();
+
+    int getTrack();
+
+    int getKey ();
+
+    int getVelocity ();
+
+    bool isEqual(Note note2); // Compare timestamp and key.
+
 };
-
-#endif // KEYBOARD_HPP

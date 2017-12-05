@@ -1,59 +1,48 @@
-//
-// Created by Ragel on 21/11/2017.
-//
+#pragma once
 
-#ifndef FANFARESIMULATOR_CLIENT_HPP
-#define FANFARESIMULATOR_CLIENT_HPP
+/***********************/
+/*    ENGINE CLIENT    */
+/***********************/
 
 #include <iostream>
+#include <string>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
+#include "network_client.hpp"
+#include "noteglobale.hpp"
+#include "partitionglobale.hpp"
 
-typedef std::basic_string<char> string;
-
-// Waiting for implementation
-class Obj_1{};
-
-typedef Obj Socket;
-
-
-//
-
-class client {
+class Client : public QObject {
 
 private :
-    Socket socket;              // !!! use the class Socket => Remark : waiting for the implementation
-    string username;            // use nothing ?
+    NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
+    Keyboard* keyboard;          // !!! Waiting for the class Keyboard
+    std::string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition
-    Keyboard keyboard;          // !!! Waiting for the class Keyboard
+	PartitionGlobale partitionglobale; //Use the class NoteGlobale
+
 
 public:
 
-    client();
+    Client(NetworkClient& network, Keyboard& keyboard);
 
-    // Other constructer can be created
-
-    ~client();
+    ~Client();
 
     void sendNote(Note note);
 
     void sendReady();
 
-    void sendAddClient(string username);
+    void sendAddClient(std::string username);
 
-    void sendAddInstrumentToClient(string username, Instrument instrument);
+    void sendAddInstrumentToClient(std::string username, Instrument instrument);
 
     void requestPartition(Partition partition);
 
     void loadPartition(Partition partition);
 
-    Instrument setInstrument();
-
+    void setInstrument(Instrument instrument);
 
 };
-
-
-#endif //FANFARESIMULATOR_CLIENT_HPP

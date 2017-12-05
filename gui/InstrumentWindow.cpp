@@ -46,19 +46,8 @@ InstrumentWindow::InstrumentWindow(std::vector<std::string> allInstru) : QWidget
 	this->show();
 }
 
-void InstrumentWindow::showpicture() {
-	//QGraphicsScene scene;
-	//QGraphicsView view(&scene);
-	//QGraphicsPixmapItem item(QPixmap("..\\resources\\musical-instruments-intro.jpg"));
-	//scene.addItem(&item);
-	//view.show();
-	//return;
-
-	
-}
 
 void InstrumentWindow::printInstrumentChosen() {
-	
 	for (int i = 0; i < buttons.size(); i++) {
 		if (buttons[i]->isChecked()) {
 			std::cout << "Instrument avec lequel vous allez jouer : "<< this->instruList[i] << std::endl;
@@ -68,6 +57,3 @@ void InstrumentWindow::printInstrumentChosen() {
 	}
 	this->hide();
 }
-
-
-

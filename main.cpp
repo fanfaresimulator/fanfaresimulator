@@ -1,33 +1,23 @@
 #include <QApplication>
-#include <QtWidgets/QApplication>
 #include "gui/testwindow.hpp"
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QGraphicsView>
-#include <iostream>
-#include <QTextEdit>
-#include <QInputDialog>
-#include <QString>
-#include <QLabel>
-#include "gui/Utilisateur.hpp"
+#include "include/network_client.hpp"
+#include "gui/Utilisateur.hpp" // TODO: rename to UsernameWindow
 #include "include/InstrumentWindow.hpp"
 
+int main(int argc, char *argv[])
+{
+	QApplication app(argc, argv);
 
-int main(int argc, char* argv[]) {
-	
-	QApplication app{ argc, argv };
+	NetworkClient client("Pickle Dummy");
 
-	Utilisateur current; 
+	Utilisateur usernameWindow;
+	std::string username = usernameWindow.askName();
+	usernameWindow.addName(username);
+	usernameWindow.printWelcomeMessage();
+	usernameWindow.printInstrumentMessage();
 
+	InstrumentWindow win({ "piano","violon","violoncelle","triangle" });
+	// TODO: connect(instrumentWindow->instrumentChosen)
 
-	std::string premier = current.askName();
-
-	current.addName(premier);
-
-	current.printWelcomeMessage();
-	current.printInstrumentMessage();
-
-	InstrumentWindow win({"piano","violon","violoncelle","triangle"});
-
-	return app.exec();	
+	return app.exec();
 }
-

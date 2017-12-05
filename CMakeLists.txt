@@ -8,39 +8,81 @@ list(INSERT CMAKE_MODULE_PATH 0
 	${CMAKE_CURRENT_SOURCE_DIR}/CMake
 )
 
+set(CMAKE_AUTOMOC ON)
+
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
+find_package(Fluidsynth REQUIRED)
+
+include_directories(include)
+
+add_subdirectory(midifile)
+
+set(COMMON_HEADER_FILES
+	include/pupitre.hpp
+	include/instrument.hpp
+	include/note.hpp
+	include/partition.hpp
+	include/midi_handler.hpp
+	include/noteglobale.hpp
+	include/partitionglobale.hpp
+)
+
+set(COMMON_SOURCE_FILES
+	synth/note.cpp
+	synth/partition.cpp
+	synth/pupitre.cpp
+	synth/instrument.cpp
+	synth/midi_handler.cpp
+)
 
 set(CLIENT_HEADER_FILES
+	${COMMON_HEADER_FILES}
 	include/client.hpp
+	include/network_client.hpp
+	include/network_utils.hpp
 	include/keyboard.hpp
-	include/note.hpp
-	include/partition.hpp
-	include/synthesizer.hpp
-	include/InstrumentWindow.hpp
 	include/ui.hpp
-	gui/testwindow.hpp
-	gui/utilisateur.hpp)
+	include/InstrumentWindow.hpp
+	gui/Utilisateur.hpp
+)
 
 set(CLIENT_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
 	main.cpp
-	gui/testwindow.cpp
+	network/network_client.cpp
+	gui/keyboard.cpp
 	gui/InstrumentWindow.cpp
-	gui/utilisateur.cpp)
+	gui/Utilisateur.cpp
+	engine/client.cpp
+	engine/client.cpp
+	include/sound_player.h
+)
 
 set(SERVER_HEADER_FILES
-	include/keyboard.hpp
-	include/note.hpp
-	include/partition.hpp
+	${COMMON_HEADER_FILES}
+	include/sound_player.hpp
 	include/server.hpp
-	include/synthesizer.hpp
-	include/ui.hpp)
+	include/network_server.hpp
+	include/network_utils.hpp
+	include/serverconnection.hpp
+	include/ui.hpp
+)
 
 set(SERVER_SOURCE_FILES
+	${COMMON_SOURCE_FILES}
+	network/network_server.cpp
+  network/serverconnection.cpp
+	network/network_server.cpp
+	synth/midi_handler.cpp
+	synth/sound_player.cpp
 	server.cpp
-	network/server.cpp)
+	engine/server.cpp
+)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
-target_link_libraries(fanfaresimulator Qt5::Widgets)
+target_link_libraries(fanfaresimulator midifile Qt5::Widgets Qt5::Network)
 
 add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
-target_link_libraries(fanfaresimulator-server Qt5::Widgets)
+target_include_directories(fanfaresimulator-server PRIVATE ${FLUIDSYNTH_INCLUDE_DIRS})
+target_link_libraries(fanfaresimulator-server Qt5::Widgets Qt5::Network midifile ${FLUIDSYNTH_LIBRARIES})
