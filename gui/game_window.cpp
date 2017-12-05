@@ -6,43 +6,12 @@ GameWindow::GameWindow() : QWidget()
     set_size(1000, 1000);
     set_number_of_lines(4);
     create_lines();
-
-
-    /*
-    setFixedSize(get_height(), get_width());
-
-    m_slider = new QSlider(Qt::Horizontal, this);
-    m_slider->setGeometry(10, 60, 150, 20);
-
-    m_bar = new QProgressBar(this);
-    m_bar->setGeometry(10, 20, 150, 20);
-    m_bar->setOrientation(Qt::Horizontal);
-
-    QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_bar, SLOT(setValue(int))) ;
-
-    line = new MusicLine(this);
-    line->setGeometry(0,200,1000,1000);
-    line->show();
-
-    note1 = new Note(this);
-    note1->setGeometry(0,200,1000,1000);
-    note1->show();7
-
-     */
 }
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
     create_lines();
-    note.push_back(new Note(this,0,0,10));
-    note[0]->position=60;
-    note.push_back(new Note(this,1,0,5));
-    note[1]->position=80;
-    note.push_back(new Note(this,2,0,40));
-    note[2]->position=200;
-    note.push_back(new Note(this,3,0,60));
-    note[3]->position=10;
 }
 
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
