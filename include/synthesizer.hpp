@@ -1,27 +1,30 @@
 #pragma once
 
 #include <iostream>
-#include <instrument.hpp>
-#include <note.hpp>
-#include <partition.hpp>
+#include <QObject>
+#include "instrument.hpp"
+#include "note.hpp"
+#include "partition.hpp"
 
-// Waiting for implementation
-class Obj {};
+void testSynth();
 
-typedef Obj MainPartition; // Maybe a .midi file ?
-
-class Synthesizer {
-private : 
-	MainPartition mainPartition;
+class Synthesizer  : public QObject {
+	Q_OBJECT
+private:
+	Partition mainPartition;
 
 public:
 	Synthesizer();
 
-	Synthesizer(MainPartition);
+	Synthesizer(Partition mainPartition);
 
 	~Synthesizer();
 
-	Partition getPartition(Instrument instrument);
-
 	void playNote(Note note);
+
+public slots:
+	void getPartition(std::string username, Instrument instrument);
+
+signals:
+    void sendPartition(std::string username, Partition partition);
 };

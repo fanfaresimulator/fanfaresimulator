@@ -10,11 +10,14 @@
 #include "music_line.hpp"
 #include "note.hpp"
 
-class MusicLine;
-class Note;
 using namespace std;
+
+class GuiNote;
+class MusicLine;
+
 class GameWindow : public QWidget
 {
+  Q_OBJECT
 public:
     GameWindow();
 
@@ -40,12 +43,13 @@ public:
     void create_lines();
 
     void read_notes(vector<string> list);
-
     void actualize_notes(float spent_time);
     int getPositionNote(int index);
     int getDurationNote(int index);
     int get_musicline_radius();
 
+    void keyPressEvent(QKeyEvent *touche);
+    void keyReleaseEvent(QKeyEvent *touche);
     float get_conversion();
 
 
@@ -56,8 +60,12 @@ private:
     int time_start;
     int number_of_lines;
     vector<MusicLine*> lines;
-    vector<Note*> note;
+    vector<GuiNote*> note;
     float conversion;
+
+signals:
+    void getreleasednote(int,double);
+    void getpressednote(int,double);
 };
 
 #endif

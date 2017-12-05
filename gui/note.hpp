@@ -13,7 +13,7 @@
 
 class GameWindow;
 
-class Note : public QWidget {
+class GuiNote : public QWidget {
 
 public:
     float visible_duration;
@@ -25,7 +25,7 @@ public:
     float position;
     float x;
 
-    Note(GameWindow * parent, int id, float time_begin, float time_end);
+    GuiNote(GameWindow * parent, int id, float time_begin, float time_end);
 
     bool is_visible(float spent_time);
 

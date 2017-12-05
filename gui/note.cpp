@@ -1,6 +1,6 @@
 #include "note.hpp"
 
-Note::Note(GameWindow *parent, int id, float time_begin, float time_end) : QWidget() {
+GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
     this->parent = parent;
     this->parent = parent;
@@ -18,7 +18,7 @@ Note::Note(GameWindow *parent, int id, float time_begin, float time_end) : QWidg
 
 }
 
-void Note::paintEvent(QPaintEvent *event)//position calculé par fonction main
+void GuiNote::paintEvent(QPaintEvent * event)//position calculé par fonction main
 {
     if (this->position == -1) { return; }
     //this->setGeometry(x, 0, x , this->parent->get_height());
@@ -27,8 +27,8 @@ void Note::paintEvent(QPaintEvent *event)//position calculé par fonction main
     painter.drawEllipse(radius_note, (int) position, radius_note, (int) (duration * parent->get_conversion()));
 }
 
-bool Note::is_visible(float spent_time) {
-    if (spent_time > duration + time_to_play) {
+bool GuiNote::is_visible(float spent_time){
+    if(spent_time>duration+time_to_play){
         return false;
     }
     if (spent_time < time_to_play - visible_duration) {
@@ -37,13 +37,13 @@ bool Note::is_visible(float spent_time) {
     return true;
 }
 
-void Note::actualize_position(float spent_time) {
-    /* if (spent_time > duration + time_to_play && spent_time < time_to_play - visible_duration) {
-         this->position = -1;
-     } else {*/
-    int h = this->parent->get_height();
-    float l = duration * parent->get_conversion();
-    int radius = this->parent->get_musicline_radius();
-    this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 3 * radius - l;
-    //}
+void GuiNote::actualize_position(int spent_time){
+    if(spent_time>duration+time_to_play&&spent_time<time_to_play-visible_duration){
+        this->position=-1;
+    }
+    else {
+        int h = this->parent->get_height();
+        float l = duration * parent->get_conversion();
+        int radius = this->parent->get_musicline_radius();
+        this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 3 * radius - l;    }
 }
