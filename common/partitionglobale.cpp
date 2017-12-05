@@ -34,3 +34,7 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 }
 
+PartitionGlobale::~PartitionGlobale()	{
+	delete listOfNotes;
+}
+
