@@ -7,11 +7,14 @@
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
-	Discoverer discoverer;
-	NetworkClient client("Pickle Dummy");
-
+	// username screen
 	UsernameWindow usernameWindow;
 	std::string username = usernameWindow.askName();
+
+	// net create
+	Discoverer discoverer;
+	NetworkClient client(username);
+
 	usernameWindow.addName(username);
 	usernameWindow.printWelcomeMessage();
 	usernameWindow.printInstrumentMessage();
