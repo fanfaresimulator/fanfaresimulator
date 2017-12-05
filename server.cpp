@@ -1,4 +1,5 @@
-#include "include/network_server.hpp"
+#include "include/network/server.hpp"
+#include "include/network/advertizer.hpp"
 #include "include/server.hpp"
 #include "include/sound_player.h"
 #include "include/midi_handler.hpp"
@@ -14,6 +15,12 @@
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
+
+	//midi_handler();
+	//testSynth();
+
+	Advertizer advertizer;
+
 	NetworkServer networkServer;
 
   Sound_player* S = new Sound_player();

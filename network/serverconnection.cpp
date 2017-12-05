@@ -1,6 +1,5 @@
-#include "../include/serverconnection.hpp"
-#include "../include/network_server.hpp"
-#include "../include/network_utils.hpp"
+#include "../include/network/server.hpp"
+#include "../include/network/serverconnection.hpp"
 
 /* PRIVATE */
 void ServerConnection::handleJsonDoc(QJsonDocument doc) {
@@ -18,17 +17,15 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
         break;
       }
       case SIG_NOTE: {
-
         break;
       }
 
       case SIG_CHOICE_LOBBY: {
-
+        std::cout << "NOT YET IMPLEMENTED" << std::endl;
         break;
       }
 
       case SIG_CHOICE_INSTRUMENT: {
-
         break;
       }
 
@@ -60,6 +57,8 @@ void ServerConnection::readyRead() {
     std::cout << jerror.errorString().toStdString() << std::endl;
     return;
   }
+
+  handleJsonDoc(doc);
 }
 
 void ServerConnection::setUsername(std::string username) {

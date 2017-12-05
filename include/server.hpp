@@ -12,7 +12,7 @@
 
 #include "instrument.hpp"
 #include "note.hpp"
-#include "network_server.hpp"
+#include "network/server.hpp"
 #include "synthesizer.hpp"
 
 

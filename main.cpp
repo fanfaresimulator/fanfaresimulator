@@ -1,6 +1,6 @@
 #include <QApplication>
-#include "gui/testwindow.hpp"
-#include "include/network_client.hpp"
+#include "include/network/client.hpp"
+#include "include/network/discoverer.hpp"
 #include "gui/Utilisateur.hpp" // TODO: rename to UsernameWindow
 #include "include/InstrumentWindow.hpp"
 
@@ -8,6 +8,8 @@ int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
 
+
+	Discoverer discoverer;
 	NetworkClient client("Pickle Dummy");
 
 	Utilisateur usernameWindow;

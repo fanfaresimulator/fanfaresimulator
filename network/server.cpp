@@ -1,4 +1,4 @@
-#include "../include/network_server.hpp"
+#include "../include/network/server.hpp"
 
 /* PRIVATE */
 void NetworkServer::newConnection() {
@@ -10,7 +10,7 @@ void NetworkServer::newConnection() {
   clients.push_back(client);
   std::cout << "new client" << std::endl;
 
-  clientConnection->write("Hello you !\n");
+  // clientConnection->write("Hello you !\n");
   // clientConnection->disconnectFromHost();
 }
 
@@ -57,7 +57,21 @@ void NetworkServer::broadcastStart() {
 void NetworkServer::sendPartition(std::string username, Partition partition) {
   QJsonObject obj;
   obj["type"] = SIG_PARTITION;
-  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
+  QJsonArray noteList;
+  // std::list<Note> l = partition.getNotes(); // waiting for interface
+  // std::initializer_list<Note> l = partition.getNotes();
+  std::list<Note> l;
+  for (Note & n : l) {
+    QJsonObject note;
+    note["timestamp"] = QString::fromStdString("NEED GETTER");
+    note["signal"] = QString::fromStdString("NEED GETTER");
+    note["instrument"] = QString::fromStdString("NEED GETTER");
+    note["velocity"] = 0;
+    note["key"] = 0;
+    note["track"] = 0;
+    noteList.append(note);
+  }
+  obj["data"] = noteList;
   sendJsonObject(username, obj);
 }
 

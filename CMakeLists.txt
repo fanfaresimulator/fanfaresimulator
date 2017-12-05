@@ -26,6 +26,7 @@ set(COMMON_HEADER_FILES
 	include/midi_handler.hpp
 	include/noteglobale.hpp
 	include/partitionglobale.hpp
+	include/network/network.hpp
 )
 
 set(COMMON_SOURCE_FILES
@@ -39,8 +40,8 @@ set(COMMON_SOURCE_FILES
 set(CLIENT_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/client.hpp
-	include/network_client.hpp
-	include/network_utils.hpp
+	include/network/client.hpp
+	include/network/discoverer.hpp
 	include/keyboard.hpp
 	include/ui.hpp
 	include/InstrumentWindow.hpp
@@ -50,11 +51,11 @@ set(CLIENT_HEADER_FILES
 set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	main.cpp
-	network/network_client.cpp
+	network/client.cpp
+	network/discoverer.cpp
 	gui/keyboard.cpp
 	gui/InstrumentWindow.cpp
 	gui/Utilisateur.cpp
-	engine/client.cpp
 	engine/client.cpp
 	include/sound_player.h
 )
@@ -63,21 +64,21 @@ set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/sound_player.hpp
 	include/server.hpp
-	include/network_server.hpp
-	include/network_utils.hpp
-	include/serverconnection.hpp
+	include/network/server.hpp
+	include/network/serverconnection.hpp
+	include/network/advertizer.hpp
 	include/ui.hpp
 )
 
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
-	network/network_server.cpp
-  network/serverconnection.cpp
-	network/network_server.cpp
-	synth/midi_handler.cpp
-	synth/sound_player.cpp
 	server.cpp
 	engine/server.cpp
+	network/server.cpp
+	network/advertizer.cpp
+	network/serverconnection.cpp
+	synth/midi_handler.cpp
+	synth/sound_player.cpp
 )
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})

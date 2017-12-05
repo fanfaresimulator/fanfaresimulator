@@ -8,13 +8,14 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
+#include <QJsonArray>
 #include <QByteArray>
 
-#include "network_utils.hpp"
-#include "instrument.hpp"
-#include "partition.hpp"
-#include "keyboard.hpp"
-#include "note.hpp"
+#include "../instrument.hpp"
+#include "../partition.hpp"
+#include "../keyboard.hpp"
+#include "../note.hpp"
+#include "network.hpp"
 
 class NetworkClient : public QObject {
   Q_OBJECT
@@ -23,6 +24,7 @@ private:
   std::string username;
 
   void sendJsonObject(QJsonObject o);
+  void handleJsonDoc(QJsonDocument doc);
   void readyRead();
 
 public:
@@ -34,6 +36,7 @@ public:
 
 signals:
   /* Emit a signal that sends the partition */
-  void partitionArrived(Partition partition);
-  void instrumentsArrived(std::list<Instrument>);
+  void partitionRecv(Partition partition);
+  void instrumentsRecv(std::list<Instrument>);
+  void startRecv();
 };
