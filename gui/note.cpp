@@ -2,6 +2,7 @@
 
 Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
+    this->parent = parent;
     this->line_id=id;
     this->time_to_play=time_begin/*+t0*/;
     this->duration=time_end-time_begin;
@@ -34,7 +35,7 @@ void Note::actualize_position(int spent_time){
         this->position=-1;
     }
     else {
-        this->position = (time_to_play - spent_time);
+        this->position = this->parent->get_height() - (time_to_play - spent_time);
     }
      /*if(spent_time>=2000){
          this->position=100;
