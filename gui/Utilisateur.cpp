@@ -14,11 +14,7 @@
 
 std::string Utilisateur::askName() {
 
-	// fonction qui demande à l'utilisateur son nom et le renvoie sous forme de string
-
-	// ce booléen tient en compte la possibilité de fermer la fenêtre sans y écrire son nom
 	bool dialogResult;
-
 
 	// QInputDialog sert à demander le nom au client qui utilise l'interface
 	QInputDialog *renameDialog = new QInputDialog();

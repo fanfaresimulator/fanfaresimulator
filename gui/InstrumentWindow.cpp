@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include <QString>
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QVBoxLayout>
@@ -14,20 +15,20 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 	QGroupBox *groupBox = new QGroupBox("Instruments :", this);
 	groupBox->setAlignment(Qt::AlignRight);
 
-	i1 = new QRadioButton("Guitare");
-	QRadioButton *i2 = new QRadioButton("Piano");
-	QRadioButton *i3 = new QRadioButton("Violon");
-	QRadioButton *i4 = new QRadioButton("Violoncelle");
 	QVBoxLayout *vBox = new QVBoxLayout;
-	vBox->addWidget(i1);
-	vBox->addWidget(i2);
-	vBox->addWidget(i3);
-	vBox->addWidget(i4);
+
+	for (int i = 0; i < nbInstru; i++) {
+		std::string nameInstru = instruList[i];
+		QRadioButton *b = new QRadioButton(QString(nameInstru.c_str()));
+		buttons.push_back(b);
+		vBox->addWidget(b);
+	}
+
 	groupBox->setLayout(vBox);
 	QPushButton *valider = new QPushButton;
 	QVBoxLayout *vBoxFen = new QVBoxLayout;
 
-	QObject::connect(valider, &QPushButton::clicked, this, &InstrumentWindow::chooseInstrument);
+	QObject::connect(valider, &QPushButton::clicked, this, &InstrumentWindow::printInstrumentChosen);
 
 	vBoxFen->addWidget(groupBox);
 	vBoxFen->addWidget(valider);
@@ -37,12 +38,22 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 }
 
 void InstrumentWindow::chooseInstrument() {
-	std::cout << i1->isChecked() << std::endl;
+	//std::cout << i2->isChecked() << std::endl;
 }
 
 
-void InstrumentWindow::printInstrumentChosen() {
-
+QRadioButton* InstrumentWindow::printInstrumentChosen() {
+	//chosen est le QRadioButton qui a été selectionné
+	QRadioButton * chosen = NULL;
+	for (std::vector<QRadioButton*>::iterator it = buttons.begin(); it != buttons.end(); ++it) {
+		if ((*it)->isChecked()) {
+			chosen = *it;
+		}
+	}
+	this->hide();
+	std::cout << chosen << std::endl;
+	return chosen;
+	
 }
 
 
