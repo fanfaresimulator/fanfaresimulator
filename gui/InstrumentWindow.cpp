@@ -37,13 +37,7 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 	this->show();
 }
 
-void InstrumentWindow::chooseInstrument() {
-	//std::cout << i2->isChecked() << std::endl;
-}
-
-
 void InstrumentWindow::printInstrumentChosen() {
-	
 	for (int i = 0; i < buttons.size(); i++) {
 		if (buttons[i]->isChecked()) {
 			std::cout << i << std::endl;
@@ -53,6 +47,3 @@ void InstrumentWindow::printInstrumentChosen() {
 	}
 	this->hide();
 }
-
-
-

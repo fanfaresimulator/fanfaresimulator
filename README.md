@@ -8,14 +8,14 @@
 Dependencies:
 * [CMake](https://cmake.org/)
 * [Qt](https://www.qt.io/)
-* [Portaudio](http://www.portaudio.com/)
+* [FluidSynth](http://www.fluidsynth.org/)
 
 ### Linux
 
 On Debian-based systems:
 
 ```shell
-sudo apt install qtbase5-dev portaudio19-dev
+sudo apt install qtbase5-dev libfluidsynth-dev
 ```
 
 In the project directory:
@@ -29,7 +29,7 @@ cmake ..
 ### macOS
 
 ```shell
-brew install qt portaudio
+brew install qt fluidsynth
 ```
 
 In the project directory:
@@ -53,10 +53,11 @@ cmake ..
   * In "Select Components", check "Qt > Qt 5.9.2 > msvc2015 64-bit"
   * Install
   * Add `C:\Qt\5.9.2\msvc2015_64\bin` to your `PATH`
-* Download prebuilt Portaudio
-  * Download https://github.com/fanfaresimulator/fanfaresimulator/files/1485774/vendor.zip
+* Install pre-built Fluidsynth
+  * Download https://github.com/fanfaresimulator/fanfaresimulator/files/1505797/vendor.zip
   * Move it in the project directory
   * Right click > Extract All
+  * Add the `vendor\lib` directory to your `PATH`
 * Install CMake
   * Go to https://cmake.org/download/ then "Latest Release > Binary Distributions > Windows win64-x64 Installer"
   * Launch setup, install
@@ -70,7 +71,7 @@ cmake ..
     * Generate
     * Open project (or open `fanfaresimulator.sln` with Visual Studio)
     * Build
-  * From the CLI:
+  * If you don't have Visual Studio, from the CLI:
     ```shell
     mkdir build
     cd build

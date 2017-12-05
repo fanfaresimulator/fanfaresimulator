@@ -1,16 +1,16 @@
 #pragma once
 
 #include <iostream>
+#include <QObject>
 #include "instrument.hpp"
 #include "note.hpp"
 #include "partition.hpp"
 
-// Waiting for implementation
-class Obj {};
+void testSynth();
 
-
-class Synthesizer {
-private : 
+class Synthesizer  : public QObject {
+	Q_OBJECT
+private:
 	Partition mainPartition;
 
 public:
@@ -20,7 +20,11 @@ public:
 
 	~Synthesizer();
 
-	Partition getPartition(Instrument instrument);
-
 	void playNote(Note note);
+
+public slots:
+	void getPartition(std::string username, Instrument instrument);
+
+signals:
+    void sendPartition(std::string username, Partition partition);
 };

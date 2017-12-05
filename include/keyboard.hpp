@@ -1,13 +1,8 @@
-//
-// Created by Luis Gustavo on 21/11/2017
-//
-
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
+#pragma once
 
 enum Switch {
-    START = 0,
-    END = 1,
+  START = 0,
+  END = 1,
 };
 
 class Keyboard {
@@ -16,7 +11,5 @@ public:
 
     ~Keyboard();
 
-    void getNextNote();
+//    Note getNextNote();
 };
-
-#endif // KEYBOARD_HPP
