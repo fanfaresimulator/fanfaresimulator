@@ -23,7 +23,6 @@ public:
 	//liste vide de radio button a ajouter dans le cpp
 	std::vector<QRadioButton*> buttons = {};
 	
-	void chooseInstrument();
 	void printInstrumentChosen();
 signals:
 	void instrumentChosen(int i);

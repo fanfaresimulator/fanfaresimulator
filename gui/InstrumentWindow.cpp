@@ -37,10 +37,6 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 	this->show();
 }
 
-void InstrumentWindow::chooseInstrument() {
-	//std::cout << i2->isChecked() << std::endl;
-}
-
 
 void InstrumentWindow::printInstrumentChosen() {
 	
