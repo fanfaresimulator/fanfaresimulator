@@ -3,9 +3,6 @@
 #include "include/InstrumentWindow.hpp"
 #include "gui/game_window.hpp"
 
-typedef basic_string<char> string;
-
-
 int main(int argc, char *argv[]) {
     vector<string> list;
     list.push_back("1000");
@@ -21,9 +18,10 @@ int main(int argc, char *argv[]) {
     list.push_back("1");
     list.push_back("D");
     QApplication app(argc, argv);
-    GameWindow window(1000, 1000, list,t0);
-    window.show();
+
     QTime t0 = QTime::currentTime();
+    GameWindow window(1000, 1000, list, t0);
+    window.show();
     t0.start();
     while (true) {
         int spent_time = t0.elapsed();

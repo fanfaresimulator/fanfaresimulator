@@ -20,11 +20,7 @@ class GameWindow : public QWidget
 {
   Q_OBJECT
 public:
-    GameWindow();
-
-    GameWindow(int width, int height);
-
-    GameWindow(int width, int height, vector<string>);
+    GameWindow(int width, int height, vector<string>, QTime t0);
 
 
     void set_size(int width, int height);
@@ -53,7 +49,6 @@ public:
     void keyReleaseEvent(QKeyEvent *touche);
     float get_conversion();
 
-
 private:
     int height;
     int width;
@@ -63,7 +58,7 @@ private:
     vector<MusicLine*> lines;
     vector<GuiNote*> note;
     float conversion;
-    QTime timer;
+    QTime t0;
 
 signals:
     void getreleasednote(int,int);

@@ -4,7 +4,9 @@
 #include <iostream>
 #include <QWidget>
 #include "game_window.hpp"
-typedef std::string string;
+
+using namespace std;
+
 class GameWindow;
 
 class MusicLine : public QWidget{
