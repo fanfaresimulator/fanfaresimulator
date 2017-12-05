@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <map>
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QJsonObject>
@@ -37,6 +37,6 @@ public:
 signals:
   /* Emit a signal that sends the partition */
   void partitionRecv(Partition partition);
-  void instrumentsRecv(std::list<Instrument>);
+  void pupitresRecv(std::map<Pupitre, bool>);
   void startRecv();
 };

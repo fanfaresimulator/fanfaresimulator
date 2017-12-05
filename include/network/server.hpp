@@ -29,14 +29,14 @@ private:
     void broadcast(QJsonObject obj);
 
 public:
-    explicit NetworkServer(QObject *parent = Q_NULLPTR);
-    void broadcastStart();
-    void sendPartition(std::string username, Partition partition);
-    void sendPupitres(std::string username, std::map<Pupitre, bool> pupitres);
+  explicit NetworkServer(QObject *parent = Q_NULLPTR);
+  void broadcastStart();
+  void sendPartition(std::string username, Partition partition);
+  void sendPupitres(std::string username, std::map<Pupitre, bool> pupitres);
 
 signals:
-    void helloRecv(std::string username);
-    void partitionChoiceRecv(std::string username, Pupitre pupitre);
-    void readyReceived(std::string username);
-    void noteRecv(std::string username, Note note);
+  void helloRecv(std::string username);
+  void partitionChoiceRecv(std::string username, Pupitre pupitre);
+  void readyReceived(std::string username);
+  void noteRecv(std::string username, Note note);
 };
