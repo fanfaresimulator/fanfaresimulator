@@ -4,13 +4,13 @@ Note::~Note()	{
 	delete Instrument;
 }
 
-Note::Note(double timestamp, bool signal, Instrument instrument, int key, int velocity, int track){
+Note::Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity){
  this->timestamp = timestamp;
  this->signal = signal;
- this->instrument = instrument;
+ this->pupitre = pupitredeux;
  this->key = key;
  this->velocity = velocity;
- this->track = track;
+ //this->track = track;
     };
 
     
