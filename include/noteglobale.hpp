@@ -6,7 +6,7 @@
 
 class NoteGlobale {
 private:
-	std::initializer_list <Note> listOfNotes;
+	std::list <Note> listOfNotes;
 	int key;			// from 0 to 3
 	double timestamp;
 	bool signal;
@@ -15,7 +15,7 @@ private:
 public:
 	NoteGlobale();
 
-	NoteGlobale(std::initializer_list <Note> listOfNotes, double timestamp, bool signal);
+	NoteGlobale(std::list <Note> listOfNotes, int key, double timestamp, bool signal);
 
 	~NoteGlobale();
 	

@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <list>
+#include <cstdlib>
 
 #include "noteglobale.hpp"
 #include "instrument.hpp"
+#include "partition.hpp"
 
 class PartitionGlobale {
 private:
@@ -13,14 +15,14 @@ private:
 public:
 	PartitionGlobale();
 
-	PartitionGlobale(std::list <NoteGlobale> listOfNotes);
+	PartitionGlobale(Partition mypartition);
 
 	~PartitionGlobale();
 
-	std::list <NoteGlobale> getNotes();
+//	std::list <NoteGlobale> getNotes();
 
 
-	Partition getPartition(Instrument instrument);
+//	Partition getPartition(Instrument instrument);
 
 
 

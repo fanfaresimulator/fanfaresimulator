@@ -3,12 +3,13 @@
 #include <iostream>
 #include <list>
 #include <cstdlib>
+#include<algorithm>
 
 #include "note.hpp"
 #include "instrument.hpp"
 
-#define  MIN_FRAME_LENGTH 0.5; // Minimum frame duration
-#define  MAX_FRAME_LENGTH 0.5; // Maximum frame duration
+#define  MIN_FRAME_LENGTH 0.5 // Minimum frame duration
+#define  MAX_FRAME_LENGTH 3.0 // Maximum frame duration
 
 class Partition {
 private:
@@ -35,6 +36,6 @@ public:
 
 	// Gives back the partition from startTime to endTime, completing notes starting or ending
 	// before of after the current frame.
-	std::list <Note> buildPartitionInFrame(double startTime, double endTime);
+	std::list <Note> buildPartitionInFrame(double startTime, double endTime, std::list<Note> noteSet);
 
 };
