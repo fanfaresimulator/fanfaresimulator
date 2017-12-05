@@ -15,7 +15,10 @@ public:
 
     int getTrack();
 
-    Instrument getInstrument();
+    Instrument getInstrument() const;
 
     bool isEqual(Pupitre p2);
+
+    // added by engine
+    bool operator<(const Pupitre& p) const;
 };
