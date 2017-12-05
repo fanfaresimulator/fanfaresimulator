@@ -103,3 +103,37 @@ int GameWindow::getDurationNote(int index){
 int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
+
+void GameWindow::keyPressEvent(QKeyEvent *touche) {
+    if(touche->key() == Qt::Key_A){
+        emit getpressednote(1,0);
+    }
+    if(touche->key() == Qt::Key_R){
+        emit getpressednote(2,0);
+    }
+    if(touche->key() == Qt::Key_U){
+        emit getpressednote(3,0);
+    }
+    if(touche->key() == Qt::Key_P){
+        emit getpressednote(4,0);
+    }
+    else{
+        emit getpressednote(0,0);
+    }
+}
+void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
+    if(touche->key() == Qt::Key_A){
+        emit getreleasednote(1,0);
+    }
+    if(touche->key() == Qt::Key_R){
+        emit getreleasednote(2,0);
+    }
+    if(touche->key() == Qt::Key_U){
+        emit getreleasednote(3,0);
+    }
+    if(touche->key() == Qt::Key_P){
+        emit getreleasednote(4,0);
+    }
+    else{
+        emit getreleasednote(0,0);
+    }

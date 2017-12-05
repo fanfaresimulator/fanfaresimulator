@@ -54,6 +54,10 @@ private:
     int number_of_lines;
     vector<MusicLine*> lines;
     vector<Note*> note;
+
+signals:
+    void getreleasednote(int,double);
+    void getpressednote(int,double);
 };
 
 #endif
