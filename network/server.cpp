@@ -63,7 +63,7 @@ void NetworkServer::sendPartition(std::string username, Partition partition) {
 
 void NetworkServer::sendPupitres(std::string username, std::map<Pupitre, bool> pupitres) {
   QJsonObject obj;
-  obj["type"] = SIG_INSTRUMENTS;
+  obj["type"] = SIG_PUPITRES;
   QJsonArray JsonPupitre;
   for (auto & pair : pupitres) {
     JsonPupitre.append(pupitreToJson(pair.first, pair.second));
