@@ -24,9 +24,6 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
 
 /* regular methods */
 
-void Server::broadcastStart() {
-    server->broadcastStart();
-}
 
 void Server::updatePupitreMap(Pupitre p) {
     // check if instrument exist in pupitreMap
@@ -44,6 +41,20 @@ bool Server::everyoneReady() {
     }
     return true;
 }
+
+void Server::broadcastStart() {
+    server->broadcastStart();
+}
+
+void Server::sendPartition(std::string username, Partition partition){
+    server->sendPartition(username, partition);
+
+}
+
+void Server::sendPupitreMap(std::string username) {
+    server->sendPupitres(username, pupitreMap);
+}
+
 // SLOTS
 
 void Server::addClient(string username) {
@@ -52,6 +63,9 @@ void Server::addClient(string username) {
     }
     pair< string, bool > p = pair<string, bool>(username, false);
     clients.insert(p);
+
+    // send pupitre map to client
+    sendPupitreMap(username);
 }
 
 void Server::addPupitre(string username, Pupitre p) {
@@ -81,16 +95,7 @@ void Server::playNote(std::string username, Note note){
     sp->playNote(&note);
 }
 
-void Server::sendPartition(std::string username, Partition partition){
-    server->sendPartition(username, partition);
-
-}
-
-void Server::sendPupitreMap(std::string username, std::map< Pupitre , bool > pMap) {
-    server->sendPupitres(username, pupitreMap);
-}
-
-void Server::clientReady(std::string username, Note note){
+void Server::clientReady(std::string username){
     // check if username exist in clients
     if ( clients.find(username) == clients.end() ) {
         // not found
@@ -103,8 +108,4 @@ void Server::clientReady(std::string username, Note note){
         broadcastStart();
     }
 }
-
-
-
-
 

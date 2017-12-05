@@ -30,12 +30,16 @@ int main(int argc, char *argv[]) {
 
 	QObject::connect(&networkServer, &NetworkServer::helloRecv,
 					 &serverEngine, &Server::addClient);
-//
-//	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
-//					 &serverEngine, &Server::addPupitre);
-//
-//	QObject::connect(&networkServer, &NetworkServer::noteRecv,
-//					 &serverEngine, &Server::playNote);
-    delete(S);
+
+	QObject::connect(&networkServer, &NetworkServer::partitionChoiceRecv,
+					 &serverEngine, &Server::addPupitre);
+
+	QObject::connect(&networkServer, &NetworkServer::noteRecv,
+					 &serverEngine, &Server::playNote);
+
+	QObject::connect(&networkServer, &NetworkServer::readyReceived,
+					 &serverEngine, &Server::clientReady);
+
+//    delete(S);
 	return app.exec();
 }
