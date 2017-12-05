@@ -2,7 +2,7 @@
 
 static int intFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toInt();
   }
@@ -10,7 +10,7 @@ static int intFromJson(QJsonValue val) {
 
 static bool boolFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toBool();
   }
@@ -18,7 +18,7 @@ static bool boolFromJson(QJsonValue val) {
 
 static double doubleFromJson(QJsonValue val) {
   if (!val.isDouble()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toDouble();
   }
@@ -27,23 +27,23 @@ static double doubleFromJson(QJsonValue val) {
 
 static std::string stringFromJson(QJsonValue val) {
   if (!val.isString()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toString().toStdString();
   }
 }
 
-static QJsonArray arrayFromJson(QJsonValue val) {
+QJsonArray arrayFromJson(QJsonValue val) {
   if (!val.isDouble()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toArray();
   }
 }
 
-static QJsonObject objectFromJson(QJsonValue val) {
+QJsonObject objectFromJson(QJsonValue val) {
   if (!val.isObject()) {
-    throw val.type();
+    throw "Incorrect type";
   } else {
     return val.toObject();
   }
@@ -78,7 +78,11 @@ QJsonObject partitionToJson(Partition partition) {
 }
 
 Partition partitionFromJson(QJsonObject o) {
-  Partition partition;
+  std::vector<Note> notes;
+  for (auto && n : arrayFromJson(o["notes"])) {
+    notes.push_back(noteFromJson(objectFromJson(n)));
+  }
+  Partition partition(notes);
   return partition;
 }
 
@@ -86,7 +90,7 @@ QJsonObject noteToJson(Note note) {
   QJsonObject JsonNote;
   JsonNote["timestamp"] = note.getTime();
   JsonNote["signal"] = note.getSignal();
-  JsonNote["pupitre"] = QString::fromStdString("TODO pupitre to JSON");
+  JsonNote["pupitre"] = pupitreToJson(note.getPupitre());
   JsonNote["key"] = note.getKey();
   JsonNote["velocity"] = note.getVelocity();
   JsonNote["track"] = note.getTrack();
@@ -96,8 +100,8 @@ QJsonObject noteToJson(Note note) {
 Note noteFromJson(QJsonObject obj) {
   double timestamp = doubleFromJson(obj["timestamp"]);
   bool signal = boolFromJson(obj["signal"]);
-  Pupitre pupitre = pupitreFromJson(obj["pupitre"].toObject());
-  int key = intFromJson("key");
+  Pupitre pupitre = pupitreFromJson(obj["pupitre"].toObject()).first;
+  int key = intFromJson(obj["key"]);
   int velocity = intFromJson(obj["velocity"]);
   Note note(timestamp, signal, pupitre, key, velocity);
   return note;
@@ -118,7 +122,13 @@ QJsonObject pupitreToJson(Pupitre pupitre, bool b) {
   return JsonPupitre;
 }
 
-Pupitre pupitreFromJson(QJsonObject o) {
-  Pupitre p;
-  return p;
+std::pair<Pupitre, bool> pupitreFromJson(QJsonObject o) {
+  int track = intFromJson(o["track"]);
+  Instrument instr = instrumentFromJson(objectFromJson(o["instrument"]));
+  Pupitre pupitre(track, instr);
+  bool taken = false;
+  if (o["taken"].isBool()) {
+    taken = o["taken"].toBool();
+  }
+  return std::make_pair(pupitre, taken);
 }

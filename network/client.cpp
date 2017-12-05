@@ -22,12 +22,8 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       break;
     }
 
-    case SIG_INSTRUMENTS: {
-      if (!obj["data"].isArray()) {
-        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-        return;
-      }
-      QJsonArray instruments = obj["data"].toArray();
+    case SIG_PUPITRES: {
+      QJsonArray instruments = arrayFromJson(obj["data"]);
       break;
     }
 
