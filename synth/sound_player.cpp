@@ -44,10 +44,10 @@ void Sound_player::initPupitres(Partition partition){
 
 void Sound_player::playNote(Note* note){
     if(note->getSignal()){
-        fluid_synth_noteon(synth, note->getInstrument().getNumber(), note->getKey(), note->getVelocity());
+        fluid_synth_noteon(synth, note->getTrack(), note->getKey(), note->getVelocity());
     }
     else {
-        fluid_synth_noteoff(synth, note->getInstrument().getNumber(),note->getVelocity ());
+        fluid_synth_noteoff(synth, note->getTrack(),note->getVelocity ());
     }
     printf("played !\n");
 }
