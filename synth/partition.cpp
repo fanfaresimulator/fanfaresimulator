@@ -84,7 +84,7 @@ std::vector <double> Partition::frameDivision()	{
 
 	while (actualTime<(endTime-MAX_FRAME_LENGTH))	{
 		// Sums the new time (random)
-		actualTime+= (MIN_FRAME_LENGTH + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(MAX_FRAME_LENGTH-MIN_FRAME_LENGTH))));
+		actualTime+= (MIN_FRAME_LENGTH + static_cast <float> (rand()) /(1+ static_cast <float> (RAND_MAX/(MAX_FRAME_LENGTH-MIN_FRAME_LENGTH))));// division par 0 !?!
 		frames.push_back(actualTime);
 	}
 

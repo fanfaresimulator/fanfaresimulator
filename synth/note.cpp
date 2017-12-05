@@ -1,8 +1,8 @@
 #include "../include/note.hpp"
 
-Note::~Note() {
-	delete pupitre;
-}
+/*Note::~Note() {
+	delete this->pupitre;
+}*/
 
 Note::Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity){
 	this->timestamp = timestamp;
@@ -16,12 +16,15 @@ bool Note::getSignal(){
  return signal;
 };
 
+int Note::getTrack() {
+	return pupitre.getTrack();
+}
 
 double Note::getTime(){
  return timestamp;
 };
 
-Instrument Note::getPupitre(){
+Pupitre Note::getPupitre(){
  return pupitre ;
 };
 

@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include <note>
+#include <list>
+#include "note.hpp"
 #include "pupitre.hpp"
 
 class NoteGlobale {
@@ -17,6 +18,6 @@ public:
 
 	NoteGlobale(std::list <Note> listOfNotes, int key, double timestamp, bool signal, Pupitre pupitrenew);
 
-	~NoteGlobale();
+	//~NoteGlobale();
 	
 };

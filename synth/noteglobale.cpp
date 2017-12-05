@@ -18,7 +18,7 @@ NoteGlobale::NoteGlobale (std::list <Note> listOfNotesNew, int newKey, double ne
 }
 
 
-NoteGlobale::~NoteGlobale()	{
+/*NoteGlobale::~NoteGlobale()	{
 	delete listOfNotes;
-	delete instrument;
-}
+	delete pupitre;
+}*/
