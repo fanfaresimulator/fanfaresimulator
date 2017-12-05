@@ -15,15 +15,20 @@ using namespace std;
 class InstrumentWindow : public QWidget {
 
 public:
-	InstrumentWindow();
 
-	int nbInstru = 4;
-
-	std::vector<std::string> instruList = {"violon", "guitare", "violoncelle", "piano"};
-	//liste vide de radio button a ajouter dans le cpp
+	std::vector<std::string> instruList;
 	std::vector<QRadioButton*> buttons = {};
+
+	InstrumentWindow(std::vector<std::string> instruList);
+
+	
+
+	
 	
 	void printInstrumentChosen();
+
+	void showpicture();
+
 signals:
 	void instrumentChosen(int i);
 };

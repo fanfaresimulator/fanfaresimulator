@@ -7,8 +7,10 @@
 #include <QTextEdit>
 #include <QInputDialog>
 #include <QString>
+#include <QLabel>
 #include "gui/Utilisateur.hpp"
 #include "include/InstrumentWindow.hpp"
+
 
 int main(int argc, char* argv[]) {
 	
@@ -24,8 +26,8 @@ int main(int argc, char* argv[]) {
 	current.printWelcomeMessage();
 	current.printInstrumentMessage();
 
-	InstrumentWindow win;
-	
+	InstrumentWindow win({"piano","violon","violoncelle","triangle"});
+
 	return app.exec();	
 }
 
