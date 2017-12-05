@@ -8,7 +8,7 @@
 class NoteGlobale {
 private:
 	std::list <Note> listOfNotes;
-	int key;			// from 0 to 3
+	int key;			// from 1 to 4
 	double timestamp;
 	bool signal;
 	Pupitre pupitre;
