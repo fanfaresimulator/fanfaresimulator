@@ -44,7 +44,7 @@ set(CLIENT_HEADER_FILES
 	include/network/discoverer.hpp
 	include/keyboard.hpp
 	include/ui.hpp
-	include/InstrumentWindow.hpp
+	include/PupitreWindow.hpp
 	include/UsernameWindow.hpp
 )
 
@@ -54,7 +54,7 @@ set(CLIENT_SOURCE_FILES
 	network/client.cpp
 	network/discoverer.cpp
 	gui/keyboard.cpp
-	gui/InstrumentWindow.cpp
+	gui/PupitreWindow.cpp
 	gui/UsernameWindow.cpp
 	engine/client.cpp
 	include/sound_player.h

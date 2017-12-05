@@ -2,7 +2,7 @@
 #include "include/network/client.hpp"
 #include "include/network/discoverer.hpp"
 #include "include/UsernameWindow.hpp"
-#include "include/InstrumentWindow.hpp"
+#include "include/PupitreWindow.hpp"
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
 	usernameWindow.printWelcomeMessage();
 	usernameWindow.printInstrumentMessage();
 
-	InstrumentWindow win({ "piano","violon","violoncelle","triangle" });
-	// TODO: connect(instrumentWindow->instrumentChosen)
+	PupitreWindow pupitreWindow({Pupitre(0, Instrument(2))});
+	// TODO: connect(pupitreWindow->pupitreChosen)
 
 	return app.exec();
 }
