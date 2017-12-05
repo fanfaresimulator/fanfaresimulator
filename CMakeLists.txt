@@ -25,7 +25,8 @@ set(COMMON_HEADER_FILES
 	include/partition.hpp
 	include/midi_handler.hpp
 	include/noteglobale.hpp
-	include/partitionglobale.hpp)
+	include/partitionglobale.hpp
+)
 
 set(COMMON_SOURCE_FILES
 	synth/note.cpp
@@ -42,6 +43,8 @@ set(CLIENT_HEADER_FILES
 	include/network_utils.hpp
 	include/keyboard.hpp
 	include/ui.hpp
+	include/InstrumentWindow.hpp
+	gui/Utilisateur.hpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -49,8 +52,12 @@ set(CLIENT_SOURCE_FILES
 	main.cpp
 	network/network_client.cpp
 	gui/keyboard.cpp
-	gui/testwindow.cpp
-	engine/client.cpp include/sound_player.h)
+	gui/InstrumentWindow.cpp
+	gui/Utilisateur.cpp
+	engine/client.cpp
+	engine/client.cpp
+	include/sound_player.h
+)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
@@ -65,13 +72,13 @@ set(SERVER_HEADER_FILES
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	network/network_server.cpp
-  	network/serverconnection.cpp
+  network/serverconnection.cpp
+	network/network_server.cpp
+	synth/midi_handler.cpp
 	synth/sound_player.cpp
 	server.cpp
-	gui/testwindow.cpp
 	engine/server.cpp
-        synth/sound_player.cpp)
-
+)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator midifile Qt5::Widgets Qt5::Network)
