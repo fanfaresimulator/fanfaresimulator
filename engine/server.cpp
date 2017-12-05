@@ -22,6 +22,22 @@ Server::Server(NetworkServer& server, Partition& partition) {
     }
 }
 
+/* regular methods */
+
+void Server::broadcastStart() {
+    server->broadcastStart();
+}
+
+void Server::updatePupitreMap(Pupitre p) {
+    // check if instrument exist in pupitreMap
+    if ( pupitreMap.find(p) == pupitreMap.end() ) {
+        // not found
+        throw std::invalid_argument("Instrument not found in pupitreMap");
+    }
+    // found => update in pupitreMap
+    pupitreMap[p] = true;
+}
+
 bool Server::everyoneReady() {
     for(pair clientPaire : clients){
         if(!clientPaire.second) return false;
@@ -74,19 +90,9 @@ void Server::sendPupitreMap(std::string username, std::map< Pupitre , bool > pMa
 //    server->sendInstruments(username, pupitreMap);
 }
 
-/* regular methods */
-
-void Server::broadcastStart() {
-    server->broadcastStart();
-}
 
 
-void Server::updatePupitreMap(Pupitre p) {
-     // check if instrument exist in pupitreMap
-     if ( pupitreMap.find(p) == pupitreMap.end() ) {
-         // not found
-         throw std::invalid_argument("Instrument not found in pupitreMap");
-     }
-     // found => update in pupitreMap
-     pupitreMap[p] = true;
-}
+
+
+
+

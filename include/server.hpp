@@ -38,7 +38,6 @@ public:
     Server(NetworkServer& server, Partition& partition);
 
 public slots:
-    void pupitreMapInit(std::list<Pupitre>);
     void addClient(std::string username);
     void addPupitre(std::string username, Pupitre p);
     void playNote(std::string username, Note note);
