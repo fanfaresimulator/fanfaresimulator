@@ -1,5 +1,5 @@
+#include <QKeyEvent>
 #include "game_window.hpp"
-
 
 GameWindow::GameWindow() : QWidget()
 {
@@ -19,7 +19,7 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_number_of_lines(4);
     create_lines();
     read_notes(list);
-    /*for(Note* n:note){
+    /*for(GuiNote* n:note){
         n->position=100;
     }*/
     //std::cout << this->note.size() << std::endl;
@@ -62,7 +62,7 @@ void GameWindow::create_lines(){
     }
 }
 void GameWindow::actualize_notes(int spent_time){
-    for(Note* n:this->note){
+    for(GuiNote* n:this->note){
         n->actualize_position(spent_time);
     }
 }
@@ -83,7 +83,7 @@ void GameWindow::read_notes(vector<string> list) {
             }
             break;
         }
-        this->note.push_back(new Note(this, id, time1, time2));
+        this->note.push_back(new GuiNote(this, id, time1, time2));
         list.erase(list.begin());
         list.erase(list.begin());
         list.erase(list.begin());
@@ -137,3 +137,4 @@ void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
     else{
         emit getreleasednote(0,0);
     }
+}

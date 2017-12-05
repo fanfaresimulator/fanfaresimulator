@@ -1,12 +1,28 @@
-//
-// Created by steven athouel on 16/11/2017.
-//
+// VIELLE CLASSE DE STEVEN
+//#pragma once
 
-#ifndef FANFARESIMULATOR_INSTRUMENT_HPP
-#define FANFARESIMULATOR_INSTRUMENT_HPP
+//typedef int Instrument;
+// enum Instrument{
+//
+// };
 
-enum Instrument{
-    // instruments here !
+#pragma once
+
+#include <string>
+
+class Instrument {
+private:
+    int number;
+    std::string name;
+
+public:
+    Instrument();
+
+    Instrument(int number);
+
+    int getNumber();
+
+    std::string getname();
+
+    bool isEqual(Instrument i2);
 };
-
-#endif //FANFARESIMULATOR_INSTRUMENT_HPP

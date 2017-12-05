@@ -1,6 +1,6 @@
 #include "note.hpp"
 
-Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
+GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
     this->parent=parent;
     this->line_id=id;
@@ -12,7 +12,7 @@ Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWid
     this->setGeometry(x-radius_note, 0, x+radius_note , parent->get_height());
 }
 
-void Note::paintEvent(QPaintEvent * event)//position calculé par fonction main
+void GuiNote::paintEvent(QPaintEvent * event)//position calculé par fonction main
 {
     if(this->position==-1){return;}
     //this->setGeometry(x, 0, x , this->parent->get_height());
@@ -21,7 +21,7 @@ void Note::paintEvent(QPaintEvent * event)//position calculé par fonction main
     painter.drawEllipse(radius_note,position,radius_note,duration*10);
 }
 
-bool Note::is_visible(float spent_time){
+bool GuiNote::is_visible(float spent_time){
     if(spent_time>duration+time_to_play){
         return false;
     }
@@ -31,7 +31,7 @@ bool Note::is_visible(float spent_time){
     return true;
 }
 
-void Note::actualize_position(int spent_time){
+void GuiNote::actualize_position(int spent_time){
     if(spent_time>duration+time_to_play&&spent_time<time_to_play-visible_duration){
         this->position=-1;
     }

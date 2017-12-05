@@ -10,11 +10,14 @@
 #include "music_line.hpp"
 #include "note.hpp"
 
-class MusicLine;
-class Note;
 using namespace std;
+
+class GuiNote;
+class MusicLine;
+
 class GameWindow : public QWidget
 {
+  Q_OBJECT
 public:
     GameWindow();
 
@@ -45,7 +48,8 @@ public:
     int getDurationNote(int index);
     int get_musicline_radius();
 
-
+    void keyPressEvent(QKeyEvent *touche);
+    void keyReleaseEvent(QKeyEvent *touche);
 private:
     int height;
     int width;
@@ -53,7 +57,7 @@ private:
     int time_start;
     int number_of_lines;
     vector<MusicLine*> lines;
-    vector<Note*> note;
+    vector<GuiNote*> note;
 
 signals:
     void getreleasednote(int,double);
