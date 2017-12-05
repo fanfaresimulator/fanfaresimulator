@@ -8,9 +8,11 @@ using namespace std;
 
 // EMITS will be uncommented after the implementation of dependencies will be done
 
-Server::Server(NetworkServer& server, Partition& partition) {
+Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     this->server = &server;
     this->mainPartition = &partition;
+    this->sp = &sp;
+
     this->clients = std::map< string, bool >();
     this->usrToPupitre = map< std::string, Pupitre >();
     this->pupitreMap = map< Pupitre , bool >();
@@ -69,28 +71,40 @@ void Server::addPupitre(string username, Pupitre p) {
     usrToPupitre.insert(pair);
 
     // update pupitreMap
-    pupitreMap[p] = true;
+    updatePupitreMap(p);
 
-//    emit requestPartition(username, p);
+//  send apropriate partition to user
+    Partition partition = mainPartition->getPartition(p);
+    sendPartition(username, partition);
+
 }
 
 void Server::playNote(std::string username, Note note){
-
-//    emit playNote(note);
+    sp->playNote(&note);
 }
 
 void Server::sendPartition(std::string username, Partition partition){
-    // network need to change function signature in network_server
-//    server->sendPartition(username, partition)
+    server->sendPartition(username, partition);
 
 }
 
 void Server::sendPupitreMap(std::string username, std::map< Pupitre , bool > pMap) {
-    // change signature of server network + add signal to server network request instruments
-//    server->sendInstruments(username, pupitreMap);
+    server->sendPupitres(username, pupitreMap);
 }
 
+void Server::clientReady(std::string username, Note note){
+    // check if username exist in clients
+    if ( clients.find(username) == clients.end() ) {
+        // not found
+        throw std::invalid_argument("Username not found in clients");
+    }
 
+    clients[username] = true;
+
+    if(everyoneReady()) {
+        broadcastStart();
+    }
+}
 
 
 

@@ -15,6 +15,7 @@
 #include "network/server.hpp"
 #include "synthesizer.hpp"
 #include "pupitre.hpp"
+#include "sound_player.hpp"
 
 
 
@@ -23,6 +24,7 @@ class Server  : public QObject {
 private:
     NetworkServer* server;
     Partition* mainPartition;
+    Sound_player* sp;
 
     std::map< std::string, bool > clients;  // key : username, value isReady
     std::map< std::string, Pupitre > usrToPupitre;         // key : username, value : Instrument
@@ -35,7 +37,7 @@ private:
 
 public:
 
-    Server(NetworkServer& server, Partition& partition);
+    Server(NetworkServer& server, Partition& partition, Sound_player& sp);
 
 public slots:
     void addClient(std::string username);
@@ -43,11 +45,6 @@ public slots:
     void playNote(std::string username, Note note);
     void sendPartition(std::string username, Partition partition);
     void sendPupitreMap(std::string username, std::map< Pupitre , bool > pMap);
-
-
-signals:
-    void playNote(Note note);
-    void requestPartition(std::string username, Instrument i);
-    void requestPupitreList();
+    void clientReady(std::string username, Note note);
 
 };
