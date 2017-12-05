@@ -12,7 +12,7 @@
 #include "note.hpp"
 #include "network/client.hpp"
 #include "noteglobale.hpp"
-#include "partitionglobale.hpp"
+//#include "partitionglobale.hpp"
 
 class Client : public QObject {
 
@@ -22,7 +22,7 @@ private :
     std::string username;            // use nothing ?
     Pupitre pupitre;      // use the class Instrument
     Partition partition;        // Use the class Partition
-	PartitionGlobale partitionglobale; //Use the class NoteGlobale
+//	PartitionGlobale partitionglobale; //Use the class NoteGlobale
 
 
 public:

@@ -13,7 +13,6 @@
 #include "partition.hpp"
 #include "note.hpp"
 #include "network/server.hpp"
-#include "synthesizer.hpp"
 #include "pupitre.hpp"
 #include "sound_player.hpp"
 
