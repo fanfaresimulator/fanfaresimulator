@@ -14,7 +14,7 @@
 class UI {
 private:
 	Partition partition;
-	Keyboard keyboard;
+	//Keyboard keyboard;
 
 public:
 	UI();

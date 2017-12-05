@@ -44,6 +44,8 @@ set(CLIENT_HEADER_FILES
 	include/network/discoverer.hpp
 	include/keyboard.hpp
 	include/ui.hpp
+	include/InstrumentWindow.hpp
+	gui/Utilisateur.hpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -52,7 +54,8 @@ set(CLIENT_SOURCE_FILES
 	network/client.cpp
 	network/discoverer.cpp
 	gui/keyboard.cpp
-	gui/testwindow.cpp
+	gui/InstrumentWindow.cpp
+	gui/Utilisateur.cpp
 	engine/client.cpp
 	include/sound_player.h
 )
@@ -69,7 +72,6 @@ set(SERVER_HEADER_FILES
 
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
-
 	server.cpp
 	engine/server.cpp
 	gui/testwindow.cpp
