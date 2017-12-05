@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 //					 &serverEngine, &Server::addClient);
 //
 //	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
-//					 &serverEngine, &Server::addInstrument);
+//					 &serverEngine, &Server::addPupitre);
 //
 //	QObject::connect(&networkServer, &NetworkServer::noteRecv,
 //					 &serverEngine, &Server::playNote);
