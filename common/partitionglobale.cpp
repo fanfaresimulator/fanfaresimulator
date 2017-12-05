@@ -26,7 +26,7 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 		std::list <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
 
-		int randomKey = rand()%3;
+		int randomKey = rand()%3 + 1;
 		finalListOfNotes.push_back(new NoteGlobale(actualSegment, randomKey,startTime, true));
 		finalListOfNotes.push_back(new NoteGlobale(actualSegment, randomKey,endTime,false));
 
