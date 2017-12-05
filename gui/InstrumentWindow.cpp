@@ -8,10 +8,18 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
+
 
 using namespace std;
 
-InstrumentWindow::InstrumentWindow() : QWidget() {
+InstrumentWindow::InstrumentWindow(std::vector<std::string> allInstru) : QWidget() {
+	this->instruList = allInstru;
+
+	//showpicture();
 	QGroupBox *groupBox = new QGroupBox("Instruments :", this);
 	groupBox->setAlignment(Qt::AlignRight);
 
@@ -25,9 +33,10 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 	}
 
 	groupBox->setLayout(vBox);
-	QPushButton *valider = new QPushButton;
+	QPushButton *valider = new QPushButton("Valider l'instrument");
 	QVBoxLayout *vBoxFen = new QVBoxLayout;
 
+	//QPushButton valider("Valider l'instrument");
 	QObject::connect(valider, &QPushButton::clicked, this, &InstrumentWindow::printInstrumentChosen);
 
 	vBoxFen->addWidget(groupBox);
@@ -37,10 +46,11 @@ InstrumentWindow::InstrumentWindow() : QWidget() {
 	this->show();
 }
 
+
 void InstrumentWindow::printInstrumentChosen() {
 	for (int i = 0; i < buttons.size(); i++) {
 		if (buttons[i]->isChecked()) {
-			std::cout << i << std::endl;
+			std::cout << "Instrument avec lequel vous allez jouer : "<< this->instruList[i] << std::endl;
 			emit instrumentChosen(i);
 			break;
 		}

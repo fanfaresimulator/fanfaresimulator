@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	usernameWindow.printWelcomeMessage();
 	usernameWindow.printInstrumentMessage();
 
-	InstrumentWindow instrumentWindow;
+	InstrumentWindow win({ "piano","violon","violoncelle","triangle" });
 	// TODO: connect(instrumentWindow->instrumentChosen)
 
 	return app.exec();
