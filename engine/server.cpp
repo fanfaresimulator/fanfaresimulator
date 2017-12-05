@@ -6,8 +6,6 @@
 
 using namespace std;
 
-// EMITS will be uncommented after the implementation of dependencies will be done
-
 Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     this->server = &server;
     this->mainPartition = &partition;

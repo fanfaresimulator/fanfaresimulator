@@ -13,7 +13,7 @@ public:
 
     Pupitre(int track, Instrument instrument);
 
-    int getTrack();
+    int getTrack() const;
 
     Instrument getInstrument() const;
 
@@ -21,4 +21,6 @@ public:
 
     // added by engine
     bool operator<(const Pupitre& p) const;
+
+    bool operator==(const Pupitre& p) const;
 };
