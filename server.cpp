@@ -16,25 +16,20 @@
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
-	//midi_handler();
-	//testSynth();
-
 	Advertizer advertizer;
-
 	NetworkServer networkServer;
+	// create main partition here !
+	Partition mainPartition = Partition();
+	Sound_player* S = new Sound_player();
 
-  Sound_player* S = new Sound_player();
+//  S->testPlayer();
 
-  S->testPlayer();
-
-
-//	Synthesizer synthesizer;
-//	Server serverEngine(networkServer);
+	Server serverEngine(networkServer, mainPartition, *S);
 
     /* CONNECTS network server & server engine */
 
-//	QObject::connect(&networkServer, &NetworkServer::helloRecv,
-//					 &serverEngine, &Server::addClient);
+	QObject::connect(&networkServer, &NetworkServer::helloRecv,
+					 &serverEngine, &Server::addClient);
 //
 //	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
 //					 &serverEngine, &Server::addPupitre);
