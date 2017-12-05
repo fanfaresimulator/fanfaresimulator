@@ -3,47 +3,47 @@
 
 /* PRIVATE */
 void ServerConnection::handleJsonDoc(QJsonDocument doc) {
-  QJsonObject obj = doc.object();
-  int type = obj["type"].toInt();
+    QJsonObject obj = doc.object();
+    int type = obj["type"].toInt();
 
-  switch (type) {
-    case SIG_HELLO: {
-      std::cout << "HELLO" << std::endl;
-      QString name = obj["data"].toString();
-      if (name.isEmpty()) {
-        return;
+    switch (type) {
+      case SIG_HELLO: {
+        std::cout << "HELLO" << std::endl;
+        QString name = obj["data"].toString();
+        if (name.isEmpty()) {
+          return;
+        }
+        setUsername(name.toStdString());
+        break;
       }
-      setUsername(name.toStdString());
-      break;
-    }
-    case SIG_NOTE: {
-      break;
-    }
-
-    case SIG_CHOICE_LOBBY: {
-      std::cout << "NOT YET IMPLEMENTED" << std::endl;
-      break;
-    }
-
-    case SIG_CHOICE_INSTRUMENT: {
-      break;
-    }
-
-    case SIG_READY: {
-      QString s = obj["data"].toString();
-      if (s.isEmpty()) {
-        return;
+      case SIG_NOTE: {
+        break;
       }
-      std::string username = s.toStdString();
-      emit server->readyReceived(username);
-      break;
+
+      case SIG_CHOICE_LOBBY: {
+        std::cout << "NOT YET IMPLEMENTED" << std::endl;
+        break;
+      }
+
+      case SIG_CHOICE_INSTRUMENT: {
+        break;
+      }
+
+      case SIG_READY: {
+        QString s = obj["data"].toString();
+        if (s.isEmpty()) {
+          return;
+        }
+        std::string username = s.toStdString();
+        emit server->readyReceived(username);
+        break;
+      }
+
+      default:
+        std::cout << "Unsupported type: " << type << std::endl;
+        break;
+
     }
-
-    default:
-      std::cout << "Unsupported type: " << type << std::endl;
-          break;
-
-  }
 }
 
 void ServerConnection::readyRead() {

@@ -82,7 +82,7 @@ void NetworkClient::sendHello() {
 void NetworkClient::sendInstrumentChoice(Instrument instrument) {
   QJsonObject obj;
   obj["type"] = SIG_CHOICE_INSTRUMENT;
-  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
+  obj["data"] = instrumentToJson(instrument);
   this->sendJsonObject(obj);
 }
 
@@ -95,13 +95,6 @@ void NetworkClient::sendReady(){
 void NetworkClient::sendNote(Note note) {
   QJsonObject obj;
   obj["type"] = SIG_NOTE;
-  QJsonObject JSonNote;
-  JSonNote["timestamp"] = QString::fromStdString("NEED GETTER");
-  JSonNote["signal"] = QString::fromStdString("NEED GETTER");
-  JSonNote["instrument"] = QString::fromStdString("NEED GETTER");
-  JSonNote["velocity"] = 0;
-  JSonNote["key"] = 0;
-  JSonNote["track"] = 0;
-  obj["data"] = JSonNote;
+  obj["data"] = noteToJson(note);
   this->sendJsonObject(obj);
 }

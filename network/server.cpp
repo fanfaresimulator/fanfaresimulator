@@ -37,7 +37,7 @@ void NetworkServer::broadcast(QJsonObject obj) {
 
 /* PUBLIC */
 NetworkServer::NetworkServer(QObject *parent) :
-        QObject(parent) {
+QObject(parent) {
   server = new QTcpServer(this);
 
   connect(server, &QTcpServer::newConnection, this, &NetworkServer::newConnection);
