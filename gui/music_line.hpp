@@ -19,6 +19,8 @@ public:
 
     void set_is_pushed(bool state);
 
+    int get_radius();
+
 protected:
     void paintEvent(QPaintEvent *event) final;
 

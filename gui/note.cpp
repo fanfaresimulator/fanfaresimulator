@@ -2,6 +2,7 @@
 
 Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
+    this->parent=parent;
     this->parent = parent;
     this->visible_duration = parent->get_height() / parent->get_conversion();
     this->line_id=id;
@@ -9,6 +10,7 @@ Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWid
     this->duration=time_end-time_begin;
     this->x = parent->get_width() * (id + 1) /(parent->get_number_of_lines() + 1);
     this->position=-1;
+    this->visible_duration=parent->get_height()-3*parent->get_musicline_radius();
     this->setGeometry(x-radius_note, 0, x+radius_note , parent->get_height());
 }
 

@@ -43,6 +43,7 @@ public:
     void actualize_notes(int spent_time);
     int getPositionNote(int index);
     int getDurationNote(int index);
+    int get_musicline_radius();
 
     float get_conversion();
 

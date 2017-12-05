@@ -36,3 +36,7 @@ void MusicLine::set_is_pushed(bool state) {
     this->isPushed = state;
 }
 
+int MusicLine::get_radius(){
+    return this->radius;
+}
+
