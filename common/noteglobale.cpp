@@ -15,3 +15,9 @@ NoteGlobale::NoteGlobale (std::list <Note> listOfNotesNew, int newKey, double ne
 	timestamp = newTimestamp;
 	signal = newSignal;
 }
+
+
+NoteGlobale::~NoteGlobale()	{
+	delete listOfNotes;
+	delete instrument;
+}
