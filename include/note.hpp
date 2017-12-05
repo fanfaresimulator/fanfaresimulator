@@ -1,29 +1,32 @@
 #pragma once
 
 #include <string>
-#include "instrument.hpp"
+#include "pupitre.hpp"
 
 class Note {
 private:
     double timestamp;
     bool signal;                // on/off
-    Instrument instrument;      // channel
+    Pupitre pupitre;
     int key;                    // note 0 to 127
     int velocity;               // value 0 to 127
-	int track;					// value 0 to #track
 
 public:
-    Note(double timestamp, bool signal, Instrument instrument, int key, int velocity, int track);
+    Note(double timestamp, bool signal, Pupitre pupitre, int key, int velocity);
 
     bool getSignal ();
 
-	double getTime ();
+    double getTime ();
 
-	Instrument getInstrument ();
+    Pupitre getPupitre();
 
-	int getKey ();
+    Instrument getInstrument();
 
-	int getVelocity ();
+    int getTrack();
+
+    int getKey ();
+
+    int getVelocity ();
 
     bool isEqual(Note note2); // Compare timestamp and key.
 

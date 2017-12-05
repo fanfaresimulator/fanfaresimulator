@@ -9,6 +9,8 @@ private:
     Instrument instrument;
 
 public:
+    Pupitre();
+
     Pupitre(int track, Instrument instrument);
 
     int getTrack();

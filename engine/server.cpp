@@ -4,7 +4,7 @@
 #include <utility>
 #include <map>
 
-
+/*
 Server::Server(NetworkServer& server, Synthesizer& synthesizer) {
     this->server = &server;
     this->synthesizer = &synthesizer;
@@ -61,4 +61,4 @@ void Server::updateInstrumentMap(Instrument i) {
     }
     // found => update in instrumentMap
     instrumentMap[i]= true;
-}
+}*/

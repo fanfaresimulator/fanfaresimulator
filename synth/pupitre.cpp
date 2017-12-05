@@ -1,4 +1,8 @@
-#include "pupitre.hpp"
+#include "../include/pupitre.hpp"
+
+Pupitre::Pupitre(){
+
+};
 
 Pupitre::Pupitre(int track, Instrument instrument){
   this->track = track;

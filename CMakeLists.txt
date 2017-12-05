@@ -19,15 +19,20 @@ include_directories(include)
 add_subdirectory(midifile)
 
 set(COMMON_HEADER_FILES
+	include/pupitre.hpp
 	include/instrument.hpp
 	include/note.hpp
 	include/partition.hpp
+	include/midi_handler.hpp
 	include/noteglobale.hpp
 	include/partitionglobale.hpp)
 
 set(COMMON_SOURCE_FILES
-	common/note.cpp
-	common/partition.cpp
+	synth/note.cpp
+	synth/partition.cpp
+	synth/pupitre.cpp
+	synth/instrument.cpp
+	synth/midi_handler.cpp
 )
 
 set(CLIENT_HEADER_FILES
@@ -49,20 +54,19 @@ set(CLIENT_SOURCE_FILES
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
+	include/sound_player.hpp
 	include/server.hpp
 	include/network_server.hpp
 	include/network_utils.hpp
 	include/serverconnection.hpp
-	include/synthesizer.hpp
 	include/ui.hpp
 )
 
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	network/network_server.cpp
-  network/serverconnection.cpp
-	synth/synthesizer.cpp
-	synth/midi_handler.cpp
+  	network/serverconnection.cpp
+	synth/sound_player.cpp
 	server.cpp
 	gui/testwindow.cpp
 	engine/server.cpp
@@ -70,7 +74,7 @@ set(SERVER_SOURCE_FILES
 
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
-target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
+target_link_libraries(fanfaresimulator midifile Qt5::Widgets Qt5::Network)
 
 add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
 target_include_directories(fanfaresimulator-server PRIVATE ${FLUIDSYNTH_INCLUDE_DIRS})

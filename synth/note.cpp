@@ -1,4 +1,4 @@
-#include "note.hpp"
+#include "../include/note.hpp"
 
 Note::Note(double timestamp, bool signal, Pupitre pupitre, int key, int velocity){
  this->timestamp = timestamp;
@@ -38,5 +38,5 @@ int Note::getVelocity (){
 };
 
 bool Note::isEqual(Note note2){
- return (note2.getTime == timestamp && note2.getKey() == key);
+ return (note2.getTime() == timestamp && note2.getKey() == key);
 };

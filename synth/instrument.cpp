@@ -1,4 +1,4 @@
-#include "instrument.hpp"
+#include "../include/instrument.hpp"
 
 const char *GMinstrument[128] = {
    "acpiano",   "britepno",  "synpiano",  "honkytonk", "epiano1",   "epiano2",
@@ -23,6 +23,9 @@ const char *GMinstrument[128] = {
    "steeldrum", "woodblock", "taiko",     "toms",      "syntom",    "revcymb",
    "fx-fret",   "fx-blow",   "seashore",  "jungle",    "telephone", "helicptr",
    "applause",  "ringwhsl"
+};
+
+Instrument::Instrument(){
 };
 
 Instrument::Instrument(int number){

@@ -1,8 +1,8 @@
 #include "include/network_server.hpp"
-#include "include/synthesizer.hpp"
 #include "include/server.hpp"
-#include "sound_player.h"
-#include "synth/midi_handler.hpp"
+#include "include/sound_player.h"
+#include "include/midi_handler.hpp"
+
 #include <QApplication>
 
 #ifdef __unix__
@@ -14,14 +14,12 @@
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
-	midi_handler();
 	NetworkServer networkServer;
 
-    Sound_player* S = new Sound_player();
+  Sound_player* S = new Sound_player();
 
-    //S->testPlayer();
+  S->testPlayer();
 
-	testSynth();
 
 //	Synthesizer synthesizer;
 //	Server serverEngine(networkServer, synthesizer);
