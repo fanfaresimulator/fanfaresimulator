@@ -27,6 +27,10 @@ private:
 
     int x;
 
+    int radius;
+
+    bool isPushed;
+
     GameWindow* parent;
 
 };
