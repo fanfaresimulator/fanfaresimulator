@@ -14,6 +14,7 @@
 
 #include "../instrument.hpp"
 #include "../partition.hpp"
+#include "../pupitre.hpp"
 #include "../note.hpp"
 #include "network.hpp"
 #include "serverconnection.hpp"
@@ -32,7 +33,7 @@ public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);
   void broadcastStart();
   void sendPartition(std::string username, Partition partition);
-  void sendInstruments(std::string username, std::list<Instrument> instruments);
+  void sendPupitres(std::string username, std::list<Pupitre> pupitres);
 
 signals:
   void helloRecv(std::string username);

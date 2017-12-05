@@ -37,6 +37,6 @@ public:
 signals:
   /* Emit a signal that sends the partition */
   void partitionRecv(Partition partition);
-  void instrumentsRecv(std::list<Instrument>);
+  void pupitresRecv(std::list<Pupitre>);
   void startRecv();
 };
