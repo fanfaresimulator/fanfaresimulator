@@ -18,7 +18,7 @@ std::list <Note> Partition::getNotes()	{
 double Partition::getLength() {
 
 	Note lastNote = listOfNotes.back();
-	return lastNote.getTime ();
+	return lastNote.getTime();
 
 }
 
@@ -28,7 +28,7 @@ std::list <double> Partition::frameDivision()	{
 	double endTime = this->getLength();
 	double actualTime = 0.0;
 
-	std::list<double> frames;
+	std::list<double> frames = new std::list<double>();
 
 	frames.push_front(actualTime);
 
@@ -43,16 +43,23 @@ std::list <double> Partition::frameDivision()	{
 	return frames;
 }
 
-std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTime)	{
+std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTime,std::list<Note> noteSet)	{
 
 
-	std::list <Note> finalPartition;
+	std::list <Note> finalPartition = new std::list<Note>();
 
 	// This is the set of notes for which we are not sure that they have an ON/OFF
 	// in the current frame.
-	std::list <Note> noteSet;
+	//std::list <Note> noteSet;
+
+	for (std::list<Note>::iterator bucketIter=noteSet.begin(); bucketIter!=noteSet.end(); bucketIter++)	{
+		finalPartition.push_front(new Note(startTime,true,bucketIter->getInstrument(), bucketIter->getKey(), bucketIter->getVelocity(), bucketIter->getTrack() ));
+	}
 
 	for (std::list<Note>::iterator iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
+
+
+
 		if (iterAct->getTime()>endTime)	{
 			break;
 		}
@@ -64,22 +71,22 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 			}
 			else	{
 				std::list<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
-				if (findIter == noteSet.end())	{
-					// pushes the ON of the current note.
-					finalPartition.push_front(Note(startTime, true, iterAct->getInstrument() ,iterAct->getKey() , iterAct->getVelocity(), iterAct->getTrack()));
-					finalPartition.push_back((*iterAct));
-				}
-				else	{
-					noteSet.erase(findIter);
+				//if (findIter == noteSet.end())	{
+				        // pushes the ON of the current note.
+				//	finalPartition.push_front(Note(startTime, true, iterAct->getInstrument() ,iterAct->getKey() , iterAct->getVelocity(), iterAct->getTrack()));
+				//	finalPartition.push_back((*iterAct));
+				//}
+				//else	{
+				        noteSet.erase(findIter);
 					finalPartition.push_back(*iterAct);
-				}
+				//}
 			}
 
 		}
 	}
 
 	for (std::list<Note>::iterator iterRest=noteSet.begin(); iterRest!=noteSet.end(); iterRest++)	{
-		finalPartition.push_back(Note(endTime, false, iterRest->getInstrument(),iterRest->getKey(), iterRest->getVelocity(), iterRest->getTrack()));
+		finalPartition.push_back(new Note(endTime, false, iterRest->getInstrument(),iterRest->getKey(), iterRest->getVelocity(), iterRest->getTrack()));
 	}
 
 	return finalPartition;
