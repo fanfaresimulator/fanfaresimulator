@@ -66,7 +66,7 @@ void NetworkServer::sendPupitres(std::string username, std::map<Pupitre, bool> p
   obj["type"] = SIG_INSTRUMENTS;
   QJsonArray JsonPupitre;
   for (auto & pair : pupitres) {
-    JsonPupitre.append(pupitreToJson(pair.first));
+    JsonPupitre.append(pupitreToJson(pair.first, pair.second));
   }
   obj["data"] = JsonPupitre;
   sendJsonObject(username, obj);

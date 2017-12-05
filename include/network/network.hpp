@@ -37,4 +37,6 @@ Note noteFromJson(QJsonObject o);
 
 QJsonObject pupitreToJson(Pupitre pupitre);
 
+QJsonObject pupitreToJson(Pupitre pupitre, bool b);
+
 Pupitre pupitreFromJson(QJsonObject o);

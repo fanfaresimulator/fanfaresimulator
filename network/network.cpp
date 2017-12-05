@@ -76,6 +76,14 @@ QJsonObject pupitreToJson(Pupitre pupitre) {
   return JsonPupitre;
 }
 
+QJsonObject pupitreToJson(Pupitre pupitre, bool b) {
+  QJsonObject JsonPupitre;
+  JsonPupitre["track"] = pupitre.getTrack();
+  JsonPupitre["instrument"] = instrumentToJson(pupitre.getInstrument());
+  JsonPupitre["taken"] = b;
+  return JsonPupitre;
+}
+
 Pupitre pupitreFromJson(QJsonObject o) {
   Pupitre p;
   return p;
