@@ -44,6 +44,8 @@ public:
     int getPositionNote(int index);
     int getDurationNote(int index);
 
+    int get_conversion();
+
 
 private:
     int height;
@@ -53,6 +55,7 @@ private:
     int number_of_lines;
     vector<MusicLine*> lines;
     vector<Note*> note;
+    int conversion;
 };
 
 #endif

@@ -17,6 +17,7 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
+    this->conversion = this->height / 4;
     create_lines();
     read_notes(list);
     /*for(Note* n:note){
@@ -98,4 +99,8 @@ int GameWindow::getPositionNote(int index){
 int GameWindow::getDurationNote(int index){
     int p = this->note[index]->duration;
     return p;
+}
+
+int GameWindow::get_conversion() {
+    return this->conversion;
 }
