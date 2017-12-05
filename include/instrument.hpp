@@ -17,7 +17,7 @@ private:
 
 public:
     Instrument();
-    
+
     Instrument(int number);
 
     int getNumber();

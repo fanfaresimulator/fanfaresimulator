@@ -23,5 +23,8 @@ public:
 	void playNote(Note note);
 
 public slots:
-	Partition getPartition(Instrument instrument);
+	void getPartition(std::string username, Instrument instrument);
+
+signals:
+    void sendPartition(std::string username, Partition partition);
 };
