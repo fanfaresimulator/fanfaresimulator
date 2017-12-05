@@ -8,7 +8,7 @@
 #include <QPainter>
 
 #include "music_line.hpp"
-#include "note.hpp"
+#include "gui_note.hpp"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "note.hpp"
+#include "gui_note.hpp"
 
 GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
@@ -37,7 +37,7 @@ bool GuiNote::is_visible(float spent_time){
     return true;
 }
 
-void GuiNote::actualize_position(int spent_time){
+void GuiNote::actualize_position(float spent_time) {
     if(spent_time>duration+time_to_play&&spent_time<time_to_play-visible_duration){
         this->position=-1;
     }

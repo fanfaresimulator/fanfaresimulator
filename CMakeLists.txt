@@ -46,7 +46,7 @@ set(CLIENT_HEADER_FILES
 	include/ui.hpp
 	include/InstrumentWindow.hpp
 	include/UsernameWindow.hpp
-	gui/note.hpp
+		gui/gui_note.hpp
 	gui/music_line.hpp
 )
 
@@ -62,7 +62,7 @@ set(CLIENT_SOURCE_FILES
 	include/sound_player.h
 	gui/game_window.cpp
 	gui/music_line.cpp
-	gui/note.cpp
+		gui/gui_note.cpp
 )
 
 set(SERVER_HEADER_FILES
