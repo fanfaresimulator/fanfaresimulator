@@ -13,19 +13,22 @@ PartitionGlobale::PartitionGlobale ()	{
 
 PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
-	std::list <NoteGlobale> finalListOfNotes;
+	std::list <NoteGlobale> finalListOfNotes = new std::list<NoteGlobale>();
 	std::list <double> frames = mypartition.frameDivision();
 
-	for (temps=frames.begin(); temps != (frames.end()-1); temps++)	{
+	std::list <Note> noteSet = new std::list<Note();
 
-		double startTime = temps;
-		double endTime = (temps+1);
 
-		std::list <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime);
+	for (std::list<double>::iterator temps=frames.begin(); temps != (frames.end()-1); temps++)	{
+
+		double startTime = (*temps);
+		double endTime = (*(temps+1));
+
+		std::list <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
 
 		int randomKey = rand()%3;
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true));
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime,false));
+		finalListOfNotes.push_back(new NoteGlobale(actualSegment, randomKey,startTime, true));
+		finalListOfNotes.push_back(new NoteGlobale(actualSegment, randomKey,endTime,false));
 
 	}
 
