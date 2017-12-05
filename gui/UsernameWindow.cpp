@@ -2,28 +2,28 @@
 // Created by Elia Mazzoni on 28/11/2017.
 //
 
-// La classe Utilisateur demande au client son username et le mémorise 
+// La classe UsernameWindow demande au client son username et le mï¿½morise
 
 
-#include "Utilisateur.hpp"
 #include <string>
 #include <iostream>
 #include <list>
 #include <QInputDialog>
+#include "../include/UsernameWindow.hpp"
 
 
-std::string Utilisateur::askName() {
+std::string UsernameWindow::askName() {
 
 	bool dialogResult;
 
-	// QInputDialog sert à demander le nom au client qui utilise l'interface
+	// QInputDialog sert ï¿½ demander le nom au client qui utilise l'interface
 	QInputDialog *renameDialog = new QInputDialog();
-	renameDialog->setTextValue("Test"); 
+	renameDialog->setTextValue("Test");
 
 	// username est le nom du client en format QString
 	QString username = renameDialog->getText(0, "Username for fanfaresimulator", "Please insert your username:", QLineEdit::Normal,
 		"", &dialogResult);
-	
+
 
 	// nom_client est le nom du client en format string
 	std::string nom_client = username.toStdString();
@@ -32,29 +32,27 @@ std::string Utilisateur::askName() {
 }
 
 
-// fonction qui met le nom en input comme username de la classe Utilisateur
-void Utilisateur::addName(std::string clientName) {
-	
+// fonction qui met le nom en input comme username de la classe UsernameWindow
+void UsernameWindow::addName(std::string clientName) {
+
 	this->user_id_name = clientName;
 	return;
 }
 
 // fonction qui affiche le nom de l'utilisateur
-void Utilisateur::printUtilisateur() {
+void UsernameWindow::printUtilisateur() {
 	std::cout << this -> user_id_name << "\n";
 	return;
 	}
 
 // fonction qui affiche un message de bienvenue pour l'utilisateur
-void Utilisateur::printWelcomeMessage() {
+void UsernameWindow::printWelcomeMessage() {
 	std::cout << "Hi " << this->user_id_name << ", welcome to fanfare simulator!" "\n";
 	return;
 }
 
 
-void Utilisateur::printInstrumentMessage() {
+void UsernameWindow::printInstrumentMessage() {
 	std::cout << "You will have first to choose an instrument and then to play it" "\n";
 	return;
 }
-
-

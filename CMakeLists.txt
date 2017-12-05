@@ -45,7 +45,7 @@ set(CLIENT_HEADER_FILES
 	include/keyboard.hpp
 	include/ui.hpp
 	include/InstrumentWindow.hpp
-	gui/Utilisateur.hpp
+	include/UsernameWindow.hpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -55,7 +55,7 @@ set(CLIENT_SOURCE_FILES
 	network/discoverer.cpp
 	gui/keyboard.cpp
 	gui/InstrumentWindow.cpp
-	gui/Utilisateur.cpp
+	gui/UsernameWindow.cpp
 	engine/client.cpp
 	include/sound_player.h
 )
@@ -77,7 +77,6 @@ set(SERVER_SOURCE_FILES
 	network/server.cpp
 	network/advertizer.cpp
 	network/serverconnection.cpp
-	synth/midi_handler.cpp
 	synth/sound_player.cpp
 )
 
