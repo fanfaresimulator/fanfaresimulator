@@ -21,10 +21,6 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
-    /*for(GuiNote* n:note){
-        n->position=100;
-    }*/
-    //std::cout << this->note.size() << std::endl;
 }
 
 void GameWindow::set_size(int width, int height) {
