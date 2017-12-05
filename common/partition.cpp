@@ -2,7 +2,9 @@
 
 #include "../include/partition.hpp"
 
-
+Partition::~Partition()	{
+	delete listOfNotes;
+}
 
 Partition::Partition (std::list <Note> newListOfNotes)	{
 
