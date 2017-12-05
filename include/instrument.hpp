@@ -1,9 +1,28 @@
+// VIELLE CLASSE DE STEVEN
+//#pragma once
+
+//typedef int Instrument;
+// enum Instrument{
+//
+// };
+
 #pragma once
 
-typedef int Instrument;
+#include <string>
 
-static const int INSTRUMENT_NUMBER = 128;
+class Instrument {
+private:
+    int number;
+    std::string name;
 
-//enum Instrument {
-//        // instruments here !
-//};
+public:
+    Instrument();
+
+    Instrument(int number);
+
+    int getNumber();
+
+    std::string getname();
+
+    bool isEqual(Instrument i2);
+};
