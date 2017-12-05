@@ -16,7 +16,7 @@ class GameWindow;
 class Note : public QWidget {
 
 public:
-    float visible_duration=500;
+    float visible_duration;
     GameWindow* parent;
     int line_id;
     float duration;

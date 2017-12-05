@@ -17,7 +17,7 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
-    this->conversion = this->height / 4;
+    this->conversion = this->height * 1.0 / 4000;
     create_lines();
     read_notes(list);
     /*for(Note* n:note){
@@ -101,6 +101,6 @@ int GameWindow::getDurationNote(int index){
     return p;
 }
 
-int GameWindow::get_conversion() {
+float GameWindow::get_conversion() {
     return this->conversion;
 }
