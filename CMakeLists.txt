@@ -24,7 +24,8 @@ set(COMMON_HEADER_FILES
 	include/partition.hpp
 	include/noteglobale.hpp
 	include/partitionglobale.hpp
-	include/network/network.hpp)
+	include/network/network.hpp
+)
 
 set(COMMON_SOURCE_FILES
 	common/note.cpp
@@ -35,6 +36,7 @@ set(CLIENT_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/client.hpp
 	include/network/client.hpp
+	include/network/discoverer.hpp
 	include/keyboard.hpp
 	include/ui.hpp
 )
@@ -43,15 +45,18 @@ set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	main.cpp
 	network/client.cpp
+	network/discoverer.cpp
 	gui/keyboard.cpp
 	gui/testwindow.cpp
-	engine/client.cpp)
+	engine/client.cpp
+)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/server.hpp
 	include/network/server.hpp
 	include/network/serverconnection.hpp
+	include/network/advertizer.hpp
 	include/synthesizer.hpp
 	include/ui.hpp
 )
@@ -59,14 +64,14 @@ set(SERVER_HEADER_FILES
 set(SERVER_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	network/server.cpp
+	network/advertizer.cpp
   network/serverconnection.cpp
 	synth/synthesizer.cpp
 	synth/midi_handler.cpp
 	server.cpp
 	gui/testwindow.cpp
 	engine/server.cpp
- )
-
+)
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
 target_link_libraries(fanfaresimulator Qt5::Widgets Qt5::Network)
