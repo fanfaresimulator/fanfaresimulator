@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/network_utils.hpp"
+#include "../include/network/network.hpp"
 #include "../include/network/discoverer.hpp"
 
 Discoverer::Discoverer(QObject *parent) : QObject(parent) {

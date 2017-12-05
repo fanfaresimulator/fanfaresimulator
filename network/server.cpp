@@ -1,4 +1,4 @@
-#include "../include/network_server.hpp"
+#include "../include/network/server.hpp"
 
 /* PRIVATE */
 void NetworkServer::newConnection() {

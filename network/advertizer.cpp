@@ -1,4 +1,4 @@
-#include "../include/network_utils.hpp"
+#include "../include/network/network.hpp"
 #include "../include/network/advertizer.hpp"
 
 #include <iostream>

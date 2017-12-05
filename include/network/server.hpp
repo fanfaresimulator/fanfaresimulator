@@ -12,11 +12,11 @@
 #include <QJsonValue>
 #include <QByteArray>
 
-#include "network_utils.hpp"
-#include "instrument.hpp"
-#include "partition.hpp"
+#include "../instrument.hpp"
+#include "../partition.hpp"
+#include "../note.hpp"
+#include "network.hpp"
 #include "serverconnection.hpp"
-#include "note.hpp"
 
 class NetworkServer : public QObject {
   Q_OBJECT

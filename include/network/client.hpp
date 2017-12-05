@@ -11,11 +11,11 @@
 #include <QJsonArray>
 #include <QByteArray>
 
-#include "network_utils.hpp"
-#include "instrument.hpp"
-#include "partition.hpp"
-#include "keyboard.hpp"
-#include "note.hpp"
+#include "../instrument.hpp"
+#include "../partition.hpp"
+#include "../keyboard.hpp"
+#include "../note.hpp"
+#include "network.hpp"
 
 class NetworkClient : public QObject {
   Q_OBJECT

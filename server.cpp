@@ -1,4 +1,4 @@
-#include "include/network_server.hpp"
+#include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
 #include "include/synthesizer.hpp"
 #include "include/server.hpp"
