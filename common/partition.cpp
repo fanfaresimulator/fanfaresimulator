@@ -55,7 +55,7 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 	//std::list <Note> noteSet;
 
 	for (std::list<Note>::iterator bucketIter=noteSet.begin(); bucketIter!=noteSet.end(); bucketIter++)	{
-		finalPartition.push_front(new Note(startTime,true,bucketIter->getInstrument(), bucketIter->getKey(), bucketIter->getVelocity(), bucketIter->getTrack() ));
+		finalPartition.push_front(new Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity() ));
 	}
 
 	for (std::list<Note>::iterator iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
@@ -88,7 +88,7 @@ std::list<Note> Partition::buildPartitionInFrame(double startTime, double endTim
 	}
 
 	for (std::list<Note>::iterator iterRest=noteSet.begin(); iterRest!=noteSet.end(); iterRest++)	{
-		finalPartition.push_back(new Note(endTime, false, iterRest->getInstrument(),iterRest->getKey(), iterRest->getVelocity(), iterRest->getTrack()));
+		finalPartition.push_back(new Note(endTime, false, iterRest->getPupitre(),iterRest->getKey(), iterRest->getVelocity()));
 	}
 
 	return finalPartition;
