@@ -22,7 +22,7 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     /*for(Note* n:note){
         n->position=100;
     }*/
-    std::cout << this->note.size() << std::endl;
+    //std::cout << this->note.size() << std::endl;
 }
 
 void GameWindow::set_size(int width, int height) {
@@ -98,4 +98,8 @@ int GameWindow::getPositionNote(int index){
 int GameWindow::getDurationNote(int index){
     int p = this->note[index]->duration;
     return p;
+}
+
+int GameWindow::get_musicline_radius(){
+    return this->lines[0]->get_radius();
 }
