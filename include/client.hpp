@@ -14,6 +14,8 @@
 #include "noteglobale.hpp"
 //#include "partitionglobale.hpp"
 
+using namespace std;
+
 class Client : public QObject {
 
 private :
@@ -24,12 +26,13 @@ private :
     Partition partition;        // Use the class Partition
 //	PartitionGlobale partitionglobale; //Use the class NoteGlobale
 
-
 public:
 
 	// need to check with keyboard team !
     //Client(NetworkClient& network, Keyboard& keyboard);
 	Client(NetworkClient& network, std::string username);
+
+    vector<string> pupitreVecAvlb(std::map<Pupitre, bool>);
 
     void sendAddClient(std::string username);
 
