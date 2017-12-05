@@ -31,11 +31,14 @@ public:
 
     ~Client();
 
+    void sendAddClient(std::string username);
+
+    void setInstrument(Instrument instrument);
+
+
     void sendNote(Note note);
 
     void sendReady();
-
-    void sendAddClient(std::string username);
 
     void sendAddInstrumentToClient(std::string username, Instrument instrument);
 
@@ -43,6 +46,6 @@ public:
 
     void loadPartition(Partition partition);
 
-    void setInstrument(Instrument instrument);
+
 
 };
