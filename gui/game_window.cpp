@@ -15,7 +15,7 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
     create_lines();
 }
 
-GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
+GameWindow::GameWindow(int width, int height, vector<string> list, QTime t0) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
     this->conversion = height * 1.0 / 4000;
@@ -37,6 +37,10 @@ void GameWindow::set_number_of_lines(int number) {
     this->number_of_lines = number;
 }
 
+// A REVOIR (julien), sans doute douille pointeurs
+void GameWindow::set_timer(QTime t0){
+    this->timer = t0;
+}
 int GameWindow::get_width() {
     return this->width;
 }
@@ -111,35 +115,38 @@ int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
 
+
+// partie clavier
+
 void GameWindow::keyPressEvent(QKeyEvent *touche) {
     if(touche->key() == Qt::Key_A){
-        emit getpressednote(1,0);
+        emit getpressednote(1,timer.elapse());
     }
     if(touche->key() == Qt::Key_R){
-        emit getpressednote(2,0);
+        emit getpressednote(2,timer.elapse());
     }
     if(touche->key() == Qt::Key_U){
-        emit getpressednote(3,0);
+        emit getpressednote(3,timer.elapse());
     }
     if(touche->key() == Qt::Key_P){
-        emit getpressednote(4,0);
+        emit getpressednote(4,timer.elapse());
     }
     else{
-        emit getpressednote(0,0);
+        emit getpressednote(0,timer.elapse());
     }
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
     if(touche->key() == Qt::Key_A){
-        emit getreleasednote(1,0);
+        emit getreleasednote(1,timer.elapse());
     }
     if(touche->key() == Qt::Key_R){
-        emit getreleasednote(2,0);
+        emit getreleasednote(2,timer.elapse());
     }
     if(touche->key() == Qt::Key_U){
-        emit getreleasednote(3,0);
+        emit getreleasednote(3,timer.elapse());
     }
     if(touche->key() == Qt::Key_P){
-        emit getreleasednote(4,0);
+        emit getreleasednote(4,timer.elapse());
     }
     else{
         emit getreleasednote(0,0);

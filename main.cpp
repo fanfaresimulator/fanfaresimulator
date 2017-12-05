@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     list.push_back("1");
     list.push_back("D");
     QApplication app(argc, argv);
-    GameWindow window(1000, 1000, list);
+    GameWindow window(1000, 1000, list,t0);
     window.show();
     cout << t0.elapsed() << endl;
     while (true) {
@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
         }*/
         window.actualize_notes(spent_time);
         window.update();
+
         QCoreApplication::processEvents();
     }
     return app.exec();

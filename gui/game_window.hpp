@@ -6,6 +6,7 @@
 #include <QSlider>
 #include <QProgressBar>
 #include <QPainter>
+#include <QTime>
 
 #include "music_line.hpp"
 #include "gui_note.hpp"
@@ -62,10 +63,11 @@ private:
     vector<MusicLine*> lines;
     vector<GuiNote*> note;
     float conversion;
+    QTime timer;
 
 signals:
-    void getreleasednote(int,double);
-    void getpressednote(int,double);
+    void getreleasednote(int,int);
+    void getpressednote(int,int);
 };
 
 #endif
