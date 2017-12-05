@@ -96,6 +96,9 @@ void Server::playNote(std::string username, Note note){
 }
 
 void Server::clientReady(std::string username){
+    if (username.empty()){
+        throw std::invalid_argument("Username null");
+    }
     // check if username exist in clients
     if ( clients.find(username) == clients.end() ) {
         // not found

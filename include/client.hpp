@@ -27,13 +27,13 @@ private :
 
 public:
 
-    Client(NetworkClient& network, Keyboard& keyboard);
-
-    ~Client();
+	// need to check with keyboard team !
+    //Client(NetworkClient& network, Keyboard& keyboard);
+	Client(NetworkClient& network, std::string username);
 
     void sendAddClient(std::string username);
 
-    void setPupitre(Pupitre p);
+    void choosePupitre(Pupitre p);
 
     void sendNote(Note note);
 
