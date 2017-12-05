@@ -1,5 +1,4 @@
 #include "note.hpp"
-#include "game_window.hpp"
 
 Note::Note(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
@@ -16,7 +15,7 @@ void Note::paintEvent(QPaintEvent * event)//position calculé par fonction main
     if(this->position==-1){return;}
     //this->setGeometry(x, 0, x , this->parent->get_height());
     QPainter painter(this);
-    painter.setPen(QPen(Qt::red, 20, Qt::SolidLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::red, 10, Qt::SolidLine, Qt::RoundCap));
     painter.drawEllipse(radius_note,position,radius_note,duration*10);
 }
 

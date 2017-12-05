@@ -1,5 +1,4 @@
 #include <QtWidgets/QApplication>
-#include <time.h>
 #include "gui/game_window.hpp"
 
 typedef basic_string<char> string;
@@ -20,7 +19,7 @@ int main(int argc, char *argv[]) {
     list.push_back("1");
     list.push_back("D");
     QApplication app(argc, argv);
-    GameWindow window(1000, 1000, list);
+    GameWindow window(500, 500, list);
     window.show();
     int time_start=clock();
     int spent_time=0;
