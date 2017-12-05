@@ -10,7 +10,7 @@
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
-#include "network_client.hpp"
+#include "network/client.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
 
