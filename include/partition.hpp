@@ -36,6 +36,6 @@ public:
 
 	// Gives back the partition from startTime to endTime, completing notes starting or ending
 	// before of after the current frame.
-	std::list <Note> buildPartitionInFrame(double startTime, double endTime);
+	std::list <Note> buildPartitionInFrame(double startTime, double endTime, std::list<Note> noteSet);
 
 };
