@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	QObject::connect(&networkServer, &NetworkServer::helloRecv,
 					 &serverEngine, &Server::addClient);
 
-	QObject::connect(&networkServer, &NetworkServer::partitionChoiceRecv,
+	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv,
 					 &serverEngine, &Server::addPupitre);
 
 	QObject::connect(&networkServer, &NetworkServer::noteRecv,
