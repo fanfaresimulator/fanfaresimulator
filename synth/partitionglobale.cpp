@@ -21,8 +21,8 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 	for (std::vector<double>::iterator temps=frames.begin(); temps != (frames.end()-1); temps++)	{
 
-		double startTime = (*temps)+USER_TOLL/2;
-		double endTime = (*(temps+1))-USER_TOLL/2;
+		double startTime = (*temps)+USER_TOLL;
+		double endTime = (*(temps+1))-USER_TOLL;
 
 		std::vector <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
 
@@ -33,6 +33,28 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 	}
 
 }
+
+std::vector<NoteGlobale>::iterator PartitionGlobale::f1(std::vector<NoteGlobale>::iterator iterActual, double actualTime)	{
+
+	std::vector<NoteGlobale>::iterator iterCurrent = iterActual;
+
+	while (iterCurrent->getTime() < actualTime)	{
+		iterCurrent++;
+		if (iterCurrent == listOfNotes.end())	{
+			// We have finished our score, so we return a listOFNotes.end()
+			return iterCurrent;
+		}
+	}
+
+	if (iterCurrent->getSignal())	{
+		return iterCurrent;
+	}
+	else	{
+		return (iterCurrent+1);
+	}
+
+}
+
 
 PartitionGlobale::~PartitionGlobale()	{
 	//delete listOfNotes;
