@@ -11,6 +11,7 @@ class PupitreWindow : public QWidget {
 	Q_OBJECT
 public:
 	PupitreWindow(std::vector<Pupitre> pupitres);
+	void start();
 
 signals:
 	void pupitreChosen(Pupitre p);
