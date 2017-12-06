@@ -24,7 +24,6 @@ double doubleFromJson(QJsonValue val) {
   }
 }
 
-
 std::string stringFromJson(QJsonValue val) {
   if (!val.isString()) {
     throw "Incorrect type";
@@ -56,7 +55,7 @@ QJsonObject instrumentToJson(Instrument instrument) {
 }
 
 Instrument instrumentFromJson(QJsonObject o) {
-  Instrument instr;
+  Instrument instr(intFromJson(o["id"]));
   return instr;
 }
 
@@ -73,7 +72,7 @@ QJsonObject partitionToJson(Partition partition) {
 
   QJsonObject JsonPart;
   JsonPart["notes"] = JsonNotes;
-  JsonPart["pupitre"] = JsonPupitre;
+  JsonPart["pupitres"] = JsonPupitre;
   return JsonPart;
 }
 
@@ -101,7 +100,7 @@ QJsonObject noteToJson(Note note) {
 Note noteFromJson(QJsonObject obj) {
   double timestamp = doubleFromJson(obj["timestamp"]);
   bool signal = boolFromJson(obj["signal"]);
-  Pupitre pupitre = pupitreFromJson(obj["pupitre"].toObject()).first;
+  Pupitre pupitre = pupitreFromJson(objectFromJson(obj["pupitre"])).first;
   int key = intFromJson(obj["key"]);
   int velocity = intFromJson(obj["velocity"]);
   Note note(timestamp, signal, pupitre, key, velocity);
