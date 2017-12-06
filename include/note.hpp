@@ -5,26 +5,26 @@
 
 class Note {
 private:
-    double timestamp;
-    bool signal;                // on/off
-    Pupitre pupitre;
-    int key;                    // note 0 to 127
-    int velocity;               // value 0 to 127
+	double timestamp;
+	bool signal;                // on/off
+	Pupitre pupitre;
+	int key;                    // note 0 to 127
+	int velocity;               // value 0 to 127
 
 public:
-    Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
+	Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
 
 	//~Note();
 
-    bool getSignal ();
+	bool getSignal ();
 
-    double getTime ();
+	double getTime ();
 
-    Pupitre getPupitre();
+	Pupitre getPupitre();
 
-    int getKey ();
+	int getKey ();
 
-    int getVelocity ();
+	int getVelocity ();
 
 	int getTrack();
 
