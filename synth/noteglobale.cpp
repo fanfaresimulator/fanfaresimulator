@@ -31,6 +31,6 @@ double NoteGlobale::getTime()	{
 	delete pupitre;
 }*/
 
-std::vector <Note> NoteGlobale::getListOfNotes() {
-	return listOfNotes;
+std::vector <Note>* NoteGlobale::getListOfNotes() {
+	return &listOfNotes;
 }

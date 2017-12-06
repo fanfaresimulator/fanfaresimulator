@@ -29,6 +29,6 @@ public:
 
 	//~NoteGlobale();
 
-	std::vector <Note> getListOfNotes();
+	std::vector <Note>* getListOfNotes();
 	
 };

@@ -45,7 +45,14 @@ public:
 
     void sendReady();
 
-    void stateFunction();
+    // state functions
+
+    void mainStateFunction();
+
+    // send all notes after error from previous
+    // it to next expected on note
+    void sendNotesAfterError();
+    void sendNotesUntillCurrentTime();
 
 public slots:
 

@@ -65,6 +65,34 @@ void Client::start() {
 
 // State Function
 
-void Client::stateFunction() {
+
+
+void Client::mainStateFunction() {
     if(state->getCurrentTime() < state->getBlockTime()) return;
+    if(!state->stateChanged){
+
+    }
+
+
+}
+
+// CAUTION : send notes just from global note with singal == false
+
+void Client::sendNotesAfterError() {
+    vector<NoteGlobale>::iterator start = state->itPartitionGlobal;
+    vector<NoteGlobale>::iterator end =
+            partitionGlobale.getNextValidIterator(start, state->getCurrentTime());
+    for (vector<NoteGlobale>::iterator it = start; it!=end; it++){
+        if(it->getSignal()) continue;
+        // get a pointer in order to store
+        // just unsended note in note global
+        vector<Note>* vNote = it->getListOfNotes();
+        vector<Note>::iterator start = vNote->begin();
+        vector<Note>::iterator end = vNote->end();
+        for (vector<Note>::iterator it = start; it!=end; it++){
+            Note n = *it;
+            sendNote(n);
+        }
+        vNote->clear();
+    }
 }
