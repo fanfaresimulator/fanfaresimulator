@@ -15,6 +15,9 @@ public:
     bool stateChanged;
     vector<NoteGlobale>::iterator itPartitionGlobal;
 
+    // methods
+    State(vector<NoteGlobale>::iterator& it);
+
     int getKey() const;
     double getTimeLastEvent() const;
     double getBlockTime() const;

@@ -1,5 +1,16 @@
 #include "../include/state.hpp"
 
+State::State(vector<NoteGlobale>::iterator &it) {
+    itPartitionGlobal = it;
+
+    key = 0;
+    stateChanged = false;
+    signal=false;
+    timeLastEvent = 0.0;
+    blockTime = 0.0;
+
+}
+
 double State::getBlockTime() const {
     return blockTime;
 }
@@ -44,7 +55,6 @@ void State::reinitialize() {
 
 bool State::checkStateWithNote(int globalNoteKey, bool globalNoteSignal,
                                double gloablNoteTimeStamp) {
-    double USER_TOLL = 1.0;
     bool keyEquals = (getKey() == globalNoteKey);
     bool signalEquals = (signal == globalNoteSignal);
     bool timesEquals = (getTimeLastEvent() >= gloablNoteTimeStamp - USER_TOLL) &&
