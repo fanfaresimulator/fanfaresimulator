@@ -11,6 +11,11 @@ PartitionGlobale::PartitionGlobale ()	{
 
 }
 
+std::vector<NoteGlobale> PartitionGlobale::getNotes()	{
+	return listOfNotes;
+
+}
+
 PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 	std::vector <NoteGlobale> finalListOfNotes;
