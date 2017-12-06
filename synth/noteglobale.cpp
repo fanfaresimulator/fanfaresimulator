@@ -8,7 +8,7 @@ NoteGlobale::NoteGlobale ()	{
 
 }
 
-NoteGlobale::NoteGlobale (std::list <Note> listOfNotesNew, int newKey, double newTimestamp, bool newSignal, Pupitre pupitrenew)	{
+NoteGlobale::NoteGlobale (std::vector <Note> listOfNotesNew, int newKey, double newTimestamp, bool newSignal, Pupitre pupitrenew)	{
 
 	listOfNotes = listOfNotesNew;
 	key = newKey;
