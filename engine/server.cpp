@@ -91,10 +91,6 @@ void Server::addPupitre(string username, Pupitre p) {
 
 }
 
-void Server::playNote(std::string username, Note note){
-    sp->playNote(&note);
-}
-
 void Server::clientReady(std::string username){
     if (username.empty()){
         throw std::invalid_argument("Username null");
@@ -110,5 +106,9 @@ void Server::clientReady(std::string username){
     if(everyoneReady()) {
         broadcastStart();
     }
+}
+
+void Server::playNote(std::string username, Note note){
+    sp->playNote(&note);
 }
 
