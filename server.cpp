@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 	Advertizer advertizer;
 	NetworkServer networkServer;
 
-	Partition mainPartition = Partition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Partition mainPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
 	Sound_player sound_player;
 
 	//sound_player.testPlayer();
