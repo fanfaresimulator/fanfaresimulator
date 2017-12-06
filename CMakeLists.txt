@@ -49,7 +49,7 @@ set(CLIENT_HEADER_FILES
 	include/ui.hpp
 	include/PupitreWindow.hpp
 	include/UsernameWindow.hpp
-)
+        include/state.hpp)
 
 set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
@@ -60,7 +60,7 @@ set(CLIENT_SOURCE_FILES
 	gui/PupitreWindow.cpp
 	gui/UsernameWindow.cpp
 	engine/client.cpp
-)
+        engine/state.cpp)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}

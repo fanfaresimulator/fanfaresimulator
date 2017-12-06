@@ -44,6 +44,9 @@ void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
 	partitionGlobale = PartitionGlobale(partition);
+    // load game screen here !
+    // need to check with ui team if this block the main thread
+    sendReady();
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool>) {
