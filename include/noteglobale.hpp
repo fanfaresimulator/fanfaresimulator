@@ -1,13 +1,13 @@
 #pragma once
 
 #include <string>
-#include <list>
+#include <vector>
 #include "note.hpp"
 #include "pupitre.hpp"
 
 class NoteGlobale {
 private:
-	std::list <Note> listOfNotes;
+	std::vector <Note> listOfNotes;
 	int key;			// from 1 to 4
 	double timestamp;
 	bool signal;
@@ -16,7 +16,7 @@ private:
 public:
 	NoteGlobale();
 
-	NoteGlobale(std::list <Note> listOfNotes, int key, double timestamp, bool signal, Pupitre pupitrenew);
+	NoteGlobale(std::vector <Note> listOfNotes, int key, double timestamp, bool signal, Pupitre pupitrenew);
 
 	//~NoteGlobale();
 	
