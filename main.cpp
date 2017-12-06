@@ -29,12 +29,5 @@ int main(int argc, char *argv[]) {
 					 &clientEngine, &Client::start);
 
 
-	usernameWindow.addName(username);
-	usernameWindow.printWelcomeMessage();
-	usernameWindow.printInstrumentMessage();
-
-	PupitreWindow pupitreWindow({Pupitre(0, Instrument(2))});
-	// TODO: connect(pupitreWindow->pupitreChosen)
-
 	return app.exec();
 }

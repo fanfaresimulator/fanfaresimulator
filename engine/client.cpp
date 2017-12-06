@@ -4,6 +4,7 @@
 Client::Client(NetworkClient &network, std::string username) {
     this->net = &network;
     this->username = username;
+    sendAddClient(username);
 }
 
 vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
