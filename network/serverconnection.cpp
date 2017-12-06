@@ -14,9 +14,12 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
           return;
         }
         setUsername(name.toStdString());
+        emit server->helloRecv(name.toStdString());
         break;
       }
       case SIG_NOTE: {
+        Note note = noteFromJson(objectFromJson(obj["data"]));
+        emit server->noteRecv(username, note);
         break;
       }
 
@@ -25,17 +28,15 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
         break;
       }
 
-      case SIG_CHOICE_INSTRUMENT: {
+      case SIG_CHOICE_PUPITRE: {
+        // There is no bool n the Json Parsed but we don't need it (defaultValue = false)
+        std::pair<Pupitre, bool> pair = pupitreFromJson(objectFromJson(obj["data"]));
+        emit server->pupitreChoiceRecv(username, pair.first);
         break;
       }
 
       case SIG_READY: {
-        QString s = obj["data"].toString();
-        if (s.isEmpty()) {
-          return;
-        }
-        std::string username = s.toStdString();
-        emit server->readyReceived(username);
+        emit server->readyRecv(username);
         break;
       }
 
