@@ -34,3 +34,7 @@ double NoteGlobale::getTime()	{
 std::vector <Note>* NoteGlobale::getListOfNotes() {
 	return &listOfNotes;
 }
+
+int NoteGlobale::getKey() {
+	return key;
+}

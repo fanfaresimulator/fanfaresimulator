@@ -29,6 +29,17 @@ private :
     Partition partition;        // Use the class Partition
 	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
 
+
+	// state functions
+
+	void mainStateFunction();
+
+	// send all notes after error from previous
+	// it to next expected on note
+	void sendNotesAfterError();
+	void sendNotesUntilCurrentTime();
+	void stateHandleError();
+
 public:
 
 	// need to check with keyboard team !
@@ -45,14 +56,6 @@ public:
 
     void sendReady();
 
-    // state functions
-
-    void mainStateFunction();
-
-    // send all notes after error from previous
-    // it to next expected on note
-    void sendNotesAfterError();
-    void sendNotesUntillCurrentTime();
 
 public slots:
 

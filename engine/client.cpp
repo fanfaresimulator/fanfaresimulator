@@ -65,14 +65,40 @@ void Client::start() {
 
 // State Function
 
+void Client::stateHandleError(){
+    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
+    sendNotesAfterError();
+    state->itPartitionGlobal =
+            partitionGlobale.getNextValidIterator(it, state->getCurrentTime());
+    state->setBlockTime(state->itPartitionGlobal->getTime() - USER_TOLL);
+    state->reinitialize();
+}
 
 
 void Client::mainStateFunction() {
     if(state->getCurrentTime() < state->getBlockTime()) return;
+    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
     if(!state->stateChanged){
-
+        sendNotesUntilCurrentTime();
+        if(state->getCurrentTime() > it->getTime() + USER_TOLL){
+            stateHandleError();
+        }
+    } else {
+        if(state->checkStateWithNote(it->getKey(), it->getSignal(), it->getTime())){
+            if(it->getSignal()){
+                // always be in GBnote off
+                state->itPartitionGlobal++;
+                it++;
+                sendNotesUntilCurrentTime();
+            } else {
+                sendNotesUntilCurrentTime();
+                state->itPartitionGlobal++;
+                it++;
+            }
+        } else {
+            stateHandleError();
+        }
     }
-
 
 }
 
@@ -95,4 +121,21 @@ void Client::sendNotesAfterError() {
         }
         vNote->clear();
     }
+}
+
+void Client::sendNotesUntilCurrentTime() {
+    double currentTime;
+    vector<NoteGlobale>::iterator currentGNote = state->itPartitionGlobal;
+    if(currentGNote->getSignal()) {
+        throw std::invalid_argument("iterater in ON !");
+    }
+    vector<Note>* vNote = state->itPartitionGlobal->getListOfNotes();
+    vector<Note>::iterator start = vNote->begin();
+    vector<Note>::iterator end;
+    for(vector<Note>::iterator it = start; it->getTime() <= currentTime; it++ ) {
+        Note n = *it;
+        sendNote(n);
+        end=it;
+    }
+    vNote->erase(start, end);
 }

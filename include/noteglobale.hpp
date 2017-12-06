@@ -27,6 +27,8 @@ public:
 
 	double getTime();
 
+	int getKey();
+
 	//~NoteGlobale();
 
 	std::vector <Note>* getListOfNotes();
