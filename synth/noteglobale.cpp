@@ -18,6 +18,14 @@ NoteGlobale::NoteGlobale (std::vector <Note> listOfNotesNew, int newKey, double 
 }
 
 
+bool NoteGlobale::getSignal()	{
+	return signal;
+}
+
+double NoteGlobale::getTime()	{
+	return timestamp;
+}
+
 /*NoteGlobale::~NoteGlobale()	{
 	delete listOfNotes;
 	delete pupitre;
