@@ -39,7 +39,7 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 }
 
-std::vector<NoteGlobale>::iterator PartitionGlobale::f1(std::vector<NoteGlobale>::iterator iterActual, double actualTime)	{
+std::vector<NoteGlobale>::iterator PartitionGlobale::getNextValidIterator(std::vector<NoteGlobale>::iterator iterActual, double actualTime)	{
 
 	std::vector<NoteGlobale>::iterator iterCurrent = iterActual;
 
