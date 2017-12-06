@@ -12,7 +12,7 @@
 #include "note.hpp"
 #include "network/client.hpp"
 #include "noteglobale.hpp"
-//#include "partitionglobale.hpp"
+#include "partitionglobale.hpp"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ private :
     std::string username;            // use nothing ?
     Pupitre pupitre;      // use the class Instrument
     Partition partition;        // Use the class Partition
-//	PartitionGlobale partitionglobale; //Use the class NoteGlobale
+	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
 
 public:
 

@@ -43,6 +43,7 @@ void Client::sendReady() {
 void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
+	partitionGlobale = PartitionGlobale(partition);
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool>) {
