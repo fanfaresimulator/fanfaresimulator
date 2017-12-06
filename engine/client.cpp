@@ -99,7 +99,6 @@ void Client::mainStateFunction() {
             stateHandleError();
         }
     }
-
 }
 
 // CAUTION : send notes just from global note with singal == false
