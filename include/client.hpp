@@ -13,6 +13,8 @@
 #include "network/client.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
+#include "state.hpp"
+
 
 using namespace std;
 
@@ -21,6 +23,7 @@ class Client : public QObject {
 private :
     NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
     Keyboard* keyboard;          // !!! Waiting for the class Keyboard
+    State* state;
     std::string username;            // use nothing ?
     Pupitre pupitre;      // use the class Instrument
     Partition partition;        // Use the class Partition

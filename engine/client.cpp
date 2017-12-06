@@ -4,7 +4,6 @@
 Client::Client(NetworkClient &network, std::string username) {
     this->net = &network;
     this->username = username;
-
 }
 
 vector<string> Client::pupitreMapToNameVec(std::map<Pupitre, bool> pmap) {
@@ -44,8 +43,11 @@ void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
 	partitionGlobale = PartitionGlobale(partition);
+    vector<NoteGlobale>::iterator it = partitionGlobale.getNotes().begin();
+    state = new State(it);
     // load game screen here !
     // need to check with ui team if this block the main thread
+
     sendReady();
 }
 
