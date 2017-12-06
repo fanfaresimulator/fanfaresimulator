@@ -1,26 +1,28 @@
 #pragma once
 
 #include <iostream>
-#include <list>
+#include <vector>
 
-#include "noteglobale.hpp"
-#include "instrument.hpp"
+#include "../include/noteglobale.hpp"
+#include "../include/pupitre.hpp"
+#include "../include/partition.hpp"
+//#include "instrument.hpp"
 
 class PartitionGlobale {
 private:
-	std::list <NoteGlobale> listOfNotes;
+	std::vector <NoteGlobale> listOfNotes;
 
 public:
 	PartitionGlobale();
 
-	PartitionGlobale(std::list <NoteGlobale> listOfNotes);
+	PartitionGlobale(Partition mypartition);
 
 	~PartitionGlobale();
 
-	std::list <NoteGlobale> getNotes();
+	std::vector <NoteGlobale> getNotes();
 
 
-	Partition getPartition(Instrument instrument);
+	Partition getPartition(Pupitre pupitre);
 
 
 
