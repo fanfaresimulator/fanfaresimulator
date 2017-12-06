@@ -4,6 +4,11 @@
 #include <vector>
 #include "note.hpp"
 #include "pupitre.hpp"
+#include "partition.hpp"
+
+#define  USER_TOLL (MIN_FRAME_LENGTH/2) // Tolerace donnee a l'utilisateur
+                                        // en appuyant les touches
+
 
 class NoteGlobale {
 private:
