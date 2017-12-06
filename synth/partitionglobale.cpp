@@ -21,8 +21,8 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 
 	for (std::vector<double>::iterator temps=frames.begin(); temps != (frames.end()-1); temps++)	{
 
-		double startTime = (*temps)+USER_TOLL;
-		double endTime = (*(temps+1))-USER_TOLL;
+		double startTime = (*temps)+USER_TOLL/2;
+		double endTime = (*(temps+1))-USER_TOLL/2;
 
 		std::vector <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
 
