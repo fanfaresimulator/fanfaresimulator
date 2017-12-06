@@ -22,24 +22,17 @@ int main(int argc, char *argv[]) {
 	Partition mainPartition = Partition();
 	Sound_player* S = new Sound_player();
 
-//  S->testPlayer();
+	//S->testPlayer();
 
 	Server serverEngine(networkServer, mainPartition, *S);
 
-    /* CONNECTS network server & server engine */
+	/* CONNECTS network server & server engine */
 
-	QObject::connect(&networkServer, &NetworkServer::helloRecv,
-					 &serverEngine, &Server::addClient);
+	QObject::connect(&networkServer, &NetworkServer::helloRecv, &serverEngine,&Server::addClient);
+	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv, &serverEngine, &Server::addPupitre);
+	QObject::connect(&networkServer, &NetworkServer::noteRecv, &serverEngine, &Server::playNote);
+	QObject::connect(&networkServer, &NetworkServer::readyRecv, &serverEngine, &Server::clientReady);
 
-	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv,
-					 &serverEngine, &Server::addPupitre);
-
-	QObject::connect(&networkServer, &NetworkServer::noteRecv,
-					 &serverEngine, &Server::playNote);
-
-	QObject::connect(&networkServer, &NetworkServer::readyReceived,
-					 &serverEngine, &Server::clientReady);
-
-//    delete(S);
+	//delete S;
 	return app.exec();
 }

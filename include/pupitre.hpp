@@ -17,10 +17,9 @@ public:
 
     Instrument getInstrument() const;
 
-    bool isEqual(Pupitre p2);
+    bool isEqual(const Pupitre &p2) const;
 
-    // added by engine
-    bool operator<(const Pupitre& p) const;
+    bool operator==(const Pupitre &other) const;
 
-    bool operator==(const Pupitre& p) const;
+    bool operator<(const Pupitre &other) const;
 };

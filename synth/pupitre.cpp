@@ -13,21 +13,23 @@ int Pupitre::getTrack() const {
   return track;
 };
 
-Instrument Pupitre::getInstrument() const{
+Instrument Pupitre::getInstrument() const {
   return instrument;
 };
 
-bool Pupitre::isEqual(Pupitre p2){
-  return (track == p2.track) && (instrument.isEqual(p2.instrument));
+// should be removed if possible
+bool Pupitre::isEqual(const Pupitre& p2) const {
+  return (track == p2.track) && (this->getInstrument() == p2.getInstrument());
 };
 
-// added by team engine
-bool Pupitre::operator<(const Pupitre &p) const {
-  return (getInstrument().getNumber() <= p.getInstrument().getNumber());
+bool Pupitre::operator==(const Pupitre &other) const {
+  return (track == other.track) && (this->getInstrument() == other.getInstrument());
 }
 
-bool Pupitre::operator==(const Pupitre &p) const {
-    bool sameTrack = (getTrack() == p.getTrack());
-    bool sameInstrument = (getInstrument().getNumber() == p.getInstrument().getNumber());
-    return sameTrack && sameInstrument;
+bool Pupitre::operator<(const Pupitre &other) const {
+  if (!(this->getInstrument() == other.getInstrument())) { // main comparing attribute
+    return this->getInstrument() < other.getInstrument();
+  } else { // if instruments are equal second comparing attribute
+    return track < other.track;
+  }
 }

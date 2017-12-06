@@ -37,6 +37,6 @@ public:
 signals:
   void helloRecv(std::string username);
   void pupitreChoiceRecv(std::string username, Pupitre pupitre);
-  void readyReceived(std::string username);
+  void readyRecv(std::string username);
   void noteRecv(std::string username, Note note);
 };
