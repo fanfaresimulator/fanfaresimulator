@@ -33,6 +33,7 @@ set(COMMON_SOURCE_FILES
 	synth/note.cpp
 	synth/noteglobale.cpp
 	synth/partition.cpp
+	synth/partitionglobale.cpp
 	synth/pupitre.cpp
 	synth/instrument.cpp
 	synth/midi_handler.cpp
