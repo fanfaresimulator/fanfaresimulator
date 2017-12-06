@@ -17,22 +17,22 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       emit startRecv();
       break;
     }
+
     case SIG_LOBBIES: {
       std::cout << "NOT YET IMPLEMENTED" << std::endl;
       break;
     }
 
     case SIG_PUPITRES: {
-      QJsonArray pupitres = arrayFromJson(obj["data"]);
+      std::map<Pupitre, bool> pupitres = pupitresFromJson(arrayFromJson(obj["data"]));
+      emit pupitresRecv(pupitres);
       break;
     }
 
     case SIG_PARTITION: {
-      if (!obj["data"].isArray()) {
-        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-        return;
-      }
-      QJsonArray notes = obj["data"].toArray();
+      QJsonObject data = objectFromJson(obj["data"]);
+      Partition partition = partitionFromJson(data);
+      emit partitionRecv(partition);
       break;
     }
 
@@ -77,7 +77,7 @@ void NetworkClient::sendHello() {
 
 void NetworkClient::sendPupitreChoice(Pupitre pupitre) {
   QJsonObject obj;
-  obj["type"] = SIG_CHOICE_INSTRUMENT;
+  obj["type"] = SIG_CHOICE_PUPITRE;
   obj["data"] = pupitreToJson(pupitre);
   this->sendJsonObject(obj);
 }

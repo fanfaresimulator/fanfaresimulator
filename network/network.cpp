@@ -1,6 +1,6 @@
 #include "../include/network/network.hpp"
 
-static int intFromJson(QJsonValue val) {
+int intFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";
   } else {
@@ -8,7 +8,7 @@ static int intFromJson(QJsonValue val) {
   }
 }
 
-static bool boolFromJson(QJsonValue val) {
+bool boolFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";
   } else {
@@ -16,7 +16,7 @@ static bool boolFromJson(QJsonValue val) {
   }
 }
 
-static double doubleFromJson(QJsonValue val) {
+double doubleFromJson(QJsonValue val) {
   if (!val.isDouble()) {
     throw "Incorrect type";
   } else {
@@ -24,8 +24,7 @@ static double doubleFromJson(QJsonValue val) {
   }
 }
 
-
-static std::string stringFromJson(QJsonValue val) {
+std::string stringFromJson(QJsonValue val) {
   if (!val.isString()) {
     throw "Incorrect type";
   } else {
@@ -56,7 +55,7 @@ QJsonObject instrumentToJson(Instrument instrument) {
 }
 
 Instrument instrumentFromJson(QJsonObject o) {
-  Instrument instr;
+  Instrument instr(intFromJson(o["id"]));
   return instr;
 }
 
@@ -73,7 +72,7 @@ QJsonObject partitionToJson(Partition partition) {
 
   QJsonObject JsonPart;
   JsonPart["notes"] = JsonNotes;
-  JsonPart["pupitre"] = JsonPupitre;
+  JsonPart["pupitres"] = JsonPupitre;
   return JsonPart;
 }
 
@@ -82,6 +81,7 @@ Partition partitionFromJson(QJsonObject o) {
   for (auto && n : arrayFromJson(o["notes"])) {
     notes.push_back(noteFromJson(objectFromJson(n)));
   }
+  // can parse pupitres but can't construct them
   Partition partition(notes);
   return partition;
 }
@@ -100,7 +100,7 @@ QJsonObject noteToJson(Note note) {
 Note noteFromJson(QJsonObject obj) {
   double timestamp = doubleFromJson(obj["timestamp"]);
   bool signal = boolFromJson(obj["signal"]);
-  Pupitre pupitre = pupitreFromJson(obj["pupitre"].toObject()).first;
+  Pupitre pupitre = pupitreFromJson(objectFromJson(obj["pupitre"])).first;
   int key = intFromJson(obj["key"]);
   int velocity = intFromJson(obj["velocity"]);
   Note note(timestamp, signal, pupitre, key, velocity);
@@ -131,4 +131,14 @@ std::pair<Pupitre, bool> pupitreFromJson(QJsonObject o) {
     taken = o["taken"].toBool();
   }
   return std::make_pair(pupitre, taken);
+}
+
+std::map<Pupitre, bool> pupitresFromJson(QJsonArray a) {
+  std::map<Pupitre, bool> pupitres;
+  std::map<Pupitre, bool>::iterator it = pupitres.begin();
+  for (auto && p : a) {
+    std:pair<Pupitre, bool> pair = pupitreFromJson(objectFromJson(p));
+    pupitres.insert(it, pair);
+  }
+  return pupitres;
 }

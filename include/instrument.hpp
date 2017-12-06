@@ -1,11 +1,3 @@
-// VIELLE CLASSE DE STEVEN
-//#pragma once
-
-//typedef int Instrument;
-// enum Instrument{
-//
-// };
-
 #pragma once
 
 #include <string>
@@ -25,4 +17,8 @@ public:
     std::string getname();
 
     bool isEqual(Instrument i2);
+
+    bool operator==(const Instrument &other);
+
+    bool operator<(const Instrument &other);
 };
