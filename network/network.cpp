@@ -1,6 +1,6 @@
 #include "../include/network/network.hpp"
 
-static int intFromJson(QJsonValue val) {
+int intFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";
   } else {
@@ -8,7 +8,7 @@ static int intFromJson(QJsonValue val) {
   }
 }
 
-static bool boolFromJson(QJsonValue val) {
+bool boolFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";
   } else {
@@ -16,7 +16,7 @@ static bool boolFromJson(QJsonValue val) {
   }
 }
 
-static double doubleFromJson(QJsonValue val) {
+double doubleFromJson(QJsonValue val) {
   if (!val.isDouble()) {
     throw "Incorrect type";
   } else {
@@ -25,7 +25,7 @@ static double doubleFromJson(QJsonValue val) {
 }
 
 
-static std::string stringFromJson(QJsonValue val) {
+std::string stringFromJson(QJsonValue val) {
   if (!val.isString()) {
     throw "Incorrect type";
   } else {
@@ -82,6 +82,7 @@ Partition partitionFromJson(QJsonObject o) {
   for (auto && n : arrayFromJson(o["notes"])) {
     notes.push_back(noteFromJson(objectFromJson(n)));
   }
+  // can parse pupitres but can't construct them
   Partition partition(notes);
   return partition;
 }
@@ -131,4 +132,14 @@ std::pair<Pupitre, bool> pupitreFromJson(QJsonObject o) {
     taken = o["taken"].toBool();
   }
   return std::make_pair(pupitre, taken);
+}
+
+std::map<Pupitre, bool> pupitresFromJson(QJsonArray a) {
+  std::map<Pupitre, bool> pupitres;
+  std::map<Pupitre, bool>::iterator it = pupitres.begin();
+  for (auto && p : a) {
+    std:pair<Pupitre, bool> pair = pupitreFromJson(objectFromJson(p));
+    pupitres.insert(it, pair);
+  }
+  return pupitres;
 }

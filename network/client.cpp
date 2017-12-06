@@ -23,7 +23,8 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
     }
 
     case SIG_PUPITRES: {
-      QJsonArray pupitres = arrayFromJson(obj["data"]);
+      std::map<Pupitre, bool> pupitres = pupitresFromJson(arrayFromJson(obj["data"]));
+      emit pupitresRecv(pupitres);
       break;
     }
 

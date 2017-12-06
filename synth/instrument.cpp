@@ -44,3 +44,11 @@ std::string Instrument::getname(){
 bool Instrument::isEqual(Instrument i2){
   return number == i2.number;
 };
+
+bool Instrument::operator==(const Instrument &other) {
+  return this->isEqual(other);
+}
+
+bool Instrument::operator<(const Instrument &other) {
+  return (number < other.number);
+}

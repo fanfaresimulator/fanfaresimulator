@@ -1,6 +1,8 @@
 #pragma once
 
 #include <utility>
+#include <string>
+#include <map>
 #include <QJsonObject>
 #include <QJsonArray>
 
@@ -24,6 +26,10 @@ typedef enum {
   SIG_PARTITION
 } Protocol_sig;
 
+int intFromJson(QJsonValue val);
+bool boolFromJson(QJsonValue val);
+double doubleFromJson(QJsonValue val);
+std::string stringFromJson(QJsonValue val);
 
 QJsonArray arrayFromJson(QJsonValue val);
 QJsonObject objectFromJson(QJsonValue val);
@@ -40,3 +46,4 @@ Note noteFromJson(QJsonObject o);
 QJsonObject pupitreToJson(Pupitre pupitre);
 QJsonObject pupitreToJson(Pupitre pupitre, bool b);
 std::pair<Pupitre, bool> pupitreFromJson(QJsonObject o);
+std::map<Pupitre, bool> pupitresFromJson(QJsonArray a);
