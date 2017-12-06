@@ -25,7 +25,7 @@ public:
 	Partition getPartition(Pupitre pupitre);
 
 	// Cette fonction peut donner listOfNotes.end() lorsqu'on est a la fin de la partiture ... il faut le gerer.
-	std::vector<NoteGlobale>::iterator f1(std::vector<NoteGlobale>::iterator iterActual, double actualTime);
+	std::vector<NoteGlobale>::iterator getNextValidIterator(std::vector<NoteGlobale>::iterator iterActual, double actualTime);
 
 
 
