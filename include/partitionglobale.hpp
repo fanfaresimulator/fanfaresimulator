@@ -28,6 +28,5 @@ public:
 	std::vector<NoteGlobale>::iterator f1(std::vector<NoteGlobale>::iterator iterActual, double actualTime);
 
 
-
 };
 

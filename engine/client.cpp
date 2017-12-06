@@ -43,12 +43,15 @@ void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
 	partitionGlobale = PartitionGlobale(partition);
+
+    // create State
     vector<NoteGlobale>::iterator it = partitionGlobale.getNotes().begin();
     state = new State(it);
+
     // load game screen here !
     // need to check with ui team if this block the main thread
 
-    sendReady();
+    sendReady(); // maybe in ui
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool>) {
@@ -58,4 +61,10 @@ void Client::forwardPupitreMap(std::map<Pupitre, bool>) {
 
 void Client::start() {
     // start UI game screen here : load global partition etc ...
+}
+
+// State Function
+
+void Client::stateFunction() {
+    if(state->getCurrentTime() < state->getBlockTime()) return;
 }

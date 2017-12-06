@@ -45,6 +45,7 @@ public:
 
     void sendReady();
 
+    void stateFunction();
 
 public slots:
 
