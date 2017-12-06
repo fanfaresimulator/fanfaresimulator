@@ -10,21 +10,19 @@ int main(int argc, char *argv[]) {
 
 	Advertizer advertizer;
 	NetworkServer networkServer;
-	// create main partition here !
-	Partition mainPartition = Partition();
-	Sound_player* S = new Sound_player();
 
-	//S->testPlayer();
+	Partition mainPartition = Partition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Sound_player sound_player;
 
-	Server serverEngine(networkServer, mainPartition, *S);
+	//sound_player.testPlayer();
 
-	/* CONNECTS network server & server engine */
+	Server serverEngine(networkServer, mainPartition, sound_player);
 
+	// Connect network server & server engine
 	QObject::connect(&networkServer, &NetworkServer::helloRecv, &serverEngine,&Server::addClient);
 	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv, &serverEngine, &Server::addPupitre);
 	QObject::connect(&networkServer, &NetworkServer::noteRecv, &serverEngine, &Server::playNote);
 	QObject::connect(&networkServer, &NetworkServer::readyRecv, &serverEngine, &Server::clientReady);
 
-	//delete S;
 	return app.exec();
 }
