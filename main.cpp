@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     list.push_back("1");
     list.push_back("D");
     QApplication app(argc, argv);
-    GameWindow window(1000, 1000, list);
+    GameWindow window(500, 500, list);
     window.show();
     cout << t0.elapsed() << endl;
     while (true) {

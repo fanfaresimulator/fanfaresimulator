@@ -6,6 +6,7 @@ GameWindow::GameWindow() : QWidget()
 {
     set_size(1000, 1000);
     set_number_of_lines(4);
+    this->conversion = height * 1.0 / 4000;
     create_lines();
 }
 
@@ -13,6 +14,7 @@ GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
     set_number_of_lines(4);
     create_lines();
+    this->conversion = height * 1.0 / 4000;
 }
 
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {

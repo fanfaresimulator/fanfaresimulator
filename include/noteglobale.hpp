@@ -18,5 +18,11 @@ public:
 	NoteGlobale(std::initializer_list <Note> listOfNotes, double timestamp, bool signal);
 
 	~NoteGlobale();
+
+	int get_key();
+
+	double get_timestamp();
+
+	bool get_signal();
 	
 };

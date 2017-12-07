@@ -10,11 +10,16 @@
 #include "partition.hpp"
 #include "keyboard.hpp"
 #include "note.hpp"
+#include "music_line.hpp"
+#include "gui_note.hpp"
+
+using namespace std;
 
 class UI {
 private:
-	Partition partition;
+	PartitionGlobale partition;
 	//Keyboard keyboard;
+	GameWindow* window;
 
 public:
 	UI();

@@ -29,7 +29,9 @@ public:
     void set_size(int width, int height);
 
     void set_number_of_lines(int number);
-
+    void add_note(GuiNote* n){
+        this->note.push_back(n);
+    }
 
     int get_height();
 
