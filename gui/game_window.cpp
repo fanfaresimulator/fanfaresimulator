@@ -1,6 +1,7 @@
 #include <QKeyEvent>
 #include "game_window.hpp"
 
+GameWindow::GameWindow(int width, int height, vector<string> list, QTime t0) : QWidget() {
 
 GameWindow::GameWindow() : QWidget()
 {
@@ -23,10 +24,7 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
-    /*for(GuiNote* n:note){
-        n->position=100;
-    }*/
-    //std::cout << this->note.size() << std::endl;
+    this->t0 = t0;
 }
 
 void GameWindow::set_size(int width, int height) {
@@ -113,35 +111,38 @@ int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
 
+
+// partie clavier
+
 void GameWindow::keyPressEvent(QKeyEvent *touche) {
     if(touche->key() == Qt::Key_A){
-        emit getpressednote(1,0);
+        emit getpressednote(1, t0.elapsed());
     }
     if(touche->key() == Qt::Key_R){
-        emit getpressednote(2,0);
+        emit getpressednote(2, t0.elapsed());
     }
     if(touche->key() == Qt::Key_U){
-        emit getpressednote(3,0);
+        emit getpressednote(3, t0.elapsed());
     }
     if(touche->key() == Qt::Key_P){
-        emit getpressednote(4,0);
+        emit getpressednote(4, t0.elapsed());
     }
     else{
-        emit getpressednote(0,0);
+        emit getpressednote(0, t0.elapsed());
     }
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
     if(touche->key() == Qt::Key_A){
-        emit getreleasednote(1,0);
+        emit getreleasednote(1, t0.elapsed());
     }
     if(touche->key() == Qt::Key_R){
-        emit getreleasednote(2,0);
+        emit getreleasednote(2, t0.elapsed());
     }
     if(touche->key() == Qt::Key_U){
-        emit getreleasednote(3,0);
+        emit getreleasednote(3, t0.elapsed());
     }
     if(touche->key() == Qt::Key_P){
-        emit getreleasednote(4,0);
+        emit getreleasednote(4, t0.elapsed());
     }
     else{
         emit getreleasednote(0,0);
