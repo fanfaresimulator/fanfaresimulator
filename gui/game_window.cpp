@@ -2,9 +2,15 @@
 #include "game_window.hpp"
 
 GameWindow::GameWindow(int width, int height, vector<string> list, QTime t0) : QWidget() {
+    set_size(width, height);
+    set_number_of_lines(4);
+    this->conversion = height * 1.0 / 4000;
+    create_lines();
+    read_notes(list);
+    this->t0 = t0;
+}
 
-GameWindow::GameWindow() : QWidget()
-{
+GameWindow::GameWindow() : QWidget() {
     set_size(1000, 1000);
     set_number_of_lines(4);
     this->conversion = height * 1.0 / 4000;
@@ -24,7 +30,6 @@ GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
-    this->t0 = t0;
 }
 
 void GameWindow::set_size(int width, int height) {

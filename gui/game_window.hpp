@@ -21,7 +21,9 @@ class GameWindow : public QWidget
   Q_OBJECT
 public:
     GameWindow(int width, int height, vector<string>, QTime t0);
-
+    GameWindow();
+    GameWindow(int width, int height);
+    GameWindow(int width, int height, vector<string> list);
 
     void set_size(int width, int height);
 

@@ -13,7 +13,7 @@
 #include "music_line.hpp"
 #include "gui_note.hpp"
 
-using namespace std;
+//using namespace std;
 
 class UI {
 private:
