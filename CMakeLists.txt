@@ -43,24 +43,28 @@ set(COMMON_SOURCE_FILES
 set(CLIENT_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/client.hpp
+	include/state.hpp
 	include/network/client.hpp
 	include/network/discoverer.hpp
-	include/keyboard.hpp
-	include/ui.hpp
 	include/PupitreWindow.hpp
 	include/UsernameWindow.hpp
-        include/state.hpp)
+	gui/gui_note.hpp
+	gui/music_line.hpp
+)
 
 set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
 	main.cpp
 	network/client.cpp
 	network/discoverer.cpp
-	gui/keyboard.cpp
 	gui/PupitreWindow.cpp
 	gui/UsernameWindow.cpp
 	engine/client.cpp
-        engine/state.cpp)
+	engine/state.cpp
+	gui/game_window.cpp
+	gui/music_line.cpp
+	gui/gui_note.cpp
+)
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}

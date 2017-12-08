@@ -32,5 +32,5 @@ public:
 	//~NoteGlobale();
 
 	std::vector <Note>* getListOfNotes();
-	
+
 };
