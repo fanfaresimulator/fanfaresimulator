@@ -56,6 +56,12 @@ void Client::connectToServer(QHostAddress addr, quint16 port) {
     sendAddClient(username);
 }
 
+void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
+    PupitreWindow pupitreWindow(pupitreMapToVec(pmap));
+    connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
+    pupitreWindow.show();
+}
+
 void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
@@ -84,12 +90,6 @@ void Client::loadPartition(Partition partition) {
     game->show();
 
     sendReady();
-}
-
-void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
-    PupitreWindow pupitreWindow(pupitreMapToVec(pmap));
-    connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
-    pupitreWindow.show();
 }
 
 void Client::start() {

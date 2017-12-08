@@ -33,7 +33,7 @@ std::string stringFromJson(QJsonValue val) {
 }
 
 QJsonArray arrayFromJson(QJsonValue val) {
-  if (!val.isDouble()) {
+  if (!val.isArray()) {
     throw "Incorrect type";
   } else {
     return val.toArray();

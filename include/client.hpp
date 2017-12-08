@@ -53,8 +53,8 @@ public:
 
 public slots:
 	void connectToServer(QHostAddress addr, quint16 port);
-	void loadPartition(Partition partition);
 	void forwardPupitreMap(std::map<Pupitre, bool>);
+	void loadPartition(Partition partition);
 	void choosePupitre(Pupitre p);
 	void start();
 };
