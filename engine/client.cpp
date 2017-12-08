@@ -158,7 +158,7 @@ void Client::sendNotesAfterError() {
 }
 
 void Client::sendNotesUntilCurrentTime() {
-    double currentTime;
+    double currentTime = state->getCurrentTime();
     vector<NoteGlobale>::iterator currentGNote = state->itPartitionGlobal;
     if(currentGNote->getSignal()) {
         throw std::invalid_argument("iter in ON !");

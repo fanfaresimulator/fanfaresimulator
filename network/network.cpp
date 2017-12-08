@@ -137,7 +137,7 @@ std::map<Pupitre, bool> pupitresFromJson(QJsonArray a) {
   std::map<Pupitre, bool> pupitres;
   std::map<Pupitre, bool>::iterator it = pupitres.begin();
   for (auto && p : a) {
-    std:pair<Pupitre, bool> pair = pupitreFromJson(objectFromJson(p));
+    std::pair<Pupitre, bool> pair = pupitreFromJson(objectFromJson(p));
     pupitres.insert(it, pair);
   }
   return pupitres;

@@ -29,7 +29,6 @@ protected:
 private:
     int id;
     string color;
-    int key;
 
     int x;
 
