@@ -17,6 +17,7 @@
 #include "network.hpp"
 
 class NetworkClient : public QObject {
+  Q_OBJECT
 private:
   QTcpSocket *socket;
   std::string username;

@@ -17,8 +17,7 @@
 using namespace std;
 
 class Client : public QObject {
-	Q_OBJECT
-private :
+private:
 	NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
 	State* state;
 	std::string username;            // use nothing ?
