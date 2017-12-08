@@ -21,6 +21,7 @@ class NetworkClient : public QObject {
 private:
   QTcpSocket *socket;
   std::string username;
+  QByteArray pending;
 
   void sendJsonObject(QJsonObject o);
   void handleJsonDoc(QJsonDocument doc);

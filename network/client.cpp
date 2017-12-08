@@ -48,12 +48,14 @@ void NetworkClient::readyRead() {
   std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
 
   // parse JSON
+  pending.append(msg);
   QJsonParseError jerror;
-  QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
+  QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
   if (jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
     return;
   }
+  pending.clear();
   handleJsonDoc(doc);
 }
 
