@@ -1,8 +1,9 @@
+#include "../gui/game_window.hpp"
+#include "../include/client.hpp"
 
-#include <../include/client.hpp>
-
-Client::Client(NetworkClient &network, std::string username) {
-    this->net = &network;
+Client::Client(QApplication *app, NetworkClient *net, std::string username) : QObject() {
+    this->app = app;
+    this->net = net;
     this->username = username;
     sendAddClient(username);
 }
@@ -41,16 +42,31 @@ void Client::sendReady() {
 void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
-	partitionGlobale = PartitionGlobale(partition);
+    partitionGlobale = PartitionGlobale(partition);
 
     // create State
     vector<NoteGlobale>::iterator it = partitionGlobale.getNotes().begin();
     state = new State(it);
 
-    // load game screen here !
-    // need to check with ui team if this block the main thread
+    // load game screen
+    std::vector<string> list;
+    list.push_back("1000");
+    list.push_back("0");
+    list.push_back("U");
+    list.push_back("1500");
+    list.push_back("0");
+    list.push_back("D");
+    list.push_back("3000");
+    list.push_back("1");
+    list.push_back("U");
+    list.push_back("5000");
+    list.push_back("1");
+    list.push_back("D");
+    // TODO: replace with GameWindow(700, 700, partitionGlobale);
+    game = new GameWindow(700, 700, list);
+    game->show();
 
-    sendReady(); // maybe in ui
+    sendReady();
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
@@ -60,7 +76,9 @@ void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
 }
 
 void Client::start() {
-    // start UI game screen here : load global partition etc ...
+    // start game
+    // this blocks, but still processes signals
+    game->run(app);
 }
 
 // STATE FUNCTIONS

@@ -29,7 +29,7 @@ public:
     int get_musicline_radius();
     float get_conversion();
     void set_size(int width, int height);
-    void run(QApplication &app);
+    void run(QApplication *app);
 
     void keyPressEvent(QKeyEvent *touche);
     void keyReleaseEvent(QKeyEvent *touche);

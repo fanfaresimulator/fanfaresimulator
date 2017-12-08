@@ -6,10 +6,13 @@
 
 #include <iostream>
 #include <string>
+#include <QObject>
+#include <QApplication>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "note.hpp"
 #include "network/client.hpp"
+#include "../gui/game_window.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
 #include "state.hpp"
@@ -19,8 +22,10 @@ using namespace std;
 
 class Client : public QObject {
 private:
-	NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
-	State* state;
+	QApplication *app;
+	NetworkClient *net;
+	GameWindow *game;
+	State *state;
 	std::string username;            // use nothing ?
 	Pupitre pupitre;      // use the class Instrument
 	Partition partition;        // Use the class Partition
@@ -36,7 +41,7 @@ private:
 	void stateHandleError();
 
 public:
-	Client(NetworkClient& network, std::string username);
+	Client(QApplication *app, NetworkClient *network, std::string username);
 
 	vector<Pupitre> pupitreMapToVec(std::map<Pupitre, bool>);
 	void sendAddClient(std::string username);

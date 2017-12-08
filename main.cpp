@@ -11,41 +11,19 @@ int main(int argc, char *argv[]) {
 
 	// username screen
 	UsernameWindow usernameWindow;
-	std::string username = usernameWindow.askName();
+	std::string username = usernameWindow.askName(); // blocks
 
 	// net create
 	Discoverer discoverer;
-	NetworkClient client(username);
+	NetworkClient net(username);
 
 	// client engine create
-	Client clientEngine(client, username);
+	Client engine(&app, &net, username);
 
 	// connect network server & server engine
-	QObject::connect(&client, &NetworkClient::pupitresRecv, &clientEngine, &Client::forwardPupitreMap);
-	QObject::connect(&client, &NetworkClient::partitionRecv, &clientEngine, &Client::loadPartition);
-	QObject::connect(&client, &NetworkClient::startRecv, &clientEngine, &Client::start);
-
-	usernameWindow.addName(username);
-	usernameWindow.printWelcomeMessage();
-	usernameWindow.printInstrumentMessage();
-
-	std::vector<string> list;
-	list.push_back("1000");
-	list.push_back("0");
-	list.push_back("U");
-	list.push_back("1500");
-	list.push_back("0");
-	list.push_back("D");
-	list.push_back("3000");
-	list.push_back("1");
-	list.push_back("U");
-	list.push_back("5000");
-	list.push_back("1");
-	list.push_back("D");
-	// TODO: replace with GameWindow window(700, 700, partitionGlobale);
-	GameWindow window(700, 700, list);
-	window.show();
-	window.run(app);
+	QObject::connect(&net, &NetworkClient::pupitresRecv, &engine, &Client::forwardPupitreMap);
+	QObject::connect(&net, &NetworkClient::partitionRecv, &engine, &Client::loadPartition);
+	QObject::connect(&net, &NetworkClient::startRecv, &engine, &Client::start);
 
 	return app.exec();
 }

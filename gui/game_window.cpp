@@ -126,7 +126,7 @@ int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
 
-void GameWindow::run(QApplication &app) {
+void GameWindow::run(QApplication *app) {
     this->show();
     t0.start();
     while (true) {
@@ -134,7 +134,7 @@ void GameWindow::run(QApplication &app) {
         this->actualize_notes(spent_time);
         this->update();
 
-        app.processEvents();
+        app->processEvents();
     }
 }
 
