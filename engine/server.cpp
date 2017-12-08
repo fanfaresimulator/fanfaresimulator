@@ -16,7 +16,7 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     this->pupitreMap = map< Pupitre , bool >();
 
     vector<Pupitre> plist = partition.getPupitre();
-    for(Pupitre p : plist){
+    for (Pupitre p : plist) {
         pair< Pupitre, bool > pair(p, false);
         this->pupitreMap.insert(pair);
     }
@@ -36,8 +36,11 @@ void Server::updatePupitreMap(Pupitre p) {
 }
 
 bool Server::everyoneReady() {
-    for(pair<std::string, bool> clientPaire : clients){
-        if(!clientPaire.second) return false;
+    // TODO: this is just for testing
+    return true;
+
+    for (pair<std::string, bool> clientPaire : clients){
+        if (!clientPaire.second) return false;
     }
     return true;
 }
@@ -92,7 +95,7 @@ void Server::addPupitre(string username, Pupitre p) {
 }
 
 void Server::clientReady(std::string username){
-    if (username.empty()){
+    if (username.empty()) {
         throw std::invalid_argument("Username null");
     }
     // check if username exist in clients
@@ -103,7 +106,8 @@ void Server::clientReady(std::string username){
 
     clients[username] = true;
 
-    if(everyoneReady()) {
+    if (everyoneReady()) {
+        std::cout << "Everyone is ready, starting the party NOW!" << std::endl;
         broadcastStart();
     }
 }
@@ -111,4 +115,3 @@ void Server::clientReady(std::string username){
 void Server::playNote(std::string username, Note note){
     sp->playNote(&note);
 }
-

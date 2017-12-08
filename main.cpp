@@ -12,6 +12,9 @@ int main(int argc, char *argv[]) {
 	// username screen
 	UsernameWindow usernameWindow;
 	std::string username = usernameWindow.askName(); // blocks
+	if (username.empty()) {
+		return 1;
+	}
 
 	// client engine create
 	Client engine(&app, username);

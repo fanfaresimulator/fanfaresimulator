@@ -124,7 +124,8 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 			else	{
 				std::vector<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
 
-				noteSet.erase(findIter);
+				// TODO: this segfaults
+				//noteSet.erase(findIter);
 				finalPartition.push_back(*iterAct);
 
 			}
@@ -139,4 +140,3 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 	return finalPartition;
 
 }
-

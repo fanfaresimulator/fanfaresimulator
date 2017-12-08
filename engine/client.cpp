@@ -66,13 +66,14 @@ void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
     partitionGlobale = PartitionGlobale(partition);
+    std::cout << "Nombre de notes globales : " << partitionGlobale.getNotes().size() << std::endl;
 
     // create State
     vector<NoteGlobale>::iterator it = partitionGlobale.getNotes().begin();
     state = new State(it);
 
-    // load game screen
-    std::vector<string> list;
+    // for testing
+    /*std::vector<string> list;
     list.push_back("1000");
     list.push_back("0");
     list.push_back("U");
@@ -85,8 +86,10 @@ void Client::loadPartition(Partition partition) {
     list.push_back("5000");
     list.push_back("1");
     list.push_back("D");
-    // TODO: replace with GameWindow(700, 700, partitionGlobale);
-    game = new GameWindow(700, 700, list);
+    game = new GameWindow(700, 700, list);*/
+
+    // load game screen
+    game = new GameWindow(700, 700, partitionGlobale);
     game->show();
 
     sendReady();
@@ -95,6 +98,7 @@ void Client::loadPartition(Partition partition) {
 void Client::start() {
     // start game
     // this blocks, but still processes signals
+    std::cout << "Starting the game NOW!" << std::endl;
     game->run(app);
 }
 

@@ -30,6 +30,9 @@ PartitionGlobale::PartitionGlobale (Partition mypartition)	{
 		double endTime = (*(temps+1))-USER_TOLL;
 
 		std::vector <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
+		if (actualSegment.size() == 0) {
+			continue;
+		}
 
 		int randomKey = rand()%3 + 1;
 		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true, actualSegment.begin()->getPupitre()));
@@ -64,4 +67,3 @@ std::vector<NoteGlobale>::iterator PartitionGlobale::getNextValidIterator(std::v
 PartitionGlobale::~PartitionGlobale()	{
 	//delete listOfNotes;
 }
-
