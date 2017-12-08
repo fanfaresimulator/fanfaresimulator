@@ -1,27 +1,31 @@
 #pragma once
 
 #include <iostream>
-#include <list>
+#include <vector>
 
-#include "noteglobale.hpp"
-#include "instrument.hpp"
+#include "../include/noteglobale.hpp"
+#include "../include/pupitre.hpp"
+#include "../include/partition.hpp"
+//#include "instrument.hpp"
 
 class PartitionGlobale {
 private:
-	std::list <NoteGlobale> listOfNotes;
+	std::vector <NoteGlobale> listOfNotes;
 
 public:
 	PartitionGlobale();
 
-	PartitionGlobale(std::list <NoteGlobale> listOfNotes);
+	PartitionGlobale(Partition mypartition);
 
 	~PartitionGlobale();
 
-	std::list <NoteGlobale> getNotes();
+	std::vector <NoteGlobale> getNotes();
 
 
-	Partition getPartition(Instrument instrument);
+	Partition getPartition(Pupitre pupitre);
 
+	// Cette fonction peut donner listOfNotes.end() lorsqu'on est a la fin de la partiture ... il faut le gerer.
+	std::vector<NoteGlobale>::iterator getNextValidIterator(std::vector<NoteGlobale>::iterator iterActual, double actualTime);
 
 
 };

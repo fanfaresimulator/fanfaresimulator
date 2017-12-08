@@ -1,46 +1,28 @@
+#include <QApplication>
 #include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
 #include "include/server.hpp"
 #include "include/sound_player.hpp"
 #include "include/midi_handler.hpp"
 
-#include <QApplication>
-
-#ifdef __unix__
-#include <unistd.h>
-#elif defined(_WIN32) || defined(WIN32)
-#include <windows.h>
-#endif
-
-
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
-	//midi_handler();
-	//testSynth();
-
 	Advertizer advertizer;
-
 	NetworkServer networkServer;
 
-  Sound_player* S = new Sound_player();
+	Partition mainPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Sound_player sound_player;
 
-  S->testPlayer();
+	//sound_player.testPlayer();
 
+	Server serverEngine(networkServer, mainPartition, sound_player);
 
-//	Synthesizer synthesizer;
-	Server serverEngine(networkServer);
+	// Connect network server & server engine
+	QObject::connect(&networkServer, &NetworkServer::helloRecv, &serverEngine,&Server::addClient);
+	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv, &serverEngine, &Server::addPupitre);
+	QObject::connect(&networkServer, &NetworkServer::noteRecv, &serverEngine, &Server::playNote);
+	QObject::connect(&networkServer, &NetworkServer::readyRecv, &serverEngine, &Server::clientReady);
 
-    /* CONNECTS network server & server engine */
-
-//	QObject::connect(&networkServer, &NetworkServer::helloRecv,
-//					 &serverEngine, &Server::addClient);
-//
-//	QObject::connect(&networkServer, &NetworkServer::instrumentChoiceRecv,
-//					 &serverEngine, &Server::addInstrument);
-//
-//	QObject::connect(&networkServer, &NetworkServer::noteRecv,
-//					 &serverEngine, &Server::playNote);
-    delete(S);
 	return app.exec();
 }

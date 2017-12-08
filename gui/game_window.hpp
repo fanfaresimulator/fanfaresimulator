@@ -21,8 +21,13 @@ public:
     GameWindow();
     GameWindow(int width, int height);
     GameWindow(int width, int height, vector<string> list);
-    GameWindow(PartitionGlobale partition);
+    GameWindow(int width, int height, PartitionGlobale partition);
 
+    int get_height();
+    int get_width();
+    int get_number_of_lines();
+    int get_musicline_radius();
+    float get_conversion();
     void set_size(int width, int height);
     void run(QApplication &app);
 
@@ -43,14 +48,7 @@ private:
     QTime t0;
 
     void set_number_of_lines(int number);
-    void add_note(GuiNote* n) {
-        this->note.push_back(n);
-    }
-
-    int get_height();
-    int get_width();
-    int get_number_of_lines();
-    bool get_is_ready();
+    void add_note(GuiNote* n);
 
     int get_time_start();
 
@@ -60,9 +58,6 @@ private:
     void actualize_notes(float spent_time);
     int getPositionNote(int index);
     int getDurationNote(int index);
-    int get_musicline_radius();
-
-    float get_conversion();
 };
 
 #endif
