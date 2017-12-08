@@ -4,16 +4,14 @@
 Client::Client(NetworkClient &network, std::string username) {
     this->net = &network;
     this->username = username;
+    sendAddClient(username);
 }
 
-vector<string> Client::pupitreMapToNameVec(std::map<Pupitre, bool> pmap) {
-    vector<string> pupitreVec = vector<string>();
+vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
+    vector<Pupitre> pupitreVec = vector<Pupitre>();
     for(pair<Pupitre, bool> p : pmap){
         if(!p.second) continue;
-        string instrumentName = p.first.getInstrument().getname();
-        int track = p.first.getTrack();
-        string pupitreName = instrumentName + "_" + to_string(track);
-        pupitreVec.push_back(pupitreName);
+        pupitreVec.push_back(p.first);
     }
     return pupitreVec;
 }
@@ -26,7 +24,8 @@ void Client::sendAddClient(std::string username) {
 }
 
 void Client::choosePupitre(Pupitre p) {
-
+    pupitre = p;
+    net->sendPupitreChoice(p);
 }
 
 void Client::sendNote(Note note) {
@@ -54,16 +53,18 @@ void Client::loadPartition(Partition partition) {
     sendReady(); // maybe in ui
 }
 
-void Client::forwardPupitreMap(std::map<Pupitre, bool>) {
-    // send pupitre map to UI in order to display it HERE !
-    // get choice and ack server about the pupitre choosen sendPupitreChoice
+void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
+    vector<Pupitre> pupitreVec = pupitreMapToVec(pmap);
+    PupitreWindow pupitreWindow(pupitreVec);
+    QObject::connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
+    pupitreWindow.start();
 }
 
 void Client::start() {
     // start UI game screen here : load global partition etc ...
 }
 
-// State Function
+// STATE FUNCTIONS
 
 void Client::stateHandleError(){
     vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
@@ -126,15 +127,14 @@ void Client::sendNotesUntilCurrentTime() {
     double currentTime;
     vector<NoteGlobale>::iterator currentGNote = state->itPartitionGlobal;
     if(currentGNote->getSignal()) {
-        throw std::invalid_argument("iterater in ON !");
+        throw std::invalid_argument("iter in ON !");
     }
     vector<Note>* vNote = state->itPartitionGlobal->getListOfNotes();
     vector<Note>::iterator start = vNote->begin();
-    vector<Note>::iterator end;
-    for(vector<Note>::iterator it = start; it->getTime() <= currentTime; it++ ) {
+    vector<Note>::iterator it;
+    for(it = start; it->getTime() <= currentTime; it++ ) {
         Note n = *it;
         sendNote(n);
-        end=it;
     }
-    vNote->erase(start, end);
+    vNote->erase(start, it);
 }

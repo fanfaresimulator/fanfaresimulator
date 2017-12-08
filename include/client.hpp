@@ -13,6 +13,7 @@
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
 #include "state.hpp"
+#include "PupitreWindow.hpp"
 
 using namespace std;
 
@@ -25,9 +26,7 @@ private:
 	Partition partition;        // Use the class Partition
 	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
 
-
 	// state functions
-
 	void mainStateFunction();
 
 	// send all notes after error from previous
@@ -37,24 +36,16 @@ private:
 	void stateHandleError();
 
 public:
-
 	Client(NetworkClient& network, std::string username);
 
-	vector<string> pupitreMapToNameVec(std::map<Pupitre, bool>);
-
+	vector<Pupitre> pupitreMapToVec(std::map<Pupitre, bool>);
 	void sendAddClient(std::string username);
-
-	void choosePupitre(Pupitre p);
-
 	void sendNote(Note note);
-
 	void sendReady();
 
-
 public slots:
-
 	void loadPartition(Partition partition);
 	void forwardPupitreMap(std::map<Pupitre, bool>);
+	void choosePupitre(Pupitre p);
 	void start();
-
 };
