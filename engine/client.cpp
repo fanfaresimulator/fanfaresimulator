@@ -54,10 +54,9 @@ void Client::loadPartition(Partition partition) {
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
-    vector<Pupitre> pupitreVec = pupitreMapToVec(pmap);
-    PupitreWindow pupitreWindow(pupitreVec);
+    PupitreWindow pupitreWindow(pupitreMapToVec(pmap));
     QObject::connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
-    pupitreWindow.start();
+    pupitreWindow.show();
 }
 
 void Client::start() {

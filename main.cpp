@@ -29,9 +29,6 @@ int main(int argc, char *argv[]) {
 	usernameWindow.printWelcomeMessage();
 	usernameWindow.printInstrumentMessage();
 
-	PupitreWindow pupitreWindow({Pupitre(0, Instrument(2))});
-	QObject::connect(&pupitreWindow, &PupitreWindow::pupitreChosen, &clientEngine, &Client::choosePupitre);
-
 	std::vector<string> list;
 	list.push_back("1000");
 	list.push_back("0");

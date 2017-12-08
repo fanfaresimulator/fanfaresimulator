@@ -12,9 +12,6 @@
 PupitreWindow::PupitreWindow(std::vector<Pupitre> pupitres) : QWidget() {
 	this->pupitres = pupitres;
 
-}
-
-void PupitreWindow::start() {
 	QGroupBox *groupBox = new QGroupBox("Instruments :", this);
 	groupBox->setAlignment(Qt::AlignRight);
 
@@ -36,8 +33,6 @@ void PupitreWindow::start() {
 	vBoxFen->addWidget(groupBox);
 	vBoxFen->addWidget(valider);
 	this->setLayout(vBoxFen);
-
-	this->show();
 }
 
 void PupitreWindow::choosePupitre() {
