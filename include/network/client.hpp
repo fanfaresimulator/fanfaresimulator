@@ -27,7 +27,7 @@ private:
   void readyRead();
 
 public:
-  explicit NetworkClient(std::string username, QObject *parent = Q_NULLPTR);
+  explicit NetworkClient(QHostAddress addr, quint16 port, std::string username, QObject *parent = Q_NULLPTR);
   void sendHello();
   void sendPupitreChoice(Pupitre pupitre);
   void sendReady();

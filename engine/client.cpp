@@ -1,11 +1,13 @@
 #include "../gui/game_window.hpp"
 #include "../include/client.hpp"
 
-Client::Client(QApplication *app, NetworkClient *net, std::string username) : QObject() {
+Client::Client(QApplication *app, std::string username) : QObject() {
     this->app = app;
-    this->net = net;
     this->username = username;
-    sendAddClient(username);
+
+    std::cout << "Discovering server..." << std::endl;
+    this->discoverer = new Discoverer();
+    connect(discoverer, &Discoverer::discovered, this, &Client::connectToServer);
 }
 
 vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
@@ -39,6 +41,21 @@ void Client::sendReady() {
 
 // SLOTS
 
+void Client::connectToServer(QHostAddress addr, quint16 port) {
+    if (net != NULL) {
+        return;
+    }
+
+    std::cout << "Connecting to " << addr.toString().toStdString() << ":" << port << std::endl;
+
+    net = new NetworkClient(addr, port, username);
+    connect(net, &NetworkClient::pupitresRecv, this, &Client::forwardPupitreMap);
+    connect(net, &NetworkClient::partitionRecv, this, &Client::loadPartition);
+    connect(net, &NetworkClient::startRecv, this, &Client::start);
+
+    sendAddClient(username);
+}
+
 void Client::loadPartition(Partition partition) {
     this->partition = partition;
     // generate global partition HERE !
@@ -71,7 +88,7 @@ void Client::loadPartition(Partition partition) {
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
     PupitreWindow pupitreWindow(pupitreMapToVec(pmap));
-    QObject::connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
+    connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
     pupitreWindow.show();
 }
 

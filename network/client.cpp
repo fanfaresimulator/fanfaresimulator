@@ -50,7 +50,7 @@ void NetworkClient::readyRead() {
   // parse JSON
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
-  if(jerror.error != QJsonParseError::ParseError::NoError) {
+  if (jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
     return;
   }
@@ -58,13 +58,14 @@ void NetworkClient::readyRead() {
 }
 
 /* PUBLIC */
-NetworkClient::NetworkClient(std::string username, QObject *parent) :
-QObject(parent) {
-  this->socket = new QTcpSocket(this);
-  // socket->connectToHost(QHostAddress("127.0.0.1"), PORT_NO);
-  this->socket->connectToHost(QHostAddress::SpecialAddress::LocalHost, PORT_NO);
-  connect(socket, &QIODevice::readyRead, this, &NetworkClient::readyRead);
+NetworkClient::NetworkClient(QHostAddress addr, quint16 port, std::string username, QObject *parent) : QObject(parent) {
   this->username = username;
+
+  this->socket = new QTcpSocket(this);
+  // socket->connectToHost(QHostAddress::SpecialAddress::LocalHost, PORT_NO);
+  this->socket->connectToHost(addr, port);
+  connect(socket, &QIODevice::readyRead, this, &NetworkClient::readyRead);
+
   std::cout << "new client: " << username << std::endl;
 }
 

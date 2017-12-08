@@ -8,10 +8,12 @@
 #include <string>
 #include <QObject>
 #include <QApplication>
+#include <QHostAddress>
 #include "instrument.hpp"
 #include "partition.hpp"
 #include "note.hpp"
 #include "network/client.hpp"
+#include "network/discoverer.hpp"
 #include "../gui/game_window.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
@@ -23,6 +25,7 @@ using namespace std;
 class Client : public QObject {
 private:
 	QApplication *app;
+	Discoverer *discoverer;
 	NetworkClient *net;
 	GameWindow *game;
 	State *state;
@@ -41,7 +44,7 @@ private:
 	void stateHandleError();
 
 public:
-	Client(QApplication *app, NetworkClient *network, std::string username);
+	Client(QApplication *app, std::string username);
 
 	vector<Pupitre> pupitreMapToVec(std::map<Pupitre, bool>);
 	void sendAddClient(std::string username);
@@ -49,6 +52,7 @@ public:
 	void sendReady();
 
 public slots:
+	void connectToServer(QHostAddress addr, quint16 port);
 	void loadPartition(Partition partition);
 	void forwardPupitreMap(std::map<Pupitre, bool>);
 	void choosePupitre(Pupitre p);

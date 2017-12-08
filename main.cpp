@@ -13,17 +13,8 @@ int main(int argc, char *argv[]) {
 	UsernameWindow usernameWindow;
 	std::string username = usernameWindow.askName(); // blocks
 
-	// net create
-	Discoverer discoverer;
-	NetworkClient net(username);
-
 	// client engine create
-	Client engine(&app, &net, username);
-
-	// connect network server & server engine
-	QObject::connect(&net, &NetworkClient::pupitresRecv, &engine, &Client::forwardPupitreMap);
-	QObject::connect(&net, &NetworkClient::partitionRecv, &engine, &Client::loadPartition);
-	QObject::connect(&net, &NetworkClient::startRecv, &engine, &Client::start);
+	Client engine(&app, username);
 
 	return app.exec();
 }
