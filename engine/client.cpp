@@ -13,7 +13,7 @@ Client::Client(QApplication *app, std::string username) : QObject() {
 vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
     vector<Pupitre> pupitreVec = vector<Pupitre>();
     for(pair<Pupitre, bool> p : pmap){
-        if(!p.second) continue;
+        if (p.second) continue;
         pupitreVec.push_back(p.first);
     }
     return pupitreVec;
@@ -57,9 +57,9 @@ void Client::connectToServer(QHostAddress addr, quint16 port) {
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
-    PupitreWindow pupitreWindow(pupitreMapToVec(pmap));
-    connect(&pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
-    pupitreWindow.show();
+    pupitreWindow = new PupitreWindow(pupitreMapToVec(pmap));
+    connect(pupitreWindow, &PupitreWindow::pupitreChosen, this, &Client::choosePupitre);
+    pupitreWindow->show();
 }
 
 void Client::loadPartition(Partition partition) {

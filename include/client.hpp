@@ -27,6 +27,7 @@ private:
 	QApplication *app;
 	Discoverer *discoverer;
 	NetworkClient *net;
+	PupitreWindow *pupitreWindow;
 	GameWindow *game;
 	State *state;
 	std::string username;            // use nothing ?
