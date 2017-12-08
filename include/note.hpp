@@ -5,29 +5,30 @@
 
 class Note {
 private:
-    double timestamp;
-    bool signal;                // on/off
-    Pupitre pupitre;
-    int key;                    // note 0 to 127
-    int velocity;               // value 0 to 127
+	double timestamp;
+	bool signal;                // on/off
+	Pupitre pupitre;
+	int key;                    // note 0 to 127
+	int velocity;               // value 0 to 127
 
 public:
-    Note(double timestamp, bool signal, Pupitre pupitre, int key, int velocity);
+	Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
 
-    bool getSignal ();
+	//~Note();
 
-    double getTime ();
+	bool getSignal ();
 
-    Pupitre getPupitre();
+	double getTime ();
 
-    Instrument getInstrument();
+	Pupitre getPupitre();
 
-    int getTrack();
+	int getKey ();
 
-    int getKey ();
+	int getVelocity ();
 
-    int getVelocity ();
+	int getTrack();
 
-    bool isEqual(Note note2); // Compare timestamp and key.
+	//bool isEqual(Note note2); // Compare timestamp and key.
 
+	bool operator== (Note note2); // We surcharge the equality
 };

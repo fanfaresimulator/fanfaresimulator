@@ -6,82 +6,109 @@
 
 using namespace std;
 
-// EMITS will be uncommented after the implementation of dependencies will be done
+Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
+    this->server = &server;
+    this->mainPartition = &partition;
+    this->sp = &sp;
 
-Server::Server(NetworkServer& server) {
-//     this->server = &server;
-//
-//     this->clients = std::map< string, bool >();
-//     this->usrToInstrument = map< std::string, Instrument >();
-// //    emit requestInstrumentList();
+    this->clients = std::map< string, bool >();
+    this->usrToPupitre = map< std::string, Pupitre >();
+    this->pupitreMap = map< Pupitre , bool >();
 
-}
-
-// SLOTS
-
-void Server::instrumentMapInit(std::list<Instrument> ilist) {
-    // this->instrumentMap = map< Instrument, bool>();
-    // for (Instrument i: ilist){
-    //     pair<Instrument, bool> p = pair<Instrument, bool>(i, false);
-    //     this->instrumentMap.insert(p);
-    // }
-}
-
-void Server::addClient(string username) {
-    // if (username.empty()){
-    //     throw std::invalid_argument("Username null");
-    // }
-    // pair< string, bool > p = pair<string, bool>(username, false);
-    // clients.insert(p);
-}
-
-void Server::addInstrument(string username, Instrument i) {
-    // if (username.empty()){
-    //     throw std::invalid_argument("Username null");
-    // }
-    // if (i < 0 || i >= INSTRUMENT_NUMBER) {
-    //     throw std::invalid_argument("wrong instrument");
-    // }
-    // // check if username exist in clients
-    // if ( clients.find(username) == clients.end() ) {
-    //     // not found
-    //     throw std::invalid_argument("Username not found in clients");
-    // }
-    // // found => insert in usrToInstrument
-    // pair< string, Instrument > p = pair<string, Instrument >(username, i);
-    // usrToInstrument.insert(p);
-
-//    emit requestPartition(username, i);
-}
-
-void Server::playNote(std::string username, Note note){
-
-//    emit playNote(note);
-}
-
-void Server::sendPartition(std::string username, Partition partition){
-    // network need to change function signature in network_server
-//    server->sendPartition(username, partition)
-}
-
-void Server::sendInstrumentMap(std::string username) {
-    // change signature of server network + add signal to server network request instruments
-//    server->sendInstruments(username, instrumentMap);
+    vector<Pupitre> plist = partition.getPupitre();
+    for(Pupitre p : plist){
+        pair< Pupitre, bool > pair(p, false);
+        this->pupitreMap.insert(pair);
+    }
 }
 
 /* regular methods */
+
+
+void Server::updatePupitreMap(Pupitre p) {
+    // check if instrument exist in pupitreMap
+    if ( pupitreMap.find(p) == pupitreMap.end() ) {
+        // not found
+        throw std::invalid_argument("Instrument not found in pupitreMap");
+    }
+    // found => update in pupitreMap
+    pupitreMap[p] = true;
+}
+
+bool Server::everyoneReady() {
+    for(pair<std::string, bool> clientPaire : clients){
+        if(!clientPaire.second) return false;
+    }
+    return true;
+}
 
 void Server::broadcastStart() {
     server->broadcastStart();
 }
 
+void Server::sendPartition(std::string username, Partition partition){
+    server->sendPartition(username, partition);
 
-void Server::updateInstrumentMap(Instrument i) {
-    // // check if instrument exist in instrumentMap
-    // if ( instrumentMap.find(i) == instrumentMap.end() ) {
-    //     // not found
-    //     throw std::invalid_argument("Instrument not found in instrumentMap");
-    // }
-    // // found => update in instrumentMap
-    // instrumentMap[i]= true;
 }
+
+void Server::sendPupitreMap(std::string username) {
+    server->sendPupitres(username, pupitreMap);
+}
+
+// SLOTS
+
+void Server::addClient(string username) {
+    if (username.empty()){
+        throw std::invalid_argument("Username null");
+    }
+    pair< string, bool > p = pair<string, bool>(username, false);
+    clients.insert(p);
+
+    // send pupitre map to client
+    sendPupitreMap(username);
+}
+
+void Server::addPupitre(string username, Pupitre p) {
+    if (username.empty()){
+        throw std::invalid_argument("Username null");
+    }
+
+    // check if username exist in clients
+    if ( clients.find(username) == clients.end() ) {
+        // not found
+        throw std::invalid_argument("Username not found in clients");
+    }
+    // found => insert in usrToPupitre
+    pair< string, Pupitre > pair(username, p);
+    usrToPupitre.insert(pair);
+
+    // update pupitreMap
+    updatePupitreMap(p);
+
+//  send apropriate partition to user
+    Partition partition = mainPartition->getPartition(p);
+    sendPartition(username, partition);
+
+}
+
+void Server::clientReady(std::string username){
+    if (username.empty()){
+        throw std::invalid_argument("Username null");
+    }
+    // check if username exist in clients
+    if ( clients.find(username) == clients.end() ) {
+        // not found
+        throw std::invalid_argument("Username not found in clients");
+    }
+
+    clients[username] = true;
+
+    if(everyoneReady()) {
+        broadcastStart();
+    }
+}
+
+void Server::playNote(std::string username, Note note){
+    sp->playNote(&note);
+}
+

@@ -8,41 +8,53 @@
 #include <string>
 #include "instrument.hpp"
 #include "partition.hpp"
-#include "keyboard.hpp"
 #include "note.hpp"
-#include "network_client.hpp"
+#include "network/client.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
+#include "state.hpp"
+
+using namespace std;
 
 class Client : public QObject {
+private:
+	NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
+	State* state;
+	std::string username;            // use nothing ?
+	Pupitre pupitre;      // use the class Instrument
+	Partition partition;        // Use the class Partition
+	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
 
-private :
-    NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
-    Keyboard* keyboard;          // !!! Waiting for the class Keyboard
-    std::string username;            // use nothing ?
-    Instrument instrument;      // use the class Instrument
-    Partition partition;        // Use the class Partition
-	PartitionGlobale partitionglobale; //Use the class NoteGlobale
 
+	// state functions
+
+	void mainStateFunction();
+
+	// send all notes after error from previous
+	// it to next expected on note
+	void sendNotesAfterError();
+	void sendNotesUntilCurrentTime();
+	void stateHandleError();
 
 public:
 
-    Client(NetworkClient& network, Keyboard& keyboard);
+	Client(NetworkClient& network, std::string username);
 
-    ~Client();
+	vector<string> pupitreMapToNameVec(std::map<Pupitre, bool>);
 
-    void sendNote(Note note);
+	void sendAddClient(std::string username);
 
-    void sendReady();
+	void choosePupitre(Pupitre p);
 
-    void sendAddClient(std::string username);
+	void sendNote(Note note);
 
-    void sendAddInstrumentToClient(std::string username, Instrument instrument);
+	void sendReady();
 
-    void requestPartition(Partition partition);
 
-    void loadPartition(Partition partition);
+public slots:
 
-    void setInstrument(Instrument instrument);
+	void loadPartition(Partition partition);
+	void forwardPupitreMap(std::map<Pupitre, bool>);
+	void start();
 
 };

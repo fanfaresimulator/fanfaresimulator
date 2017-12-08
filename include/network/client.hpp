@@ -13,7 +13,6 @@
 
 #include "../instrument.hpp"
 #include "../partition.hpp"
-#include "../keyboard.hpp"
 #include "../note.hpp"
 #include "network.hpp"
 
@@ -39,4 +38,5 @@ signals:
   void partitionRecv(Partition partition);
   void pupitresRecv(std::map<Pupitre, bool>);
   void startRecv();
+
 };
