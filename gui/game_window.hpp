@@ -35,8 +35,7 @@ public:
     void keyReleaseEvent(QKeyEvent *touche);
 
 signals:
-    void getreleasednote(int, int);
-    void getpressednote(int, int);
+    void keyChanged(int key, int t, bool pressed);
 
 private:
     int height;
@@ -58,6 +57,7 @@ private:
     void actualize_notes(float spent_time);
     int getPositionNote(int index);
     int getDurationNote(int index);
+    int getKeyIndex(int keycode);
 };
 
 #endif

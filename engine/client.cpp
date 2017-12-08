@@ -88,7 +88,7 @@ void Client::loadPartition(Partition partition) {
     list.push_back("D");
     game = new GameWindow(700, 700, list);*/
 
-    // load game screen
+    // create game screen
     game = new GameWindow(700, 700, partitionGlobale);
     game->show();
 
@@ -99,7 +99,19 @@ void Client::start() {
     // start game
     // this blocks, but still processes signals
     std::cout << "Starting the game NOW!" << std::endl;
+    connect(game, &GameWindow::keyChanged, this, &Client::pressKey);
     game->run(app);
+}
+
+void Client::pressKey(int key, int t, bool pressed) {
+    if (key < 0) {
+        std::cout << "Pressed/released invalid key" << std::endl;
+        return;
+    }
+    std::cout << "Pressed/released key " << key << std::endl;
+
+    // TODO
+    sendNote(*partition.getNotes().begin());
 }
 
 // STATE FUNCTIONS

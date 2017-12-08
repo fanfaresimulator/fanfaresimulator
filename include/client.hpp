@@ -44,13 +44,13 @@ private:
 	void sendNotesUntilCurrentTime();
 	void stateHandleError();
 
-public:
-	Client(QApplication *app, std::string username);
-
 	vector<Pupitre> pupitreMapToVec(std::map<Pupitre, bool>);
 	void sendAddClient(std::string username);
 	void sendNote(Note note);
 	void sendReady();
+
+public:
+	Client(QApplication *app, std::string username);
 
 public slots:
 	void connectToServer(QHostAddress addr, quint16 port);
@@ -58,4 +58,5 @@ public slots:
 	void loadPartition(Partition partition);
 	void choosePupitre(Pupitre p);
 	void start();
+	void pressKey(int key, int t, bool pressed);
 };

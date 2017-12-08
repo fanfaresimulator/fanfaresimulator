@@ -140,37 +140,24 @@ void GameWindow::run(QApplication *app) {
 
 // partie clavier
 
-void GameWindow::keyPressEvent(QKeyEvent *touche) {
-    if(touche->key() == Qt::Key_A){
-        emit getpressednote(1, t0.elapsed());
+int GameWindow::getKeyIndex(int keycode) {
+    switch (keycode) {
+    case Qt::Key_D:
+        return 0;
+    case Qt::Key_F:
+        return 1;
+    case Qt::Key_J:
+        return 2;
+    case Qt::Key_K:
+        return 3;
     }
-    if(touche->key() == Qt::Key_R){
-        emit getpressednote(2, t0.elapsed());
-    }
-    if(touche->key() == Qt::Key_U){
-        emit getpressednote(3, t0.elapsed());
-    }
-    if(touche->key() == Qt::Key_P){
-        emit getpressednote(4, t0.elapsed());
-    }
-    else{
-        emit getpressednote(0, t0.elapsed());
-    }
+    return -1;
 }
-void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
-    if(touche->key() == Qt::Key_A){
-        emit getreleasednote(1, t0.elapsed());
-    }
-    if(touche->key() == Qt::Key_R){
-        emit getreleasednote(2, t0.elapsed());
-    }
-    if(touche->key() == Qt::Key_U){
-        emit getreleasednote(3, t0.elapsed());
-    }
-    if(touche->key() == Qt::Key_P){
-        emit getreleasednote(4, t0.elapsed());
-    }
-    else{
-        emit getreleasednote(0, t0.elapsed());
-    }
+
+void GameWindow::keyPressEvent(QKeyEvent *event) {
+    std::cout << "Pressed" << std::endl;
+    emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), true);
+}
+void GameWindow::keyReleaseEvent(QKeyEvent *event) {
+    emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), false);
 }
