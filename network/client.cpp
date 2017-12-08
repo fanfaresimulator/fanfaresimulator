@@ -17,26 +17,22 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       emit startRecv();
       break;
     }
+
     case SIG_LOBBIES: {
       std::cout << "NOT YET IMPLEMENTED" << std::endl;
       break;
     }
 
-    case SIG_INSTRUMENTS: {
-      if (!obj["data"].isArray()) {
-        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-        return;
-      }
-      QJsonArray instruments = obj["data"].toArray();
+    case SIG_PUPITRES: {
+      std::map<Pupitre, bool> pupitres = pupitresFromJson(arrayFromJson(obj["data"]));
+      emit pupitresRecv(pupitres);
       break;
     }
 
     case SIG_PARTITION: {
-      if (!obj["data"].isArray()) {
-        std::cout << "obj[\"data\"] is supposed to be an array not a " << obj["data"].type() << std::endl;
-        return;
-      }
-      QJsonArray notes = obj["data"].toArray();
+      QJsonObject data = objectFromJson(obj["data"]);
+      Partition partition = partitionFromJson(data);
+      emit partitionRecv(partition);
       break;
     }
 
@@ -79,10 +75,10 @@ void NetworkClient::sendHello() {
   this->sendJsonObject(obj);
 }
 
-void NetworkClient::sendInstrumentChoice(Instrument instrument) {
+void NetworkClient::sendPupitreChoice(Pupitre pupitre) {
   QJsonObject obj;
-  obj["type"] = SIG_CHOICE_INSTRUMENT;
-  obj["data"] = QString::fromStdString("NOT YET IMPLEMENTED");
+  obj["type"] = SIG_CHOICE_PUPITRE;
+  obj["data"] = pupitreToJson(pupitre);
   this->sendJsonObject(obj);
 }
 
@@ -95,13 +91,6 @@ void NetworkClient::sendReady(){
 void NetworkClient::sendNote(Note note) {
   QJsonObject obj;
   obj["type"] = SIG_NOTE;
-  QJsonObject JSonNote;
-  JSonNote["timestamp"] = QString::fromStdString("NEED GETTER");
-  JSonNote["signal"] = QString::fromStdString("NEED GETTER");
-  JSonNote["instrument"] = QString::fromStdString("NEED GETTER");
-  JSonNote["velocity"] = 0;
-  JSonNote["key"] = 0;
-  JSonNote["track"] = 0;
-  obj["data"] = JSonNote;
+  obj["data"] = noteToJson(note);
   this->sendJsonObject(obj);
 }

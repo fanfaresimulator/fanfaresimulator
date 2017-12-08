@@ -1,20 +1,34 @@
 #include <QKeyEvent>
 #include "game_window.hpp"
 
-GameWindow::GameWindow(int width, int height, vector<string> list, QTime t0) : QWidget() {
-    set_size(width, height);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
-    create_lines();
-    read_notes(list);
-    this->t0 = t0;
-}
-
 GameWindow::GameWindow() : QWidget() {
     set_size(1000, 1000);
     set_number_of_lines(4);
     this->conversion = height * 1.0 / 4000;
     create_lines();
+}
+
+GameWindow::GameWindow(PartitionGlobale partition) : QWidget() {
+    set_number_of_lines(4);
+    this->conversion = height * 1.0 / 4000;
+    create_lines();
+
+    std::list<NoteGlobale> notes = partition.getNotes();
+    int size = notes.size();
+    double time1, time2;
+    for (int i=0;i<size;i++) {
+        if (notes[i].signal) {
+            time1 = notes[i].get_timestamp();
+            int key = notes[i].get_key();
+            for (int j = i; j < size; j++) {
+                if (notes[j].get_key() == key && notes[j].signal) {
+                    time2 = notes[j].get_timestamp();
+                    this->add_note(new GuiNote(this, key, time1, time2));
+                    break;
+                }
+            }
+        }
+    }
 }
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
@@ -42,24 +56,8 @@ void GameWindow::set_number_of_lines(int number) {
     this->number_of_lines = number;
 }
 
-int GameWindow::get_width() {
-    return this->width;
-}
-
-int GameWindow::get_height() {
-    return height;
-}
-
 int GameWindow::get_number_of_lines() {
     return number_of_lines;
-}
-
-bool GameWindow::get_is_ready() {
-    return is_ready;
-}
-
-int GameWindow::get_time_start() {
-    return time_start;
 }
 
 void GameWindow::create_lines(){
@@ -116,6 +114,17 @@ int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
 
+void GameWindow::run(QApplication &app) {
+    window.show();
+    t0.start();
+    while (true) {
+        int spent_time = t0.elapsed();
+        window.actualize_notes(spent_time);
+        window.update();
+
+        app.processEvents();
+    }
+}
 
 // partie clavier
 
@@ -150,6 +159,6 @@ void GameWindow::keyReleaseEvent(QKeyEvent *touche) {
         emit getreleasednote(4, t0.elapsed());
     }
     else{
-        emit getreleasednote(0,0);
+        emit getreleasednote(0, t0.elapsed());
     }
 }

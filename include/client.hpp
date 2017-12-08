@@ -8,7 +8,6 @@
 #include <string>
 #include "instrument.hpp"
 #include "partition.hpp"
-#include "keyboard.hpp"
 #include "note.hpp"
 #include "network_client.hpp"
 #include "noteglobale.hpp"
@@ -18,7 +17,6 @@ class Client : public QObject {
 
 private :
     NetworkClient* net;              // !!! use the class Socket => Remark : waiting for the implementation
-    Keyboard* keyboard;          // !!! Waiting for the class Keyboard
     std::string username;            // use nothing ?
     Instrument instrument;      // use the class Instrument
     Partition partition;        // Use the class Partition

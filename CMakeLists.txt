@@ -35,6 +35,7 @@ set(COMMON_SOURCE_FILES
 	synth/pupitre.cpp
 	synth/instrument.cpp
 	synth/midi_handler.cpp
+	network/network.cpp
 )
 
 set(CLIENT_HEADER_FILES
@@ -42,11 +43,9 @@ set(CLIENT_HEADER_FILES
 	include/client.hpp
 	include/network/client.hpp
 	include/network/discoverer.hpp
-	include/keyboard.hpp
-	include/ui.hpp
-	include/InstrumentWindow.hpp
+	include/PupitreWindow.hpp
 	include/UsernameWindow.hpp
-		gui/gui_note.hpp
+	gui/gui_note.hpp
 	gui/music_line.hpp
 )
 
@@ -55,14 +54,12 @@ set(CLIENT_SOURCE_FILES
 	main.cpp
 	network/client.cpp
 	network/discoverer.cpp
-	gui/keyboard.cpp
-	gui/InstrumentWindow.cpp
+	gui/PupitreWindow.cpp
 	gui/UsernameWindow.cpp
 	engine/client.cpp
-	include/sound_player.h
 	gui/game_window.cpp
 	gui/music_line.cpp
-		gui/gui_note.cpp
+	gui/gui_note.cpp
 )
 
 set(SERVER_HEADER_FILES

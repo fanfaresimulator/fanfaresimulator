@@ -1,6 +1,8 @@
 #include <QApplication>
-#include <QTime>
-#include "include/InstrumentWindow.hpp"
+#include "include/network/client.hpp"
+#include "include/network/discoverer.hpp"
+#include "include/UsernameWindow.hpp"
+#include "include/PupitreWindow.hpp"
 #include "gui/game_window.hpp"
 
 int main(int argc, char *argv[]) {
@@ -19,16 +21,19 @@ int main(int argc, char *argv[]) {
     list.push_back("D");
     QApplication app(argc, argv);
 
-    QTime t0 = QTime::currentTime();
-    GameWindow window(1000, 1000, list, t0);
+    GameWindow window(1000, 1000, list);
     window.show();
-    t0.start();
-    while (true) {
-        int spent_time = t0.elapsed();
-        window.actualize_notes(spent_time);
-        window.update();
+    window.run(app);
+    return 0;
 
-        QCoreApplication::processEvents();
-    }
-    return app.exec();
+    // UsernameWindow usernameWindow;
+    // std::string username = usernameWindow.askName();
+    // usernameWindow.addName(username);
+    // usernameWindow.printWelcomeMessage();
+    // usernameWindow.printInstrumentMessage();
+    //
+    // PupitreWindow pupitreWindow({Pupitre(0, Instrument(2))});
+    // // TODO: connect(pupitreWindow->pupitreChosen)
+    //
+    // return app.exec();
 }

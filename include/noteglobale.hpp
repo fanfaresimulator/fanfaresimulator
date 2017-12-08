@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <note>
+#include "note.hpp"
 #include "instrument.hpp"
 
 class NoteGlobale {
@@ -24,5 +24,5 @@ public:
 	double get_timestamp();
 
 	bool get_signal();
-	
+
 };
