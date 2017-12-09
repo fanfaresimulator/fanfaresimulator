@@ -31,4 +31,6 @@ public:
 	//bool isEqual(Note note2); // Compare timestamp and key.
 
 	bool operator== (Note note2); // We surcharge the equality
+
+	void print();
 };

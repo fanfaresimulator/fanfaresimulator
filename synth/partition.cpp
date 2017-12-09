@@ -140,3 +140,9 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 	return finalPartition;
 
 }
+
+void Partition::print() {
+	for (std::vector<Note>::iterator iter = listOfNotes.begin(); iter != listOfNotes.end(); iter++)	{
+		iter->print();
+	}
+}

@@ -1,8 +1,5 @@
+#include <iostream>
 #include "../include/note.hpp"
-
-/*Note::~Note() {
-	delete this->pupitre;
-}*/
 
 Note::Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity){
 	this->timestamp = timestamp;
@@ -13,7 +10,7 @@ Note::Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velo
 };
 
 bool Note::getSignal(){
- return signal;
+	return signal;
 };
 
 int Note::getTrack() {
@@ -21,21 +18,26 @@ int Note::getTrack() {
 }
 
 double Note::getTime(){
- return timestamp;
+	return timestamp;
 };
 
 Pupitre Note::getPupitre(){
- return pupitre ;
+	return pupitre;
 };
 
 int Note::getKey(){
- return key;
+	return key;
 };
 
 int Note::getVelocity (){
- return velocity;
+	return velocity;
 };
 
-bool Note::operator== (Note note2) {
+bool Note::operator==(Note note2) {
 	return (key == note2.key);
+}
+
+void Note::print() {
+	std::cout << "Note{ .timestamp=" << timestamp << "; .signal = " << signal <<
+		"; .key = " << key << "; .velocity = " << velocity << " }" << std::endl;
 }

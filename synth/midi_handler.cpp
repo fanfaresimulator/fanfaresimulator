@@ -80,8 +80,8 @@ std::vector<Note> midi_handler::midi_handler_fromString(std::string s) {
               Note n = Note(getTime(midifile.getEvent(track, event).tick, midifile, timetype),
                             (int)midifile.getEvent(track, event).isNoteOn(),
                            Pupitre(track, Instrument(instru)),
-                             (int)midifile.getEvent(track, event)[0],
-                           (int)midifile.getEvent(track, event)[1]);
+                             (int)midifile.getEvent(track, event)[1],
+                           (int)midifile.getEvent(track, event)[2]);
              listOfNotes.push_back(n);
             }
       }
