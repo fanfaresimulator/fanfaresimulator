@@ -35,7 +35,7 @@ public:
     void keyReleaseEvent(QKeyEvent *touche);
 
 signals:
-    void keyChanged(int key, int t, bool pressed);
+    void keyChanged(int key, double t, bool pressed);
 
 private:
     int height;

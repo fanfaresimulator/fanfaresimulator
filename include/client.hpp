@@ -58,5 +58,5 @@ public slots:
 	void loadPartition(Partition partition);
 	void choosePupitre(Pupitre p);
 	void start();
-	void pressKey(int key, int t, bool pressed);
+	void pressKey(int key, double t, bool pressed);
 };

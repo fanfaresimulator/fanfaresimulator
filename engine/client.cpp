@@ -1,3 +1,4 @@
+#include <cmath>
 #include "../include/client.hpp"
 
 Client::Client(QApplication *app, std::string username) : QObject() {
@@ -102,18 +103,35 @@ void Client::start() {
     game->run(app);
 }
 
-void Client::pressKey(int key, int t, bool pressed) {
-    if (!pressed) {
-        return; // TODO: handle released keys
-    }
+void Client::pressKey(int key, double t, bool pressed) {
     if (key < 0) {
-        std::cout << "Pressed invalid key" << std::endl;
+        std::cout << "Invalid key" << std::endl;
         return;
     }
-    std::cout << "Pressed key " << key << std::endl;
+    if (pressed) {
+        std::cout << "Pressed key " << key << std::endl;
+    } else {
+        std::cout << "Released key " << key << std::endl;
+    }
 
-    // TODO
-    sendNote(*partition.getNotes().begin());
+    // TODO: improve this
+    std::vector<NoteGlobale> notes = partitionGlobale.getNotes();
+    NoteGlobale *best = nullptr;
+    double bestDiff = std::numeric_limits<double>::infinity();
+    for (int i = 0; i < notes.size(); ++i) {
+        NoteGlobale *n = &notes[i];
+        if (n->getKey() != key || n->getSignal() != pressed) {
+            continue;
+        }
+
+        double dt = std::abs(t - n->getTime());
+        if (dt < bestDiff) {
+            best = n;
+            dt = bestDiff;
+        }
+    }
+
+    sendNote(*best->getListOfNotes()->begin());
 }
 
 // STATE FUNCTIONS
