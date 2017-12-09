@@ -18,7 +18,7 @@ void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
   for (size_t i = 0; i < clients.size(); i++) {
     if (clients[i]->getUsername() == username) {
       QJsonDocument doc = QJsonDocument(obj);
-      QByteArray msg = doc.toJson();
+      QByteArray msg = doc.toJson(JSON_FORMAT);
       clients[i]->write(msg);
       return;
     }
@@ -36,8 +36,7 @@ void NetworkServer::broadcast(QJsonObject obj) {
 }
 
 /* PUBLIC */
-NetworkServer::NetworkServer(QObject *parent) :
-QObject(parent) {
+NetworkServer::NetworkServer(QObject *parent) : QObject(parent) {
   server = new QTcpServer(this);
 
   connect(server, &QTcpServer::newConnection, this, &NetworkServer::newConnection);

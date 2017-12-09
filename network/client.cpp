@@ -3,7 +3,7 @@
 /* PRIVATE */
 void NetworkClient::sendJsonObject(QJsonObject o) {
   QJsonDocument doc = QJsonDocument(o);
-  QByteArray msg = doc.toJson();
+  QByteArray msg = doc.toJson(JSON_FORMAT);
   std::cout << "sending: " << QString(msg).toStdString() << std::endl;
   socket->write(msg);
 }

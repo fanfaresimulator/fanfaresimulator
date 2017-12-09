@@ -1,12 +1,10 @@
 #include "../include/server.hpp"
-#include <string>
 #include <iostream>
-#include <utility>
-#include <map>
 
 using namespace std;
 
-Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
+Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp,
+  QObject *parent) : QObject(parent) {
     this->server = &server;
     this->mainPartition = &partition;
     this->sp = &sp;
@@ -20,6 +18,8 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
         pair< Pupitre, bool > pair(p, false);
         this->pupitreMap.insert(pair);
     }
+
+    connect(&server, &NetworkServer::helloRecv, this, &Server::addClient);
 }
 
 /* regular methods */
@@ -60,7 +60,7 @@ void Server::sendPupitreMap(std::string username) {
 
 // SLOTS
 
-void Server::addClient(string username) {
+void Server::addClient(std::string username) {
     if (username.empty()){
         throw std::invalid_argument("Username null");
     }

@@ -4,6 +4,7 @@
 Client::Client(QApplication *app, std::string username) : QObject() {
     this->app = app;
     this->username = username;
+    this->net = NULL;
 
     std::cout << "Discovering server..." << std::endl;
     this->discoverer = new Discoverer();

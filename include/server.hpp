@@ -17,9 +17,7 @@
 #include "sound_player.hpp"
 
 
-
-class Server  : public QObject {
-
+class Server : public QObject {
 private:
     NetworkServer* server;
     Partition* mainPartition;
@@ -36,8 +34,7 @@ private:
     void sendPupitreMap(std::string username);
 
 public:
-
-    Server(NetworkServer& server, Partition& partition, Sound_player& sp);
+    explicit Server(NetworkServer& server, Partition& partition, Sound_player& sp, QObject *parent = Q_NULLPTR);
 
 public slots:
     void addClient(std::string username);
