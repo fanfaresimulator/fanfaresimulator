@@ -61,7 +61,7 @@ void Sound_player::playNote(Note* note){
         fluid_synth_noteon(synth, note->getTrack(), note->getKey(), note->getVelocity());
     }
     else {
-        fluid_synth_noteoff(synth, note->getTrack(),note->getVelocity ());
+        fluid_synth_noteoff(synth, note->getTrack(), note->getKey());
     }
 }
 
