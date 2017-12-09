@@ -4,7 +4,10 @@
 void NetworkClient::sendJsonObject(QJsonObject o) {
   QJsonDocument doc = QJsonDocument(o);
   QByteArray msg = doc.toJson(JSON_FORMAT);
-  std::cout << "sending: " << QString(msg).toStdString() << std::endl;
+  size_t size = msg.size();
+  msg.push_front(';'); // separator
+  msg.push_front((std::to_string(size)).c_str());
+  std::cout << "SENDING (size: "<< size << " bytes)\n" << msg.toStdString();
   socket->write(msg);
 }
 
@@ -43,19 +46,32 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
 }
 
 void NetworkClient::readyRead() {
-  std::cout << "Client " << username << " is reading :" << std::endl << "##beg##\n";
   QByteArray msg = socket->readAll();
-  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
+  std::cout << "READING\n" <<  QString(msg).toStdString() << std::endl;
 
-  // parse JSON
-  pending.append(msg);
+  bool ok;
+  size_t objBeg = msg.indexOf(';');
+  int size = msg.left(objBeg).toInt(&ok,10);
+  std::cout << "size:" << size << std::endl;
+  if (!ok) { // in the middle of the message
+    size = msg.size(); // we take it all...
+    objBeg = 0;        // ...from the begining
+  }
+
+  QByteArray content = msg.right(size - objBeg + 2); // +1 cannot bug
+  pending.append(content);
+  std::cout << "pending content" << QString(content).toStdString();
+  std::cout << "pending size : "<< pending.size();
+  if (pending.size() != size) { // only parts of the message has arrived
+    return;
+  }
+  // message is arrived entirely
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
   if (jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
     return;
   }
-  pending.clear();
   handleJsonDoc(doc);
 }
 

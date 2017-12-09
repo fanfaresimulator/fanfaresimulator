@@ -48,17 +48,33 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
 }
 
 void ServerConnection::readyRead() {
-  std::cout << "Reading from " << username << std::endl << "##beg##\n";
   QByteArray msg = socket->readAll();
-  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
+  std::cout << "READING\n" <<  QString(msg).toStdString() << std::endl;
 
+  bool ok;
+  size_t objBeg = msg.indexOf(';');
+  int size = msg.left(objBeg).toInt(&ok,10);
+  std::cout << "size:" << size << std::endl;
+  if (!ok) { // in the middle of the message
+    size = msg.size(); // we take it all...
+    objBeg = 0;        // ...from the begining
+  }
+
+  QByteArray content = msg.right(size - objBeg + 2); // +1 cannot bug
+  pending.append(content);
+  std::cout << "pending content" << QString(content).toStdString();
+  std::cout << "pending size : "<< pending.size();
+  if (pending.size() != size) { // only parts of the message has arrived
+    return;
+  }
+  // message is arrived entirely
   QJsonParseError jerror;
-  QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
+  QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
   if(jerror.error != QJsonParseError::ParseError::NoError) {
     std::cout << jerror.errorString().toStdString() << std::endl;
     return;
   }
-
+  pending.clear();
   handleJsonDoc(doc);
 }
 

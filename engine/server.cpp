@@ -18,8 +18,6 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp,
         pair< Pupitre, bool > pair(p, false);
         this->pupitreMap.insert(pair);
     }
-
-    connect(&server, &NetworkServer::helloRecv, this, &Server::addClient);
 }
 
 /* regular methods */

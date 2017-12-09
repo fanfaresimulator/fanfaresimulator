@@ -12,6 +12,7 @@ private:
   NetworkServer *server;
   QTcpSocket *socket;
   std::string username;
+  QByteArray pending;
 
   void setUsername(std::string username);
   void handleJsonDoc(QJsonDocument doc);
