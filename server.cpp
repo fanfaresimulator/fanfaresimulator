@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	//mainPartition.print();
 
 	Sound_player sound_player;
-	//sound_player.testPlayer();
+	sound_player.testPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 

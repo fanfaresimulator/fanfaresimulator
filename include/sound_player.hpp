@@ -1,5 +1,6 @@
 #include "partition.hpp"
 #include <fluidsynth.h>
+#include <unistd.h>
 
 #ifndef FANFARESIMULATOR_SOUND_PLAYER_H
 #define FANFARESIMULATOR_SOUND_PLAYER_H
@@ -22,6 +23,8 @@ public:
     void playNote(Note* note);
 
     void testPlayer();
+
+    void testPartition(std::string filename);
 
     void initPupitres(Partition partition);
 };

@@ -49,7 +49,6 @@ void Sound_player::playNote(Note* note){
     else {
         fluid_synth_noteoff(synth, note->getTrack(),note->getVelocity ());
     }
-    printf("played !\n");
 }
 
 void Sound_player::testPlayer() {
@@ -78,6 +77,19 @@ void Sound_player::testPlayer() {
         Sleep(1000);
 #endif
         playNote(noteoff_2);
+    }
+
+}
+
+
+void Sound_player::testPartition(std::string filename) {
+    Partition partition = Partition(filename);
+    initPupitres(partition);
+
+    for (int i = 0; i < partition.getNotes().size() - 1; i++) {
+        playNote(&partition.getNotes()[i]);
+        // Sleep for 1 second
+        usleep(1000000 * (partition.getNotes()[i + 1].getTime() - partition.getNotes()[i].getTime()));
     }
 
 }
