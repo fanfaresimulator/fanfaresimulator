@@ -3,7 +3,6 @@
 GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
     this->parent = parent;
-    this->parent = parent;
     this->visible_duration = parent->get_height() / parent->get_conversion();
     this->line_id = id;
     this->time_to_play = time_begin/*+t0*/;
@@ -41,4 +40,10 @@ void GuiNote::actualize_position(float spent_time) {
         int radius = this->parent->get_musicline_radius();
         this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 3 * radius - l;
     }
+}
+
+void GuiNote::print() {
+    std::cout << "GuiNote{ .line_id = " << line_id <<
+        "; .time_to_play = " << time_to_play <<"; .duration = " << duration <<
+        " }" << std::endl;
 }

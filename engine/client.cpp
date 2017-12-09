@@ -103,11 +103,14 @@ void Client::start() {
 }
 
 void Client::pressKey(int key, int t, bool pressed) {
+    if (!pressed) {
+        return; // TODO: handle released keys
+    }
     if (key < 0) {
-        std::cout << "Pressed/released invalid key" << std::endl;
+        std::cout << "Pressed invalid key" << std::endl;
         return;
     }
-    std::cout << "Pressed/released key " << key << std::endl;
+    std::cout << "Pressed key " << key << std::endl;
 
     // TODO
     sendNote(*partition.getNotes().begin());

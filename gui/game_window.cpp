@@ -17,17 +17,25 @@ GameWindow::GameWindow(int width, int height, PartitionGlobale partition) : QWid
     std::vector<NoteGlobale> notes = partition.getNotes();
     int size = notes.size();
     for (int i=0;i<size;i++) {
-        if (notes[i].getSignal()) {
-            double time1 = notes[i].getTime();
-            int key = notes[i].getKey();
-            for (int j = i; j < size; j++) {
-                if (notes[j].getKey() == key && !notes[j].getSignal()) {
-                    double time2 = notes[j].getTime();
-                    this->add_note(new GuiNote(this, key, time1, time2));
-                    break;
-                }
+        if (!notes[i].getSignal()) {
+            continue;
+        }
+
+        double time1 = notes[i].getTime();
+        int key = notes[i].getKey();
+        for (int j = i; j < size; j++) {
+            if (notes[j].getKey() == key && !notes[j].getSignal()) {
+                double time2 = notes[j].getTime();
+                this->add_note(new GuiNote(this, key, time1*1000, time2*1000));
+                break;
             }
         }
+    }
+
+    std::cout << "Number of GUI notes: " << note.size() << std::endl;
+
+    for (int i = 0; i < note.size(); ++i) {
+        note[i]->print();
     }
 }
 
