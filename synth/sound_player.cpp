@@ -7,6 +7,20 @@
 #include "../include/sound_player.hpp"
 #include "../include/note.hpp"
 
+// Fuck you windows
+#if defined(_WIN32) || defined(WIN32)
+void usleep(int waitTime){
+__int64 time1 = 0, time2 = 0, sysFreq = 0;
+
+QueryPerformanceCounter((LARGE_INTEGER *)&time1);
+QueryPerformanceFrequency((LARGE_INTEGER *)&freq);
+do{
+QueryPerformanceCounter((LARGE_INTEGER *)&time2);
+
+//  }while((((time2-time1)*1.0)/sysFreq)<waitTime);
+  }while( (time2-time1) <waitTime);
+}
+#endif
 
 Sound_player::Sound_player() {
     printf("Created the Synth !\n");
@@ -88,8 +102,7 @@ void Sound_player::testPartition(std::string filename) {
 
     for (int i = 0; i < partition.getNotes().size() - 1; i++) {
         playNote(&partition.getNotes()[i]);
-        // Sleep for 1 second
-        usleep(1000000 * (partition.getNotes()[i + 1].getTime() - partition.getNotes()[i].getTime()));
+        int dt = 1000000 * (partition.getNotes()[i + 1].getTime() - partition.getNotes()[i].getTime());
+        usleep(dt);
     }
-
 }
