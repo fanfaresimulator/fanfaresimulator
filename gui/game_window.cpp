@@ -163,9 +163,14 @@ int GameWindow::getKeyIndex(int keycode) {
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *event) {
-    std::cout << "Pressed" << std::endl;
+    if (event->isAutoRepeat()) {
+        return;
+    }
     emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), true);
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *event) {
+    if (event->isAutoRepeat()) {
+        return;
+    }
     emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), false);
 }

@@ -17,19 +17,19 @@ int Note::getTrack() {
 	return pupitre.getTrack();
 }
 
-double Note::getTime(){
+double Note::getTime() {
 	return timestamp;
 };
 
-Pupitre Note::getPupitre(){
+Pupitre Note::getPupitre() {
 	return pupitre;
 };
 
-int Note::getKey(){
+int Note::getKey() {
 	return key;
 };
 
-int Note::getVelocity (){
+int Note::getVelocity () {
 	return velocity;
 };
 
