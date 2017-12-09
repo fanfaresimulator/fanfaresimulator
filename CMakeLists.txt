@@ -56,8 +56,9 @@ set(CLIENT_HEADER_FILES
 	include/network/discoverer.hpp
 	include/PupitreWindow.hpp
 	include/UsernameWindow.hpp
-	gui/gui_note.hpp
-	gui/music_line.hpp
+	include/game_window.hpp
+	include/gui_note.hpp
+	include/music_line.hpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -81,7 +82,6 @@ set(SERVER_HEADER_FILES
 	include/network/server.hpp
 	include/network/serverconnection.hpp
 	include/network/advertizer.hpp
-	include/ui.hpp
 )
 
 set(SERVER_SOURCE_FILES

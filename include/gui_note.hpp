@@ -1,10 +1,4 @@
-//
-// Created by Sophie Degabriel on 21/11/2017.
-//
-
-#ifndef FANFARESIMULATOR_NOTE_HPP
-#define FANFARESIMULATOR_NOTE_HPP
-
+#pragma once
 
 #include <iostream>
 #include <QWidget>
@@ -35,6 +29,3 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 };
-
-
-#endif //FANFARESIMULATOR_NOTE_HPP

@@ -1,4 +1,3 @@
-#include "../gui/game_window.hpp"
 #include "../include/client.hpp"
 
 Client::Client(QApplication *app, std::string username) : QObject() {

@@ -1,4 +1,4 @@
-#include "music_line.hpp"
+#include "../include/music_line.hpp"
 
 MusicLine::MusicLine(GameWindow * parent, int id ) : QWidget (){
     this->setParent(parent);
@@ -39,4 +39,3 @@ void MusicLine::set_is_pushed(bool state) {
 int MusicLine::get_radius(){
     return this->radius;
 }
-

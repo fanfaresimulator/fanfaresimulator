@@ -1,4 +1,4 @@
-#include "gui_note.hpp"
+#include "../include/gui_note.hpp"
 
 GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);

@@ -1,5 +1,5 @@
-#ifndef DEF_TESTWINDOW
-#define DEF_TESTWINDOW
+#pragma once
+
 #include <vector>
 #include <QApplication>
 #include <QWidget>
@@ -59,5 +59,3 @@ private:
     int getDurationNote(int index);
     int getKeyIndex(int keycode);
 };
-
-#endif

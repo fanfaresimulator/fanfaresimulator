@@ -1,5 +1,5 @@
 #include <QKeyEvent>
-#include "game_window.hpp"
+#include "../include/game_window.hpp"
 
 GameWindow::GameWindow() : QWidget() {
     set_size(1000, 1000);

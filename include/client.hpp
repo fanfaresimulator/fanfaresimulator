@@ -14,7 +14,7 @@
 #include "note.hpp"
 #include "network/client.hpp"
 #include "network/discoverer.hpp"
-#include "../gui/game_window.hpp"
+#include "game_window.hpp"
 #include "noteglobale.hpp"
 #include "partitionglobale.hpp"
 #include "state.hpp"
