@@ -7,6 +7,11 @@
 #include "../include/sound_player.hpp"
 #include "../include/note.hpp"
 
+#define SOUNDFONT_PATH "../resources/sf.sf2"
+//#define SOUNDFONT_PATH "../resources/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2"
+#define SYNTH_GAIN 2
+//#define SYNTH_GAIN 1
+
 // Fuck you windows
 #if defined(_WIN32) || defined(WIN32)
 void usleep(int waitTime){
@@ -31,11 +36,11 @@ Sound_player::Sound_player() {
 #ifdef __linux__
             fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
 #endif
-    fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
+    fluid_synth_sfload(synth, SOUNDFONT_PATH, 1);
 
     adriver = new_fluid_audio_driver(settings, synth);
 
-    fluid_settings_setnum(settings, "synth.gain", 2);
+    fluid_settings_setnum(settings, "synth.gain", SYNTH_GAIN);
 
 }
 
@@ -57,10 +62,9 @@ void Sound_player::initPupitres(Partition partition){
 };
 
 void Sound_player::playNote(Note* note){
-    if(note->getSignal()){
+    if (note->getSignal()) {
         fluid_synth_noteon(synth, note->getTrack(), note->getKey(), note->getVelocity());
-    }
-    else {
+    } else {
         fluid_synth_noteoff(synth, note->getTrack(), note->getKey());
     }
 }
@@ -95,14 +99,15 @@ void Sound_player::testPlayer() {
 
 }
 
-
 void Sound_player::testPartition(std::string filename) {
     Partition partition = Partition(filename);
-    initPupitres(partition);
 
-    for (int i = 0; i < partition.getNotes().size() - 1; i++) {
-        playNote(&partition.getNotes()[i]);
-        int dt = 1000000 * (partition.getNotes()[i + 1].getTime() - partition.getNotes()[i].getTime());
+    std::cout << "Playing " << filename << std::endl;
+
+    std::vector<Note> notes = partition.getNotes();
+    for (int i = 0; i < notes.size(); i++) {
+        playNote(&notes[i]);
+        int dt = 1000000 * (notes[i + 1].getTime() - notes[i].getTime());
         usleep(dt);
     }
 }
