@@ -25,15 +25,15 @@ using namespace std;
 class Client : public QObject {
 private:
 	QApplication *app;
-	Discoverer *discoverer;
-	NetworkClient *net;
-	PupitreWindow *pupitreWindow;
-	GameWindow *game;
-	State *state;
-	std::string username;            // use nothing ?
-	Pupitre pupitre;      // use the class Instrument
-	Partition partition;        // Use the class Partition
-	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
+	std::string username;
+	Discoverer *discoverer = nullptr;
+	NetworkClient *net = nullptr;
+	PupitreWindow *pupitreWindow = nullptr;
+	GameWindow *game = nullptr;
+	State *state = nullptr;
+	Pupitre *pupitre = nullptr;
+	Partition *partition = nullptr;
+	PartitionGlobale *partitionGlobale = nullptr;
 
 	// state functions
 	void mainStateFunction();

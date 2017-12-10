@@ -4,7 +4,9 @@
 #include "../include/partitionglobale.hpp"
 #include "../include/partition.hpp"
 
-PartitionGlobale::PartitionGlobale() {}
+PartitionGlobale::PartitionGlobale() {
+	listOfNotes = {};
+}
 
 std::vector<NoteGlobale> PartitionGlobale::getNotes() {
 	return listOfNotes;

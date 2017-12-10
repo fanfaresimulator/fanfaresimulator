@@ -2,16 +2,13 @@
 #include "../include/game_window.hpp"
 
 GameWindow::GameWindow() : QWidget() {
-    set_size(1000, 1000);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
+    set_size(700, 700);
     create_lines();
 }
 
-GameWindow::GameWindow(int width, int height, PartitionGlobale partition) : QWidget() {
+GameWindow::GameWindow(int width, int height, PartitionGlobale partition) :
+        QWidget() {
     set_size(width, height);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
     create_lines();
 
     std::vector<NoteGlobale> notes = partition.getNotes();
@@ -41,15 +38,11 @@ GameWindow::GameWindow(int width, int height, PartitionGlobale partition) : QWid
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
-    set_number_of_lines(4);
     create_lines();
-    this->conversion = height * 1.0 / 4000;
 }
 
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
 }
@@ -61,11 +54,11 @@ void GameWindow::set_size(int width, int height) {
 }
 
 int GameWindow::get_height() {
-  return height;
+    return height;
 }
 
 int GameWindow::get_width() {
-  return width;
+    return width;
 }
 
 void GameWindow::set_number_of_lines(int number) {
@@ -127,15 +120,30 @@ int GameWindow::getDurationNote(int index){
 }
 
 float GameWindow::get_conversion() {
-    return this->conversion;
+    return (float)height / 4000;
 }
 
 int GameWindow::get_musicline_radius(){
     return this->lines[0]->get_radius();
 }
 
+void GameWindow::printKeys() {
+    std::cout << "Keybindings:";
+    for (int i = 0; i < keys.size(); ++i) {
+        std::cout << " " << QKeySequence(keys[i]).toString().toStdString();
+    }
+    std::cout << std::endl;
+}
+
 void GameWindow::run(QApplication *app) {
+    if (running) {
+        return;
+    }
+
+    printKeys();
+
     this->show();
+    running = true;
     t0.start();
     while (true) {
         int spent_time = t0.elapsed();
@@ -148,29 +156,24 @@ void GameWindow::run(QApplication *app) {
 
 // partie clavier
 
-int GameWindow::getKeyIndex(int keycode) {
-    switch (keycode) {
-    case Qt::Key_D:
-        return 0;
-    case Qt::Key_F:
-        return 1;
-    case Qt::Key_J:
-        return 2;
-    case Qt::Key_K:
-        return 3;
+int GameWindow::getKeyIndex(Qt::Key key) {
+    for (int i = 0; i < keys.size(); ++i) {
+        if (key == keys[i]) {
+            return i;
+        }
     }
     return -1;
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *event) {
-    if (event->isAutoRepeat()) {
+    if (!running || event->isAutoRepeat()) {
         return;
     }
-    emit keyChanged(getKeyIndex(event->key()), (double)t0.elapsed()/1000, true);
+    emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, true);
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *event) {
-    if (event->isAutoRepeat()) {
+    if (!running || event->isAutoRepeat()) {
         return;
     }
-    emit keyChanged(getKeyIndex(event->key()), (double)t0.elapsed()/1000, false);
+    emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, false);
 }

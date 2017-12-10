@@ -1,12 +1,8 @@
 #include "../include/pupitre.hpp"
 
-Pupitre::Pupitre(){
-
-};
-
-Pupitre::Pupitre(int track, Instrument instrument){
-  this->track = track;
-  this->instrument = instrument;
+Pupitre::Pupitre(int track, Instrument instrument) : track(track),
+    instrument(instrument) {
+  // Nothing to do
 };
 
 int Pupitre::getTrack() const {

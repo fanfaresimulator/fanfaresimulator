@@ -25,9 +25,6 @@ const char *GMinstrument[128] = {
    "applause",  "ringwhsl"
 };
 
-Instrument::Instrument(){
-};
-
 Instrument::Instrument(int number){
   this->number = number;
   this->name = GMinstrument[number];
