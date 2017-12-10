@@ -171,7 +171,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event) {
     emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, true);
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *event) {
-    if (!running || event->isAutoRepeat()) {
+    if (!running) {
         return;
     }
     emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, false);

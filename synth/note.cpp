@@ -7,8 +7,12 @@ Note::Note(double timestamp, bool signal, Pupitre pupitre, int key,
 	// Nothing to do
 }
 
-bool Note::getSignal(){
+bool Note::getSignal() {
 	return signal;
+}
+
+void Note::setSignal(bool signal) {
+	this->signal = signal;
 }
 
 int Note::getTrack() {
@@ -27,7 +31,7 @@ int Note::getKey() {
 	return key;
 }
 
-int Note::getVelocity () {
+int Note::getVelocity() {
 	return velocity;
 }
 

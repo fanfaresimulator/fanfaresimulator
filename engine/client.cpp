@@ -112,24 +112,37 @@ void Client::pressKey(int key, double t, bool pressed) {
         std::cout << "Released key " << key << std::endl;
     }
 
-    // TODO: improve this
-    std::vector<NoteGlobale> notes = partitionGlobale->getNotes();
-    NoteGlobale *best = nullptr;
-    double bestDiff = std::numeric_limits<double>::infinity();
-    for (int i = 0; i < notes.size(); ++i) {
-        NoteGlobale *n = &notes[i];
-        if (n->getKey() != key || n->getSignal() != pressed) {
-            continue;
+    if (pressed) {
+        // TODO: improve this
+        std::vector<NoteGlobale> notes = partitionGlobale->getNotes();
+        NoteGlobale *best = nullptr;
+        double bestDiff = std::numeric_limits<double>::infinity();
+        for (int i = 0; i < notes.size(); ++i) {
+            NoteGlobale *n = &notes[i];
+            if (n->getKey() != key || n->getSignal() != pressed) {
+                continue;
+            }
+
+            double dt = std::abs(t - n->getTime());
+            if (dt < bestDiff) {
+                best = n;
+                bestDiff = dt;
+            }
         }
 
-        double dt = std::abs(t - n->getTime());
-        if (dt < bestDiff) {
-            best = n;
-            bestDiff = dt;
+        Note note = *best->getListOfNotes()->begin();
+        pressedNotes[key] = new Note(note);
+        sendNote(note);
+    } else {
+        if (pressedNotes[key] == nullptr) {
+            return;
         }
+        Note note = *pressedNotes[key];
+        note.setSignal(false);
+        sendNote(note);
+        delete pressedNotes[key];
+        pressedNotes[key] = nullptr;
     }
-
-    sendNote(*best->getListOfNotes()->begin());
 }
 
 // STATE FUNCTIONS

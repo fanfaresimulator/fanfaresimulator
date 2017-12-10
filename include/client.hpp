@@ -34,6 +34,8 @@ private:
 	Pupitre *pupitre = nullptr;
 	Partition *partition = nullptr;
 	PartitionGlobale *partitionGlobale = nullptr;
+	// For each key, gives the currently pressed Note
+	std::vector<Note *> pressedNotes = {nullptr, nullptr, nullptr, nullptr};
 
 	// state functions
 	void mainStateFunction();

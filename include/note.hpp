@@ -14,6 +14,7 @@ private:
 public:
 	Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
 	bool getSignal();
+	void setSignal(bool signal);
 	double getTime();
 	Pupitre getPupitre();
 	int getKey();
