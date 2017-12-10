@@ -30,10 +30,9 @@ GameWindow::GameWindow(int width, int height, PartitionGlobale partition) :
     }
 
     std::cout << "Number of GUI notes: " << note.size() << std::endl;
-
-    for (int i = 0; i < note.size(); ++i) {
-        note[i]->print();
-    }
+    // for (int i = 0; i < note.size(); ++i) {
+    //     note[i]->print();
+    // }
 }
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
