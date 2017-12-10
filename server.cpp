@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	//mainPartition.print();
 
 	Sound_player sound_player;
-	sound_player.testPartition(filepath);
+	//sound_player.testPartition(filepath);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 
