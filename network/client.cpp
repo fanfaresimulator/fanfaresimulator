@@ -47,31 +47,33 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
 }
 
 void NetworkClient::readyRead() {
-  if (remainingBytes == 0) {
-    char b[sizeof(int)];
-    socket->read(b, sizeof(int));
-    memcpy(&remainingBytes, &b, sizeof(int));
-    std::cout << "MSG size: " << remainingBytes << std::endl;
-  }
+  while (socket->bytesAvailable()) {
+    if (remainingBytes == 0) {
+      char b[sizeof(int)];
+      socket->read(b, sizeof(int));
+      memcpy(&remainingBytes, &b, sizeof(int));
+      std::cout << "MSG size: " << remainingBytes << std::endl;
+    }
 
-  QByteArray buffer = socket->read(remainingBytes);
-  pending.append(buffer);
-  std::cout << "READING " << buffer.size() << "/" << remainingBytes << "\n";
-  remainingBytes -= buffer.size();
+    QByteArray buffer = socket->read(remainingBytes);
+    pending.append(buffer);
+    std::cout << "READING " << buffer.size() << "/" << remainingBytes << "\n";
+    remainingBytes -= buffer.size();
 
-  if (remainingBytes != 0) { // message insn't complete
-    return;
+    if (remainingBytes != 0) { // message insn't complete
+      return;
+    }
+    // message is arrived entirely
+    QJsonParseError jerror;
+    QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
+    if (jerror.error != QJsonParseError::ParseError::NoError) {
+      std::cout << "QJsonParseError: "<< jerror.errorString().toStdString() << std::endl;
+      std::cout << "With : "<< QString(pending).toStdString();
+      return;
+    }
+    pending.clear();
+    handleJsonDoc(doc);
   }
-  // message is arrived entirely
-  QJsonParseError jerror;
-  QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
-  if (jerror.error != QJsonParseError::ParseError::NoError) {
-    std::cout << "QJsonParseError: "<< jerror.errorString().toStdString() << std::endl;
-    std::cout << "With : "<< QString(pending).toStdString();
-    return;
-  }
-  pending.clear();
-  handleJsonDoc(doc);
 }
 
 /* PUBLIC */
