@@ -3,8 +3,7 @@
 
 using namespace std;
 
-Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp,
-  QObject *parent) : QObject(parent) {
+Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     this->server = &server;
     this->mainPartition = &partition;
     this->sp = &sp;

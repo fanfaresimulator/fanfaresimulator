@@ -48,32 +48,21 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
 }
 
 void ServerConnection::readyRead() {
-  QByteArray msg = socket->readAll();
-  std::cout << "READING\n"<< QString(msg).toStdString();
+  if (remainingBytes == 0) {
+    int dataSize;
+    socket->read((char*)&dataSize, sizeof(int));
+    remainingBytes = dataSize;
+  }
 
-  bool ok;
-  int size = msg.toInt(&ok,10);
-  if (ok) {
-    remainingBytes = size;
-    std::cout << "waiting for message of size: " << size;
+  QByteArray buffer = socket->read(remainingBytes);
+  pending.append(buffer);
+  remainingBytes -= buffer.size();
+  std::cout << "READING\n" << QString(buffer).toStdString();
+
+  if (remainingBytes != 0) { // message insn't complete
     return;
   }
-
-  if (msg.size() <= remainingBytes) {
-    pending.append(msg);
-    remainingBytes -= msg.size();
-  } else {
-    pending.append(msg.left(remainingBytes));
-    remainingBytes -= remainingBytes;
-  }
-
-  std::cout << "pending (size: "<< pending.size() << ")\n";
-  if (remainingBytes != 0) { // only parts of the message has arrived
-    return;
-  }
-
-  std::cout << pending.toStdString();
-
+  
   // message is arrived entirely
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);

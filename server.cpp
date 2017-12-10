@@ -1,4 +1,5 @@
-#include <QApplication>
+#include <QCoreApplication>
+#include <QCommandLineParser>
 #include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
 #include "include/server.hpp"
@@ -6,16 +7,28 @@
 #include "include/midi_handler.hpp"
 
 int main(int argc, char *argv[]) {
-	QApplication app(argc, argv);
+	QCoreApplication app(argc, argv);
+	app.setApplicationName("fanfaresimulator-server");
+	app.setApplicationVersion("1.0");
+
+	QCommandLineParser parser;
+	parser.setApplicationDescription("FanfareSimulator 2k server");
+	parser.addHelpOption();
+	parser.addVersionOption();
+	parser.addPositionalArgument("audio-file", "The MIDI file to play", "[audio-file]");
+	parser.process(app);
+	const QStringList args = parser.positionalArguments();
+	std::string audioFile = args.value(0, "../resources/Movie_Themes_-_Willie_Wonka.mid").toStdString();
 
 	Advertizer advertizer;
 	NetworkServer networkServer;
 
-	Partition mainPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Partition mainPartition(audioFile);
 	//mainPartition.print();
 
 	Sound_player sound_player;
-	//sound_player.testPlayer();
+	sound_player.initPupitres(mainPartition);
+	//sound_player.testPartition(mainPartition);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 

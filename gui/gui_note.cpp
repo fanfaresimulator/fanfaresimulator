@@ -12,7 +12,7 @@ GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) 
     this->setGeometry(x - radius_note, 0, x + radius_note, parent->get_height());
 }
 
-void GuiNote::paintEvent(QPaintEvent * event)//position calculé par fonction main
+void GuiNote::paintEvent(QPaintEvent * event)
 {
     if (this->position == -1) { return; }
     QPainter painter(this);

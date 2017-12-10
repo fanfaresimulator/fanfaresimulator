@@ -3,7 +3,7 @@
 Partition::Partition(){
 	this->listOfNotes = std::vector<Note>();
 	this->listOfPupitres = std::vector<Pupitre>();
-};
+}
 
 Partition::Partition(std::vector<Note> listOfNotes){
 	this->listOfNotes = listOfNotes;
@@ -19,7 +19,7 @@ Partition::Partition(std::vector<Note> listOfNotes){
 		}
 	}
 	this->listOfPupitres = listOfPupitres;
-};
+}
 
 Partition::Partition(std::string midiFileName){
 	std::vector<Note> listOfNotes = midi_handler::midi_handler_fromString(midiFileName);
@@ -37,12 +37,6 @@ Partition::Partition(std::string midiFileName){
 		}
 	}
 	this->listOfPupitres = listOfPupitres;
-};
-
-Partition::~Partition(){
-
-	//delete listOfNotes;
-	//delete listOfPupitres;
 }
 
 std::vector<Note> Partition::getNotes() {
@@ -142,6 +136,11 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 }
 
 void Partition::print() {
+	std::cout << "Pupitres:" << std::endl;
+	for (std::vector<Pupitre>::iterator iter = listOfPupitres.begin(); iter != listOfPupitres.end(); iter++)	{
+		iter->print();
+	}
+	std::cout << "Notes:" << std::endl;
 	for (std::vector<Note>::iterator iter = listOfNotes.begin(); iter != listOfNotes.end(); iter++)	{
 		iter->print();
 	}
