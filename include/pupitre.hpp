@@ -15,4 +15,5 @@ public:
     bool isEqual(const Pupitre &p2) const;
     bool operator==(const Pupitre &other) const;
     bool operator<(const Pupitre &other) const;
+    void print();
 };

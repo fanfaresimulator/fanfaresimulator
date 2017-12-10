@@ -52,18 +52,18 @@ Sound_player::~Sound_player() {
     delete_fluid_synth(synth);
 }
 
-void Sound_player::initPupitres(Partition partition){
+void Sound_player::initPupitres(Partition partition) {
     std::vector<Pupitre> pupitres = partition.getPupitre();
     int instrument, track ;
     for(int i=0; i<pupitres.size(); i++){
         track = pupitres[i].getTrack();
         instrument = pupitres[i].getInstrument().getNumber();
-        //Chaque track joue dans un channel égal à son track et en utilisant le Soundfont correspondant à son instrument;
-        fluid_synth_program_change(synth, track , instrument);
-        }
+        // Chaque track joue dans un channel égal à son track et en utilisant le Soundfont correspondant à son instrument
+        fluid_synth_program_change(synth, track, instrument);
+    }
 };
 
-void Sound_player::playNote(Note* note){
+void Sound_player::playNote(Note* note) {
     if (note->getSignal()) {
         fluid_synth_noteon(synth, note->getTrack(), note->getKey(), note->getVelocity());
     } else {
@@ -98,13 +98,10 @@ void Sound_player::testPlayer() {
 #endif
         playNote(noteoff_2);
     }
-
 }
 
-void Sound_player::testPartition(std::string filename) {
-    Partition partition = Partition(filename);
-
-    std::cout << "Playing " << filename << std::endl;
+void Sound_player::testPartition(Partition partition) {
+    initPupitres(partition);
 
     std::vector<Note> notes = partition.getNotes();
     for (int i = 0; i < notes.size(); i++) {

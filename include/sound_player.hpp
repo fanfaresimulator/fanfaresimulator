@@ -14,6 +14,6 @@ public:
     ~Sound_player();
     void playNote(Note* note);
     void testPlayer();
-    void testPartition(std::string filename);
+    void testPartition(Partition partition);
     void initPupitres(Partition partition);
 };

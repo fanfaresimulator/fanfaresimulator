@@ -136,6 +136,11 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 }
 
 void Partition::print() {
+	std::cout << "Pupitres:" << std::endl;
+	for (std::vector<Pupitre>::iterator iter = listOfPupitres.begin(); iter != listOfPupitres.end(); iter++)	{
+		iter->print();
+	}
+	std::cout << "Notes:" << std::endl;
 	for (std::vector<Note>::iterator iter = listOfNotes.begin(); iter != listOfNotes.end(); iter++)	{
 		iter->print();
 	}
