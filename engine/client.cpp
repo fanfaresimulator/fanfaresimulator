@@ -125,7 +125,7 @@ void Client::pressKey(int key, double t, bool pressed) {
         double dt = std::abs(t - n->getTime());
         if (dt < bestDiff) {
             best = n;
-            dt = bestDiff;
+            bestDiff = dt;
         }
     }
 

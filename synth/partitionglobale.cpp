@@ -1,6 +1,3 @@
-// Created by Thomas Bellotti on 02/12/2017
-
-
 #include "../include/partitionglobale.hpp"
 #include "../include/partition.hpp"
 
