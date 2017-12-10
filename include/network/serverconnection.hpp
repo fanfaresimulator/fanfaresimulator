@@ -13,6 +13,7 @@ private:
   QTcpSocket *socket;
   std::string username;
   QByteArray pending;
+  int remainingBytes;
 
   void setUsername(std::string username);
   void handleJsonDoc(QJsonDocument doc);
