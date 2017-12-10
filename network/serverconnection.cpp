@@ -51,14 +51,14 @@ void ServerConnection::readyRead() {
   if (remainingBytes == 0) {
     char b[sizeof(int)];
     socket->read(b, sizeof(int));
-    std::cout << "size to read: " << b << std::endl;
-    remainingBytes = atoi(b);
+    memcpy(&remainingBytes, &b, sizeof(int));
+    std::cout << "MSG size: " << remainingBytes << std::endl;
   }
 
   QByteArray buffer = socket->read(remainingBytes);
   pending.append(buffer);
+  std::cout << "READING " << buffer.size() << "/" << remainingBytes << "\n";
   remainingBytes -= buffer.size();
-  std::cout << "READING\n" << QString(buffer).toStdString();
 
   if (remainingBytes != 0) { // message insn't complete
     return;
@@ -68,7 +68,8 @@ void ServerConnection::readyRead() {
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
   if(jerror.error != QJsonParseError::ParseError::NoError) {
-    std::cout << jerror.errorString().toStdString() << std::endl;
+    std::cout << "QJsonParseError: "<< jerror.errorString().toStdString() << std::endl;
+    std::cout << "With : "<< QString(pending).toStdString();
     return;
   }
   pending.clear();
@@ -90,12 +91,12 @@ ServerConnection::ServerConnection(std::string username, QTcpSocket *socket, Net
 }
 
 void ServerConnection::write(QByteArray msg) {
-  socket->write(msg);
+  socket->write(msg, msg.size());
 }
 
 void ServerConnection::write(int n) {
   char b[sizeof(int)];
-  sprintf(b, "%d", n);
+  memcpy(&b, &n, sizeof(int));
   socket->write(b, sizeof(int));
 }
 

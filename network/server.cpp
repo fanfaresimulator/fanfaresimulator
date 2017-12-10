@@ -20,7 +20,7 @@ void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
       QJsonDocument doc = QJsonDocument(obj);
       QByteArray msg = doc.toJson(JSON_FORMAT);
       int size = msg.size();
-      std::cout << "SENDING (size: "<< msg.size() << " bytes)(to i=" << i << ")\n";
+      std::cout << "SENDING (size: "<< msg.size() << " bytes)(to " << clients[i]->getUsername() << ")\n";
       clients[i]->write(size);
       clients[i]->write(msg);
       return;
