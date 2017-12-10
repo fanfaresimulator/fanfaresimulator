@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QTime>
 #include <QTimer>
 #include "partition.hpp"
 #include "sound_player.hpp"
@@ -13,7 +14,9 @@ private:
 	Partition partition;
 	Sound_player *sp;
 	int next = 0;
+	QTime t0;
 	QTimer timer;
 private slots:
 	void playNextNote();
+	void scheduleNextNote();
 };

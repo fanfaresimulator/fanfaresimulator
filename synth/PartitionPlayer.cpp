@@ -7,7 +7,21 @@ PartitionPlayer::PartitionPlayer(Partition partition, Sound_player *sp) :
 }
 
 void PartitionPlayer::start() {
-	playNextNote();
+	t0.start();
+	scheduleNextNote();
+}
+
+void PartitionPlayer::scheduleNextNote() {
+	std::vector<Note> notes = partition.getNotes();
+	if (next >= notes.size()) {
+		return;
+	}
+
+	int dt = 1000 * notes[next].getTime() - t0.elapsed();
+	if (dt < 0) {
+		dt = 0;
+	}
+	timer.start(dt);
 }
 
 void PartitionPlayer::playNextNote() {
@@ -20,9 +34,5 @@ void PartitionPlayer::playNextNote() {
 	sp->playNote(n);
 
 	next++;
-	if (next >= notes.size()) {
-		return;
-	}
-
-	timer.start(1000 * (notes[next].getTime() - n->getTime()));
+	scheduleNextNote();
 }
