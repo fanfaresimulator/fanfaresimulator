@@ -9,12 +9,32 @@ std::vector<NoteGlobale> PartitionGlobale::getNotes() {
 	return listOfNotes;
 }
 
-PartitionGlobale::PartitionGlobale(Partition mypartition) {
+PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
 	// TODO: improve this
 	std::vector<Note> notes = mypartition.getNotes();
+	std::vector<int> pressed(keys_nbr, -1);
 	for (int i = 0; i < notes.size(); ++i) {
 		Note *n = &notes[i];
-		listOfNotes.push_back(NoteGlobale({*n}, n->getKey()%4, n->getTime(), n->getSignal(), n->getPupitre()));
+		// Check availability of each key, starting from n->getKey() % keys_nbr
+		bool added = false;
+		for (int j = n->getKey(); j < n->getKey() + keys_nbr; ++j) {
+			int key = j % keys_nbr;
+			if (pressed[key] >= 0 && pressed[key] != n->getKey()) {
+				continue; // This key is busy with another note
+			}
+			listOfNotes.push_back(NoteGlobale({*n}, key, n->getTime(), n->getSignal(), n->getPupitre()));
+			if (n->getSignal()) {
+				pressed[key] = n->getKey(); // This key is now supposed to press this note
+			} else {
+				pressed[key] = -1; // This key is no longer supposed to press this note
+			}
+			added = true;
+			break;
+		}
+		if (!added && n->getSignal()) {
+			std::cout << "Warning: more than " << keys_nbr << " notes pressed at the same time, skipping one note:" << std::endl;
+			n->print();
+		}
 	}
 
 	/*std::vector <NoteGlobale> finalListOfNotes;

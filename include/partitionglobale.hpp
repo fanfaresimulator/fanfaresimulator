@@ -14,7 +14,7 @@ private:
 
 public:
 	PartitionGlobale();
-	PartitionGlobale(Partition mypartition);
+	PartitionGlobale(Partition partition, int keys_nbr);
 	std::vector <NoteGlobale> getNotes();
 	Partition getPartition(Pupitre pupitre);
 	// Cette fonction peut donner listOfNotes.end() lorsqu'on est a la fin de la partiture ... il faut le gerer.

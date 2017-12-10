@@ -22,6 +22,7 @@ public:
     GameWindow(int width, int height);
     GameWindow(int width, int height, vector<string> list);
     GameWindow(int width, int height, PartitionGlobale partition);
+    GameWindow(int width, int height, PartitionGlobale partition, int number_of_lines);
 
     int get_height();
     int get_width();
@@ -46,7 +47,6 @@ private:
     QTime t0;
     vector<Qt::Key> keys = {Qt::Key_D, Qt::Key_F, Qt::Key_J, Qt::Key_K};
 
-    void set_number_of_lines(int number);
     void add_note(GuiNote* n);
     void create_lines();
     void read_notes(vector<string> list);

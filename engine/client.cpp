@@ -63,7 +63,7 @@ void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
 void Client::loadPartition(Partition partition) {
     this->partition = new Partition(partition);
     // generate global partition HERE !
-    partitionGlobale = new PartitionGlobale(partition);
+    partitionGlobale = new PartitionGlobale(partition, KEYS_NUMBER);
     std::cout << "Nombre de notes globales : " << partitionGlobale->getNotes().size() << std::endl;
 
     // create State
@@ -87,7 +87,7 @@ void Client::loadPartition(Partition partition) {
     game = new GameWindow(700, 700, list);*/
 
     // create game screen
-    game = new GameWindow(700, 700, *partitionGlobale);
+    game = new GameWindow(700, 700, *partitionGlobale, KEYS_NUMBER);
     game->show();
 
     sendReady();

@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
 	Sound_player sound_player;
 	sound_player.initPupitres(mainPartition);
-	//sound_player.testPartition(mainPartition);
+	sound_player.testPartition(mainPartition);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 

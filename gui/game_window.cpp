@@ -1,13 +1,13 @@
 #include <QKeyEvent>
 #include "../include/game_window.hpp"
 
-GameWindow::GameWindow() : QWidget() {
-    set_size(700, 700);
-    create_lines();
-}
+GameWindow::GameWindow() : GameWindow(700, 700) {}
 
 GameWindow::GameWindow(int width, int height, PartitionGlobale partition) :
-        QWidget() {
+        GameWindow(width, height, partition, 4) {}
+
+GameWindow::GameWindow(int width, int height, PartitionGlobale partition,
+        int number_of_lines) : QWidget(), number_of_lines(number_of_lines) {
     set_size(width, height);
     create_lines();
 
@@ -60,10 +60,6 @@ int GameWindow::get_width() {
     return width;
 }
 
-void GameWindow::set_number_of_lines(int number) {
-    this->number_of_lines = number;
-}
-
 int GameWindow::get_number_of_lines() {
     return number_of_lines;
 }
@@ -72,7 +68,7 @@ void GameWindow::add_note(GuiNote* n) {
     this->note.push_back(n);
 }
 
-void GameWindow::create_lines(){
+void GameWindow::create_lines() {
     int number = get_number_of_lines();
     for (int i = 0; i < number; i++){
         lines.push_back(new MusicLine(this, i));

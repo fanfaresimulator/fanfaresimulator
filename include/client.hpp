@@ -22,6 +22,9 @@
 
 using namespace std;
 
+// Number of keyboard keys
+#define KEYS_NUMBER 4
+
 class Client : public QObject {
 private:
 	QApplication *app;
@@ -35,7 +38,7 @@ private:
 	Partition *partition = nullptr;
 	PartitionGlobale *partitionGlobale = nullptr;
 	// For each key, gives the currently pressed Note
-	std::vector<Note *> pressedNotes = {nullptr, nullptr, nullptr, nullptr};
+	std::vector<Note *> pressedNotes = std::vector<Note *>(KEYS_NUMBER, nullptr);
 
 	// state functions
 	void mainStateFunction();
