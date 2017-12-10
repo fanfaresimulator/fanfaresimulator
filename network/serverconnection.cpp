@@ -57,7 +57,7 @@ void ServerConnection::readyRead() {
 
   QByteArray buffer = socket->read(remainingBytes);
   pending.append(buffer);
-  std::cout << "READING " << buffer.size() << "/" << remainingBytes << "\n";
+  std::cout << "READING " << buffer.size() << "/" << remainingBytes << "from " << username << std::endl;
   remainingBytes -= buffer.size();
 
   if (remainingBytes != 0) { // message insn't complete
