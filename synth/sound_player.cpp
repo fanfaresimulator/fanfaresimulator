@@ -7,6 +7,27 @@
 #include "../include/sound_player.hpp"
 #include "../include/note.hpp"
 
+#define SOUNDFONT_PATH "../resources/sf.sf2"
+//#define SOUNDFONT_PATH "../resources/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2"
+#define SYNTH_GAIN 2
+//#define SYNTH_GAIN 1
+
+// Fuck you windows
+#if defined(_WIN32) || defined(WIN32)
+#include <windows.h>
+void usleep(__int64 usec)
+{
+    HANDLE timer;
+    LARGE_INTEGER ft;
+
+    ft.QuadPart = -(10*usec); // Convert to 100 nanosecond interval, negative value indicates relative time
+
+    timer = CreateWaitableTimer(NULL, TRUE, NULL);
+    SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
+    WaitForSingleObject(timer, INFINITE);
+    CloseHandle(timer);
+}
+#endif
 
 Sound_player::Sound_player() {
     printf("Created the Synth !\n");
@@ -17,11 +38,11 @@ Sound_player::Sound_player() {
 #ifdef __linux__
             fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
 #endif
-    fluid_synth_sfload(synth, "../resources/sf.sf2", 1);
+    fluid_synth_sfload(synth, SOUNDFONT_PATH, 1);
 
     adriver = new_fluid_audio_driver(settings, synth);
 
-    fluid_settings_setnum(settings, "synth.gain", 2);
+    fluid_settings_setnum(settings, "synth.gain", SYNTH_GAIN);
 
 }
 
@@ -43,13 +64,11 @@ void Sound_player::initPupitres(Partition partition){
 };
 
 void Sound_player::playNote(Note* note){
-    if(note->getSignal()){
+    if (note->getSignal()) {
         fluid_synth_noteon(synth, note->getTrack(), note->getKey(), note->getVelocity());
+    } else {
+        fluid_synth_noteoff(synth, note->getTrack(), note->getKey());
     }
-    else {
-        fluid_synth_noteoff(synth, note->getTrack(),note->getVelocity ());
-    }
-    printf("played !\n");
 }
 
 void Sound_player::testPlayer() {
@@ -80,4 +99,17 @@ void Sound_player::testPlayer() {
         playNote(noteoff_2);
     }
 
+}
+
+void Sound_player::testPartition(std::string filename) {
+    Partition partition = Partition(filename);
+
+    std::cout << "Playing " << filename << std::endl;
+
+    std::vector<Note> notes = partition.getNotes();
+    for (int i = 0; i < notes.size(); i++) {
+        playNote(&notes[i]);
+        int dt = 1000000 * (notes[i + 1].getTime() - notes[i].getTime());
+        usleep(dt);
+    }
 }

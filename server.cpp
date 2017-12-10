@@ -8,14 +8,19 @@
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
+	const char *filepath = "../resources/Movie_Themes_-_Willie_Wonka.mid";
+	if (argc > 1) {
+		filepath = argv[1];
+	}
+
 	Advertizer advertizer;
 	NetworkServer networkServer;
 
-	Partition mainPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Partition mainPartition(filepath);
 	//mainPartition.print();
 
 	Sound_player sound_player;
-	//sound_player.testPlayer();
+	sound_player.testPartition(filepath);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 

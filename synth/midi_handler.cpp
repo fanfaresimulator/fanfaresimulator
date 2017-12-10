@@ -65,7 +65,6 @@ std::vector<Note> midi_handler::midi_handler_fromString(std::string s) {
   int timetype = getTimetype(s);
 
   int tracks = midifile.getTrackCount();
-
   for (int track=0; track < tracks; track++) {
        int instru;
        for (int event=0; event < midifile.getEventCount(track); event++) {
