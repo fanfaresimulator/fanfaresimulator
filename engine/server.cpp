@@ -62,7 +62,7 @@ void Server::broadcastStart() {
     // TODO: this delay is hardcoded :(
     QTimer *timer = new QTimer();
     timer->setSingleShot(true);
-    connect(timer, SIGNAL(timeout()), this, SLOT(startBots()));
+    connect(timer, &QTimer::timeout, this, &Server::startBots);
     timer->start(500);
 }
 
