@@ -16,6 +16,8 @@ int main(int argc, char *argv[]) {
 	parser.addHelpOption();
 	parser.addVersionOption();
 	parser.addPositionalArgument("audio-file", "The MIDI file to play", "[audio-file]");
+	QCommandLineOption playersNbrOption("players-nbr", "Number of players", "n");
+	parser.addOption(playersNbrOption);
 	parser.process(app);
 	const QStringList args = parser.positionalArguments();
 	std::string audioFile = args.value(0, "../resources/Movie_Themes_-_Willie_Wonka.mid").toStdString();
@@ -37,6 +39,11 @@ int main(int argc, char *argv[]) {
 	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv, &serverEngine, &Server::addPupitre);
 	QObject::connect(&networkServer, &NetworkServer::noteRecv, &serverEngine, &Server::playNote);
 	QObject::connect(&networkServer, &NetworkServer::readyRecv, &serverEngine, &Server::clientReady);
+
+	if (parser.isSet(playersNbrOption)) {
+		int playersNbr = parser.value(playersNbrOption).toInt();
+		serverEngine.setPlayersNbr(playersNbr);
+	}
 
 	return app.exec();
 }

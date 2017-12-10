@@ -78,6 +78,7 @@ set(CLIENT_SOURCE_FILES
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/sound_player.hpp
+	include/PartitionPlayer.hpp
 	include/server.hpp
 	include/network/server.hpp
 	include/network/serverconnection.hpp
@@ -92,6 +93,7 @@ set(SERVER_SOURCE_FILES
 	network/advertizer.cpp
 	network/serverconnection.cpp
 	synth/sound_player.cpp
+	synth/PartitionPlayer.cpp
 )
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
