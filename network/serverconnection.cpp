@@ -49,9 +49,10 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
 
 void ServerConnection::readyRead() {
   if (remainingBytes == 0) {
-    int dataSize;
-    socket->read((char*)&dataSize, sizeof(int));
-    remainingBytes = dataSize;
+    char b[sizeof(int)];
+    socket->read(b, sizeof(int));
+    std::cout << "size to read: " << b << std::endl;
+    remainingBytes = atoi(b);
   }
 
   QByteArray buffer = socket->read(remainingBytes);
@@ -62,7 +63,7 @@ void ServerConnection::readyRead() {
   if (remainingBytes != 0) { // message insn't complete
     return;
   }
-  
+
   // message is arrived entirely
   QJsonParseError jerror;
   QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
@@ -84,11 +85,18 @@ ServerConnection::ServerConnection(std::string username, QTcpSocket *socket, Net
   this->username = username;
   this->socket = socket;
   this->server = server;
+  this->remainingBytes = 0;
   connect(this->socket, &QIODevice::readyRead, this, &ServerConnection::readyRead);
 }
 
 void ServerConnection::write(QByteArray msg) {
   socket->write(msg);
+}
+
+void ServerConnection::write(int n) {
+  char b[sizeof(int)];
+  sprintf(b, "%d", n);
+  socket->write(b, sizeof(int));
 }
 
 std::string ServerConnection::getUsername() {

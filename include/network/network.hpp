@@ -28,8 +28,6 @@ typedef enum {
   SIG_PARTITION
 } Protocol_sig;
 
-QByteArray QBAfromInt(int i);
-
 int intFromJson(QJsonValue val);
 bool boolFromJson(QJsonValue val);
 double doubleFromJson(QJsonValue val);

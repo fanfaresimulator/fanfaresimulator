@@ -22,5 +22,6 @@ private:
 public:
   ServerConnection(std::string username, QTcpSocket *socket, NetworkServer *server);
   void write(QByteArray msg);
+  void write(int n);
   std::string getUsername();
 };

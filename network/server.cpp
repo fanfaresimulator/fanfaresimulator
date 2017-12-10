@@ -19,7 +19,7 @@ void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
     if (clients[i]->getUsername() == username) {
       QJsonDocument doc = QJsonDocument(obj);
       QByteArray msg = doc.toJson(JSON_FORMAT);
-      QByteArray size = QBAfromInt(msg.size());
+      int size = msg.size();
       std::cout << "SENDING (size: "<< msg.size() << " bytes)(to i=" << i << ")\n";
       clients[i]->write(size);
       clients[i]->write(msg);
@@ -32,7 +32,7 @@ void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {
 void NetworkServer::broadcast(QJsonObject obj) {
   QJsonDocument doc = QJsonDocument(obj);
   QByteArray msg = doc.toJson();
-  QByteArray size = QBAfromInt(msg.size());
+  int size = msg.size();
   std::cout << "SENDING (size: "<< msg.size() << " bytes)\n";
   // for each element e of the Set clients
   for (size_t i = 0; i < clients.size(); i++) {

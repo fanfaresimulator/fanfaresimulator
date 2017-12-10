@@ -4,9 +4,11 @@
 void NetworkClient::sendJsonObject(QJsonObject o) {
   QJsonDocument doc = QJsonDocument(o);
   QByteArray msg = doc.toJson(JSON_FORMAT);
-  QByteArray size = QBAfromInt(msg.size());
+  int size = msg.size();
   std::cout << "SENDING (size: "<< msg.size() << " bytes)\n";
-  socket->write(size);
+  char b[sizeof(int)];
+  sprintf(b, "%d", size);
+  socket->write(b, sizeof(int));
   socket->write(msg);
 }
 
@@ -46,9 +48,10 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
 
 void NetworkClient::readyRead() {
   if (remainingBytes == 0) {
-    int dataSize;
-    socket->read((char*)&dataSize, sizeof(int));
-    remainingBytes = dataSize;
+    char b[sizeof(int)];
+    socket->read(b, sizeof(int));
+    std::cout << "size to read: " << b << std::endl;
+    remainingBytes = atoi(b);
   }
 
   QByteArray buffer = socket->read(remainingBytes);
@@ -76,6 +79,7 @@ NetworkClient::NetworkClient(QHostAddress addr, quint16 port, std::string userna
   this->socket = new QTcpSocket(this);
   // socket->connectToHost(QHostAddress::SpecialAddress::LocalHost, PORT_NO);
   this->socket->connectToHost(addr, port);
+  this->remainingBytes = 0;
   connect(socket, &QIODevice::readyRead, this, &NetworkClient::readyRead);
 
   std::cout << "new client: " << username << std::endl;

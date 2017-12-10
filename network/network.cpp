@@ -1,9 +1,5 @@
 #include "../include/network/network.hpp"
 
-QByteArray QBAfromInt(int i) {
-  return QByteArray((std::to_string(i)).c_str());
-}
-
 int intFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";
