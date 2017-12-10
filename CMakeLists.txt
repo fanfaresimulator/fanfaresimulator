@@ -17,6 +17,7 @@ list(INSERT CMAKE_MODULE_PATH 0
 )
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
@@ -78,6 +79,7 @@ set(CLIENT_SOURCE_FILES
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
 	include/sound_player.hpp
+	include/PartitionPlayer.hpp
 	include/server.hpp
 	include/network/server.hpp
 	include/network/serverconnection.hpp
@@ -92,6 +94,7 @@ set(SERVER_SOURCE_FILES
 	network/advertizer.cpp
 	network/serverconnection.cpp
 	synth/sound_player.cpp
+	synth/PartitionPlayer.cpp
 )
 
 add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})

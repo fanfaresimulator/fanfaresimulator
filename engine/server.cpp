@@ -1,5 +1,8 @@
 #include "../include/server.hpp"
 #include <iostream>
+#include <utility>
+#include <map>
+#include <QTimer>
 
 using namespace std;
 
@@ -13,6 +16,7 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     this->pupitreMap = map< Pupitre , bool >();
 
     vector<Pupitre> plist = partition.getPupitre();
+    std::cout << "Number of pupitres: " << plist.size() << std::endl;
     for (Pupitre p : plist) {
         pair< Pupitre, bool > pair(p, false);
         this->pupitreMap.insert(pair);
@@ -32,23 +36,49 @@ void Server::updatePupitreMap(Pupitre p) {
     pupitreMap[p] = true;
 }
 
-bool Server::everyoneReady() {
-    // TODO: this is just for testing
-    return true;
-
-    for (pair<std::string, bool> clientPaire : clients){
-        if (!clientPaire.second) return false;
+void Server::setPlayersNbr(int playersNbr) {
+    this->playersNbr = playersNbr;
+    if (everyoneReady()) {
+        broadcastStart();
     }
-    return true;
+}
+
+bool Server::everyoneReady() {
+    int n = 0;
+    for (pair<std::string, bool> clientPaire : clients) {
+        if (clientPaire.second) {
+            n++;
+        }
+    }
+    if (playersNbr >= 0) {
+        return (n == playersNbr);
+    }
+    return (clients.size() > 0 && n == clients.size());
 }
 
 void Server::broadcastStart() {
     server->broadcastStart();
+
+    // TODO: this delay is hardcoded :(
+    QTimer *timer = new QTimer();
+    timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout, this, &Server::startBots);
+    timer->start(500);
+}
+
+void Server::startBots() {
+    for (pair<Pupitre, bool> p : pupitreMap) {
+        if (!p.second) {
+            Partition partition = mainPartition->getPartition(p.first);
+            PartitionPlayer *pp = new PartitionPlayer(partition, sp);
+            bots.push_back(pp);
+            pp->start();
+        }
+    }
 }
 
 void Server::sendPartition(std::string username, Partition partition){
     server->sendPartition(username, partition);
-
 }
 
 void Server::sendPupitreMap(std::string username) {
