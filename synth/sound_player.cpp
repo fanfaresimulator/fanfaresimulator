@@ -14,16 +14,18 @@
 
 // Fuck you windows
 #if defined(_WIN32) || defined(WIN32)
-void usleep(int waitTime){
-__int64 time1 = 0, time2 = 0, sysFreq = 0;
+#include <windows.h>
+void usleep(__int64 usec)
+{
+    HANDLE timer;
+    LARGE_INTEGER ft;
 
-QueryPerformanceCounter((LARGE_INTEGER *)&time1);
-QueryPerformanceFrequency((LARGE_INTEGER *)&freq);
-do{
-QueryPerformanceCounter((LARGE_INTEGER *)&time2);
+    ft.QuadPart = -(10*usec); // Convert to 100 nanosecond interval, negative value indicates relative time
 
-//  }while((((time2-time1)*1.0)/sysFreq)<waitTime);
-  }while( (time2-time1) <waitTime);
+    timer = CreateWaitableTimer(NULL, TRUE, NULL);
+    SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
+    WaitForSingleObject(timer, INFINITE);
+    CloseHandle(timer);
 }
 #endif
 
