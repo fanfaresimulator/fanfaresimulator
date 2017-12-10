@@ -17,7 +17,6 @@
 #include "sound_player.hpp"
 
 class Server : public QObject {
-
 private:
     NetworkServer* server;
     Partition* mainPartition;

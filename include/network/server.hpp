@@ -19,14 +19,14 @@
 #include "serverconnection.hpp"
 
 class NetworkServer : public QObject {
-Q_OBJECT
+  Q_OBJECT
 private:
-    QTcpServer *server;
-    std::vector<ServerConnection*> clients; //<username, name+socket>
+  QTcpServer *server;
+  std::vector<ServerConnection*> clients; //<username, name+socket>
 
-    void newConnection();
-    void sendJsonObject(std::string username, QJsonObject obj);
-    void broadcast(QJsonObject obj);
+  void newConnection();
+  void sendJsonObject(std::string username, QJsonObject obj);
+  void broadcast(QJsonObject obj);
 
 public:
   explicit NetworkServer(QObject *parent = Q_NULLPTR);

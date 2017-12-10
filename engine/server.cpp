@@ -1,8 +1,5 @@
 #include "../include/server.hpp"
-#include <string>
 #include <iostream>
-#include <utility>
-#include <map>
 
 using namespace std;
 
@@ -60,7 +57,7 @@ void Server::sendPupitreMap(std::string username) {
 
 // SLOTS
 
-void Server::addClient(string username) {
+void Server::addClient(std::string username) {
     if (username.empty()){
         throw std::invalid_argument("Username null");
     }

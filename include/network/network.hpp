@@ -3,6 +3,7 @@
 #include <utility>
 #include <string>
 #include <map>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 
@@ -13,6 +14,7 @@
 
 #define PORT_NO 15051
 #define DISCOVER_MSG "fanfaresimulator"
+#define JSON_FORMAT QJsonDocument::Indented
 
 typedef enum {
   SIG_HELLO,
