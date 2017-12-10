@@ -18,6 +18,7 @@
 #include "PartitionPlayer.hpp"
 
 class Server : public QObject {
+    Q_OBJECT
 private:
     NetworkServer* server;
     Partition* mainPartition;

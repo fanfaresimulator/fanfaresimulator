@@ -58,8 +58,12 @@ bool Server::everyoneReady() {
 
 void Server::broadcastStart() {
     server->broadcastStart();
+
     // TODO: this delay is hardcoded :(
-    QTimer::singleShot(500, this, &Server::startBots);
+    QTimer *timer = new QTimer();
+    timer->setSingleShot(true);
+    connect(timer, SIGNAL(timeout()), this, SLOT(startBots()));
+    timer->start(500);
 }
 
 void Server::startBots() {
