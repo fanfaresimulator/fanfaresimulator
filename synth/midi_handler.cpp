@@ -1,4 +1,4 @@
-#include "../include/midi_handler.hpp"
+#include "../include/synth/midi_handler.hpp"
 
 std::vector<Note> midi_handler::midi_handler_fromString(std::string s) {
   MidiFile midifile;

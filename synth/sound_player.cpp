@@ -4,8 +4,8 @@
 #elif defined(_WIN32) || defined(WIN32)
 #include <windows.h>
 #endif
-#include "../include/sound_player.hpp"
-#include "../include/note.hpp"
+#include "../include/synth/sound_player.hpp"
+#include "../include/synth/note.hpp"
 
 #define SOUNDFONT_PATH "../resources/sf.sf2"
 //#define SOUNDFONT_PATH "../resources/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2"

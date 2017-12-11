@@ -1,15 +1,4 @@
-//
-// Created by Elia Mazzoni on 28/11/2017.
-//
-
-// La classe UsernameWindow demande au client son username et le m�morise
-
-
-#include <string>
-#include <iostream>
-#include <list>
-#include <QInputDialog>
-#include "../include/UsernameWindow.hpp"
+#include "../include/gui/UsernameWindow.hpp"
 
 
 std::string UsernameWindow::askName() {

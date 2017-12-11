@@ -1,4 +1,4 @@
-#include "../include/PartitionPlayer.hpp"
+#include "../include/synth/PartitionPlayer.hpp"
 
 PartitionPlayer::PartitionPlayer(Partition partition, Sound_player *sp) :
 		QObject(), partition(partition), sp(sp) {

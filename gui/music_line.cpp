@@ -1,4 +1,4 @@
-#include "../include/music_line.hpp"
+#include "../include/gui/music_line.hpp"
 
 MusicLine::MusicLine(GameWindow * parent, int id ) : QWidget (){
     this->setParent(parent);

@@ -28,13 +28,13 @@ include_directories(include)
 add_subdirectory(midifile)
 
 set(COMMON_HEADER_FILES
-	include/pupitre.hpp
-	include/instrument.hpp
-	include/note.hpp
-	include/partition.hpp
-	include/midi_handler.hpp
-	include/noteglobale.hpp
-	include/partitionglobale.hpp
+	include/synth/pupitre.hpp
+	include/synth/instrument.hpp
+	include/synth/note.hpp
+	include/synth/partition.hpp
+	include/synth/midi_handler.hpp
+	include/synth/noteglobale.hpp
+	include/synth/partitionglobale.hpp
 	include/network/network.hpp
 )
 
@@ -51,15 +51,15 @@ set(COMMON_SOURCE_FILES
 
 set(CLIENT_HEADER_FILES
 	${COMMON_HEADER_FILES}
-	include/client.hpp
-	include/state.hpp
+	include/engine/client.hpp
+	include/engine/state.hpp
 	include/network/client.hpp
 	include/network/discoverer.hpp
-	include/PupitreWindow.hpp
-	include/UsernameWindow.hpp
-	include/game_window.hpp
-	include/gui_note.hpp
-	include/music_line.hpp
+	include/gui/PupitreWindow.hpp
+	include/gui/UsernameWindow.hpp
+	include/gui/game_window.hpp
+	include/gui/gui_note.hpp
+	include/gui/music_line.hpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -78,9 +78,9 @@ set(CLIENT_SOURCE_FILES
 
 set(SERVER_HEADER_FILES
 	${COMMON_HEADER_FILES}
-	include/sound_player.hpp
-	include/PartitionPlayer.hpp
-	include/server.hpp
+	include/synth/sound_player.hpp
+	include/synth/PartitionPlayer.hpp
+	include/engine/server.hpp
 	include/network/server.hpp
 	include/network/serverconnection.hpp
 	include/network/advertizer.hpp

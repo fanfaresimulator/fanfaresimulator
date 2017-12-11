@@ -1,8 +1,4 @@
-#include "../include/server.hpp"
-#include <iostream>
-#include <utility>
-#include <map>
-#include <QTimer>
+#include "../include/engine/server.hpp"
 
 using namespace std;
 

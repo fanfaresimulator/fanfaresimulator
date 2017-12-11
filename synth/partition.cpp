@@ -1,4 +1,4 @@
-#include "../include/partition.hpp"
+#include "../include/synth/partition.hpp"
 
 Partition::Partition(){
 	this->listOfNotes = std::vector<Note>();
