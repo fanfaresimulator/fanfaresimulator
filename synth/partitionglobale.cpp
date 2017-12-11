@@ -13,7 +13,7 @@ PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
 	// TODO: improve this
 	std::vector<Note> notes = mypartition.getNotes();
 	std::vector<int> pressed(keys_nbr, -1);
-	for (int i = 0; i < notes.size(); ++i) {
+	for (size_t i = 0; i < notes.size(); ++i) {
 		Note *n = &notes[i];
 		// Check availability of each key, starting from n->getKey() % keys_nbr
 		bool added = false;

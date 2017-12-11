@@ -55,7 +55,7 @@ Sound_player::~Sound_player() {
 void Sound_player::initPupitres(Partition partition) {
     std::vector<Pupitre> pupitres = partition.getPupitre();
     int instrument, track ;
-    for(int i=0; i<pupitres.size(); i++){
+    for(size_t i=0; i<pupitres.size(); i++){
         track = pupitres[i].getTrack();
         instrument = pupitres[i].getInstrument().getNumber();
         // Chaque track joue dans un channel égal à son track et en utilisant le Soundfont correspondant à son instrument
@@ -104,7 +104,7 @@ void Sound_player::testPartition(Partition partition) {
     initPupitres(partition);
 
     std::vector<Note> notes = partition.getNotes();
-    for (int i = 0; i < notes.size(); i++) {
+    for (size_t i = 0; i < notes.size(); i++) {
         playNote(&notes[i]);
         int dt = 1000000 * (notes[i + 1].getTime() - notes[i].getTime());
         usleep(dt);

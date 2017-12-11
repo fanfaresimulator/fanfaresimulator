@@ -88,7 +88,7 @@ void GameWindow::read_notes(vector<string> list) {
     while(!list.empty()) {
         time1 = std::stod(list[0]);
         id = (int) std::stod(list[1]);
-        for (int i = 1; i < list.size() / 3; i++) {
+        for (size_t i = 1; i < list.size() / 3; i++) {
             if ((int) std::stod(list[3 * i + 1]) == id && list[3 * i + 2].compare("D") == 0) {
                 time2 = std::stod(list[3 * i]);
                 list.erase(list.begin()+3*i);
@@ -124,7 +124,7 @@ int GameWindow::get_musicline_radius(){
 
 void GameWindow::printKeys() {
     std::cout << "Keybindings:";
-    for (int i = 0; i < keys.size(); ++i) {
+    for (size_t i = 0; i < keys.size(); ++i) {
         std::cout << " " << QKeySequence(keys[i]).toString().toStdString();
     }
     std::cout << std::endl;
@@ -152,7 +152,7 @@ void GameWindow::run(QApplication *app) {
 // partie clavier
 
 int GameWindow::getKeyIndex(Qt::Key key) {
-    for (int i = 0; i < keys.size(); ++i) {
+    for (size_t i = 0; i < keys.size(); ++i) {
         if (key == keys[i]) {
             return i;
         }
