@@ -9,9 +9,9 @@ Partition::Partition(std::vector<Note> listOfNotes){
 	this->listOfNotes = listOfNotes;
 
 	std::vector<Pupitre> listOfPupitres;
-	for(int i = 0; i < listOfNotes.size(); i++){
+	for(size_t i = 0; i < listOfNotes.size(); i++){
 		bool pupitreIsAlreadyCounted = false;
-		for(int j = 0; j < listOfPupitres.size(); j++){
+		for(size_t j = 0; j < listOfPupitres.size(); j++){
 			pupitreIsAlreadyCounted = pupitreIsAlreadyCounted || listOfPupitres[j].isEqual(listOfNotes[i].getPupitre());
 		}
 		if(!pupitreIsAlreadyCounted){
@@ -27,9 +27,9 @@ Partition::Partition(std::string midiFileName){
 	this->listOfNotes = listOfNotes;
 
 	std::vector<Pupitre> listOfPupitres;
-	for(int i = 0; i < listOfNotes.size(); i++){
+	for(size_t i = 0; i < listOfNotes.size(); i++){
 		bool pupitreIsAlreadyCounted = false;
-		for(int j = 0; j < listOfPupitres.size(); j++){
+		for(size_t j = 0; j < listOfPupitres.size(); j++){
 			pupitreIsAlreadyCounted = pupitreIsAlreadyCounted || listOfPupitres[j].isEqual(listOfNotes[i].getPupitre());
 		}
 		if(!pupitreIsAlreadyCounted){
@@ -49,7 +49,7 @@ std::vector<Pupitre> Partition::getPupitre() {
 
 Partition Partition::getPartition(Pupitre pupitre) {
 	std::vector<Note> listOfNotes;
-	for(int i = 0; i < this->listOfNotes.size(); i++){
+	for(size_t i = 0; i < this->listOfNotes.size(); i++){
 		if(pupitre.isEqual(this->listOfNotes[i].getPupitre())){
 			listOfNotes.push_back(this->listOfNotes[i]);
 		}
@@ -59,7 +59,7 @@ Partition Partition::getPartition(Pupitre pupitre) {
 
 double Partition::getLength() {
 	double maxTime = 0.;
-	for(int i = 0; i < this->listOfNotes.size(); i++){
+	for(size_t i = 0; i < this->listOfNotes.size(); i++){
 		if(maxTime < this->listOfNotes[i].getTime()){
 			maxTime = this->listOfNotes[i].getTime();
 		}
@@ -116,7 +116,7 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 				finalPartition.push_back(*iterAct);
 			}
 			else	{
-				std::vector<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
+				// std::vector<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
 
 				// TODO: this segfaults
 				//noteSet.erase(findIter);

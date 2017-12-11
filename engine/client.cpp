@@ -117,7 +117,7 @@ void Client::pressKey(int key, double t, bool pressed) {
         std::vector<NoteGlobale> notes = partitionGlobale->getNotes();
         NoteGlobale *best = nullptr;
         double bestDiff = std::numeric_limits<double>::infinity();
-        for (int i = 0; i < notes.size(); ++i) {
+        for (size_t i = 0; i < notes.size(); ++i) {
             NoteGlobale *n = &notes[i];
             if (n->getKey() != key || n->getSignal() != pressed) {
                 continue;
