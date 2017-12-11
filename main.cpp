@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
-#include "include/client.hpp"
-#include "include/UsernameWindow.hpp"
+#include "include/engine/client.hpp"
+#include "include/gui/UsernameWindow.hpp"
 #include "include/network/network.hpp"
 
 int main(int argc, char *argv[]) {

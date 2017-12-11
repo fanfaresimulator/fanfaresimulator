@@ -1,5 +1,4 @@
-#include "../include/partitionglobale.hpp"
-#include "../include/partition.hpp"
+#include "../include/synth/partitionglobale.hpp"
 
 PartitionGlobale::PartitionGlobale() {
 	listOfNotes = {};

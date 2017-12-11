@@ -1,5 +1,4 @@
-#include <iostream>
-#include "../include/pupitre.hpp"
+#include "../include/synth/pupitre.hpp"
 
 Pupitre::Pupitre(int track, Instrument instrument) : track(track),
     instrument(instrument) {

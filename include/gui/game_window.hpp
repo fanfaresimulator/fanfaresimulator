@@ -5,10 +5,11 @@
 #include <QWidget>
 #include <QPainter>
 #include <QTime>
+#include <QKeyEvent>
 
-#include "music_line.hpp"
-#include "gui_note.hpp"
-#include "partitionglobale.hpp"
+#include "gui/music_line.hpp"
+#include "gui/gui_note.hpp"
+#include "synth/partitionglobale.hpp"
 
 using namespace std;
 

@@ -1,5 +1,4 @@
-#include <cmath>
-#include "../include/client.hpp"
+#include "../include/engine/client.hpp"
 
 Client::Client(QApplication *app, std::string username) : QObject(), app(app),
         username(username) {

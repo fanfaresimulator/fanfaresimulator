@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+
 #include "pupitre.hpp"
 
 class Note {

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <list>
+#include <QInputDialog>
 
 // La classe UsernameWindow demande au client son username et le mémorise
 class UsernameWindow {

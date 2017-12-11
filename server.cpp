@@ -2,9 +2,9 @@
 #include <QCommandLineParser>
 #include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
-#include "include/server.hpp"
-#include "include/sound_player.hpp"
-#include "include/midi_handler.hpp"
+#include "include/engine/server.hpp"
+#include "include/synth/sound_player.hpp"
+#include "include/synth/midi_handler.hpp"
 
 int main(int argc, char *argv[]) {
 	QCoreApplication app(argc, argv);

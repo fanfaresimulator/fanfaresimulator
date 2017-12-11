@@ -11,9 +11,9 @@
 #include <QJsonArray>
 #include <QByteArray>
 
-#include "../instrument.hpp"
-#include "../partition.hpp"
-#include "../note.hpp"
+#include "../synth/instrument.hpp"
+#include "../synth/partition.hpp"
+#include "../synth/note.hpp"
 #include "network.hpp"
 
 class NetworkClient : public QObject {

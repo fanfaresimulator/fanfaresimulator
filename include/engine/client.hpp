@@ -9,16 +9,18 @@
 #include <QObject>
 #include <QApplication>
 #include <QHostAddress>
-#include "instrument.hpp"
-#include "partition.hpp"
-#include "note.hpp"
+#include <cmath>
+
+#include "synth/instrument.hpp"
+#include "synth/partition.hpp"
+#include "synth/note.hpp"
+#include "synth/noteglobale.hpp"
+#include "synth/partitionglobale.hpp"
 #include "network/client.hpp"
 #include "network/discoverer.hpp"
-#include "game_window.hpp"
-#include "noteglobale.hpp"
-#include "partitionglobale.hpp"
-#include "state.hpp"
-#include "PupitreWindow.hpp"
+#include "gui/game_window.hpp"
+#include "gui/PupitreWindow.hpp"
+#include "engine/state.hpp"
 
 using namespace std;
 

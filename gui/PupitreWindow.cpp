@@ -1,13 +1,4 @@
-#include <string>
-#include <map>
-#include <list>
-#include <iostream>
-#include <QString>
-#include <QGroupBox>
-#include <QRadioButton>
-#include <QVBoxLayout>
-#include <QPushButton>
-#include "../include/PupitreWindow.hpp"
+#include "../include/gui/PupitreWindow.hpp"
 
 PupitreWindow::PupitreWindow(std::vector<Pupitre> pupitres) : QWidget() {
 	this->pupitres = pupitres;

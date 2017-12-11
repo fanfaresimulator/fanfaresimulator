@@ -1,5 +1,4 @@
-#include <iostream>
-#include "../include/note.hpp"
+#include "../include/synth/note.hpp"
 
 Note::Note(double timestamp, bool signal, Pupitre pupitre, int key,
 		int velocity) : timestamp(timestamp), signal(signal), pupitre(pupitre),

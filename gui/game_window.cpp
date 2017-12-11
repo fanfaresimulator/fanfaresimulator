@@ -1,5 +1,4 @@
-#include <QKeyEvent>
-#include "../include/game_window.hpp"
+#include "../include/gui/game_window.hpp"
 
 GameWindow::GameWindow() : GameWindow(700, 700) {}
 
