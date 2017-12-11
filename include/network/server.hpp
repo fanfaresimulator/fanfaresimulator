@@ -11,10 +11,10 @@
 #include <QJsonValue>
 #include <QByteArray>
 
-#include "../instrument.hpp"
-#include "../partition.hpp"
-#include "../pupitre.hpp"
-#include "../note.hpp"
+#include "../synth/instrument.hpp"
+#include "../synth/partition.hpp"
+#include "../synth/pupitre.hpp"
+#include "../synth/note.hpp"
 #include "network.hpp"
 #include "serverconnection.hpp"
 

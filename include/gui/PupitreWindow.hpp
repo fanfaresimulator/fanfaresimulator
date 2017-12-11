@@ -5,7 +5,13 @@
 #include <vector>
 #include <QWidget>
 #include <QRadioButton>
-#include "../include/pupitre.hpp"
+#include <list>
+#include <iostream>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <QPushButton>
+
+#include "../include/synth/pupitre.hpp"
 
 class PupitreWindow : public QWidget {
 	Q_OBJECT

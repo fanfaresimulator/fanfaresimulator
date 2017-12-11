@@ -13,7 +13,7 @@ public:
 private:
 	Partition partition;
 	Sound_player *sp;
-	int next = 0;
+	size_t next = 0;
 	QTime t0;
 	QTimer timer;
 private slots:

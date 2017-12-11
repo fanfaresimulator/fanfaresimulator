@@ -7,10 +7,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include "../pupitre.hpp"
-#include "../instrument.hpp"
-#include "../partition.hpp"
-#include "../note.hpp"
+#include "../synth/pupitre.hpp"
+#include "../synth/instrument.hpp"
+#include "../synth/partition.hpp"
+#include "../synth/note.hpp"
 
 #define PORT_NO 15051
 #define DISCOVER_MSG "fanfaresimulator"

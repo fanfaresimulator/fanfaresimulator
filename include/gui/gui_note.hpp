@@ -3,7 +3,8 @@
 #include <iostream>
 #include <QWidget>
 #include <QPainter>
-#include "game_window.hpp"
+
+#include "gui/game_window.hpp"
 
 class GameWindow;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "partitionglobale.hpp"
+#include "synth/partitionglobale.hpp"
 
 using namespace std;
 

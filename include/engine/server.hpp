@@ -9,13 +9,15 @@
 #include <queue>
 #include <map>
 #include <QObject>
+#include <utility>
+#include <QTimer>
 
-#include "partition.hpp"
-#include "note.hpp"
+#include "synth/partition.hpp"
+#include "synth/note.hpp"
 #include "network/server.hpp"
-#include "pupitre.hpp"
-#include "sound_player.hpp"
-#include "PartitionPlayer.hpp"
+#include "synth/pupitre.hpp"
+#include "synth/sound_player.hpp"
+#include "synth/PartitionPlayer.hpp"
 
 class Server : public QObject {
 private:

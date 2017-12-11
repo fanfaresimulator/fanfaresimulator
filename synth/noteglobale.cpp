@@ -1,4 +1,4 @@
-#include "../include/noteglobale.hpp"
+#include "../include/synth/noteglobale.hpp"
 
 NoteGlobale::NoteGlobale (std::vector <Note> listOfNotes, int key,
 		double timestamp, bool signal, Pupitre pupitre) : listOfNotes(listOfNotes),

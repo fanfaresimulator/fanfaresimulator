@@ -1,4 +1,4 @@
-#include "../include/instrument.hpp"
+#include "../include/synth/instrument.hpp"
 
 const char *GMinstrument[128] = {
    "acpiano",   "britepno",  "synpiano",  "honkytonk", "epiano1",   "epiano2",

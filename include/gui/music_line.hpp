@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <QWidget>
-#include "game_window.hpp"
+#include "gui/game_window.hpp"
 
 using namespace std;
 

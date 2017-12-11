@@ -1,8 +1,4 @@
-#include "../include/server.hpp"
-#include <iostream>
-#include <utility>
-#include <map>
-#include <QTimer>
+#include "../include/engine/server.hpp"
 
 using namespace std;
 
@@ -44,14 +40,14 @@ void Server::setPlayersNbr(int playersNbr) {
 }
 
 bool Server::everyoneReady() {
-    int n = 0;
+    size_t n = 0;
     for (pair<std::string, bool> clientPaire : clients) {
         if (clientPaire.second) {
             n++;
         }
     }
     if (playersNbr >= 0) {
-        return (n == playersNbr);
+        return ((int)n == playersNbr);
     }
     return (clients.size() > 0 && n == clients.size());
 }

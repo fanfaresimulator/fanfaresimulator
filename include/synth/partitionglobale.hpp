@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/noteglobale.hpp"
-#include "../include/pupitre.hpp"
-#include "../include/partition.hpp"
+#include "../include/synth/noteglobale.hpp"
+#include "../include/synth/pupitre.hpp"
+#include "../include/synth/partition.hpp"
 //#include "instrument.hpp"
 
 class PartitionGlobale {
