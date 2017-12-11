@@ -16,7 +16,12 @@ std::vector<Note> midi_handler::midi_handler_fromString(std::string s) {
       if (e.isTimbre()) {
         instru = (int)e[1];
         //cout << "Timbre : " << GMinstrument[(int)e[1]] << " " << (int)e[1] << endl;
-      } else if (e.isNoteOn() || e.isNoteOff()) {
+      }
+      if (e.isNoteOn() || e.isNoteOff()) {
+        if (instru < 0) {
+          std::cout << "Warning: got note before timbre! Falling back to acpiano." << std::endl;
+          instru = 0;
+        }
         Note n = Note(midifile.getTimeInSeconds(track, event), e.isNoteOn(),
           Pupitre(track, Instrument(instru)), (int)e[1], (int)e[2]);
         listOfNotes.push_back(n);
