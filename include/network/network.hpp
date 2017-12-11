@@ -25,7 +25,8 @@ typedef enum {
   SIG_START,
   SIG_LOBBIES,
   SIG_PUPITRES,
-  SIG_PARTITION
+  SIG_PARTITION,
+  SIG_PING
 } Protocol_sig;
 
 int intFromJson(QJsonValue val);
@@ -49,3 +50,5 @@ QJsonObject pupitreToJson(Pupitre pupitre);
 QJsonObject pupitreToJson(Pupitre pupitre, bool b);
 std::pair<Pupitre, bool> pupitreFromJson(QJsonObject o);
 std::map<Pupitre, bool> pupitresFromJson(QJsonArray a);
+
+QJsonObject pingToJson(int seqNumber);

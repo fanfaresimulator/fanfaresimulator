@@ -9,9 +9,6 @@ void NetworkServer::newConnection() {
   ServerConnection *client = new ServerConnection(username, clientConnection, this);
   clients.push_back(client);
   std::cout << "new client" << std::endl;
-
-  // clientConnection->write("Hello you !\n");
-  // clientConnection->disconnectFromHost();
 }
 
 void NetworkServer::sendJsonObject(std::string username, QJsonObject obj) {

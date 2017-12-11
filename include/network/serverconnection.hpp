@@ -8,6 +8,7 @@
 class NetworkServer;
 
 class ServerConnection : public QObject {
+  Q_OBJECT
 private:
   NetworkServer *server;
   QTcpSocket *socket;
@@ -24,4 +25,7 @@ public:
   void write(QByteArray msg);
   void write(int n);
   std::string getUsername();
+
+signals:
+  void pingRecv(std::string username);
 };

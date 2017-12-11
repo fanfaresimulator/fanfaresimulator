@@ -40,6 +40,11 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
         break;
       }
 
+      case SIG_PING: {
+        emit pingRecv(username);
+        break;
+      }
+
       default:
         std::cout << "Unsupported type: " << type << std::endl;
         break;

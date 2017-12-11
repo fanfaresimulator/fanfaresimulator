@@ -40,6 +40,12 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       break;
     }
 
+    case SIG_PING: {
+      int seqNumber = intFromJson(obj["data"]);
+      this->sendJsonObject(pingToJson(seqNumber));
+      break;
+    }
+
     default:
       std::cout << "Unsupported type: " << type << std::endl;
       break;

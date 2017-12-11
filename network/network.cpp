@@ -142,3 +142,10 @@ std::map<Pupitre, bool> pupitresFromJson(QJsonArray a) {
   }
   return pupitres;
 }
+
+QJsonObject pingToJson(int seqNumber) {
+  QJsonObject obj;
+  obj["type"] = SIG_PING;
+  obj["data"] = seqNumber;
+  return obj;
+}
