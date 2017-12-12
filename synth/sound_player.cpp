@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #ifdef __unix__
 #include <unistd.h>
 #elif defined(_WIN32) || defined(WIN32)
