@@ -40,4 +40,5 @@ public:
 
 public slots:
   void pingFrom(std::string username); // connect(sc, &pingRecv, this, &pingFrom);
+  void disconnected(std::string username);
 };

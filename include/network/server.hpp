@@ -44,7 +44,7 @@ signals:
   void pupitreChoiceRecv(std::string username, Pupitre pupitre);
   void readyRecv(std::string username);
   void noteRecv(std::string username, Note note);
-  void sendAfterStart(QThread::Priority p);
+  void sendAfterStart();
 
 public slots:
   void handleHello(std::string username);

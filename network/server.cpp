@@ -45,7 +45,7 @@ void NetworkServer::synchronizedBroadcast(QJsonObject obj) {
       std::cout << "Can't find "<< clients[i]->getUsername() << " in pings\n";
     }
   }
-  emit sendAfterStart(QThread::NormalPriority);
+  emit sendAfterStart();
   // emit startIn(maxPing) // for the bots to start
 }
 
