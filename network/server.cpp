@@ -46,7 +46,7 @@ uint32_t NetworkServer::synchronizedBroadcast(QJsonObject obj) {
       std::cout << "Can't find "<< clients[i]->getUsername() << " in pings\n";
     }
   }
-  emit sendAfterStart(QThread::NormalPriority);
+  emit sendAfterStart();
   return maxPing;
 }
 

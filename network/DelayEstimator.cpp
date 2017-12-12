@@ -97,3 +97,10 @@ void DelayEstimator::pingFrom(std::string username) {
   }
   update(client->second);
 }
+
+void DelayEstimator::disconnected(std::string username) {
+  DE_map::iterator it = clients.find(username);
+  if (it != clients.end()) {
+    clients.erase(it);
+  }
+}
