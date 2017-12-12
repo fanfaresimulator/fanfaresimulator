@@ -22,8 +22,7 @@ private:
 
 public:
   ServerConnection(std::string username, QTcpSocket *socket, NetworkServer *server);
-  void write(QByteArray msg);
-  void write(int n);
+  void write(QJsonObject obj);
   std::string getUsername();
 
 signals:

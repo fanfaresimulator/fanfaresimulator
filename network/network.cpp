@@ -1,5 +1,21 @@
 #include "../include/network/network.hpp"
 
+/* Sending a Json Object accordingly to the protocol
+ * 1. Send the size of the message
+ * 2. Send the message
+ */
+void sendJsonObjectTo(QTcpSocket *socket, QJsonObject obj) {
+  QJsonDocument doc = QJsonDocument(obj);
+  QByteArray msg = doc.toJson(JSON_FORMAT);
+  int size = msg.size();
+  std::cout << "SENDING (size: "<< msg.size() << " bytes)\n";
+  char b[sizeof(int)];
+  memcpy(&b, &size, sizeof(int));
+  socket->write(b, sizeof(int));
+  socket->write(msg);
+}
+
+/* Transation function for Json */
 int intFromJson(QJsonValue val) {
   if (val.isUndefined() || val.isNull()) {
     throw "Incorrect type";

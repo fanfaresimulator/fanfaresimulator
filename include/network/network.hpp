@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QTcpSocket>
 
 #include "../synth/pupitre.hpp"
 #include "../synth/instrument.hpp"
@@ -28,6 +29,8 @@ typedef enum {
   SIG_PARTITION,
   SIG_PING
 } Protocol_sig;
+
+void sendJsonObjectTo(QTcpSocket *socket, QJsonObject obj);
 
 int intFromJson(QJsonValue val);
 bool boolFromJson(QJsonValue val);

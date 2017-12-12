@@ -97,14 +97,8 @@ ServerConnection::ServerConnection(std::string username, QTcpSocket *socket, Net
   connect(this->socket, &QIODevice::readyRead, this, &ServerConnection::readyRead);
 }
 
-void ServerConnection::write(QByteArray msg) {
-  socket->write(msg, msg.size());
-}
-
-void ServerConnection::write(int n) {
-  char b[sizeof(int)];
-  memcpy(&b, &n, sizeof(int));
-  socket->write(b, sizeof(int));
+void ServerConnection::write(QJsonObject obj) {
+  sendJsonObjectTo(socket, obj);
 }
 
 std::string ServerConnection::getUsername() {
