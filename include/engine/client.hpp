@@ -59,7 +59,7 @@ public:
 	Client(QApplication *app, std::string username);
 
 public slots:
-	void mainStateFunction();
+	void timerSendNotes();
 	void connectToServer(QHostAddress addr, quint16 port);
 	void forwardPupitreMap(std::map<Pupitre, bool>);
 	void loadPartition(Partition partition);

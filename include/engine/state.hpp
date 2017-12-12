@@ -31,11 +31,11 @@ public:
 
     State(std::vector<Note> notes, std::vector<NoteGlobale> gNotes);
 
-//    void startChrono();
+    void startChrono();
+    double getCurrentTime();
 //    int getKey() const;
 //    double getTimeLastEvent() const;
 //    double getBlockTime() const;
-//    double getCurrentTime() const;
 //
 //    void setKey(int newKey);
 //    void setTimeLastEvent(double newTimeLastEvent);

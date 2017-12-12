@@ -10,8 +10,8 @@
 #include "pupitre.hpp"
 #include "midi_handler.hpp"
 
-#define  MIN_FRAME_LENGTH 2.0 // Minimum frame duration
-#define  MAX_FRAME_LENGTH 4.0 // Maximum frame duration
+#define  MIN_FRAME_LENGTH 1.0 // Minimum frame duration
+#define  MAX_FRAME_LENGTH 3.0 // Maximum frame duration
 
 class Partition {
 private:

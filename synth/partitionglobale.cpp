@@ -38,9 +38,11 @@ PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
         while((randomKey == previousKey) && (previousKey != -1)){
             randomKey = getRand(0, 3);
         }
-
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime + USER_TOLL, true, actualSegment.begin()->getPupitre()));
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime - USER_TOLL,false, actualSegment.begin()->getPupitre()));
+		// with user toll
+//		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime + USER_TOLL, true, actualSegment.begin()->getPupitre()));
+//		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime - USER_TOLL,false, actualSegment.begin()->getPupitre()));
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true, actualSegment.begin()->getPupitre()));
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime ,false, actualSegment.begin()->getPupitre()));
         previousKey = randomKey;
 	}
 
