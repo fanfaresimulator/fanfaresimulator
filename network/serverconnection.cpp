@@ -104,3 +104,7 @@ void ServerConnection::write(QJsonObject obj) {
 std::string ServerConnection::getUsername() {
   return username;
 }
+
+void ServerConnection::sendNow(QJsonObject obj) {
+  sendJsonObjectTo(socket, obj);
+}

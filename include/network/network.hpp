@@ -16,6 +16,7 @@
 #define PORT_NO 15051
 #define DISCOVER_MSG "fanfaresimulator"
 #define JSON_FORMAT QJsonDocument::Indented
+#define TIMEOUT_TIME 2000
 
 typedef enum {
   SIG_HELLO,

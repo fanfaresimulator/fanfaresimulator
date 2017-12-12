@@ -25,6 +25,9 @@ public:
   void write(QJsonObject obj);
   std::string getUsername();
 
+public slots:
+  void sendNow(QJsonObject obj);
+
 signals:
   void pingRecv(std::string username);
 };

@@ -8,25 +8,19 @@ DelayConnection *DelayEstimator::makeDelayConnection(ServerConnection *sc) {
   return dc;
 }
 
-int DelayEstimator::maxPing() {
-  int max = 0;
-  for(auto & client : clients) {
-    int estimate = client.second->estimate;
-    if (estimate > max) {
-      max = estimate;
-    }
-  }
-  return max;
-}
-
 void DelayEstimator::estimatePing() {
   for (DE_element client : clients) {
     DelayConnection *dc = client.second;
     QJsonObject ping = pingToJson(0);
     QDateTime now = QDateTime::currentDateTime();
     dc->lastSent = now;
-    dc->sc->write(ping);
+    try {
+          dc->sc->write(ping);
+    } catch (QException e) {
+
+    }
   }
+  // clear();
 }
 
 void DelayEstimator::update(DelayConnection *dc) {
@@ -37,21 +31,22 @@ void DelayEstimator::update(DelayConnection *dc) {
 
 DelayEstimator::DelayEstimator() {
   this->timer = new QTimer();
-  this->timer->setInterval(TIMEOUT_TIME * 10);
+  this->timer->setInterval(TIMEOUT_TIME);
   connect(timer, &QTimer::timeout, this, &DelayEstimator::estimatePing);
-  timer->start();
 }
 
 DelayEstimator::DelayEstimator(std::list<ServerConnection*> connections) {
-  DelayEstimator();
+  this->timer = new QTimer();
+  this->timer->setInterval(TIMEOUT_TIME);
+  connect(timer, &QTimer::timeout, this, &DelayEstimator::estimatePing);
   for (ServerConnection* sc : connections) {
     bool ok = addServerConnection(sc);
     if (!ok) {
       std::cout << sc->getUsername() << " already in DelayEstimator" << std::endl;
-    } else {
-      connect(sc, &ServerConnection::pingRecv, this, &DelayEstimator::pingFrom);
+      return;
     }
   }
+  timer->start();
 }
 
 DelayEstimator::~DelayEstimator() {
@@ -65,13 +60,35 @@ DelayEstimator::~DelayEstimator() {
 bool DelayEstimator::addServerConnection(ServerConnection *sc) {
   std::string username = sc->getUsername();
   if (clients.find(username) != clients.end()) {
+    std::cout << username <<" already in DelayEstimator" << std::endl;
     return false;
   }
   DE_element elt(sc->getUsername(), makeDelayConnection(sc));
   clients.insert(elt);
+  connect(sc, &ServerConnection::pingRecv, this, &DelayEstimator::pingFrom);
+  timer->start();
   return true;
 }
 
+map<std::string, size_t> DelayEstimator::getPings() {
+  std::map<std::string, size_t> pings;
+  for (DE_element client : clients) {
+    std::pair<std::string, int> elt(client.first, client.second->estimate);
+    pings.insert(elt);
+  }
+  return pings;
+}
+
+size_t DelayEstimator::maxPing() {
+  size_t max = 0;
+  for(auto & client : clients) {
+    size_t estimate = client.second->estimate;
+    if (estimate > max) {
+      max = estimate;
+    }
+  }
+  return max;
+}
 
 void DelayEstimator::pingFrom(std::string username) {
   DE_map::iterator client = clients.find(username);

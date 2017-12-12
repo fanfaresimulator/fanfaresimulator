@@ -1,3 +1,5 @@
+#pragma once
+
 #include <map>
 #include <list>
 #include <utility>
@@ -6,7 +8,6 @@
 #include "network.hpp"
 
 #define PING_COUNT 10
-#define TIMEOUT_TIME 2000
 
 typedef struct {
   ServerConnection *sc;
@@ -26,7 +27,6 @@ private:
   QTimer *timer;
 
   DelayConnection *makeDelayConnection(ServerConnection *sc); // create the struct of estimation
-  int maxPing(); // returns the max ping of all clients in millisecs
   void estimatePing();
   void update(DelayConnection *dc);
 
@@ -35,6 +35,8 @@ public:
   DelayEstimator(std::list<ServerConnection*> connections);
   ~DelayEstimator();
   bool addServerConnection(ServerConnection *sc);
+  map<std::string, size_t> getPings(); // returns <username, ping> foreach client
+  size_t maxPing(); // returns the max ping of all clients in millisecs
 
 public slots:
   void pingFrom(std::string username); // connect(sc, &pingRecv, this, &pingFrom);

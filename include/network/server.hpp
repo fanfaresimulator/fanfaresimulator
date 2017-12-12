@@ -15,21 +15,26 @@
 #include "../synth/partition.hpp"
 #include "../synth/pupitre.hpp"
 #include "../synth/note.hpp"
-#include "network.hpp"
 #include "serverconnection.hpp"
+#include "network.hpp"
+#include "SendAfter.hpp"
+#include "DelayEstimator.hpp"
 
 class NetworkServer : public QObject {
   Q_OBJECT
 private:
   QTcpServer *server;
   std::vector<ServerConnection*> clients; //<username, name+socket>
+  DelayEstimator *delayEstimator;
 
   void newConnection();
   void sendJsonObject(std::string username, QJsonObject obj);
   void broadcast(QJsonObject obj);
+  void synchronizedBroadcast(QJsonObject obj);
 
 public:
-  explicit NetworkServer(QObject *parent = Q_NULLPTR);
+  NetworkServer();
+  ~NetworkServer();
   void broadcastStart();
   void sendPartition(std::string username, Partition partition);
   void sendPupitres(std::string username, std::map<Pupitre, bool> pupitres);
@@ -39,4 +44,8 @@ signals:
   void pupitreChoiceRecv(std::string username, Pupitre pupitre);
   void readyRecv(std::string username);
   void noteRecv(std::string username, Note note);
+  void sendAfterStart(QThread::Priority p);
+
+public slots:
+  void handleHello(std::string username);
 };

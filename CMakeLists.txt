@@ -85,6 +85,7 @@ set(SERVER_HEADER_FILES
 	include/network/serverconnection.hpp
 	include/network/advertizer.hpp
 	include/network/DelayEstimator.hpp
+	include/network/SendAfter.hpp
 )
 
 set(SERVER_SOURCE_FILES
@@ -95,6 +96,7 @@ set(SERVER_SOURCE_FILES
 	network/advertizer.cpp
 	network/serverconnection.cpp
 	network/DelayEstimator.cpp
+	network/SendAfter.cpp
 	synth/sound_player.cpp
 	synth/PartitionPlayer.cpp
 )
