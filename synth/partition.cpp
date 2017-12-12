@@ -57,14 +57,28 @@ Partition Partition::getPartition(Pupitre pupitre) {
 	return Partition(listOfNotes);
 }
 
+//double Partition::getLength() {
+//	double maxTime = 0.;
+//	for(size_t i = 0; i < this->listOfNotes.size(); i++){
+//		if(maxTime < this->listOfNotes[i].getTime()){
+//			maxTime = this->listOfNotes[i].getTime();
+//		}
+//	}
+//	return maxTime;
+//}
+
 double Partition::getLength() {
-	double maxTime = 0.;
-	for(size_t i = 0; i < this->listOfNotes.size(); i++){
-		if(maxTime < this->listOfNotes[i].getTime()){
-			maxTime = this->listOfNotes[i].getTime();
-		}
-	}
-	return maxTime;
+    std::vector<Note>::iterator it = listOfNotes.end();
+    return (it-1)->getTime();
+}
+
+// generate rand val between 0 and 1
+double getRand(double min, double max){
+	std::random_device rd;  //Will be used to obtain a seed for the random number engine
+	std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+	std::uniform_real_distribution<> dis(min, max);
+	return dis(gen);
+
 }
 
 std::vector <double> Partition::frameDivision()	{
@@ -76,9 +90,9 @@ std::vector <double> Partition::frameDivision()	{
 
 	frames.push_back(actualTime);
 
-	while (actualTime<(endTime-MAX_FRAME_LENGTH))	{
+	while (actualTime < (endTime-MAX_FRAME_LENGTH) )	{
 		// Sums the new time (random)
-		actualTime+= MIN_FRAME_LENGTH+(MAX_FRAME_LENGTH-MIN_FRAME_LENGTH)*((double)rand()/RAND_MAX);
+		actualTime+= MIN_FRAME_LENGTH+(MAX_FRAME_LENGTH-MIN_FRAME_LENGTH)*getRand(0.0, 1.0);
 		//actualTime+= (MIN_FRAME_LENGTH + static_cast <float> (rand()) /(1+ static_cast <float> (RAND_MAX/(MAX_FRAME_LENGTH-MIN_FRAME_LENGTH))));// division par 0 !?!
 		frames.push_back(actualTime);
 	}
@@ -100,30 +114,38 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 
 	for (std::vector<Note>::iterator bucketIter=noteSet.begin(); bucketIter!=noteSet.end(); bucketIter++)	{
 		finalPartition.insert(finalPartition.begin(), Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
+		// maybe better
+//		finalPartition.push_back(Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
 	}
 
 	for (std::vector<Note>::iterator iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
 
 
 
-		if (iterAct->getTime()>endTime)	{
+		if (iterAct->getTime()>endTime || iterAct->getTime() < startTime )	{
 			break;
 		}
 
-		if (iterAct->getTime()>=startTime)	{
-			if (iterAct->getSignal())	{
-				noteSet.insert(noteSet.begin(),*iterAct);
-				finalPartition.push_back(*iterAct);
+		if (iterAct->getSignal())	{
+			noteSet.insert(noteSet.begin(),*iterAct);
+			finalPartition.push_back(*iterAct);
+		}
+		else {
+
+			// std::vector<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
+			// iterate over note Set check for note father
+
+			std::vector<Note>::iterator it;
+			for (it = noteSet.begin(); it != noteSet.end(); it++){
+				if((*it) == (*iterAct)) {
+					break;
+				}
 			}
-			else	{
-				// std::vector<Note>::iterator findIter = std::find(noteSet.begin(), noteSet.end(), (*iterAct));
+			noteSet.erase(it);
 
-				// TODO: this segfaults
-				//noteSet.erase(findIter);
-				finalPartition.push_back(*iterAct);
-
-			}
-
+			// TODO: this segfaults
+			//noteSet.erase(findIter);
+			finalPartition.push_back(*iterAct);
 		}
 	}
 

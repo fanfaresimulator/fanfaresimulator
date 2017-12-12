@@ -4,6 +4,7 @@
 #include <list>
 #include <cstdlib>
 #include <algorithm>
+#include <random>
 
 #include "note.hpp"
 #include "pupitre.hpp"

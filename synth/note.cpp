@@ -35,7 +35,7 @@ int Note::getVelocity() {
 }
 
 bool Note::operator==(Note note2) {
-	return (key == note2.key);
+	return (key == note2.key) && (velocity == note2.velocity);
 }
 
 void Note::print() {

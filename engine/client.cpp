@@ -64,6 +64,7 @@ void Client::loadPartition(Partition partition) {
     // generate global partition HERE !
     partitionGlobale = new PartitionGlobale(partition, KEYS_NUMBER);
     std::cout << "Nombre de notes globales : " << partitionGlobale->getNotes().size() << std::endl;
+    partitionGlobale->print();
 
     // create State
     vector<NoteGlobale>::iterator it = partitionGlobale->getNotes().begin();

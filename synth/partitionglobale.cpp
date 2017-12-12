@@ -9,52 +9,61 @@ std::vector<NoteGlobale> PartitionGlobale::getNotes() {
 }
 
 PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
-	// TODO: improve this
-	std::vector<Note> notes = mypartition.getNotes();
-	std::vector<int> pressed(keys_nbr, -1);
-	for (size_t i = 0; i < notes.size(); ++i) {
-		Note *n = &notes[i];
-		// Check availability of each key, starting from n->getKey() % keys_nbr
-		bool added = false;
-		for (int j = n->getKey(); j < n->getKey() + keys_nbr; ++j) {
-			int key = j % keys_nbr;
-			if (pressed[key] >= 0 && pressed[key] != n->getKey()) {
-				continue; // This key is busy with another note
-			}
-			listOfNotes.push_back(NoteGlobale({*n}, key, n->getTime(), n->getSignal(), n->getPupitre()));
-			if (n->getSignal()) {
-				pressed[key] = n->getKey(); // This key is now supposed to press this note
-			} else {
-				pressed[key] = -1; // This key is no longer supposed to press this note
-			}
-			added = true;
-			break;
-		}
-		if (!added && n->getSignal()) {
-			std::cout << "Warning: more than " << keys_nbr << " notes pressed at the same time, skipping one note:" << std::endl;
-			n->print();
-		}
-	}
+//	// TODO: improve this
+//	std::vector<Note> notes = mypartition.getNotes();
+//	std::vector<int> pressed(keys_nbr, -1);
+//	for (size_t i = 0; i < notes.size(); ++i) {
+//		Note *n = &notes[i];
+//		// Check availability of each key, starting from n->getKey() % keys_nbr
+//		bool added = false;
+//		for (int j = n->getKey(); j < n->getKey() + keys_nbr; ++j) {
+//			int key = j % keys_nbr;
+//			if (pressed[key] >= 0 && pressed[key] != n->getKey()) {
+//				continue; // This key is busy with another note
+//			}
+//			listOfNotes.push_back(NoteGlobale({*n}, key, n->getTime(), n->getSignal(), n->getPupitre()));
+//			if (n->getSignal()) {
+//				pressed[key] = n->getKey(); // This key is now supposed to press this note
+//			} else {
+//				pressed[key] = -1; // This key is no longer supposed to press this note
+//			}
+//			added = true;
+//			break;
+//		}
+//		if (!added && n->getSignal()) {
+//			std::cout << "Warning: more than " << keys_nbr << " notes pressed at the same time, skipping one note:" << std::endl;
+//			n->print();
+//		}
+//	}
 
-	/*std::vector <NoteGlobale> finalListOfNotes;
+	std::vector <NoteGlobale> finalListOfNotes;
 	std::vector <double> frames = mypartition.frameDivision();
 
 	std::vector <Note> noteSet;
-	for (std::vector<double>::iterator temps=frames.begin(); temps != (frames.end()-1); temps++)	{
 
-		double startTime = (*temps)+USER_TOLL;
-		double endTime = (*(temps+1))-USER_TOLL;
+	// DEBUG changed frames.end()-1 by frames.end()-2
+	for (std::vector<double>::iterator temps=frames.begin(); temps != (frames.end()-2); temps++)	{
+
+//		double startTime = (*temps)+USER_TOLL;
+//		double endTime = (*(temps+1))-USER_TOLL;
+		// DEBUG
+		double startTime = (*temps);
+		double endTime = (*(temps+1));
 
 		std::vector <Note> actualSegment = mypartition.buildPartitionInFrame(startTime,endTime,noteSet);
 		if (actualSegment.size() == 0) {
+			// choose min frame in order to avoid this case
+			cout << "ERROR ! actual segement size == 0 in partition global cpp" << endl;
 			continue;
 		}
 
+		srand (time(NULL));
 		int randomKey = rand()%3 + 1;
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true, actualSegment.begin()->getPupitre()));
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime,false,actualSegment.begin()->getPupitre()));
 
-	}*/
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true, actualSegment.begin()->getPupitre()));
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime,false, actualSegment.begin()->getPupitre()));
+
+	}
 }
 
 std::vector<NoteGlobale>::iterator PartitionGlobale::getNextValidIterator(std::vector<NoteGlobale>::iterator iterActual, double actualTime) {
@@ -77,3 +86,16 @@ std::vector<NoteGlobale>::iterator PartitionGlobale::getNextValidIterator(std::v
 	}
 
 }
+
+void PartitionGlobale::print() {
+	vector<NoteGlobale>::iterator it;
+	int i ;
+	for (it = listOfNotes.begin(), i = 0; it != listOfNotes.end(); it+=2, i++) {
+		cout << "Note Globale " << i << ":" << endl;
+		cout << "start : " << it->getTime() << endl;
+		cout << "end : " << (it+1)->getTime() << endl;
+		cout << "key : " << it->getKey() << endl;
+	}
+}
+
+
