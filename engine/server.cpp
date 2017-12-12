@@ -53,13 +53,8 @@ bool Server::everyoneReady() {
 }
 
 void Server::broadcastStart() {
+    connect(server, &NetworkServer::started, this, &Server::startBots);
     server->broadcastStart();
-
-    // TODO: this delay is hardcoded :(
-    QTimer *timer = new QTimer();
-    timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, &Server::startBots);
-    timer->start(500);
 }
 
 void Server::startBots() {

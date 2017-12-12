@@ -30,7 +30,7 @@ private:
   void newConnection();
   void sendJsonObject(std::string username, QJsonObject obj);
   void broadcast(QJsonObject obj);
-  void synchronizedBroadcast(QJsonObject obj);
+  uint32_t synchronizedBroadcast(QJsonObject obj);
 
 public:
   NetworkServer();
@@ -45,6 +45,7 @@ signals:
   void readyRecv(std::string username);
   void noteRecv(std::string username, Note note);
   void sendAfterStart(QThread::Priority p);
+  void started();
 
 public slots:
   void handleHello(std::string username);

@@ -38,7 +38,7 @@ void GuiNote::actualize_position(float spent_time) {
         int h = this->parent->get_height();
         float l = duration * parent->get_conversion();
         int radius = this->parent->get_musicline_radius();
-        this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 3 * radius - l;
+        this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 2 * radius - l;
     }
 }
 

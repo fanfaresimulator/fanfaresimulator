@@ -31,7 +31,8 @@ void NetworkServer::broadcast(QJsonObject obj) {
 }
 
 // Using the ping estimation so that clients receive the messages at the same time
-void NetworkServer::synchronizedBroadcast(QJsonObject obj) {
+// Returns the time to wait before all clients receive the message at the same time
+uint32_t NetworkServer::synchronizedBroadcast(QJsonObject obj) {
   std::map<std::string, uint32_t> pings = delayEstimator->getPings();
   uint32_t maxPing = delayEstimator->maxPing();
   // std::vector<SendAfter*> senders;
@@ -46,7 +47,7 @@ void NetworkServer::synchronizedBroadcast(QJsonObject obj) {
     }
   }
   emit sendAfterStart(QThread::NormalPriority);
-  // emit startIn(maxPing) // for the bots to start
+  return maxPing;
 }
 
 /* PUBLIC */
@@ -71,7 +72,12 @@ NetworkServer::~NetworkServer() {
 void NetworkServer::broadcastStart() {
   QJsonObject obj;
   obj["type"] = SIG_START;
-  synchronizedBroadcast(obj);
+  uint32_t dt = synchronizedBroadcast(obj);
+
+  QTimer *timer = new QTimer();
+  timer->setSingleShot(true);
+  connect(timer, &QTimer::timeout, this, &NetworkServer::started);
+  timer->start(dt);
 }
 
 void NetworkServer::sendPartition(std::string username, Partition partition) {

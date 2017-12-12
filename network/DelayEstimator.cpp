@@ -12,13 +12,10 @@ void DelayEstimator::estimatePing() {
   for (DE_element client : clients) {
     DelayConnection *dc = client.second;
     QJsonObject ping = pingToJson(0);
-    QTime now = QTime::currentTime();
-    dc->lastSent = now;
+    dc->lastSent = QTime::currentTime();
     try {
-          dc->sc->write(ping);
-    } catch (QException e) {
-
-    }
+        dc->sc->write(ping);
+    } catch (QException e) {}
   }
   // clear();
 }
@@ -27,6 +24,8 @@ void DelayEstimator::update(DelayConnection *dc) {
   QTime now = QTime::currentTime();
   dc->estimate = dc->lastSent.msecsTo(now) / 2; // RTT /2
   dc->lastEstimate = now;
+
+  std::cout << "Ping estimation for " << dc->sc->getUsername() << ": " << dc->estimate << "ms" << std::endl;
 }
 
 DelayEstimator::DelayEstimator() {
