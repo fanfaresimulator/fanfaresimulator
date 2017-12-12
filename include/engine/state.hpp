@@ -2,7 +2,7 @@
 
 #include "synth/partitionglobale.hpp"
 #include <QObject>
-#include <Qtime>
+#include <QTime>
 #include "../synth/note.hpp"
 #include "../synth/noteglobale.hpp"
 #include <algorithm>
