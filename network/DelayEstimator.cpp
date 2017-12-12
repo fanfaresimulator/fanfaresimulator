@@ -4,7 +4,7 @@ DelayConnection *DelayEstimator::makeDelayConnection(ServerConnection *sc) {
   DelayConnection *dc = new DelayConnection();
   dc->sc = sc;
   dc->estimate = TIMEOUT_TIME;
-  dc->lastEstimate = QDateTime();
+  dc->lastEstimate = QTime();
   return dc;
 }
 
@@ -12,7 +12,7 @@ void DelayEstimator::estimatePing() {
   for (DE_element client : clients) {
     DelayConnection *dc = client.second;
     QJsonObject ping = pingToJson(0);
-    QDateTime now = QDateTime::currentDateTime();
+    QTime now = QTime::currentTime();
     dc->lastSent = now;
     try {
           dc->sc->write(ping);
@@ -24,7 +24,7 @@ void DelayEstimator::estimatePing() {
 }
 
 void DelayEstimator::update(DelayConnection *dc) {
-  QDateTime now = QDateTime::currentDateTime();
+  QTime now = QTime::currentTime();
   dc->estimate = dc->lastSent.msecsTo(now) / 2; // RTT /2
   dc->lastEstimate = now;
 }
@@ -70,8 +70,8 @@ bool DelayEstimator::addServerConnection(ServerConnection *sc) {
   return true;
 }
 
-map<std::string, size_t> DelayEstimator::getPings() {
-  std::map<std::string, size_t> pings;
+map<std::string, uint32_t> DelayEstimator::getPings() {
+  std::map<std::string, uint32_t> pings;
   for (DE_element client : clients) {
     std::pair<std::string, int> elt(client.first, client.second->estimate);
     pings.insert(elt);
@@ -79,10 +79,10 @@ map<std::string, size_t> DelayEstimator::getPings() {
   return pings;
 }
 
-size_t DelayEstimator::maxPing() {
-  size_t max = 0;
+uint32_t DelayEstimator::maxPing() {
+  uint32_t max = 0;
   for(auto & client : clients) {
-    size_t estimate = client.second->estimate;
+    uint32_t estimate = client.second->estimate;
     if (estimate > max) {
       max = estimate;
     }

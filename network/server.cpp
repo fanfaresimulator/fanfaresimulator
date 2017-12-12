@@ -32,8 +32,8 @@ void NetworkServer::broadcast(QJsonObject obj) {
 
 // Using the ping estimation so that clients receive the messages at the same time
 void NetworkServer::synchronizedBroadcast(QJsonObject obj) {
-  std::map<std::string, size_t> pings = delayEstimator->getPings();
-  size_t maxPing = delayEstimator->maxPing();
+  std::map<std::string, uint32_t> pings = delayEstimator->getPings();
+  uint32_t maxPing = delayEstimator->maxPing();
   // std::vector<SendAfter*> senders;
   for (size_t i = 0; i < clients.size(); i++) {
     auto ping = pings.find(clients[i]->getUsername());

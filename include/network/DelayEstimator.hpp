@@ -11,10 +11,10 @@
 
 typedef struct {
   ServerConnection *sc;
-  size_t estimate;
-  QDateTime lastSent;
+  uint32_t estimate;
+  QTime lastSent;
   // std::map<ping, pair<t0,t1> > pings; // pings with send/receive time
-  QDateTime lastEstimate;
+  QTime lastEstimate;
 } DelayConnection;
 
 typedef std::pair<std::string, DelayConnection*> DE_element;
@@ -35,8 +35,8 @@ public:
   DelayEstimator(std::list<ServerConnection*> connections);
   ~DelayEstimator();
   bool addServerConnection(ServerConnection *sc);
-  map<std::string, size_t> getPings(); // returns <username, ping> foreach client
-  size_t maxPing(); // returns the max ping of all clients in millisecs
+  map<std::string, uint32_t> getPings(); // returns <username, ping> foreach client
+  uint32_t maxPing(); // returns the max ping of all clients in millisecs
 
 public slots:
   void pingFrom(std::string username); // connect(sc, &pingRecv, this, &pingFrom);
