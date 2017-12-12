@@ -103,7 +103,7 @@ std::vector <double> Partition::frameDivision()	{
 	return frames;
 }
 
-std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endTime,std::vector<Note> noteSet)	{
+std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endTime, std::vector<Note> noteSet)	{
 
 
 	std::vector <Note> finalPartition;
@@ -113,18 +113,18 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 	//std::list <Note> noteSet;
 
 	for (std::vector<Note>::iterator bucketIter=noteSet.begin(); bucketIter!=noteSet.end(); bucketIter++)	{
-		finalPartition.insert(finalPartition.begin(), Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
+//		finalPartition.insert(finalPartition.begin(), Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
 		// maybe better
-//		finalPartition.push_back(Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
+		finalPartition.push_back(Note(startTime,true,bucketIter->getPupitre(), bucketIter->getKey(), bucketIter->getVelocity()));
 	}
 
 	for (std::vector<Note>::iterator iterAct=listOfNotes.begin(); iterAct != listOfNotes.end(); iterAct++)	{
 
 
-
 		if (iterAct->getTime()>endTime || iterAct->getTime() < startTime )	{
-			break;
+            continue;
 		}
+
 
 		if (iterAct->getSignal())	{
 			noteSet.insert(noteSet.begin(),*iterAct);
@@ -138,17 +138,14 @@ std::vector<Note> Partition::buildPartitionInFrame(double startTime, double endT
 			std::vector<Note>::iterator it;
 			for (it = noteSet.begin(); it != noteSet.end(); it++){
 				if((*it) == (*iterAct)) {
+                    noteSet.erase(it);
 					break;
 				}
 			}
-			noteSet.erase(it);
 
-			// TODO: this segfaults
-			//noteSet.erase(findIter);
 			finalPartition.push_back(*iterAct);
 		}
 	}
-
 	for (std::vector<Note>::iterator iterRest=noteSet.begin(); iterRest!=noteSet.end(); iterRest++)	{
 		finalPartition.push_back(Note(endTime, false, iterRest->getPupitre(),iterRest->getKey(), iterRest->getVelocity()));
 	}
@@ -167,3 +164,4 @@ void Partition::print() {
 		iter->print();
 	}
 }
+

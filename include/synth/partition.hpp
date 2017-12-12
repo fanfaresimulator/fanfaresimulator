@@ -31,4 +31,5 @@ public:
 	// before of after the current frame.
 	std::vector<Note> buildPartitionInFrame(double startTime, double endTime, std::vector<Note> noteSet);
 	void print();
+
 };
