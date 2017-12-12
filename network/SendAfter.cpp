@@ -3,6 +3,7 @@
 void SendAfter::send() {
   // could be sending from here... but for now the ServerConnection handles it
   emit sendNow(obj);
+  delete this;
 }
 
 void SendAfter::start() {
