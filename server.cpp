@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
 	parser.addPositionalArgument("audio-file", "The MIDI file to play", "[audio-file]");
 	QCommandLineOption playersNbrOption("players-nbr", "Number of players", "n");
 	parser.addOption(playersNbrOption);
+	QCommandLineOption timeScaleOption("time-scale", "Time scale of the partition", "scale");
+	parser.addOption(timeScaleOption);
 	parser.process(app);
 	const QStringList args = parser.positionalArguments();
 	std::string audioFile = args.value(0, "../resources/Movie_Themes_-_Willie_Wonka.mid").toStdString();
@@ -27,6 +29,11 @@ int main(int argc, char *argv[]) {
 
 	Partition mainPartition(audioFile);
 	//mainPartition.print();
+
+	if (parser.isSet(timeScaleOption)) {
+		double timeScale = parser.value(timeScaleOption).toDouble();
+		mainPartition.scaleTime(timeScale);
+	}
 
 	Sound_player sound_player;
 	sound_player.initPupitres(mainPartition);

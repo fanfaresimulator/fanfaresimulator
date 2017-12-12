@@ -59,12 +59,18 @@ Partition Partition::getPartition(Pupitre pupitre) {
 
 double Partition::getLength() {
 	double maxTime = 0.;
-	for(size_t i = 0; i < this->listOfNotes.size(); i++){
-		if(maxTime < this->listOfNotes[i].getTime()){
+	for (size_t i = 0; i < this->listOfNotes.size(); i++) {
+		if (maxTime < this->listOfNotes[i].getTime()) {
 			maxTime = this->listOfNotes[i].getTime();
 		}
 	}
 	return maxTime;
+}
+
+void Partition::scaleTime(double factor) {
+	for (size_t i = 0; i < this->listOfNotes.size(); i++) {
+		this->listOfNotes[i].setTime(this->listOfNotes[i].getTime() / factor);
+	}
 }
 
 std::vector <double> Partition::frameDivision()	{

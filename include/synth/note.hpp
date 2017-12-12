@@ -18,6 +18,7 @@ public:
 	bool getSignal();
 	void setSignal(bool signal);
 	double getTime();
+	void setTime(double t);
 	Pupitre getPupitre();
 	int getKey();
 	int getVelocity();
