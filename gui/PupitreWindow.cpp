@@ -9,7 +9,7 @@ PupitreWindow::PupitreWindow(std::vector<Pupitre> pupitres) : QWidget() {
 	QVBoxLayout *vBox = new QVBoxLayout;
 
 	for (size_t i = 0; i < pupitres.size(); i++) {
-		std::string nameInstru = pupitres[i].getInstrument().getname();
+		std::string nameInstru = pupitres[i].getInstrument().getName();
 		QRadioButton *b = new QRadioButton(QString(nameInstru.c_str()));
 		buttons.push_back(b);
 		vBox->addWidget(b);
@@ -30,7 +30,7 @@ void PupitreWindow::choosePupitre() {
 	for (size_t i = 0; i < buttons.size(); i++) {
 		if (buttons[i]->isChecked()) {
 			Pupitre p = this->pupitres[i];
-			std::cout << "Instrument avec lequel vous allez jouer : "<< p.getInstrument().getname() << std::endl;
+			std::cout << "Instrument avec lequel vous allez jouer : "<< p.getInstrument().getName() << std::endl;
 			this->hide();
 			emit pupitreChosen(p);
 			break;

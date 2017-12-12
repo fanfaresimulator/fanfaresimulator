@@ -48,6 +48,7 @@ bool Server::everyoneReady() {
     if (playersNbr >= 0) {
         return ((int)n >= playersNbr);
     }
+    // TODO: use pupitreMap.size() instead
     return (clients.size() > 0 && n == clients.size());
 }
 
@@ -69,6 +70,8 @@ void Server::broadcastStart() {
 void Server::startBots() {
     for (pair<Pupitre, bool> p : pupitreMap) {
         if (!p.second) {
+            std::cout << "Starting " << p.first.getInstrument().getName() << " bot" << std::endl;
+
             Partition partition = mainPartition->getPartition(p.first);
             PartitionPlayer *pp = new PartitionPlayer(partition, sp);
             bots.push_back(pp);
