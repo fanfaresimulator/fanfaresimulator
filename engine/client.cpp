@@ -36,6 +36,10 @@ void Client::sendReady() {
     net->sendReady();
 }
 
+void Client::setNotesSpeed(float notesSpeed) {
+    this->notesSpeed = notesSpeed;
+}
+
 // SLOTS
 
 void Client::connectToServer(QHostAddress addr, quint16 port) {
@@ -87,6 +91,7 @@ void Client::loadPartition(Partition partition) {
 
     // create game screen
     game = new GameWindow(700, 700, *partitionGlobale, KEYS_NUMBER);
+    game->set_speed(notesSpeed);
     game->show();
 
     sendReady();

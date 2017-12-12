@@ -31,6 +31,7 @@ public:
     int get_musicline_radius();
     float get_conversion();
     void set_size(int width, int height);
+    void set_speed(float speed);
     void run(QApplication *app);
 
     void keyPressEvent(QKeyEvent *touche);
@@ -42,6 +43,7 @@ signals:
 private:
     int width, height;
     int number_of_lines = 4;
+    float speed = 1.0;
     vector<MusicLine*> lines;
     vector<GuiNote*> note;
     bool running = false;

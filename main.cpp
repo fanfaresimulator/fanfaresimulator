@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
 	parser.addVersionOption();
 	QCommandLineOption serverHostOption("server-host", "Server host", "host");
 	parser.addOption(serverHostOption);
+	QCommandLineOption notesSpeedOption("notes-speed", "Falling notes speed", "speed");
+	parser.addOption(notesSpeedOption);
 	parser.process(app);
 
 	// username screen
@@ -30,6 +32,10 @@ int main(int argc, char *argv[]) {
 	if (parser.isSet(serverHostOption)) {
 		QHostAddress serverHost = QHostAddress(parser.value(serverHostOption));
 		engine.connectToServer(serverHost, PORT_NO);
+	}
+	if (parser.isSet(notesSpeedOption)) {
+		float notesSpeed = parser.value(notesSpeedOption).toFloat();
+		engine.setNotesSpeed(notesSpeed);
 	}
 
 	return app.exec();
