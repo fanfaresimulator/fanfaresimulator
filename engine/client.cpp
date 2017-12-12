@@ -1,10 +1,14 @@
 #include "../include/engine/client.hpp"
 
+static int TIMER_INTERVAL = 50;
+
 Client::Client(QApplication *app, std::string username) : QObject(), app(app),
         username(username) {
     std::cout << "Discovering server..." << std::endl;
     this->discoverer = new Discoverer();
     connect(discoverer, &Discoverer::discovered, this, &Client::connectToServer);
+//    timer = new QTimer(this);
+//    connect(timer, &QTimer::timeout, this, &Client::mainStateFunction);
 }
 
 vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
@@ -70,7 +74,7 @@ void Client::loadPartition(Partition partition) {
 
     // create State
     vector<NoteGlobale>::iterator it = partitionGlobale->getNotes().begin();
-    state = new State(it);
+    state = new State(partition.getNotes(), partitionGlobale->getNotes());
 
     // for testing
     /*std::vector<string> list;
@@ -100,124 +104,189 @@ void Client::start() {
     // this blocks, but still processes signals
     std::cout << "Starting the game NOW!" << std::endl;
     connect(game, &GameWindow::keyChanged, this, &Client::pressKey);
+    // engine
+//    state->startChrono();
+//    timer->start(TIMER_INTERVAL); // in mili sec
     game->run(app);
 }
 
 void Client::pressKey(int key, double t, bool pressed) {
-    if (key < 0) {
-        std::cout << "Invalid key" << std::endl;
-        return;
-    }
-    if (pressed) {
-        std::cout << "Pressed key " << key << std::endl;
-    } else {
-        std::cout << "Released key " << key << std::endl;
+//    if (t < state->getBlockTime()) {
+//        cout << "KEYBOARD BLOCKED" << endl;
+//        return;
+//    }
+//    state->stateChanged = true;
+//    state->stateNeverChanged = false;
+//    state->setKey(key);
+//    state->setTimeLastEvent(t);
+//    state->signal = pressed;
+
+//    cout <<"SEG 0" << endl;
+//    double next_gnote_time = state->listOfGNotes.back().getTime();
+//    cout <<"SEG 1" << endl;
+//    if (t < next_gnote_time - USER_TOLL) return;
+//
+//    if ( t > next_gnote_time + USER_TOLL) {
+//        cout <<"SEG 2" << endl;
+//        double new_gnote_time = next_gnote_time;
+//        cout <<"SEG 3" << endl;
+//        while (t > new_gnote_time + USER_TOLL){
+//            state->listOfGNotes.pop_back();
+//            new_gnote_time = state->listOfGNotes.back().getTime();
+//        }
+//        cout <<"SEG 4" << endl;
+//        double new_real_note_time = state->listOfNotes.back().getTime();
+//        cout <<"SEG 5" << endl;
+//        while(new_gnote_time > new_real_note_time){
+//            sendNote(state->listOfNotes.back());
+//            state->listOfNotes.pop_back();
+//        }
+//        cout <<"SEG 6" << endl;
+//        return;
+//    }
+//    cout <<"SEG 7" << endl;
+//    state->listOfGNotes.pop_back();
+//    cout <<"SEG 8" << endl;
+//    double curr_real_note_time = state->listOfNotes.back().getTime();
+//    cout <<"SEG 9" << endl;
+//    while(curr_real_note_time < t){
+//        sendNote(state->listOfNotes.back());
+//        state->listOfNotes.pop_back();
+//    }
+//    cout <<"SEG 10" << endl;
+
+//    double next_gnote_time = state->listOfGNotes.back().getTime();
+//    double new_gnote_time = next_gnote_time;
+//    cout <<"SEG 3" << endl;
+//    while (t > new_gnote_time + USER_TOLL){
+//        state->listOfGNotes.pop_back();
+//        new_gnote_time = state->listOfGNotes.back().getTime();
+//    }
+    double curr_real_note_time = state->listOfNotes.back().getTime();
+    while(curr_real_note_time < t){
+        sendNote(state->listOfNotes.back());
+        state->listOfNotes.pop_back();
     }
 
-    if (pressed) {
-        // TODO: improve this
-        std::vector<NoteGlobale> notes = partitionGlobale->getNotes();
-        NoteGlobale *best = nullptr;
-        double bestDiff = std::numeric_limits<double>::infinity();
-        for (size_t i = 0; i < notes.size(); ++i) {
-            NoteGlobale *n = &notes[i];
-            if (n->getKey() != key || n->getSignal() != pressed) {
-                continue;
-            }
-
-            double dt = std::abs(t - n->getTime());
-            if (dt < bestDiff) {
-                best = n;
-                bestDiff = dt;
-            }
-        }
-
-        Note note = *best->getListOfNotes()->begin();
-        pressedNotes[key] = new Note(note);
-        sendNote(note);
-    } else {
-        if (pressedNotes[key] == nullptr) {
-            return;
-        }
-        Note note = *pressedNotes[key];
-        note.setSignal(false);
-        sendNote(note);
-        delete pressedNotes[key];
-        pressedNotes[key] = nullptr;
-    }
 }
 
-// STATE FUNCTIONS
-
-void Client::stateHandleError(){
-    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
-    sendNotesAfterError();
-    state->itPartitionGlobal =
-            partitionGlobale->getNextValidIterator(it, state->getCurrentTime());
-    state->setBlockTime(state->itPartitionGlobal->getTime() - USER_TOLL);
-    state->reinitialize();
-}
-
-
-void Client::mainStateFunction() {
-    if(state->getCurrentTime() < state->getBlockTime()) return;
-    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
-    if(!state->stateChanged){
-        sendNotesUntilCurrentTime();
-        if(state->getCurrentTime() > it->getTime() + USER_TOLL){
-            stateHandleError();
-        }
-    } else {
-        if(state->checkStateWithNote(it->getKey(), it->getSignal(), it->getTime())){
-            if(it->getSignal()){
-                // always be in GBnote off
-                state->itPartitionGlobal++;
-                it++;
-                sendNotesUntilCurrentTime();
-            } else {
-                sendNotesUntilCurrentTime();
-                state->itPartitionGlobal++;
-                it++;
-            }
-        } else {
-            stateHandleError();
-        }
-    }
-}
-
-// CAUTION : send notes just from global note with singal == false
-
-void Client::sendNotesAfterError() {
-    vector<NoteGlobale>::iterator start = state->itPartitionGlobal;
-    vector<NoteGlobale>::iterator end =
-            partitionGlobale->getNextValidIterator(start, state->getCurrentTime());
-    for (vector<NoteGlobale>::iterator it = start; it!=end; it++){
-        if(it->getSignal()) continue;
-        // get a pointer in order to store
-        // just unsended note in note global
-        vector<Note>* vNote = it->getListOfNotes();
-        vector<Note>::iterator start = vNote->begin();
-        vector<Note>::iterator end = vNote->end();
-        for (vector<Note>::iterator it = start; it!=end; it++){
-            Note n = *it;
-            sendNote(n);
-        }
-        vNote->clear();
-    }
-}
-
-void Client::sendNotesUntilCurrentTime() {
-    double currentTime = state->getCurrentTime();
-    vector<NoteGlobale>::iterator currentGNote = state->itPartitionGlobal;
-    if(currentGNote->getSignal()) {
-        throw std::invalid_argument("iter in ON !");
-    }
-    vector<Note>* vNote = state->itPartitionGlobal->getListOfNotes();
-    vector<Note>::iterator start = vNote->begin();
-    vector<Note>::iterator it;
-    for(it = start; it->getTime() <= currentTime; it++ ) {
-        Note n = *it;
-        sendNote(n);
-    }
-    vNote->erase(start, it);
-}
+//// STATE FUNCTIONS
+//
+//void Client::stateHandleError(){
+//    cout <<"SEG 3" << endl;
+//    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
+//    cout <<"SEG 3.1" << endl;
+//    sendNotesAfterError();
+//    cout <<"SEG 3.2" << endl;
+//    state->itPartitionGlobal =
+//            partitionGlobale->getNextValidIterator(it, state->getCurrentTime());
+//    cout <<"SEG 3.3" << endl;
+//    state->setBlockTime(state->itPartitionGlobal->getTime());
+//    cout <<"SEG 3.4" << endl;
+//    state->reinitialize();
+//    cout <<"SEG 3.5" << endl;
+//}
+//
+//
+//void Client::mainStateFunction() {
+//    cout << "current time = " << state->getCurrentTime();
+//    if(state->stateNeverChanged) {
+//        cout <<"state never changed !" << endl;
+//        return;
+//    }
+//    if(state->getCurrentTime() < state->getBlockTime()){
+//        cout << "already BLOCKED - time == " << state->getBlockTime() << endl;
+//        return;
+//    }
+//
+//    vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
+//    cout <<"SEG 0" << endl;
+//    if(!state->stateChanged){
+//        cout << "state didnt changed" << endl;
+//        if(state->getCurrentTime() > it->getTime()){
+//            stateHandleError();
+//        }
+//        cout <<"SEG 1.1" << endl;
+//        sendNotesUntilCurrentTime();
+//        cout <<"SEG 1.2" << endl;
+//    } else {
+//        cout <<"SEG 2" << endl;
+//        if(state->checkStateWithNote(it->getKey(), it->getSignal(), it->getTime())){
+//            cout <<"SEG 2.1" << endl;
+//            if(it->getSignal()){
+//                // always be in GBnote off
+//                cout <<"SEG 2.1.1" << endl;
+//                state->itPartitionGlobal++;
+//                it++;
+//                cout <<"SEG 2.1.2" << endl;
+//                sendNotesUntilCurrentTime();
+//                cout <<"SEG 2.1.3" << endl;
+//            } else {
+//                cout <<"SEG 2.2.1" << endl;
+//                sendNotesUntilCurrentTime(); // change here send ALL notes
+//                cout <<"SEG 2.2.2" << endl;
+//                state->itPartitionGlobal++;
+//                it++;
+//            }
+//        } else {
+//            cout <<"SEG 2.3.1" << endl;
+//            stateHandleError();
+//            cout <<"SEG 2.3.2" << endl;
+//        }
+//    }
+//}
+//
+//// CAUTION : send notes just from global note with singal == false
+//
+//void Client::sendNotesAfterError() {
+//    cout <<"SEG 4" << endl;
+//    vector<NoteGlobale>::iterator start = state->itPartitionGlobal;
+//    cout <<"SEG 4.1" << endl;
+//    vector<NoteGlobale>::iterator end =
+//            partitionGlobale->getNextValidIterator(start, state->getCurrentTime());
+//    cout <<"SEG 4.2" << endl;
+//    for (vector<NoteGlobale>::iterator it = start; it!=end; it++){
+//        cout <<"SEG 4.3*" << endl;
+//        if(it->getSignal()) continue;
+//        // get a pointer in order to store
+//        // just unsended note in note global
+//        vector<Note>* vNote = it->getListOfNotes();
+//        cout <<"SEG 4.3*.1" << endl;
+//        vector<Note>::iterator start = vNote->begin();
+//        cout <<"SEG 4.3*.2" << endl;
+//        vector<Note>::iterator end = vNote->end();
+//        cout <<"SEG 4.3*.3" << endl;
+//        for (vector<Note>::iterator it = start; it!=end; it++){
+//            Note n = *it;
+//            cout <<"SEG 4.3*.3.1" << endl;
+//            sendNote(n);
+//            cout <<"SEG 4.3*.3.2" << endl;
+//        }
+//        cout <<"SEG 4.3*.4" << endl;
+//        vNote->clear();
+//        cout <<"SEG 4.3*.5" << endl;
+//    }
+//}
+//
+//void Client::sendNotesUntilCurrentTime() {
+//    cout <<"SEG 1.1.1" << endl;
+//    vector<NoteGlobale>::iterator currentGNote = state->itPartitionGlobal;
+//    cout <<"SEG 1.1.2" << endl;
+//    if(currentGNote->getSignal()) {
+//        throw std::invalid_argument("iter in ON !");
+//    }
+//    cout <<"SEG 1.1.3" << endl;
+//    vector<Note>* vNote = state->itPartitionGlobal->getListOfNotes();
+//    vector<Note>::iterator start = vNote->begin();
+//    vector<Note>::iterator it;
+//    cout <<"SEG 1.1.4" << endl;
+//    double currentTime = state->getCurrentTime();
+//    cout <<"SEG 1.1.5" << endl;
+//    for(it = start; it->getTime() <= currentTime; it++ ) {
+//        cout <<"SEG 1.1.5*" << endl;
+//        Note n = *it;
+//        sendNote(n);
+//    }
+//    cout <<"SEG 1.1.6" << endl;
+//    vNote->erase(start, it);
+//}

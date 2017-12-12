@@ -20,9 +20,6 @@ PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
     int previousKey = -1;
 	for (std::vector<double>::iterator temps=frames.begin(); temps != (frames.end()-2); temps++)	{
 
-//		double startTime = (*temps)+USER_TOLL;
-//		double endTime = (*(temps+1))-USER_TOLL;
-		// DEBUG
 		double startTime = (*temps);
 		double endTime = (*(temps+1));
 
@@ -42,8 +39,8 @@ PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
             randomKey = getRand(0, 3);
         }
 
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime, true, actualSegment.begin()->getPupitre()));
-		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime,false, actualSegment.begin()->getPupitre()));
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,startTime + USER_TOLL, true, actualSegment.begin()->getPupitre()));
+		finalListOfNotes.push_back(NoteGlobale(actualSegment, randomKey,endTime - USER_TOLL,false, actualSegment.begin()->getPupitre()));
         previousKey = randomKey;
 	}
 

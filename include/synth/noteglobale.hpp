@@ -6,7 +6,7 @@
 #include "pupitre.hpp"
 #include "partition.hpp"
 
-#define  USER_TOLL (MIN_FRAME_LENGTH/4) // Tolerace donnee a l'utilisateur
+#define  USER_TOLL (MIN_FRAME_LENGTH/3) // Tolerace donnee a l'utilisateur
                                         // en appuyant les touches
 
 class NoteGlobale {

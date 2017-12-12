@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QHostAddress>
 #include <cmath>
+#include <QTimer>
 
 #include "synth/instrument.hpp"
 #include "synth/partition.hpp"
@@ -30,6 +31,7 @@ using namespace std;
 class Client : public QObject {
 private:
 	QApplication *app;
+	QTimer * timer;
 	std::string username;
 	Discoverer *discoverer = nullptr;
 	NetworkClient *net = nullptr;
@@ -41,9 +43,6 @@ private:
 	PartitionGlobale *partitionGlobale = nullptr;
 	// For each key, gives the currently pressed Note
 	std::vector<Note *> pressedNotes = std::vector<Note *>(KEYS_NUMBER, nullptr);
-
-	// state functions
-	void mainStateFunction();
 
 	// send all notes after error from previous
 	// it to next expected on note
@@ -60,6 +59,7 @@ public:
 	Client(QApplication *app, std::string username);
 
 public slots:
+	void mainStateFunction();
 	void connectToServer(QHostAddress addr, quint16 port);
 	void forwardPupitreMap(std::map<Pupitre, bool>);
 	void loadPartition(Partition partition);
