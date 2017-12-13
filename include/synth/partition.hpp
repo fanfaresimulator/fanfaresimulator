@@ -26,6 +26,7 @@ public:
 	Partition getPartition(Pupitre pupitre); // What is that function? What does it should do?
 	double getLength(); // Partition length
 	void scaleTime(double factor); // accelerate or decelerate the time
+	void ensureSilenceAtBeginning(double dt);
 	std::vector <double> frameDivision(); // Divide time in frames.
 	// Gives back the partition from startTime to endTime, completing notes starting or ending
 	// before of after the current frame.

@@ -73,6 +73,19 @@ void Partition::scaleTime(double factor) {
 	}
 }
 
+void Partition::ensureSilenceAtBeginning(double dt) {
+	if (this->listOfNotes.empty()) {
+		return;
+	}
+	Note first = this->listOfNotes[0];
+	dt -= first.getTime();
+	if (dt > 0) {
+		for (size_t i = 0; i < this->listOfNotes.size(); i++) {
+			this->listOfNotes[i].setTime(this->listOfNotes[i].getTime() + dt);
+		}
+	}
+}
+
 std::vector <double> Partition::frameDivision()	{
 
 	double endTime = this->getLength();

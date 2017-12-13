@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 		double timeScale = parser.value(timeScaleOption).toDouble();
 		mainPartition.scaleTime(timeScale);
 	}
+	mainPartition.ensureSilenceAtBeginning(3.0); // 3s of silence
 
 	Sound_player sound_player;
 	sound_player.initPupitres(mainPartition);
