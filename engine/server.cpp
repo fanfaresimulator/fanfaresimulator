@@ -16,6 +16,9 @@ Server::Server(NetworkServer& server, Partition& partition, Sound_player& sp) {
     for (Pupitre p : plist) {
         pair<Pupitre, bool> pair(p, false);
         this->pupitreMap.insert(pair);
+
+        Partition partition = mainPartition->getPartition(p);
+        std::cout << "* " << p.getInstrument().getName() << " (" << partition.getNotes().size() << " notes)" << std::endl;
     }
 }
 
