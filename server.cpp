@@ -1,21 +1,44 @@
-#include <QApplication>
+#include <QCoreApplication>
+#include <QCommandLineParser>
 #include "include/network/server.hpp"
 #include "include/network/advertizer.hpp"
-#include "include/server.hpp"
-#include "include/sound_player.hpp"
-#include "include/midi_handler.hpp"
+#include "include/engine/server.hpp"
+#include "include/synth/sound_player.hpp"
+#include "include/synth/midi_handler.hpp"
 
 int main(int argc, char *argv[]) {
-	QApplication app(argc, argv);
+	QCoreApplication app(argc, argv);
+	app.setApplicationName("fanfaresimulator-server");
+	app.setApplicationVersion("1.0");
+
+	QCommandLineParser parser;
+	parser.setApplicationDescription("FanfareSimulator 2k server");
+	parser.addHelpOption();
+	parser.addVersionOption();
+	parser.addPositionalArgument("audio-file", "The MIDI file to play", "[audio-file]");
+	QCommandLineOption playersNbrOption("players-nbr", "Number of players", "n");
+	parser.addOption(playersNbrOption);
+	QCommandLineOption timeScaleOption("time-scale", "Time scale of the partition", "scale");
+	parser.addOption(timeScaleOption);
+	parser.process(app);
+	const QStringList args = parser.positionalArguments();
+	std::string audioFile = args.value(0, "../resources/Movie_Themes_-_Willie_Wonka.mid").toStdString();
 
 	Advertizer advertizer;
 	NetworkServer networkServer;
 
-	Partition mainPartition("../resources/Movie_Themes_-_Willie_Wonka.mid");
+	Partition mainPartition(audioFile);
 	//mainPartition.print();
 
+	if (parser.isSet(timeScaleOption)) {
+		double timeScale = parser.value(timeScaleOption).toDouble();
+		mainPartition.scaleTime(timeScale);
+	}
+	mainPartition.ensureSilenceAtBeginning(3.0); // 3s of silence
+
 	Sound_player sound_player;
-	//sound_player.testPlayer();
+	sound_player.initPupitres(mainPartition);
+	//sound_player.testPartition(mainPartition);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);
 
@@ -24,6 +47,11 @@ int main(int argc, char *argv[]) {
 	QObject::connect(&networkServer, &NetworkServer::pupitreChoiceRecv, &serverEngine, &Server::addPupitre);
 	QObject::connect(&networkServer, &NetworkServer::noteRecv, &serverEngine, &Server::playNote);
 	QObject::connect(&networkServer, &NetworkServer::readyRecv, &serverEngine, &Server::clientReady);
+
+	if (parser.isSet(playersNbrOption)) {
+		int playersNbr = parser.value(playersNbrOption).toInt();
+		serverEngine.setPlayersNbr(playersNbr);
+	}
 
 	return app.exec();
 }

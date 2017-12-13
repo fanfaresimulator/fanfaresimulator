@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+
 #include "pupitre.hpp"
 
 class Note {
@@ -13,24 +15,15 @@ private:
 
 public:
 	Note(double timestamp, bool signal, Pupitre pupitredeux, int key, int velocity);
-
-	//~Note();
-
-	bool getSignal ();
-
-	double getTime ();
-
+	bool getSignal();
+	void setSignal(bool signal);
+	double getTime();
+	void setTime(double t);
 	Pupitre getPupitre();
-
-	int getKey ();
-
-	int getVelocity ();
-
+	int getKey();
+	int getVelocity();
 	int getTrack();
-
 	//bool isEqual(Note note2); // Compare timestamp and key.
-
 	bool operator== (Note note2); // We surcharge the equality
-
 	void print();
 };

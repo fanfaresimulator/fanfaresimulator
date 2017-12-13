@@ -9,31 +9,40 @@
 #include <QObject>
 #include <QApplication>
 #include <QHostAddress>
-#include "instrument.hpp"
-#include "partition.hpp"
-#include "note.hpp"
+#include <cmath>
+
+#include "synth/instrument.hpp"
+#include "synth/partition.hpp"
+#include "synth/note.hpp"
+#include "synth/noteglobale.hpp"
+#include "synth/partitionglobale.hpp"
 #include "network/client.hpp"
 #include "network/discoverer.hpp"
-#include "../gui/game_window.hpp"
-#include "noteglobale.hpp"
-#include "partitionglobale.hpp"
-#include "state.hpp"
-#include "PupitreWindow.hpp"
+#include "gui/game_window.hpp"
+#include "gui/PupitreWindow.hpp"
+#include "engine/state.hpp"
 
 using namespace std;
+
+// Number of keyboard keys
+#define KEYS_NUMBER 4
 
 class Client : public QObject {
 private:
 	QApplication *app;
-	Discoverer *discoverer;
-	NetworkClient *net;
-	PupitreWindow *pupitreWindow;
-	GameWindow *game;
-	State *state;
-	std::string username;            // use nothing ?
-	Pupitre pupitre;      // use the class Instrument
-	Partition partition;        // Use the class Partition
-	PartitionGlobale partitionGlobale; //Use the class NoteGlobale
+	std::string username;
+	Discoverer *discoverer = nullptr;
+	NetworkClient *net = nullptr;
+	PupitreWindow *pupitreWindow = nullptr;
+	GameWindow *game = nullptr;
+	State *state = nullptr;
+	Pupitre *pupitre = nullptr;
+	Partition *partition = nullptr;
+	PartitionGlobale *partitionGlobale = nullptr;
+	// For each key, gives the currently pressed Note
+	std::vector<Note *> pressedNotes = std::vector<Note *>(KEYS_NUMBER, nullptr);
+
+	float notesSpeed = 1.0;
 
 	// state functions
 	void mainStateFunction();
@@ -51,6 +60,7 @@ private:
 
 public:
 	Client(QApplication *app, std::string username);
+	void setNotesSpeed(float notesSpeed);
 
 public slots:
 	void connectToServer(QHostAddress addr, quint16 port);
@@ -58,5 +68,5 @@ public slots:
 	void loadPartition(Partition partition);
 	void choosePupitre(Pupitre p);
 	void start();
-	void pressKey(int key, int t, bool pressed);
+	void pressKey(int key, double t, bool pressed);
 };

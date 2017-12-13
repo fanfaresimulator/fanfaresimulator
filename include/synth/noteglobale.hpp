@@ -9,28 +9,21 @@
 #define  USER_TOLL (MIN_FRAME_LENGTH/4) // Tolerace donnee a l'utilisateur
                                         // en appuyant les touches
 
-
 class NoteGlobale {
 private:
 	std::vector <Note> listOfNotes;
-	int key;			// from 1 to 4
+	int key; // from 0 to 4
 	double timestamp;
 	bool signal;
 	Pupitre pupitre;
 
 public:
-	NoteGlobale();
-
 	NoteGlobale(std::vector <Note> listOfNotes, int key, double timestamp, bool signal, Pupitre pupitrenew);
-
 	bool getSignal();
-
 	double getTime();
-
 	int getKey();
+	std::vector<Note>* getListOfNotes();
 
-	//~NoteGlobale();
-
-	std::vector <Note>* getListOfNotes();
-
+	// DEBUG
+	void print();
 };

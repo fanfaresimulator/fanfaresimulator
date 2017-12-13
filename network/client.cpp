@@ -2,10 +2,7 @@
 
 /* PRIVATE */
 void NetworkClient::sendJsonObject(QJsonObject o) {
-  QJsonDocument doc = QJsonDocument(o);
-  QByteArray msg = doc.toJson();
-  std::cout << "sending: " << QString(msg).toStdString() << std::endl;
-  socket->write(msg);
+  sendJsonObjectTo(socket, o);
 }
 
 void NetworkClient::handleJsonDoc(QJsonDocument doc) {
@@ -36,6 +33,12 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       break;
     }
 
+    case SIG_PING: {
+      int seqNumber = intFromJson(obj["data"]);
+      this->sendJsonObject(pingToJson(seqNumber));
+      break;
+    }
+
     default:
       std::cout << "Unsupported type: " << type << std::endl;
       break;
@@ -43,20 +46,33 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
 }
 
 void NetworkClient::readyRead() {
-  std::cout << "Client " << username << " is reading :" << std::endl << "##beg##\n";
-  QByteArray msg = socket->readAll();
-  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
+  while (socket->bytesAvailable()) {
+    if (remainingBytes == 0) {
+      char b[sizeof(int)];
+      socket->read(b, sizeof(int));
+      memcpy(&remainingBytes, &b, sizeof(int));
+      std::cout << "MSG size: " << remainingBytes << std::endl;
+    }
 
-  // parse JSON
-  pending.append(msg);
-  QJsonParseError jerror;
-  QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
-  if (jerror.error != QJsonParseError::ParseError::NoError) {
-    std::cout << jerror.errorString().toStdString() << std::endl;
-    return;
+    QByteArray buffer = socket->read(remainingBytes);
+    pending.append(buffer);
+    std::cout << "READING " << buffer.size() << "/" << remainingBytes << "\n";
+    remainingBytes -= buffer.size();
+
+    if (remainingBytes != 0) { // message insn't complete
+      return;
+    }
+    // message is arrived entirely
+    QJsonParseError jerror;
+    QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
+    if (jerror.error != QJsonParseError::ParseError::NoError) {
+      std::cout << "QJsonParseError: "<< jerror.errorString().toStdString() << std::endl;
+      std::cout << "With : "<< QString(pending).toStdString();
+      return;
+    }
+    pending.clear();
+    handleJsonDoc(doc);
   }
-  pending.clear();
-  handleJsonDoc(doc);
 }
 
 /* PUBLIC */
@@ -66,6 +82,7 @@ NetworkClient::NetworkClient(QHostAddress addr, quint16 port, std::string userna
   this->socket = new QTcpSocket(this);
   // socket->connectToHost(QHostAddress::SpecialAddress::LocalHost, PORT_NO);
   this->socket->connectToHost(addr, port);
+  this->remainingBytes = 0;
   connect(socket, &QIODevice::readyRead, this, &NetworkClient::readyRead);
 
   std::cout << "new client: " << username << std::endl;

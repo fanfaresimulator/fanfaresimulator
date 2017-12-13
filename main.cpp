@@ -1,10 +1,8 @@
 #include <QApplication>
-#include "include/network/client.hpp"
-#include "include/client.hpp"
-#include "include/network/discoverer.hpp"
-#include "include/UsernameWindow.hpp"
-#include "include/PupitreWindow.hpp"
-#include "gui/game_window.hpp"
+#include <QCommandLineParser>
+#include "include/engine/client.hpp"
+#include "include/gui/UsernameWindow.hpp"
+#include "include/network/network.hpp"
 
 void *operator new(size_t size) {
 	return nullptr;
@@ -12,6 +10,18 @@ void *operator new(size_t size) {
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
+	app.setApplicationName("fanfaresimulator-client");
+	app.setApplicationVersion("1.0");
+
+	QCommandLineParser parser;
+	parser.setApplicationDescription("FanfareSimulator 2k client");
+	parser.addHelpOption();
+	parser.addVersionOption();
+	QCommandLineOption serverHostOption("server-host", "Server host", "host");
+	parser.addOption(serverHostOption);
+	QCommandLineOption notesSpeedOption("notes-speed", "Falling notes speed", "speed");
+	parser.addOption(notesSpeedOption);
+	parser.process(app);
 
 	// username screen
 	UsernameWindow usernameWindow;
@@ -22,6 +32,15 @@ int main(int argc, char *argv[]) {
 
 	// client engine create
 	Client engine(&app, username);
+
+	if (parser.isSet(serverHostOption)) {
+		QHostAddress serverHost = QHostAddress(parser.value(serverHostOption));
+		engine.connectToServer(serverHost, PORT_NO);
+	}
+	if (parser.isSet(notesSpeedOption)) {
+		float notesSpeed = parser.value(notesSpeedOption).toFloat();
+		engine.setNotesSpeed(notesSpeed);
+	}
 
 	return app.exec();
 }

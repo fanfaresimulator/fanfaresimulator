@@ -8,17 +8,10 @@ private:
     std::string name;
 
 public:
-    Instrument();
-
     Instrument(int number);
-
     int getNumber();
-
-    std::string getname();
-
+    std::string getName();
     bool isEqual(Instrument i2);
-
     bool operator==(const Instrument &other);
-
     bool operator<(const Instrument &other);
 };

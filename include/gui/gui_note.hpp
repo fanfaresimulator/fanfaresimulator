@@ -1,15 +1,10 @@
-//
-// Created by Sophie Degabriel on 21/11/2017.
-//
-
-#ifndef FANFARESIMULATOR_NOTE_HPP
-#define FANFARESIMULATOR_NOTE_HPP
-
+#pragma once
 
 #include <iostream>
 #include <QWidget>
 #include <QPainter>
-#include "game_window.hpp"
+
+#include "gui/game_window.hpp"
 
 class GameWindow;
 
@@ -26,15 +21,11 @@ public:
     float x;
 
     GuiNote(GameWindow * parent, int id, float time_begin, float time_end);
-
     bool is_visible(float spent_time);
-
     void actualize_position(float spent_time);
+    void print();
 
 protected:
     void paintEvent(QPaintEvent *event);
 
 };
-
-
-#endif //FANFARESIMULATOR_NOTE_HPP

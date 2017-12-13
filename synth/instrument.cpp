@@ -1,4 +1,4 @@
-#include "../include/instrument.hpp"
+#include "../include/synth/instrument.hpp"
 
 const char *GMinstrument[128] = {
    "acpiano",   "britepno",  "synpiano",  "honkytonk", "epiano1",   "epiano2",
@@ -25,9 +25,6 @@ const char *GMinstrument[128] = {
    "applause",  "ringwhsl"
 };
 
-Instrument::Instrument(){
-};
-
 Instrument::Instrument(int number){
   this->number = number;
   this->name = GMinstrument[number];
@@ -37,7 +34,7 @@ int Instrument::getNumber(){
   return number;
 };
 
-std::string Instrument::getname(){
+std::string Instrument::getName(){
   return name;
 };
 

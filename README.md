@@ -86,7 +86,27 @@ And you're done!
 ```shell
 cd build # If you're not there already
 make
+```
+
+## Usage
+
+Start the server and some clients:
+
+```shell
+./fanfaresimulator-server
 ./fanfaresimulator
+```
+
+If you want to select a custom MIDI file:
+
+```shell
+./fanfaresimulator-server <midi-file>
+```
+
+If you want to change the number of players (put 0 to just play the partition):
+
+```shell
+./fanfaresimulator-server --players-nbr=4
 ```
 
 ### Cleanup build directory

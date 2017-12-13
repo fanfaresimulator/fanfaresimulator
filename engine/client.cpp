@@ -1,10 +1,7 @@
-#include "../gui/game_window.hpp"
-#include "../include/client.hpp"
+#include "../include/engine/client.hpp"
 
-Client::Client(QApplication *app, std::string username) : QObject() {
-    this->app = app;
-    this->username = username;
-
+Client::Client(QApplication *app, std::string username) : QObject(), app(app),
+        username(username) {
     std::cout << "Discovering server..." << std::endl;
     this->discoverer = new Discoverer();
     connect(discoverer, &Discoverer::discovered, this, &Client::connectToServer);
@@ -20,14 +17,14 @@ vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
 }
 
 void Client::sendAddClient(std::string username) {
-    if (username.empty()){
+    if (username.empty()) {
         throw std::invalid_argument("Username null");
     }
     net->sendHello();
 }
 
 void Client::choosePupitre(Pupitre p) {
-    pupitre = p;
+    pupitre = new Pupitre(p);
     net->sendPupitreChoice(p);
 }
 
@@ -37,6 +34,10 @@ void Client::sendNote(Note note) {
 
 void Client::sendReady() {
     net->sendReady();
+}
+
+void Client::setNotesSpeed(float notesSpeed) {
+    this->notesSpeed = notesSpeed;
 }
 
 // SLOTS
@@ -63,13 +64,16 @@ void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
 }
 
 void Client::loadPartition(Partition partition) {
-    this->partition = partition;
+    //partition.print();
+
+    this->partition = new Partition(partition);
     // generate global partition HERE !
-    partitionGlobale = PartitionGlobale(partition);
-    std::cout << "Nombre de notes globales : " << partitionGlobale.getNotes().size() << std::endl;
+    partitionGlobale = new PartitionGlobale(partition, KEYS_NUMBER);
+    std::cout << "Nombre de notes globales : " << partitionGlobale->getNotes().size() << std::endl;
+    //partitionGlobale->print();
 
     // create State
-    vector<NoteGlobale>::iterator it = partitionGlobale.getNotes().begin();
+    vector<NoteGlobale>::iterator it = partitionGlobale->getNotes().begin();
     state = new State(it);
 
     // for testing
@@ -89,7 +93,8 @@ void Client::loadPartition(Partition partition) {
     game = new GameWindow(700, 700, list);*/
 
     // create game screen
-    game = new GameWindow(700, 700, partitionGlobale);
+    game = new GameWindow(700, 700, *partitionGlobale, KEYS_NUMBER);
+    game->set_speed(notesSpeed);
     game->show();
 
     sendReady();
@@ -103,15 +108,48 @@ void Client::start() {
     game->run(app);
 }
 
-void Client::pressKey(int key, int t, bool pressed) {
+void Client::pressKey(int key, double t, bool pressed) {
     if (key < 0) {
-        std::cout << "Pressed/released invalid key" << std::endl;
+        std::cout << "Invalid key" << std::endl;
         return;
     }
-    std::cout << "Pressed/released key " << key << std::endl;
+    if (pressed) {
+        std::cout << "Pressed key " << key << std::endl;
+    } else {
+        std::cout << "Released key " << key << std::endl;
+    }
 
-    // TODO
-    sendNote(*partition.getNotes().begin());
+    if (pressed) {
+        // TODO: improve this
+        std::vector<NoteGlobale> notes = partitionGlobale->getNotes();
+        NoteGlobale *best = nullptr;
+        double bestDiff = std::numeric_limits<double>::infinity();
+        for (size_t i = 0; i < notes.size(); ++i) {
+            NoteGlobale *n = &notes[i];
+            if (n->getKey() != key || n->getSignal() != pressed) {
+                continue;
+            }
+
+            double dt = std::abs(t - n->getTime());
+            if (dt < bestDiff) {
+                best = n;
+                bestDiff = dt;
+            }
+        }
+
+        Note note = *best->getListOfNotes()->begin();
+        pressedNotes[key] = new Note(note);
+        sendNote(note);
+    } else {
+        if (pressedNotes[key] == nullptr) {
+            return;
+        }
+        Note note = *pressedNotes[key];
+        note.setSignal(false);
+        sendNote(note);
+        delete pressedNotes[key];
+        pressedNotes[key] = nullptr;
+    }
 }
 
 // STATE FUNCTIONS
@@ -120,7 +158,7 @@ void Client::stateHandleError(){
     vector<NoteGlobale>::iterator it = state->itPartitionGlobal;
     sendNotesAfterError();
     state->itPartitionGlobal =
-            partitionGlobale.getNextValidIterator(it, state->getCurrentTime());
+            partitionGlobale->getNextValidIterator(it, state->getCurrentTime());
     state->setBlockTime(state->itPartitionGlobal->getTime() - USER_TOLL);
     state->reinitialize();
 }
@@ -157,7 +195,7 @@ void Client::mainStateFunction() {
 void Client::sendNotesAfterError() {
     vector<NoteGlobale>::iterator start = state->itPartitionGlobal;
     vector<NoteGlobale>::iterator end =
-            partitionGlobale.getNextValidIterator(start, state->getCurrentTime());
+            partitionGlobale->getNextValidIterator(start, state->getCurrentTime());
     for (vector<NoteGlobale>::iterator it = start; it!=end; it++){
         if(it->getSignal()) continue;
         // get a pointer in order to store

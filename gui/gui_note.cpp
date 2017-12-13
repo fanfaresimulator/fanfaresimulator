@@ -1,8 +1,7 @@
-#include "gui_note.hpp"
+#include "../include/gui/gui_note.hpp"
 
 GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) : QWidget (){
     this->setParent(parent);
-    this->parent = parent;
     this->parent = parent;
     this->visible_duration = parent->get_height() / parent->get_conversion();
     this->line_id = id;
@@ -13,7 +12,7 @@ GuiNote::GuiNote(GameWindow * parent, int id, float time_begin, float time_end) 
     this->setGeometry(x - radius_note, 0, x + radius_note, parent->get_height());
 }
 
-void GuiNote::paintEvent(QPaintEvent * event)//position calculé par fonction main
+void GuiNote::paintEvent(QPaintEvent * event)
 {
     if (this->position == -1) { return; }
     QPainter painter(this);
@@ -39,6 +38,12 @@ void GuiNote::actualize_position(float spent_time) {
         int h = this->parent->get_height();
         float l = duration * parent->get_conversion();
         int radius = this->parent->get_musicline_radius();
-        this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 3 * radius - l;
+        this->position = (spent_time - time_to_play) * parent->get_conversion() + h - 1.5 * radius - l;
     }
+}
+
+void GuiNote::print() {
+    std::cout << "GuiNote{ .line_id = " << line_id <<
+        "; .time_to_play = " << time_to_play <<"; .duration = " << duration <<
+        " }" << std::endl;
 }

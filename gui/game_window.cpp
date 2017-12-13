@@ -1,47 +1,46 @@
-#include <QKeyEvent>
-#include "game_window.hpp"
+#include "../include/gui/game_window.hpp"
 
-GameWindow::GameWindow() : QWidget() {
-    set_size(1000, 1000);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
-    create_lines();
-}
+GameWindow::GameWindow() : GameWindow(700, 700) {}
 
-GameWindow::GameWindow(int width, int height, PartitionGlobale partition) : QWidget() {
+GameWindow::GameWindow(int width, int height, PartitionGlobale partition) :
+        GameWindow(width, height, partition, 4) {}
+
+GameWindow::GameWindow(int width, int height, PartitionGlobale partition,
+        int number_of_lines) : QWidget(), number_of_lines(number_of_lines) {
     set_size(width, height);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
     create_lines();
 
     std::vector<NoteGlobale> notes = partition.getNotes();
     int size = notes.size();
     for (int i=0;i<size;i++) {
-        if (notes[i].getSignal()) {
-            double time1 = notes[i].getTime();
-            int key = notes[i].getKey();
-            for (int j = i; j < size; j++) {
-                if (notes[j].getKey() == key && !notes[j].getSignal()) {
-                    double time2 = notes[j].getTime();
-                    this->add_note(new GuiNote(this, key, time1, time2));
-                    break;
-                }
+        if (!notes[i].getSignal()) {
+            continue;
+        }
+
+        double time1 = notes[i].getTime();
+        int key = notes[i].getKey();
+        for (int j = i; j < size; j++) {
+            if (notes[j].getKey() == key && !notes[j].getSignal()) {
+                double time2 = notes[j].getTime();
+                this->add_note(new GuiNote(this, key, time1*1000, time2*1000));
+                break;
             }
         }
     }
+
+    std::cout << "Number of GUI notes: " << note.size() << std::endl;
+    // for (int i = 0; i < note.size(); ++i) {
+    //     note[i]->print();
+    // }
 }
 
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
-    set_number_of_lines(4);
     create_lines();
-    this->conversion = height * 1.0 / 4000;
 }
 
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
-    set_number_of_lines(4);
-    this->conversion = height * 1.0 / 4000;
     create_lines();
     read_notes(list);
 }
@@ -53,15 +52,11 @@ void GameWindow::set_size(int width, int height) {
 }
 
 int GameWindow::get_height() {
-  return height;
+    return height;
 }
 
 int GameWindow::get_width() {
-  return width;
-}
-
-void GameWindow::set_number_of_lines(int number) {
-    this->number_of_lines = number;
+    return width;
 }
 
 int GameWindow::get_number_of_lines() {
@@ -72,7 +67,7 @@ void GameWindow::add_note(GuiNote* n) {
     this->note.push_back(n);
 }
 
-void GameWindow::create_lines(){
+void GameWindow::create_lines() {
     int number = get_number_of_lines();
     for (int i = 0; i < number; i++){
         lines.push_back(new MusicLine(this, i));
@@ -92,7 +87,7 @@ void GameWindow::read_notes(vector<string> list) {
     while(!list.empty()) {
         time1 = std::stod(list[0]);
         id = (int) std::stod(list[1]);
-        for (int i = 1; i < list.size() / 3; i++) {
+        for (size_t i = 1; i < list.size() / 3; i++) {
             if ((int) std::stod(list[3 * i + 1]) == id && list[3 * i + 2].compare("D") == 0) {
                 time2 = std::stod(list[3 * i]);
                 list.erase(list.begin()+3*i);
@@ -108,26 +103,45 @@ void GameWindow::read_notes(vector<string> list) {
     }
 }
 
-int GameWindow::getPositionNote(int index){
+int GameWindow::getPositionNote(int index) {
     int p = this->note[index]->position;
     return p;
 }
 
-int GameWindow::getDurationNote(int index){
+int GameWindow::getDurationNote(int index) {
     int p = this->note[index]->duration;
     return p;
 }
 
-float GameWindow::get_conversion() {
-    return this->conversion;
+void GameWindow::set_speed(float speed) {
+    this->speed = speed;
 }
 
-int GameWindow::get_musicline_radius(){
+float GameWindow::get_conversion() {
+    return (float)height / 4000 * speed;
+}
+
+int GameWindow::get_musicline_radius() {
     return this->lines[0]->get_radius();
 }
 
+void GameWindow::printKeys() {
+    std::cout << "Keybindings:";
+    for (size_t i = 0; i < keys.size(); ++i) {
+        std::cout << " " << QKeySequence(keys[i]).toString().toStdString();
+    }
+    std::cout << std::endl;
+}
+
 void GameWindow::run(QApplication *app) {
+    if (running) {
+        return;
+    }
+
+    printKeys();
+
     this->show();
+    running = true;
     t0.start();
     while (true) {
         int spent_time = t0.elapsed();
@@ -140,24 +154,36 @@ void GameWindow::run(QApplication *app) {
 
 // partie clavier
 
-int GameWindow::getKeyIndex(int keycode) {
-    switch (keycode) {
-    case Qt::Key_D:
-        return 0;
-    case Qt::Key_F:
-        return 1;
-    case Qt::Key_J:
-        return 2;
-    case Qt::Key_K:
-        return 3;
+int GameWindow::getKeyIndex(Qt::Key key) {
+    for (size_t i = 0; i < keys.size(); ++i) {
+        if (key == keys[i]) {
+            return i;
+        }
     }
     return -1;
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *event) {
-    std::cout << "Pressed" << std::endl;
-    emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), true);
+    if (!running || event->isAutoRepeat()) {
+        return;
+    }
+
+    int key = getKeyIndex(Qt::Key(event->key()));
+    if (key >= 0) {
+        lines[key]->set_is_pushed(true);
+    }
+
+    emit keyChanged(key, (double)t0.elapsed()/1000, true);
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *event) {
-    emit keyChanged(getKeyIndex(event->key()), t0.elapsed(), false);
+    if (!running || event->isAutoRepeat()) {
+        return;
+    }
+
+    int key = getKeyIndex(Qt::Key(event->key()));
+    if (key >= 0) {
+        lines[key]->set_is_pushed(false);
+    }
+
+    emit keyChanged(key, (double)t0.elapsed()/1000, false);
 }

@@ -40,6 +40,11 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
         break;
       }
 
+      case SIG_PING: {
+        emit pingRecv(username);
+        break;
+      }
+
       default:
         std::cout << "Unsupported type: " << type << std::endl;
         break;
@@ -48,18 +53,34 @@ void ServerConnection::handleJsonDoc(QJsonDocument doc) {
 }
 
 void ServerConnection::readyRead() {
-  std::cout << "Reading from " << username << std::endl << "##beg##\n";
-  QByteArray msg = socket->readAll();
-  std::cout <<  QString(msg).toStdString() << std::endl << "##end##\n";
+  while (socket->bytesAvailable()) {
+    if (remainingBytes == 0) {
+      char b[sizeof(int)];
+      socket->read(b, sizeof(int));
+      memcpy(&remainingBytes, &b, sizeof(int));
+      std::cout << "MSG size: " << remainingBytes << std::endl;
+    }
 
-  QJsonParseError jerror;
-  QJsonDocument doc = QJsonDocument::fromJson(msg, &jerror);
-  if(jerror.error != QJsonParseError::ParseError::NoError) {
-    std::cout << jerror.errorString().toStdString() << std::endl;
-    return;
+    QByteArray buffer = socket->read(remainingBytes);
+    pending.append(buffer);
+    std::cout << "READING " << buffer.size() << "/" << remainingBytes << " from " << username << std::endl;
+    remainingBytes -= buffer.size();
+
+    if (remainingBytes != 0) { // message insn't complete
+      return;
+    }
+
+    // message is arrived entirely
+    QJsonParseError jerror;
+    QJsonDocument doc = QJsonDocument::fromJson(pending, &jerror);
+    if(jerror.error != QJsonParseError::ParseError::NoError) {
+      std::cout << "QJsonParseError: "<< jerror.errorString().toStdString() << std::endl;
+      std::cout << "With : "<< QString(pending).toStdString();
+      return;
+    }
+    pending.clear();
+    handleJsonDoc(doc);
   }
-
-  handleJsonDoc(doc);
 }
 
 void ServerConnection::setUsername(std::string username) {
@@ -72,13 +93,18 @@ ServerConnection::ServerConnection(std::string username, QTcpSocket *socket, Net
   this->username = username;
   this->socket = socket;
   this->server = server;
+  this->remainingBytes = 0;
   connect(this->socket, &QIODevice::readyRead, this, &ServerConnection::readyRead);
 }
 
-void ServerConnection::write(QByteArray msg) {
-  socket->write(msg);
+void ServerConnection::write(QJsonObject obj) {
+  sendJsonObjectTo(socket, obj);
 }
 
 std::string ServerConnection::getUsername() {
   return username;
+}
+
+void ServerConnection::sendNow(QJsonObject obj) {
+  sendJsonObjectTo(socket, obj);
 }
