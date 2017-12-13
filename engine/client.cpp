@@ -64,10 +64,13 @@ void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
 }
 
 void Client::loadPartition(Partition partition) {
+    //partition.print();
+
     this->partition = new Partition(partition);
     // generate global partition HERE !
     partitionGlobale = new PartitionGlobale(partition, KEYS_NUMBER);
     std::cout << "Nombre de notes globales : " << partitionGlobale->getNotes().size() << std::endl;
+    //partitionGlobale->print();
 
     // create State
     vector<NoteGlobale>::iterator it = partitionGlobale->getNotes().begin();

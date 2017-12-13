@@ -22,5 +22,8 @@ public:
 	bool getSignal();
 	double getTime();
 	int getKey();
-	std::vector <Note>* getListOfNotes();
+	std::vector<Note>* getListOfNotes();
+
+	// DEBUG
+	void print();
 };

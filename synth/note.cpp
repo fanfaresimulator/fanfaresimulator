@@ -44,5 +44,6 @@ bool Note::operator==(Note note2) {
 
 void Note::print() {
 	std::cout << "Note{ .timestamp=" << timestamp << "; .signal = " << signal <<
-		"; .key = " << key << "; .velocity = " << velocity << " }" << std::endl;
+		"; .key = " << key << "; .velocity = " << velocity << "; pupitre = " <<
+		 pupitre.getTrack() << " }" << std::endl;
 }

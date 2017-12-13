@@ -17,7 +17,7 @@ std::vector<Note> midi_handler::midi_handler_fromString(std::string s) {
         instru = (int)e[1];
         //cout << "Timbre : " << GMinstrument[(int)e[1]] << " " << (int)e[1] << endl;
       }
-      if (e.isNoteOn() || e.isNoteOff()) {
+      if (e.isNote()) {
         if (instru < 0) {
           std::cout << "Warning: got note before timbre! Falling back to acpiano." << std::endl;
           instru = 0;

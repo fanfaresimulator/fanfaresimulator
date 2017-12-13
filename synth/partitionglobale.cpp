@@ -14,22 +14,31 @@ PartitionGlobale::PartitionGlobale(Partition mypartition, int keys_nbr) {
 	std::vector<int> pressed(keys_nbr, -1);
 	for (size_t i = 0; i < notes.size(); ++i) {
 		Note *n = &notes[i];
+
 		// Check availability of each key, starting from n->getKey() % keys_nbr
 		bool added = false;
 		for (int j = n->getKey(); j < n->getKey() + keys_nbr; ++j) {
 			int key = j % keys_nbr;
-			if (pressed[key] >= 0 && pressed[key] != n->getKey()) {
-				continue; // This key is busy with another note
-			}
-			listOfNotes.push_back(NoteGlobale({*n}, key, n->getTime(), n->getSignal(), n->getPupitre()));
+
 			if (n->getSignal()) {
+				if (pressed[key] >= 0) {
+					continue; // This key is busy with another note
+				}
 				pressed[key] = n->getKey(); // This key is now supposed to press this note
 			} else {
+				if (pressed[key] != n->getKey()) {
+					continue;
+				}
 				pressed[key] = -1; // This key is no longer supposed to press this note
 			}
+
+			NoteGlobale ng = NoteGlobale({*n}, key, n->getTime(), n->getSignal(), n->getPupitre());
+			listOfNotes.push_back(ng);
+
 			added = true;
 			break;
 		}
+
 		if (!added && n->getSignal()) {
 			std::cout << "Warning: more than " << keys_nbr << " notes pressed at the same time, skipping one note:" << std::endl;
 			n->print();
@@ -76,4 +85,10 @@ std::vector<NoteGlobale>::iterator PartitionGlobale::getNextValidIterator(std::v
 		return (iterCurrent+1);
 	}
 
+}
+
+void PartitionGlobale::print() {
+	for (NoteGlobale n : listOfNotes) {
+		n.print();
+	}
 }

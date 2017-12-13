@@ -21,3 +21,8 @@ std::vector <Note>* NoteGlobale::getListOfNotes() {
 int NoteGlobale::getKey() {
 	return key;
 }
+
+void NoteGlobale::print() {
+	std::cout << "NoteGlobale{ .key = " << key << "; .timestamp = " <<
+		timestamp << "; .signal = " << signal << " }" << std::endl;
+}
