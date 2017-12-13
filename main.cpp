@@ -4,6 +4,10 @@
 #include "include/gui/UsernameWindow.hpp"
 #include "include/network/network.hpp"
 
+void *operator new(size_t size) {
+	return nullptr;
+}
+
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 	app.setApplicationName("fanfaresimulator-client");
