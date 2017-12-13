@@ -167,11 +167,23 @@ void GameWindow::keyPressEvent(QKeyEvent *event) {
     if (!running || event->isAutoRepeat()) {
         return;
     }
-    emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, true);
+
+    int key = getKeyIndex(Qt::Key(event->key()));
+    if (key >= 0) {
+        lines[key]->set_is_pushed(true);
+    }
+
+    emit keyChanged(key, (double)t0.elapsed()/1000, true);
 }
 void GameWindow::keyReleaseEvent(QKeyEvent *event) {
     if (!running || event->isAutoRepeat()) {
         return;
     }
-    emit keyChanged(getKeyIndex(Qt::Key(event->key())), (double)t0.elapsed()/1000, false);
+
+    int key = getKeyIndex(Qt::Key(event->key()));
+    if (key >= 0) {
+        lines[key]->set_is_pushed(false);
+    }
+
+    emit keyChanged(key, (double)t0.elapsed()/1000, false);
 }
