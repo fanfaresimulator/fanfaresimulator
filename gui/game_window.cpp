@@ -103,21 +103,25 @@ void GameWindow::read_notes(vector<string> list) {
     }
 }
 
-int GameWindow::getPositionNote(int index){
+int GameWindow::getPositionNote(int index) {
     int p = this->note[index]->position;
     return p;
 }
 
-int GameWindow::getDurationNote(int index){
+int GameWindow::getDurationNote(int index) {
     int p = this->note[index]->duration;
     return p;
 }
 
-float GameWindow::get_conversion() {
-    return (float)height / 4000;
+void GameWindow::set_speed(float speed) {
+    this->speed = speed;
 }
 
-int GameWindow::get_musicline_radius(){
+float GameWindow::get_conversion() {
+    return (float)height / 4000 * speed;
+}
+
+int GameWindow::get_musicline_radius() {
     return this->lines[0]->get_radius();
 }
 

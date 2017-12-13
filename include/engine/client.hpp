@@ -42,6 +42,8 @@ private:
 	// For each key, gives the currently pressed Note
 	std::vector<Note *> pressedNotes = std::vector<Note *>(KEYS_NUMBER, nullptr);
 
+	float notesSpeed = 1.0;
+
 	// state functions
 	void mainStateFunction();
 
@@ -58,6 +60,7 @@ private:
 
 public:
 	Client(QApplication *app, std::string username);
+	void setNotesSpeed(float notesSpeed);
 
 public slots:
 	void connectToServer(QHostAddress addr, quint16 port);

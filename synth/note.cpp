@@ -22,6 +22,10 @@ double Note::getTime() {
 	return timestamp;
 }
 
+void Note::setTime(double t) {
+	this->timestamp = t;
+}
+
 Pupitre Note::getPupitre() {
 	return pupitre;
 }

@@ -34,7 +34,7 @@ int Instrument::getNumber(){
   return number;
 };
 
-std::string Instrument::getname(){
+std::string Instrument::getName(){
   return name;
 };
 

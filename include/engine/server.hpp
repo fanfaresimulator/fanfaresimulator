@@ -25,6 +25,7 @@ private:
     Partition* mainPartition;
     Sound_player* sp;
     int playersNbr = -1;
+    bool playing = false;
 
     std::map<std::string, bool> clients;  // key : username, value isReady
     std::map<std::string, Pupitre> usrToPupitre;         // key : username, value : Instrument
