@@ -3,12 +3,13 @@
 DelayConnection *DelayEstimator::makeDelayConnection(ServerConnection *sc) {
   DelayConnection *dc = new DelayConnection();
   dc->sc = sc;
-  dc->estimate = TIMEOUT_TIME;
+  dc->estimate = 0;
   dc->lastEstimate = QTime();
   return dc;
 }
 
 void DelayEstimator::estimatePing() {
+  std::cout << "Estimating ping for all clients..." << std::endl;
   for (DE_element client : clients) {
     DelayConnection *dc = client.second;
     QJsonObject ping = pingToJson(0);
@@ -32,6 +33,7 @@ DelayEstimator::DelayEstimator() {
   this->timer = new QTimer();
   this->timer->setInterval(TIMEOUT_TIME);
   connect(timer, &QTimer::timeout, this, &DelayEstimator::estimatePing);
+  timer->start();
 }
 
 DelayEstimator::DelayEstimator(std::list<ServerConnection*> connections) {
@@ -65,7 +67,6 @@ bool DelayEstimator::addServerConnection(ServerConnection *sc) {
   DE_element elt(sc->getUsername(), makeDelayConnection(sc));
   clients.insert(elt);
   connect(sc, &ServerConnection::pingRecv, this, &DelayEstimator::pingFrom);
-  timer->start();
   return true;
 }
 
