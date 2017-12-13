@@ -2,14 +2,7 @@
 
 /* PRIVATE */
 void NetworkClient::sendJsonObject(QJsonObject o) {
-  QJsonDocument doc = QJsonDocument(o);
-  QByteArray msg = doc.toJson(JSON_FORMAT);
-  int size = msg.size();
-  std::cout << "SENDING (size: "<< msg.size() << " bytes)\n";
-  char b[sizeof(int)];
-  memcpy(&b, &size, sizeof(int));
-  socket->write(b, sizeof(int));
-  socket->write(msg);
+  sendJsonObjectTo(socket, o);
 }
 
 void NetworkClient::handleJsonDoc(QJsonDocument doc) {
@@ -37,6 +30,12 @@ void NetworkClient::handleJsonDoc(QJsonDocument doc) {
       QJsonObject data = objectFromJson(obj["data"]);
       Partition partition = partitionFromJson(data);
       emit partitionRecv(partition);
+      break;
+    }
+
+    case SIG_PING: {
+      int seqNumber = intFromJson(obj["data"]);
+      this->sendJsonObject(pingToJson(seqNumber));
       break;
     }
 
