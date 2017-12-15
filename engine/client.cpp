@@ -136,6 +136,10 @@ void Client::pressKey(int key, double t, bool pressed) {
                 bestDiff = dt;
             }
         }
+        if (best == nullptr) {
+            std::cout << "No notes on that key!" << std::endl;
+            return;
+        }
 
         Note note = *best->getListOfNotes()->begin();
         pressedNotes[key] = new Note(note);

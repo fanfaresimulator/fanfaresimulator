@@ -74,10 +74,6 @@ void Partition::scaleTime(double factor) {
 }
 
 void Partition::ensureSilenceAtBeginning(double dt) {
-	if (listOfNotes.empty()) {
-		return;
-	}
-
 	Note *first = nullptr;
 	for (size_t i = 0; i < this->listOfNotes.size(); i++) {
 		if (first == nullptr || listOfNotes[i].getTime() < first->getTime()) {
