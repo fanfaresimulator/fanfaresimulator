@@ -68,21 +68,33 @@ double Partition::getLength() {
 }
 
 void Partition::scaleTime(double factor) {
-	for (size_t i = 0; i < this->listOfNotes.size(); i++) {
-		this->listOfNotes[i].setTime(this->listOfNotes[i].getTime() / factor);
+	for (size_t i = 0; i < listOfNotes.size(); i++) {
+		listOfNotes[i].setTime(listOfNotes[i].getTime() / factor);
 	}
 }
 
 void Partition::ensureSilenceAtBeginning(double dt) {
-	if (this->listOfNotes.empty()) {
+	if (listOfNotes.empty()) {
 		return;
 	}
-	Note first = this->listOfNotes[0];
-	dt -= first.getTime();
-	if (dt > 0) {
-		for (size_t i = 0; i < this->listOfNotes.size(); i++) {
-			this->listOfNotes[i].setTime(this->listOfNotes[i].getTime() + dt);
+
+	Note *first = nullptr;
+	for (size_t i = 0; i < this->listOfNotes.size(); i++) {
+		if (first == nullptr || listOfNotes[i].getTime() < first->getTime()) {
+			first = &listOfNotes[i];
 		}
+	}
+	if (first == nullptr) {
+		return;
+	}
+
+	dt -= first->getTime();
+	if (dt <= 0) {
+		return;
+	}
+
+	for (size_t i = 0; i < listOfNotes.size(); i++) {
+		listOfNotes[i].setTime(listOfNotes[i].getTime() + dt);
 	}
 }
 
