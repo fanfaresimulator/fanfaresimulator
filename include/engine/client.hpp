@@ -24,9 +24,6 @@
 
 using namespace std;
 
-// Number of keyboard keys
-#define KEYS_NUMBER 4
-
 class Client : public QObject {
 private:
 	QApplication *app;
@@ -40,8 +37,9 @@ private:
 	Partition *partition = nullptr;
 	PartitionGlobale *partitionGlobale = nullptr;
 	// For each key, gives the currently pressed Note
-	std::vector<Note *> pressedNotes = std::vector<Note *>(KEYS_NUMBER, nullptr);
+	std::vector<Note *> pressedNotes;
 
+	int keysNumber = 4;
 	float notesSpeed = 1.0;
 
 	// state functions
@@ -61,6 +59,7 @@ private:
 public:
 	Client(QApplication *app, std::string username);
 	void setNotesSpeed(float notesSpeed);
+	void setKeysNumber(int keysNumber);
 
 public slots:
 	void connectToServer(QHostAddress addr, quint16 port);

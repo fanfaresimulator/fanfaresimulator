@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
 	parser.addOption(serverHostOption);
 	QCommandLineOption notesSpeedOption("notes-speed", "Falling notes speed", "speed");
 	parser.addOption(notesSpeedOption);
+	QCommandLineOption keysNbrOption("keys-nbr", "Number of keyboard keys", "n");
+	parser.addOption(keysNbrOption);
 	parser.process(app);
 
 	// username screen
@@ -36,6 +38,10 @@ int main(int argc, char *argv[]) {
 	if (parser.isSet(notesSpeedOption)) {
 		float notesSpeed = parser.value(notesSpeedOption).toFloat();
 		engine.setNotesSpeed(notesSpeed);
+	}
+	if (parser.isSet(keysNbrOption)) {
+		int keysNbr = parser.value(keysNbrOption).toInt();
+		engine.setKeysNumber(keysNbr);
 	}
 
 	return app.exec();

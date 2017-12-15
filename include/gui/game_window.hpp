@@ -48,11 +48,12 @@ private:
     vector<GuiNote*> note;
     bool running = false;
     QTime t0;
-    vector<Qt::Key> keys = {Qt::Key_D, Qt::Key_F, Qt::Key_J, Qt::Key_K};
+    vector<Qt::Key> keys = {};
 
     void add_note(GuiNote* n);
     void create_lines();
     void read_notes(vector<string> list);
+    void assign_keys();
     void actualize_notes(float spent_time);
     int getPositionNote(int index);
     int getDurationNote(int index);

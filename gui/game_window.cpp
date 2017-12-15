@@ -8,6 +8,7 @@ GameWindow::GameWindow(int width, int height, PartitionGlobale partition) :
 GameWindow::GameWindow(int width, int height, PartitionGlobale partition,
         int number_of_lines) : QWidget(), number_of_lines(number_of_lines) {
     set_size(width, height);
+    assign_keys();
     create_lines();
 
     std::vector<NoteGlobale> notes = partition.getNotes();
@@ -37,11 +38,13 @@ GameWindow::GameWindow(int width, int height, PartitionGlobale partition,
 GameWindow::GameWindow(int width, int height) : QWidget() {
     set_size(width, height);
     create_lines();
+    assign_keys();
 }
 
 GameWindow::GameWindow(int width, int height, vector<string> list) : QWidget() {
     set_size(width, height);
     create_lines();
+    assign_keys();
     read_notes(list);
 }
 
@@ -123,6 +126,24 @@ float GameWindow::get_conversion() {
 
 int GameWindow::get_musicline_radius() {
     return this->lines[0]->get_radius();
+}
+
+void GameWindow::assign_keys() {
+    vector<Qt::Key> leftKeys = {Qt::Key_A, Qt::Key_S, Qt::Key_D, Qt::Key_F};
+    vector<Qt::Key> rightKeys = {Qt::Key_J, Qt::Key_K, Qt::Key_L, Qt::Key_Semicolon};
+    Qt::Key middleKey = Qt::Key_Space;
+
+    size_t nbrSideKeys = (size_t)number_of_lines / 2;
+
+    for (size_t i = 0; i < nbrSideKeys; ++i) {
+        keys.push_back(leftKeys[leftKeys.size() - nbrSideKeys + i]);
+    }
+    if (number_of_lines % 2 == 1) {
+        keys.push_back(middleKey);
+    }
+    for (size_t i = 0; i < nbrSideKeys; ++i) {
+        keys.push_back(rightKeys[i]);
+    }
 }
 
 void GameWindow::printKeys() {

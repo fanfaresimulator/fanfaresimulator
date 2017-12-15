@@ -40,6 +40,13 @@ void Client::setNotesSpeed(float notesSpeed) {
     this->notesSpeed = notesSpeed;
 }
 
+void Client::setKeysNumber(int keysNumber) {
+    if (keysNumber <= 0 || keysNumber > 9) {
+        throw std::invalid_argument("Invalid number of keys");
+    }
+    this->keysNumber = keysNumber;
+}
+
 // SLOTS
 
 void Client::connectToServer(QHostAddress addr, quint16 port) {
@@ -68,7 +75,7 @@ void Client::loadPartition(Partition partition) {
 
     this->partition = new Partition(partition);
     // generate global partition HERE !
-    partitionGlobale = new PartitionGlobale(partition, KEYS_NUMBER);
+    partitionGlobale = new PartitionGlobale(partition, keysNumber);
     std::cout << "Nombre de notes globales : " << partitionGlobale->getNotes().size() << std::endl;
     //partitionGlobale->print();
 
@@ -93,9 +100,11 @@ void Client::loadPartition(Partition partition) {
     game = new GameWindow(700, 700, list);*/
 
     // create game screen
-    game = new GameWindow(700, 700, *partitionGlobale, KEYS_NUMBER);
+    game = new GameWindow(700, 700, *partitionGlobale, keysNumber);
     game->set_speed(notesSpeed);
     game->show();
+
+    pressedNotes = std::vector<Note *>(keysNumber, nullptr);
 
     sendReady();
 }
