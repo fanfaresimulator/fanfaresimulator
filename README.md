@@ -94,7 +94,7 @@ Start the server and some clients:
 
 ```shell
 ./fanfaresimulator-server
-./fanfaresimulator
+./fanfaresimulator-client
 ```
 
 If you want to select a custom MIDI file:

@@ -64,7 +64,7 @@ set(CLIENT_HEADER_FILES
 
 set(CLIENT_SOURCE_FILES
 	${COMMON_SOURCE_FILES}
-	main.cpp
+	client.cpp
 	network/client.cpp
 	network/discoverer.cpp
 	gui/PupitreWindow.cpp
@@ -101,8 +101,8 @@ set(SERVER_SOURCE_FILES
 	synth/PartitionPlayer.cpp
 )
 
-add_executable(fanfaresimulator ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
-target_link_libraries(fanfaresimulator midifile Qt5::Widgets Qt5::Network)
+add_executable(fanfaresimulator-client ${CLIENT_SOURCE_FILES} ${CLIENT_HEADER_FILES})
+target_link_libraries(fanfaresimulator-client Qt5::Widgets Qt5::Network midifile)
 
 add_executable(fanfaresimulator-server ${SERVER_SOURCE_FILES} ${SERVER_HEADER_FILES})
 target_include_directories(fanfaresimulator-server PRIVATE ${FLUIDSYNTH_INCLUDE_DIRS})
