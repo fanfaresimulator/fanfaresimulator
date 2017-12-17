@@ -27,10 +27,10 @@ private:
   void sendJsonObject(QJsonObject o);
   void handleJsonDoc(QJsonDocument doc);
   void readyRead();
+  void sendHello();
 
 public:
   explicit NetworkClient(QHostAddress addr, quint16 port, std::string username, QObject *parent = Q_NULLPTR);
-  void sendHello();
   void sendPupitreChoice(Pupitre pupitre);
   void sendReady();
   void sendNote(Note note);

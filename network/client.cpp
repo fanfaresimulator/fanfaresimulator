@@ -75,6 +75,16 @@ void NetworkClient::readyRead() {
   }
 }
 
+void NetworkClient::sendHello() {
+  if (username.empty()) {
+    throw std::invalid_argument("Username null");
+  }
+  QJsonObject obj;
+  obj["type"] = SIG_HELLO;
+  obj["data"] = QString::fromStdString(username);
+  this->sendJsonObject(obj);
+}
+
 /* PUBLIC */
 NetworkClient::NetworkClient(QHostAddress addr, quint16 port, std::string username, QObject *parent) : QObject(parent) {
   this->username = username;
@@ -84,15 +94,9 @@ NetworkClient::NetworkClient(QHostAddress addr, quint16 port, std::string userna
   this->socket->connectToHost(addr, port);
   this->remainingBytes = 0;
   connect(socket, &QIODevice::readyRead, this, &NetworkClient::readyRead);
+  connect(socket, &QAbstractSocket::connected, this, &NetworkClient::sendHello);
 
   std::cout << "new client: " << username << std::endl;
-}
-
-void NetworkClient::sendHello() {
-  QJsonObject obj;
-  obj["type"] = SIG_HELLO;
-  obj["data"] = QString::fromStdString(username);
-  this->sendJsonObject(obj);
 }
 
 void NetworkClient::sendPupitreChoice(Pupitre pupitre) {
