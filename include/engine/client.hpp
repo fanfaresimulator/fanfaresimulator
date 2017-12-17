@@ -52,7 +52,6 @@ private:
 	void stateHandleError();
 
 	vector<Pupitre> pupitreMapToVec(std::map<Pupitre, bool>);
-	void sendAddClient(std::string username);
 	void sendNote(Note note);
 	void sendReady();
 

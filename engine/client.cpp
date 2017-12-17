@@ -16,13 +16,6 @@ vector<Pupitre> Client::pupitreMapToVec(std::map<Pupitre, bool> pmap) {
     return pupitreVec;
 }
 
-void Client::sendAddClient(std::string username) {
-    if (username.empty()) {
-        throw std::invalid_argument("Username null");
-    }
-    net->sendHello();
-}
-
 void Client::choosePupitre(Pupitre p) {
     pupitre = new Pupitre(p);
     net->sendPupitreChoice(p);
@@ -60,8 +53,6 @@ void Client::connectToServer(QHostAddress addr, quint16 port) {
     connect(net, &NetworkClient::pupitresRecv, this, &Client::forwardPupitreMap);
     connect(net, &NetworkClient::partitionRecv, this, &Client::loadPartition);
     connect(net, &NetworkClient::startRecv, this, &Client::start);
-
-    sendAddClient(username);
 }
 
 void Client::forwardPupitreMap(std::map<Pupitre, bool> pmap) {
