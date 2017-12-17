@@ -19,8 +19,7 @@ list(INSERT CMAKE_MODULE_PATH 0
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Network REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
 find_package(Fluidsynth REQUIRED)
 
 include_directories(include)
