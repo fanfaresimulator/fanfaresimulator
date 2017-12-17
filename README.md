@@ -40,6 +40,22 @@ cd build
 cmake ..
 ```
 
+### MSYS2/MinGW-w64
+
+Assuming you have already [setup MSYS2 and a MinGW-w64 C/C++ toolchain](https://github.com/orlp/dev-on-windows/wiki/Installing-GCC--&-MSYS2):
+
+```shell
+pacman -S mingw-w64-x86_64-qt5 mingw-w64-x86_64-fluidsynth mingw-w64-x86_64-cmake
+```
+
+In the project directory:
+
+```shell
+mkdir build
+cd build
+cmake -G "MSYS Makefiles" ..
+```
+
 ### Windows
 
 * If you don't have Visual Studio, install Visual C++ Build Tools
