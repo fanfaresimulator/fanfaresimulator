@@ -10,10 +10,11 @@ private:
     fluid_audio_driver_t* adriver;
 
 public:
-    Sound_player();
+    Sound_player(std::string bankPath);
     ~Sound_player();
     void playNote(Note* note);
     void testPlayer();
     void testPartition(Partition partition);
     void initPupitres(Partition partition);
+    void setGain(double gain);
 };

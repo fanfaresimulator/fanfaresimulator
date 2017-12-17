@@ -20,6 +20,10 @@ int main(int argc, char *argv[]) {
 	parser.addOption(playersNbrOption);
 	QCommandLineOption timeScaleOption("time-scale", "Time scale of the partition", "scale");
 	parser.addOption(timeScaleOption);
+	QCommandLineOption synthGainOption("synth-gain", "Synthesizer audio gain", "gain");
+	parser.addOption(synthGainOption);
+	QCommandLineOption synthBankOption("synth-bank", "Synthesizer SoundFont2 bank", "path");
+	parser.addOption(synthBankOption);
 	parser.process(app);
 	const QStringList args = parser.positionalArguments();
 	std::string audioFile = args.value(0, "../resources/Movie_Themes_-_Willie_Wonka.mid").toStdString();
@@ -36,8 +40,16 @@ int main(int argc, char *argv[]) {
 	}
 	mainPartition.ensureSilenceAtBeginning(3.0); // 3s of silence
 
-	Sound_player sound_player;
+	std::string synthBank = "../resources/bank.sf2";
+	if (parser.isSet(synthBankOption)) {
+		synthBank = parser.value(synthBankOption).toStdString();
+	}
+	Sound_player sound_player(synthBank);
 	sound_player.initPupitres(mainPartition);
+	if (parser.isSet(synthGainOption)) {
+		double audioGain = parser.value(synthGainOption).toDouble();
+		sound_player.setGain(audioGain);
+	}
 	//sound_player.testPartition(mainPartition);
 
 	Server serverEngine(networkServer, mainPartition, sound_player);

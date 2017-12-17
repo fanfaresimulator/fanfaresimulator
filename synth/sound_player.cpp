@@ -7,11 +7,6 @@
 #include "../include/synth/sound_player.hpp"
 #include "../include/synth/note.hpp"
 
-#define SOUNDFONT_PATH "../resources/sf.sf2"
-//#define SOUNDFONT_PATH "../resources/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2"
-#define SYNTH_GAIN 2
-//#define SYNTH_GAIN 1
-
 // Fuck you windows
 #if defined(_WIN32) || defined(WIN32)
 #include <windows.h>
@@ -29,8 +24,7 @@ void usleep(__int64 usec)
 }
 #endif
 
-Sound_player::Sound_player() {
-    printf("Created the Synth !\n");
+Sound_player::Sound_player(std::string bankPath) {
     settings = new_fluid_settings();
     synth = new_fluid_synth(settings);
 
@@ -38,18 +32,19 @@ Sound_player::Sound_player() {
 #ifdef __linux__
             fluid_settings_setstr(settings, "audio.driver", "pulseaudio"); // à changer
 #endif
-    fluid_synth_sfload(synth, SOUNDFONT_PATH, 1);
+    fluid_synth_sfload(synth, bankPath.c_str(), 1);
 
     adriver = new_fluid_audio_driver(settings, synth);
-
-    fluid_settings_setnum(settings, "synth.gain", SYNTH_GAIN);
-
 }
 
 Sound_player::~Sound_player() {
     delete_fluid_audio_driver(adriver);
     delete_fluid_settings(settings);
     delete_fluid_synth(synth);
+}
+
+void Sound_player::setGain(double gain) {
+    fluid_settings_setnum(settings, "synth.gain", gain);
 }
 
 void Sound_player::initPupitres(Partition partition) {
